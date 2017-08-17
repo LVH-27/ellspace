@@ -28,14 +28,11 @@ def main():
 
     export.write(FINAL)
 
-
     export.close()
-
     
     print('\nSQL file successfully generated.\n')
 
     return
-
 
 
 main()
