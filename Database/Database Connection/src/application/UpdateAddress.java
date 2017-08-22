@@ -28,8 +28,10 @@ public class UpdateAddress {
         try {
 			con = DriverManager.getConnection(
                       "jdbc:postgresql://localhost:5432/TestFill", username, password);
+			  
+		    String importPath = new File("").getAbsoluteFile().getParentFile().getAbsolutePath();
 
-	        File file = new File("D:\\Programs\\Git\\MY REPOSITORIES\\ellspace\\Database\\PopulateTableEventTypeList.sql");
+	        File file = new File(importPath + "\\PopulateTableEventTypeList.sql");
 	        @SuppressWarnings("resource")
 			Scanner sc = new Scanner(file);
 	        while(sc.hasNextLine()){
