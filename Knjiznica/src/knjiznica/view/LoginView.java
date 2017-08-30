@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import knjiznica.resources.Strings;
 
 public class LoginView {
 
@@ -42,7 +43,8 @@ public class LoginView {
         try {
         	@SuppressWarnings("unused")
 			Connection con = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/TestFill", username, password);
+					Strings.getLink(), username, password);
+        	Strings.setPassword(password);
 		} catch (PSQLException e) {
 			errorLabel.setVisible(true);
 			passwordText.setText("");
@@ -51,6 +53,7 @@ public class LoginView {
 		}
 
 		System.out.println(username + '\t' + password);
+		System.out.println(Strings.getPassword());
 		
 		//errorLabel.setText("Successful login!");
 		//errorLabel.setVisible(true);
