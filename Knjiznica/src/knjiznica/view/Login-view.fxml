@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,7 +21,7 @@
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <GridPane alignment="CENTER" style="-fx-background-color: #ff0000; -fx-border-color: #00ff00;" vgap="10.0">
+                  <GridPane alignment="CENTER" style="-fx-border-color: #B1BCBE; -fx-background-color: #F4DDC9; -fx-border-radius: 15; -fx-border-width: 3.5; -fx-background-radius: 24;" vgap="10.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="70.0" prefWidth="85.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="140.0" prefWidth="220.0" />
@@ -37,11 +39,30 @@
                               <Insets />
                            </GridPane.margin>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Dobrodošli u Knjižnicu!">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
+                              <HBox>
+                                 <children>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/login-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <VBox alignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Library" textFill="#000000b2">
+                                             <font>
+                                                <Font name="Microsoft Sans Serif" size="56.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <padding>
+                                          <Insets left="20.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -54,7 +75,7 @@
                         </VBox>
                         <Label alignment="CENTER" text="Username:" GridPane.rowIndex="2">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="16.0" />
                            </font>
                            <GridPane.margin>
                               <Insets />
@@ -62,19 +83,19 @@
                         </Label>
                         <Label alignment="CENTER" text="Password:" GridPane.rowIndex="3">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="usernameText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <PasswordField fx:id="passwordText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="usernameText" promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <PasswordField fx:id="passwordText" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#activateLogin" text="Log In" textAlignment="CENTER">
+                              <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#activateLogin" style="-fx-background-color: #D98027;" text="LOGIN" textAlignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                                  <opaqueInsets>
                                     <Insets />

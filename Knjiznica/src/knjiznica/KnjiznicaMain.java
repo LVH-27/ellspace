@@ -1,5 +1,8 @@
 package knjiznica;
 	
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -15,9 +18,12 @@ public class KnjiznicaMain extends Application {
 			BorderPane root = (BorderPane) FXMLLoader.load(
 					getClass().getResource("view/Login-view.fxml"));
 			
-			Scene scene = new Scene(root);
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			
+			Scene scene = new Scene(root, screenSize.getWidth() / 2, screenSize.getHeight() / 2);
 			scene.getStylesheets().add(getClass().getResource(
 					"resources/BackgroundStyle.css").toExternalForm());
+			
 			primaryStage.setTitle("Knjižnica");
 			primaryStage.setScene(scene);
 			primaryStage.show();
