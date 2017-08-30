@@ -29,13 +29,14 @@ public class LoginView {
 	}
 	
 	public void initialize() {
-		backgroundImage.fitWidthProperty().bind(root.widthProperty());
+		System.out.println("sd");
+		//backgroundImage.fitWidthProperty().bind(root.widthProperty());
 		//backgroundImage.fitHeightProperty().bind(root.heightProperty());
+		root.setId("pane");
 	}
 	
 	@FXML
 	private void activateLogin() {
-
 		String username = usernameText.getText();
 		String password = passwordText.getText();
 		

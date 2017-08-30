@@ -17,7 +17,7 @@ public class KnjiznicaMain extends Application {
 			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource(
-					"application.css").toExternalForm());
+					"resources/BackgroundStyle.css").toExternalForm());
 			primaryStage.setTitle("Knjižnica");
 			primaryStage.setScene(scene);
 			primaryStage.show();

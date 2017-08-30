@@ -1,0 +1,6 @@
+#pane{
+    -fx-background-image: url("Chosenwallpaper.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
