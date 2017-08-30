@@ -1,5 +1,11 @@
 package knjiznica.view;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import org.postgresql.util.PSQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -33,13 +39,22 @@ public class LoginView {
 		String username = usernameText.getText();
 		String password = passwordText.getText();
 		
+        try {
+        	@SuppressWarnings("unused")
+			Connection con = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/TestFill", username, password);
+		} catch (PSQLException e) {
+			errorLabel.setVisible(true);
+			passwordText.setText("");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		System.out.println(username + '\t' + password);
 		
-		errorLabel.setText("Successful login!");
-		errorLabel.setVisible(true);
-		
-		//clear passwordText ako faila
-		
+		//errorLabel.setText("Successful login!");
+		//errorLabel.setVisible(true);
+				
 		//close window / view
 		
 	}

@@ -20,7 +20,8 @@ public class KnjiznicaMain extends Application {
 			
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			
-			Scene scene = new Scene(root, screenSize.getWidth() / 2, screenSize.getHeight() / 2);
+			Scene scene = new Scene(root, 
+					screenSize.getWidth() / 2, screenSize.getHeight() / 2);
 			scene.getStylesheets().add(getClass().getResource(
 					"resources/BackgroundStyle.css").toExternalForm());
 			
