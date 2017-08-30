@@ -13,7 +13,7 @@ public class KnjiznicaMain extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane) FXMLLoader.load(
-					getClass().getResource("view/Login-viewTEST.fxml"));
+					getClass().getResource("view/Login-view.fxml"));
 			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource(

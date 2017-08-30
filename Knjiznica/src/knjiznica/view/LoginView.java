@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class LoginView {
@@ -17,10 +16,7 @@ public class LoginView {
 	
 	@FXML
 	private Label errorLabel;
-	
-	@FXML
-	private ImageView backgroundImage;
-	
+		
 	@FXML 
 	private BorderPane root;
 	
@@ -29,9 +25,6 @@ public class LoginView {
 	}
 	
 	public void initialize() {
-		System.out.println("sd");
-		//backgroundImage.fitWidthProperty().bind(root.widthProperty());
-		//backgroundImage.fitHeightProperty().bind(root.heightProperty());
 		root.setId("pane");
 	}
 	
