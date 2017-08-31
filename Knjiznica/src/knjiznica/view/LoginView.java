@@ -57,7 +57,7 @@ public class LoginView {
 		
 		//errorLabel.setText("Successful login!");
 		//errorLabel.setVisible(true);
-				
+		
 		//close window / view
 		
 	}
