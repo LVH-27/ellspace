@@ -11,9 +11,8 @@ public class Strings {
 	public static void setPassword(String password) {
 		Strings.password = password;
 	}
-	public static String getLink() {
-		return link;
+	public static String getLink() { 
+		return link; 
 	}
-	
 	
 }

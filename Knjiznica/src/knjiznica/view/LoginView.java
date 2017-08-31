@@ -1,16 +1,19 @@
 package knjiznica.view;
-
+ 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import org.postgresql.util.PSQLException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import knjiznica.model.ViewProvider;
 import knjiznica.resources.Strings;
 
 public class LoginView {
@@ -20,23 +23,23 @@ public class LoginView {
 	
 	@FXML
 	private PasswordField passwordText;
-	
+	 
 	@FXML
 	private Label errorLabel;
 		
-	@FXML 
-	private BorderPane root;
+	@FXML
+	private BorderPane localRoot;
 	
 	public void login() {
 
 	}
 	
 	public void initialize() {
-		root.setId("pane");
+		localRoot.setId("login");
 	}
 	
 	@FXML
-	private void activateLogin() {
+	private void activateLogin() throws IOException {
 		String username = usernameText.getText();
 		String password = passwordText.getText();
 		
@@ -45,10 +48,14 @@ public class LoginView {
 			Connection con = DriverManager.getConnection(
 					Strings.getLink(), username, password);
         	Strings.setPassword(password);
-		} catch (PSQLException e) {
+        	TabPane root = (TabPane) FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
+        	MainView mv = (MainView) ViewProvider.getView("main");
+        	mv.getMain().setCenter(root);
+        	
+        } catch (PSQLException e) {
 			errorLabel.setVisible(true);
 			passwordText.setText("");
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -59,8 +66,7 @@ public class LoginView {
 		//errorLabel.setVisible(true);
 		
 		//close window / view
-		
-		//Test git pull
+
 		
 	}
 	
