@@ -35,6 +35,7 @@ public class KnjiznicaMain extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		InitializeBooks();
 	}
 	
