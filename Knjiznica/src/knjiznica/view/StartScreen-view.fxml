@@ -14,25 +14,25 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<TabPane fx:id="tab" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.StartScreenView">
+<TabPane fx:id="startScreenPane" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.StartScreenView">
   <tabs>
-    <Tab fx:id="tabb" text="Book List">
+    <Tab fx:id="tabBookList" text="Book List">
          <content>
-            <BorderPane fx:id="bpp">
+            <BorderPane>
                <center>
-                  <TableView fx:id="list" BorderPane.alignment="CENTER">
+                  <TableView fx:id="tableBookList" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn fx:id="titleCol" prefWidth="75.0" text="Title" />
-                      <TableColumn fx:id="authorCol" prefWidth="75.0" text="Author" />
+                      <TableColumn fx:id="titleCol" prefWidth="70.0" text="Title" />
+                      <TableColumn fx:id="authorCol" prefWidth="70.0" text="Author" />
                     </columns>
                   </TableView>
                </center>
             </BorderPane>
          </content>
     </Tab>
-    <Tab fx:id="tabbb" text="Add Book">
+    <Tab fx:id="tabAddBook" text="Add Book">
          <content>
-            <BorderPane fx:id="bp">
+            <BorderPane>
                <center>
                   <GridPane>
                     <columnConstraints>

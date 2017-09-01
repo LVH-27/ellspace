@@ -10,15 +10,17 @@ import knjiznica.model.ViewProvider;
 public class MainView {
 
 	@FXML 
-	private BorderPane main;
+	private BorderPane root;
 	
 	public void initialize() throws IOException {
-		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login-view.fxml"));
-		main.setCenter(root);
+		BorderPane main = (BorderPane) FXMLLoader.load(
+				getClass().getResource("Login-view.fxml"));
+		root.setCenter(main);
 		ViewProvider.setView("main", this);
 	}
-
-	public BorderPane getMain() {
-		return main;
+	
+	public BorderPane getRoot() {
+		return root;
 	}
+	
 }

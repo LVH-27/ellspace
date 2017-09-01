@@ -1,15 +1,15 @@
 package knjiznica.model;
 
 public class Book {
-	private String title;
 	
+	private String title;
 	private String author;
 	
 	public Book(String title, String author) {
 		this.title = title;
 		this.author = author;
 	}
-	 
+	
 	public String getTitle() {
 		return title;
 	}
@@ -25,9 +25,5 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
-	@Override
-	public String toString() {
-		return "[Book [title=" + title + ", " + "author=" + author + "]";
-	}
+		
 }

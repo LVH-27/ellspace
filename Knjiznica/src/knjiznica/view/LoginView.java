@@ -30,10 +30,6 @@ public class LoginView {
 	@FXML
 	private BorderPane localRoot;
 	
-	public void login() {
-
-	}
-	
 	public void initialize() {
 		localRoot.setId("login");
 	}
@@ -48,25 +44,24 @@ public class LoginView {
 			Connection con = DriverManager.getConnection(
 					Strings.getLink(), username, password);
         	Strings.setPassword(password);
-        	TabPane root = (TabPane) FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));
-        	MainView mv = (MainView) ViewProvider.getView("main");
-        	mv.getMain().setCenter(root);
+        	TabPane startScreen = (TabPane) FXMLLoader.load(
+        			getClass().getResource("StartScreen-view.fxml"));
+        	MainView root = (MainView) ViewProvider.getView("main");
+        	root.getRoot().setCenter(startScreen);
         	
         } catch (PSQLException e) {
 			errorLabel.setVisible(true);
 			passwordText.setText("");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+        
 		System.out.println(username + '\t' + password);
 		System.out.println(Strings.getPassword());
 		
 		//errorLabel.setText("Successful login!");
 		//errorLabel.setVisible(true);
-		
-		//close window / view
-
 		
 	}
 	

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ViewProvider {
-	static Map <String, Object> views;
+	static Map<String, Object> views;
 	
 	static {
 		views = new HashMap<String, Object>();
