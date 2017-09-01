@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import knjiznica.model.ViewProvider;
@@ -44,7 +43,7 @@ public class LoginView {
 			Connection con = DriverManager.getConnection(
 					Strings.getLink(), username, password);
         	Strings.setPassword(password);
-        	TabPane startScreen = (TabPane) FXMLLoader.load(
+        	BorderPane startScreen = (BorderPane) FXMLLoader.load(
         			getClass().getResource("StartScreen-view.fxml"));
         	MainView root = (MainView) ViewProvider.getView("main");
         	root.getRoot().setCenter(startScreen);
