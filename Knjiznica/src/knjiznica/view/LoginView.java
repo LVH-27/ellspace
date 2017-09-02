@@ -46,8 +46,10 @@ public class LoginView {
         	Strings.setPassword(password);
         	BorderPane startScreen = (BorderPane) FXMLLoader.load(
         			getClass().getResource("StartScreen-view.fxml"));
+        	ViewProvider.setView("startScreen", startScreen);
         	MainView root = (MainView) ViewProvider.getView("main");
         	root.getRoot().setCenter(startScreen);
+        	root.getMenuBox().setManaged(true);
         	
         } catch (PSQLException e) {
 			errorLabel.setVisible(true);

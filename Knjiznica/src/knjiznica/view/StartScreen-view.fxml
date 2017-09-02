@@ -29,31 +29,31 @@
                       <RowConstraints maxHeight="120.0" minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="addBook" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" textAlignment="JUSTIFY">
+                        <Button fx:id="addBook" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateAddBook" prefHeight="110.0" prefWidth="110.0" textAlignment="JUSTIFY">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="search" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="2">
+                        <Button fx:id="search" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateSearch" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="users" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" GridPane.columnIndex="1">
+                        <Button fx:id="users" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateUsers" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="settings" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button fx:id="settings" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateSettings" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="share" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="1">
+                        <Button fx:id="share" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateShare" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin></Button>
-                        <Button fx:id="directory" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="directory" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateDirectory" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
