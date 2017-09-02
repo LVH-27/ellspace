@@ -30,7 +30,9 @@ public class StartScreenView {
 	private Button users;
 	
 	public void initialize() {
+		
 		startScreen.setId("booklist");
+		
 		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/add-book.png"));
 		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-icon.png"));
 		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-icon.png"));
@@ -38,12 +40,12 @@ public class StartScreenView {
 		Image imageShare     = new Image(getClass().getResourceAsStream("../resources/sharebook-icon.png"));
 		Image imageUsers     = new Image(getClass().getResourceAsStream("../resources/users-icon.png"));
 		
-		addBook.setGraphic(new ImageView(imageAddBook));
+		addBook.  setGraphic(new ImageView(imageAddBook));
 		directory.setGraphic(new ImageView(imageDirectory));
-		search.setGraphic(new ImageView(imageSearch));
-		settings.setGraphic(new ImageView(imageSettings));
-		share.setGraphic(new ImageView(imageShare));
-		users.setGraphic(new ImageView(imageUsers));
+		search.   setGraphic(new ImageView(imageSearch));
+		settings. setGraphic(new ImageView(imageSettings));
+		share.    setGraphic(new ImageView(imageShare));
+		users.    setGraphic(new ImageView(imageUsers));
 		
 		/*startScreenPane.setId("booklist");
 		tabBookList.setId("booklist");

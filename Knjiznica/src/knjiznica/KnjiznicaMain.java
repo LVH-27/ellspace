@@ -32,7 +32,7 @@ public class KnjiznicaMain extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -43,6 +43,7 @@ public class KnjiznicaMain extends Application {
 		Book book = new Book("AAA", "BBB");
 		GlobalCollection.getList().add(book);
 	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

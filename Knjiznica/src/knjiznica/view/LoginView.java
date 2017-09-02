@@ -42,6 +42,7 @@ public class LoginView {
         	@SuppressWarnings("unused")
 			Connection con = DriverManager.getConnection(
 					Strings.getLink(), username, password);
+        	Strings.setUsername(username);
         	Strings.setPassword(password);
         	BorderPane startScreen = (BorderPane) FXMLLoader.load(
         			getClass().getResource("StartScreen-view.fxml"));
@@ -61,6 +62,8 @@ public class LoginView {
 		
 		//errorLabel.setText("Successful login!");
 		//errorLabel.setVisible(true);
+		
+		//error za no internet?
 		
 	}
 	

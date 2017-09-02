@@ -1,0 +1,21 @@
+#login{
+    -fx-background-image: url("login-background.jpeg");
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+#booklist{
+	-fx-background-image: url("booklist-background.jpg");
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.table-row-cell{
+	-fx-background-color: transparent;
+}
+
+.table-view{
+	-fx-background-color: transparent;
+}
