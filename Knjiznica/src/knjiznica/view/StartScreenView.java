@@ -39,12 +39,12 @@ public class StartScreenView {
 		
 		startScreen.setId("booklist");
 		
-		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/add-book.png"));
-		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-icon.png"));
-		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-icon.png"));
-		Image imageSettings  = new Image(getClass().getResourceAsStream("../resources/settings-icon.png"));
-		Image imageShare     = new Image(getClass().getResourceAsStream("../resources/sharebook-icon.png"));
-		Image imageUsers     = new Image(getClass().getResourceAsStream("../resources/users-icon.png"));
+		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/addBook-button.png"));
+		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-button.png"));
+		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-button.png"));
+		Image imageSettings  = new Image(getClass().getResourceAsStream("../resources/settings-button.png"));
+		Image imageShare     = new Image(getClass().getResourceAsStream("../resources/sharebook-button.png"));
+		Image imageUsers     = new Image(getClass().getResourceAsStream("../resources/users-button.png"));
 		
 		addBook.  setGraphic(new ImageView(imageAddBook));
 		directory.setGraphic(new ImageView(imageDirectory));

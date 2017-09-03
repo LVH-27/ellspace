@@ -29,7 +29,7 @@ public class MainView {
 	public void initialize() throws IOException {
 		menuBox.setManaged(false);
 		
-		Image imageHomeButton = new Image(getClass().getResourceAsStream("../resources/home-icon.png"));
+		Image imageHomeButton = new Image(getClass().getResourceAsStream("../resources/home-button.png"));
 		homeButton.setGraphic(new ImageView(imageHomeButton));
 
 		BorderPane main = (BorderPane) FXMLLoader.load(getClass().getResource("Login-view.fxml"));
