@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import knjiznica.model.ViewProvider;
 
 public class StartScreenView {
@@ -16,6 +17,9 @@ public class StartScreenView {
 	
 	@FXML
 	private BorderPane startScreen;
+	
+	@FXML
+	private BorderPane startScreenPopup;
 	
 	@FXML
 	private Button addBook;
@@ -58,6 +62,7 @@ public class StartScreenView {
 		BorderPane search    = (BorderPane) FXMLLoader.load(getClass().getResource("Search-view.fxml"));
 		BorderPane settings  = (BorderPane) FXMLLoader.load(getClass().getResource("Settings-view.fxml"));
 		BorderPane share     = (BorderPane) FXMLLoader.load(getClass().getResource("Share-view.fxml"));
+		GridPane usersPopup     = (GridPane) FXMLLoader.load(getClass().getResource("AddUsersPopup-view.fxml"));
 		BorderPane users     = (BorderPane) FXMLLoader.load(getClass().getResource("Users-view.fxml"));
 		
 		ViewProvider.setView("addBook", addBook);
@@ -65,6 +70,7 @@ public class StartScreenView {
 		ViewProvider.setView("search", search);
 		ViewProvider.setView("settings", settings);
 		ViewProvider.setView("share", share);
+		ViewProvider.setView("usersPopup", usersPopup);
 		ViewProvider.setView("users", users);
 		
 	}
@@ -105,9 +111,9 @@ public class StartScreenView {
 	}
 	
 	@FXML
-	private void activateUsers() throws IOException {
-		BorderPane users = (BorderPane) ViewProvider.getView("users");
-    	root.getRoot().setCenter(users);
+	private void activateUsersPopup() throws IOException {
+		GridPane usersPopup = (GridPane) ViewProvider.getView("usersPopup");
+    	startScreenPopup.setCenter(usersPopup);
 
 	}
 	
