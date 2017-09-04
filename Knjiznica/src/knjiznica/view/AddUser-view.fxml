@@ -91,7 +91,7 @@
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <TextField alignment="TOP_CENTER">
+                                    <TextField>
                                        <HBox.margin>
                                           <Insets top="10.0" />
                                        </HBox.margin>
