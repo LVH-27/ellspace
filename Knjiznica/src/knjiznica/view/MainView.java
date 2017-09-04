@@ -23,14 +23,13 @@ public class MainView {
 	@FXML
 	private HBox menuBox;
 	
-	@FXML
-	private Button homeButton;
+	
 	
 	public void initialize() throws IOException {
 		root.setId("booklist");
 		menuBox.setManaged(false);
-		Image imageHomeButton = new Image(getClass().getResourceAsStream("../resources/home-button.png"));
-		homeButton.setGraphic(new ImageView(imageHomeButton));
+		
+		
 
 		BorderPane main = (BorderPane) FXMLLoader.load(getClass().getResource("Login-view.fxml"));
 		root.setCenter(main);
@@ -49,10 +48,6 @@ public class MainView {
 		return menuBox;
 	}
 	
-	@FXML
-	private void activateHomeButoon() {
-    	BorderPane home = (BorderPane) ViewProvider.getView("startScreen");
-    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(home);
-	}
+	
 	
 }
