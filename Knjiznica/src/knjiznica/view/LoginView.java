@@ -46,11 +46,8 @@ public class LoginView {
         	Strings.setPassword(password);
         	BorderPane mainScreen = (BorderPane) FXMLLoader.load(
         			getClass().getResource("MainScreen-view.fxml"));
-        	
-        	System.out.println(44);
-        	System.out.println(mainScreen);
+        
         	ViewProvider.setView("mainScreen", mainScreen);
-        	System.out.println(ViewProvider.getView("mainScreen"));
         	MainView root = (MainView) ViewProvider.getView("main");
         	root.getRoot().setCenter(mainScreen);
         	root.getMenuBox().setManaged(true);
