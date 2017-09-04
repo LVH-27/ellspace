@@ -26,7 +26,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0">
+                              <Button fx:id="addUserButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>

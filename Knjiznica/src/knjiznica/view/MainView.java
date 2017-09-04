@@ -52,7 +52,7 @@ public class MainView {
 	@FXML
 	private void activateHomeButoon() {
     	BorderPane home = (BorderPane) ViewProvider.getView("startScreen");
-    	root.setCenter(home);
+    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(home);
 	}
 	
 }

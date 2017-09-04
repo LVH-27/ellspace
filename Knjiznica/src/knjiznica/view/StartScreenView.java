@@ -76,7 +76,6 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateAddBook() throws IOException {
-		//MainScreenView mainScreen = (MainScreenView) ViewProvider.getView("mainScreen");
 		BorderPane addBook = (BorderPane) ViewProvider.getView("addBook");
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 
@@ -85,40 +84,35 @@ public class StartScreenView {
 	@FXML
 	private void activateDirectory() throws IOException {
 		BorderPane directory = (BorderPane) ViewProvider.getView("directory");
-		//BorderPane proba = mainScreen.getMainScreen();
-    	//mainScreen.getMainScreen().setCenter(null);
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(directory);
 
 	}
 	
 	@FXML
 	private void activateSearch() throws IOException {
-		mainScreen = (MainScreenView) ViewProvider.getView("mainScreen");
 		BorderPane search = (BorderPane) ViewProvider.getView("search");
-		System.out.println(mainScreen);
-		System.out.println(search);
-		//System.out.println(mainScreen);
-    	//mainScreen.getMainScreen().setCenter(search);
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(search);
 
 	}
 	
 	@FXML
 	private void activateSettings() throws IOException {
 		BorderPane settings = (BorderPane) ViewProvider.getView("settings");
-    	//mainScreen.getMainScreen().setCenter(settings);
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(settings);
 
 	}
 	
 	@FXML
 	private void activateShare() throws IOException {
 		BorderPane share = (BorderPane) ViewProvider.getView("share");
-    	//mainScreen.getMainScreen().setCenter(share);
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(share);
 
 	}
 	
 	@FXML
 	private void activateUsersPopup() throws IOException {
 		BorderPane usersPopup = (BorderPane) ViewProvider.getView("usersPopup");
-    	//mainScreen.getMainScreen().setCenter(usersPopup);
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(usersPopup);
 
 	}
 	
