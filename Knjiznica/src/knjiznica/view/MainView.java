@@ -27,8 +27,8 @@ public class MainView {
 	private Button homeButton;
 	
 	public void initialize() throws IOException {
+		root.setId("booklist");
 		menuBox.setManaged(false);
-		
 		Image imageHomeButton = new Image(getClass().getResourceAsStream("../resources/home-button.png"));
 		homeButton.setGraphic(new ImageView(imageHomeButton));
 
