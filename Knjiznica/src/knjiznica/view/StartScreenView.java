@@ -13,6 +13,8 @@ import knjiznica.model.ViewProvider;
 
 public class StartScreenView {
 	
+	private MainScreenView mainScreen;
+	
 	private MainView root = (MainView) ViewProvider.getView("main");
 	
 	@FXML
@@ -40,9 +42,6 @@ public class StartScreenView {
 	private Button users;
 	
 	public void initialize() throws IOException {
-		
-		startScreen.setId("booklist");
-		
 		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/addBook-button.png"));
 		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-button.png"));
 		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-button.png"));
@@ -57,13 +56,13 @@ public class StartScreenView {
 		share.    setGraphic(new ImageView(imageShare));
 		users.    setGraphic(new ImageView(imageUsers));
 		
-		BorderPane addBook   = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
-		BorderPane directory = (BorderPane) FXMLLoader.load(getClass().getResource("Directory-view.fxml"));
-		BorderPane search    = (BorderPane) FXMLLoader.load(getClass().getResource("Search-view.fxml"));
-		BorderPane settings  = (BorderPane) FXMLLoader.load(getClass().getResource("Settings-view.fxml"));
-		BorderPane share     = (BorderPane) FXMLLoader.load(getClass().getResource("Share-view.fxml"));
-		GridPane usersPopup     = (GridPane) FXMLLoader.load(getClass().getResource("AddUsersPopup-view.fxml"));
-		BorderPane users     = (BorderPane) FXMLLoader.load(getClass().getResource("Users-view.fxml"));
+		BorderPane addBook    = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
+		BorderPane directory  = (BorderPane) FXMLLoader.load(getClass().getResource("Directory-view.fxml"));
+		BorderPane search     = (BorderPane) FXMLLoader.load(getClass().getResource("Search-view.fxml"));
+		BorderPane settings   = (BorderPane) FXMLLoader.load(getClass().getResource("Settings-view.fxml"));
+		BorderPane share      = (BorderPane) FXMLLoader.load(getClass().getResource("Share-view.fxml"));
+		BorderPane usersPopup = (BorderPane) FXMLLoader.load(getClass().getResource("AddUsersPopup-view.fxml"));
+		BorderPane users      = (BorderPane) FXMLLoader.load(getClass().getResource("Users-view.fxml"));
 		
 		ViewProvider.setView("addBook", addBook);
 		ViewProvider.setView("directory", directory);
@@ -77,43 +76,49 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateAddBook() throws IOException {
+		//MainScreenView mainScreen = (MainScreenView) ViewProvider.getView("mainScreen");
 		BorderPane addBook = (BorderPane) ViewProvider.getView("addBook");
-    	root.getRoot().setCenter(addBook);
+    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 
 	}
 	
 	@FXML
 	private void activateDirectory() throws IOException {
 		BorderPane directory = (BorderPane) ViewProvider.getView("directory");
-    	root.getRoot().setCenter(directory);
+		//BorderPane proba = mainScreen.getMainScreen();
+    	//mainScreen.getMainScreen().setCenter(null);
 
 	}
 	
 	@FXML
 	private void activateSearch() throws IOException {
+		mainScreen = (MainScreenView) ViewProvider.getView("mainScreen");
 		BorderPane search = (BorderPane) ViewProvider.getView("search");
-    	root.getRoot().setCenter(search);
+		System.out.println(mainScreen);
+		System.out.println(search);
+		//System.out.println(mainScreen);
+    	//mainScreen.getMainScreen().setCenter(search);
 
 	}
 	
 	@FXML
 	private void activateSettings() throws IOException {
 		BorderPane settings = (BorderPane) ViewProvider.getView("settings");
-    	root.getRoot().setCenter(settings);
+    	//mainScreen.getMainScreen().setCenter(settings);
 
 	}
 	
 	@FXML
 	private void activateShare() throws IOException {
 		BorderPane share = (BorderPane) ViewProvider.getView("share");
-    	root.getRoot().setCenter(share);
+    	//mainScreen.getMainScreen().setCenter(share);
 
 	}
 	
 	@FXML
 	private void activateUsersPopup() throws IOException {
-		GridPane usersPopup = (GridPane) ViewProvider.getView("usersPopup");
-    	startScreenPopup.setCenter(usersPopup);
+		BorderPane usersPopup = (BorderPane) ViewProvider.getView("usersPopup");
+    	//mainScreen.getMainScreen().setCenter(usersPopup);
 
 	}
 	

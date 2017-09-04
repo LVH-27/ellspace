@@ -44,11 +44,15 @@ public class LoginView {
 					Strings.getLink(), username, password);
         	Strings.setUsername(username);
         	Strings.setPassword(password);
-        	BorderPane startScreen = (BorderPane) FXMLLoader.load(
-        			getClass().getResource("StartScreen-view.fxml"));
-        	ViewProvider.setView("startScreen", startScreen);
+        	BorderPane mainScreen = (BorderPane) FXMLLoader.load(
+        			getClass().getResource("MainScreen-view.fxml"));
+        	
+        	System.out.println(44);
+        	System.out.println(mainScreen);
+        	ViewProvider.setView("mainScreen", mainScreen);
+        	System.out.println(ViewProvider.getView("mainScreen"));
         	MainView root = (MainView) ViewProvider.getView("main");
-        	root.getRoot().setCenter(startScreen);
+        	root.getRoot().setCenter(mainScreen);
         	root.getMenuBox().setManaged(true);
         	
         } catch (PSQLException e) {
@@ -59,8 +63,8 @@ public class LoginView {
 			e.printStackTrace();
 		}
         
-		System.out.println(username + '\t' + password);
-		System.out.println(Strings.getPassword());
+//		System.out.println(username + '\t' + password);
+//		System.out.println(Strings.getPassword());
 		
 		//errorLabel.setText("Successful login!");
 		//errorLabel.setVisible(true);
