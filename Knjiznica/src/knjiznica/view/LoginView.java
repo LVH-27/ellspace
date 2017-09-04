@@ -50,7 +50,6 @@ public class LoginView {
         	ViewProvider.setView("mainScreen", mainScreen);
         	MainView root = (MainView) ViewProvider.getView("main");
         	root.getRoot().setCenter(mainScreen);
-        	root.getMenuBox().setManaged(true);
         	
         } catch (PSQLException e) {
 			errorLabel.setVisible(true);

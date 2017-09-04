@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <BorderPane fx:id="mainScreen" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.MainScreenView">
    <top>
       <HBox maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="TOP_LEFT">

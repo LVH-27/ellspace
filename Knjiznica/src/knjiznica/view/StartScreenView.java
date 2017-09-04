@@ -8,15 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import knjiznica.model.ViewProvider;
 
 public class StartScreenView {
-	
-	private MainScreenView mainScreen;
-	
-	private MainView root = (MainView) ViewProvider.getView("main");
-	
+		
 	@FXML
 	private BorderPane startScreen;
 	

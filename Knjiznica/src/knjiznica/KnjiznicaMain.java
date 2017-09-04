@@ -6,8 +6,6 @@ import java.awt.Toolkit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import knjiznica.model.Book;
-import knjiznica.model.GlobalCollection;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -36,13 +34,13 @@ public class KnjiznicaMain extends Application {
 			e.printStackTrace();
 		}
 		
-		InitializeBooks();
+//		InitializeBooks();
 	}
 	
-	public void InitializeBooks(){
-		Book book = new Book("AAA", "BBB");
-		GlobalCollection.getList().add(book);
-	}
+//	public void InitializeBooks(){
+//		Book book = new Book("AAA", "BBB");
+//		GlobalCollection.getList().add(book);
+//	}
 	
 	public static void main(String[] args) {
 		launch(args);
