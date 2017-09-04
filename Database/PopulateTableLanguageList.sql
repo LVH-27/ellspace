@@ -4,36 +4,36 @@ INSERT INTO "LanguageList" VALUES(DEFAULT, 'Other');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hrvatski');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Engleski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'NjemaËki');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Njemaƒçkiki');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Srpski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, '»eöki');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'SlovaËki');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'ƒåe≈°ki');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Slovaƒçki');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Poljski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Ruski');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Francuski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Talijanski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'äpanjolski');
+INSERT INTO "LanguageList" VALUES(DEFAULT, '≈†panjolski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Portugalski');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Danski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Nizozemski');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Finski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Norveöki');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'ävedski');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Norve≈°ki');
+INSERT INTO "LanguageList" VALUES(DEFAULT, '≈†vedski');
 
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Maarski');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Maƒëarski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Rumunjski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Bugarski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Makedonski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Albanski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'GrËki');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Grƒçki');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Turski');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Kineski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Japanski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Arapski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hindski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Pandûapski');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Pand≈æapski');

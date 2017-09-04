@@ -9,7 +9,7 @@
 
 def main():
 
-    export = open("PopulateAll.sql", "w")
+    export = open("PopulateAll.sql", "w", encoding="utf-8")
 
     import_list = ["ModelKnjiznica_postgres_create.sql",
                    "PopulateTableCity.sql",
@@ -21,7 +21,7 @@ def main():
     FINAL = ""
     
     for file in import_list:
-        imp = open(file, "r")
+        imp = open(file, "r", encoding="utf-8")
         text = imp.read()
         imp.close()
         FINAL += text + '\n\n'
