@@ -58,6 +58,7 @@ public class StartScreenView {
 		BorderPane share      = (BorderPane) FXMLLoader.load(getClass().getResource("Share-view.fxml"));
 		BorderPane usersPopup = (BorderPane) FXMLLoader.load(getClass().getResource("AddUsersPopup-view.fxml"));
 		BorderPane users      = (BorderPane) FXMLLoader.load(getClass().getResource("Users-view.fxml"));
+		BorderPane addUser    = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
 		
 		ViewProvider.setView("addBook", addBook);
 		ViewProvider.setView("directory", directory);
@@ -66,6 +67,7 @@ public class StartScreenView {
 		ViewProvider.setView("share", share);
 		ViewProvider.setView("usersPopup", usersPopup);
 		ViewProvider.setView("users", users);
+		ViewProvider.setView("addUser", addUser);
 		
 	}
 	
