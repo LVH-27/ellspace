@@ -70,7 +70,7 @@
                         </VBox>
                         <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                            <children>
-                              <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" text="Username or password is incorrect. Please try again." textFill="#dc0000" visible="false" />
+                              <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" text="Username or password is incorrect. Please try again." textFill="RED" visible="false" />
                            </children>
                         </VBox>
                         <Label alignment="CENTER" text="Username:" GridPane.rowIndex="2">

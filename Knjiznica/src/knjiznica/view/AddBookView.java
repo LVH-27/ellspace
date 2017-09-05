@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import knjiznica.model.PostalCodeComboBox;
+import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
 
 public class AddBookView {
@@ -16,7 +16,7 @@ public class AddBookView {
 	
 	public void initialize() throws SQLException {
 		ViewProvider.setView(nameCombo, postalCodeCombo);
-		PostalCodeComboBox.setComboData(nameCombo);
+		PostalCodeComboThread.setComboData(nameCombo);
 	}
 
 }

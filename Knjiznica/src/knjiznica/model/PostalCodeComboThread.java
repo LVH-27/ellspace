@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import javafx.scene.control.ComboBox;
 
 
-public class PostalCodeComboBox implements Runnable {
+public class PostalCodeComboThread implements Runnable {
 	
 	private static String which;
 	
@@ -31,7 +31,7 @@ public class PostalCodeComboBox implements Runnable {
 	
 	public static void setComboData(String whichCombo) {
 		which = whichCombo;
-		(new Thread(new PostalCodeComboBox())).start();
+		(new Thread(new PostalCodeComboThread())).start();
 	}
 
 }
