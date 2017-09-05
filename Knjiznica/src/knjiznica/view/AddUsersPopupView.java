@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import knjiznica.model.ViewProvider;
 
-public class AddUsersPopup {
+public class AddUsersPopupView {
 	
 	@FXML
 	private BorderPane addUsersPopup;

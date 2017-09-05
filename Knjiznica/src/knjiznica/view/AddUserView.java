@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import knjiznica.model.PostalCodeComboBox;
 import knjiznica.model.ViewProvider;
 
-public class AddUser {
+public class AddUserView {
 	
 	@FXML
 	private Button addButton;
@@ -22,6 +22,8 @@ public class AddUser {
 	@FXML
 	private ComboBox<String> postalCodeCombo;
 	
+	private String nameCombo = "postalCodeComboAddUser";
+	
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
@@ -31,7 +33,9 @@ public class AddUser {
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("homeButton");
 		
-		PostalCodeComboBox.setComboData();
+		ViewProvider.setView(nameCombo, postalCodeCombo);
+		PostalCodeComboBox.setComboData(nameCombo);
+		
 	}
 	
 	@FXML
