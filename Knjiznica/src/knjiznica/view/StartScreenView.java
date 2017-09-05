@@ -37,6 +37,7 @@ public class StartScreenView {
 	private Button users;
 	
 	public void initialize() throws IOException {
+		
 		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/addBook-button.png"));
 		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-button.png"));
 		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-button.png"));

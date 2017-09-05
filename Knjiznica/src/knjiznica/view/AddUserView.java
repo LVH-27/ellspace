@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import knjiznica.model.AddUserToDatabase;
 import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
 
@@ -28,10 +29,16 @@ public class AddUserView {
 	private TextField emailField;
 	
 	@FXML
-	private TextField adressField;
+	private TextField phoneNumberField;
 	
 	@FXML
-	private TextField phoneNumberField;
+	private TextField countryField;
+	
+	@FXML
+	private TextField streetField;
+	
+	@FXML
+	private TextField houseNumberField;
 	
 	@FXML
 	private Button addButton;
@@ -55,9 +62,15 @@ public class AddUserView {
 	
 	private String email;
 	
-	private String adress;
-	
 	private String phoneNumber;
+	
+	private String country;
+	
+	private String street;
+	
+	private String houseNumber;
+	
+	private String postalCode;
 	
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
@@ -80,17 +93,26 @@ public class AddUserView {
 	
 	@FXML
 	private void activateAdd() {
+		postalCode = postalCodeCombo.getSelectionModel().getSelectedItem();
 		firstName = firstNameField.getText();
 		middleName = middleNameField.getText();
 		lastName = lastNameField.getText();
 		email = emailField.getText();
-		adress = adressField.getText();
 		phoneNumber = phoneNumberField.getText();
-		if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || adress.isEmpty() || phoneNumber.isEmpty()) {
+		country = countryField.getText();
+		street = streetField.getText();
+		houseNumber = houseNumberField.getText();
+		
+		if(postalCode.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
 			errorLabel.setVisible(true);
 		}
 		else {
-			System.out.println(middleName);
+			if(middleName.isEmpty()) {
+				middleName = null;
+			}
+			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
 		}
+		
 	}
 }
