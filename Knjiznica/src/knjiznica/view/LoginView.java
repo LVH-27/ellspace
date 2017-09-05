@@ -62,9 +62,8 @@ public class LoginView {
 //		System.out.println(username + '\t' + password);
 //		System.out.println(Strings.getPassword());
 		
-		//errorLabel.setText("Successful login!");
-		//errorLabel.setVisible(true);
-		
+        //progress bar?
+        
 		//error za no internet?
 		
 	}

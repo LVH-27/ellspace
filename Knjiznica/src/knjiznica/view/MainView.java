@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import knjiznica.model.ViewProvider;
 
 public class MainView {
-
+	
 	@FXML 
 	private BorderPane root;
 	

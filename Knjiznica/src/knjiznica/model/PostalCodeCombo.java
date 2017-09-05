@@ -22,7 +22,7 @@ public class PostalCodeCombo {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 
-			String query = "SELECT * FROM public.\"City\"";
+			String query = "SELECT * FROM public.\"City\" ORDER BY \"PostalCode\" ASC";
 			
 			stmt = con.createStatement();
 			
@@ -35,9 +35,11 @@ public class PostalCodeCombo {
 				
 		} catch(SQLException e){
 			e.printStackTrace();
+			
 		} finally {
 			stmt.close();
 		}
+		
 		return null;
 	}
 }

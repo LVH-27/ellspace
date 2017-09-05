@@ -70,14 +70,12 @@ public class AddUserView {
 		
 		ViewProvider.setView(nameCombo, postalCodeCombo);
 		PostalCodeComboThread.setComboData(nameCombo);
-		
 	}
 	
 	@FXML
 	private void activateBack() throws IOException {
 		BorderPane usersPopup = (BorderPane) ViewProvider.getView("usersPopup");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(usersPopup);
-
 	}
 	
 	@FXML
@@ -92,7 +90,7 @@ public class AddUserView {
 			errorLabel.setVisible(true);
 		}
 		else {
-			
+			System.out.println(middleName);
 		}
 	}
 }
