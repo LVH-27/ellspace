@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import knjiznica.model.PostalCodeComboBox;
 import knjiznica.model.ViewProvider;
 
 public class AddUser {
@@ -17,6 +19,9 @@ public class AddUser {
 	@FXML
 	private Button backButton;
 	
+	@FXML
+	private ComboBox<String> postalCodeCombo;
+	
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
@@ -25,6 +30,8 @@ public class AddUser {
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("homeButton");
+		
+		PostalCodeComboBox.setComboData();
 	}
 	
 	@FXML

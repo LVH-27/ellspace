@@ -1,6 +1,6 @@
 package knjiznica.resources;
 
-public class Strings {
+public class ConnectionData {
 	
 	private static String link = "jdbc:postgresql://localhost:5432/TestFill";
 	private static String username = null;
@@ -15,7 +15,7 @@ public class Strings {
 	}
 	
 	public static void setPassword(String password) {
-		Strings.password = password;
+		ConnectionData.password = password;
 	}
 
 	public static String getUsername() {
@@ -23,7 +23,7 @@ public class Strings {
 	}
 
 	public static void setUsername(String username) {
-		Strings.username = username;
+		ConnectionData.username = username;
 	}
 	
 }

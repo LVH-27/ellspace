@@ -13,7 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import knjiznica.model.ViewProvider;
-import knjiznica.resources.Strings;
+import knjiznica.resources.ConnectionData;
 
 public class LoginView {
 
@@ -41,9 +41,9 @@ public class LoginView {
         try {
         	@SuppressWarnings("unused")
 			Connection con = DriverManager.getConnection(
-					Strings.getLink(), username, password);
-        	Strings.setUsername(username);
-        	Strings.setPassword(password);
+					ConnectionData.getLink(), username, password);
+        	ConnectionData.setUsername(username);
+        	ConnectionData.setPassword(password);
         	BorderPane mainScreen = (BorderPane) FXMLLoader.load(
         			getClass().getResource("MainScreen-view.fxml"));
         
