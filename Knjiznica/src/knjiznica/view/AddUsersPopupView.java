@@ -18,14 +18,48 @@ public class AddUsersPopupView {
 	@FXML
 	private Button addUserButton;
 	
+	@FXML
+	private Button listUsersButton;
+	
+	@FXML
+	private Button addLibraryButton;
+	
+	@FXML
+	private Button listLibrariesButton;
+	
 	public void initialize() {
-		Image imageAddUser = new Image(getClass().getResourceAsStream("../resources/addUser-button.png"));
-		addUserButton.setGraphic(new ImageView(imageAddUser));
+		Image imageAddUser       = new Image(getClass().getResourceAsStream("../resources/addUser-button.png"));
+		//Image imageListUsers     = new Image(getClass().getResourceAsStream("../resources/listUsers-button.png"));
+		//Image imageAddLibrary    = new Image(getClass().getResourceAsStream("../resources/addLibrary-button.png"));
+		//Image imageListLibraries = new Image(getClass().getResourceAsStream("../resources/listLibraries-button.png"));
+
+		addUserButton.      setGraphic(new ImageView(imageAddUser));
+//		listUsersButton.    setGraphic(new ImageView(imageListUsers));
+//		addLibraryButton.   setGraphic(new ImageView(imageAddLibrary));
+//		listLibrariesButton.setGraphic(new ImageView(imageListLibraries));
 	}
 	
 	@FXML
 	private void activateAddUser() throws IOException {
-		BorderPane addUser    = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
+		BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
+	}
+	
+	@FXML
+	private void activateListUsers() throws IOException {
+		BorderPane listUsers = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));////////////////
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listUsers);
+	}
+	
+	@FXML
+	private void activateAddLibrary() throws IOException {
+		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));/////////////////
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
+	}
+	
+	@FXML
+	private void activateListLibraries() throws IOException {
+		BorderPane listLibraries = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));//////////////
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listLibraries);
 	}
 }
