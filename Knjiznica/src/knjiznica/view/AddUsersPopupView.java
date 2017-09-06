@@ -29,9 +29,9 @@ public class AddUsersPopupView {
 	
 	public void initialize() {
 		Image imageAddUser       = new Image(getClass().getResourceAsStream("../resources/addUser-button.png"));
-		//Image imageListUsers     = new Image(getClass().getResourceAsStream("../resources/listUsers-button.png"));
-		//Image imageAddLibrary    = new Image(getClass().getResourceAsStream("../resources/addLibrary-button.png"));
-		//Image imageListLibraries = new Image(getClass().getResourceAsStream("../resources/listLibraries-button.png"));
+//		Image imageListUsers     = new Image(getClass().getResourceAsStream("../resources/listUsers-button.png"));
+//		Image imageAddLibrary    = new Image(getClass().getResourceAsStream("../resources/addLibrary-button.png"));
+//		Image imageListLibraries = new Image(getClass().getResourceAsStream("../resources/listLibraries-button.png"));
 
 		addUserButton.      setGraphic(new ImageView(imageAddUser));
 //		listUsersButton.    setGraphic(new ImageView(imageListUsers));
@@ -47,19 +47,19 @@ public class AddUsersPopupView {
 	
 	@FXML
 	private void activateListUsers() throws IOException {
-		BorderPane listUsers = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));////////////////
+		BorderPane listUsers = (BorderPane) FXMLLoader.load(getClass().getResource("ListUsers-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listUsers);
 	}
 	
 	@FXML
 	private void activateAddLibrary() throws IOException {
-		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));/////////////////
+		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
 	}
 	
 	@FXML
 	private void activateListLibraries() throws IOException {
-		BorderPane listLibraries = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));//////////////
+		BorderPane listLibraries = (BorderPane) FXMLLoader.load(getClass().getResource("ListLibraries-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listLibraries);
 	}
 }
