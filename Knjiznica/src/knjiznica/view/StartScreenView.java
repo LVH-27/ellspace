@@ -28,7 +28,7 @@ public class StartScreenView {
 	private Button search;
 	
 	@FXML
-	private Button settings;
+	private Button eventLog;
 	
 	@FXML
 	private Button share;
@@ -41,27 +41,27 @@ public class StartScreenView {
 		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/addBook-button.png"));
 		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-button.png"));
 		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-button.png"));
-		Image imageSettings  = new Image(getClass().getResourceAsStream("../resources/settings-button.png"));
+		Image imageEventLog  = new Image(getClass().getResourceAsStream("../resources/log-button.png"));
 		Image imageShare     = new Image(getClass().getResourceAsStream("../resources/sharebook-button.png"));
 		Image imageUsers     = new Image(getClass().getResourceAsStream("../resources/users-button.png"));
 		
 		addBook.  setGraphic(new ImageView(imageAddBook));
 		directory.setGraphic(new ImageView(imageDirectory));
 		search.   setGraphic(new ImageView(imageSearch));
-		settings. setGraphic(new ImageView(imageSettings));
+		eventLog. setGraphic(new ImageView(imageEventLog));
 		share.    setGraphic(new ImageView(imageShare));
 		users.    setGraphic(new ImageView(imageUsers));
 		
 		BorderPane directory  = (BorderPane) FXMLLoader.load(getClass().getResource("Directory-view.fxml"));
 		BorderPane search     = (BorderPane) FXMLLoader.load(getClass().getResource("Search-view.fxml"));
-		BorderPane settings   = (BorderPane) FXMLLoader.load(getClass().getResource("Settings-view.fxml"));
+		BorderPane eventLog   = (BorderPane) FXMLLoader.load(getClass().getResource("EventLog-view.fxml"));
 		BorderPane share      = (BorderPane) FXMLLoader.load(getClass().getResource("Share-view.fxml"));
 		BorderPane usersPopup = (BorderPane) FXMLLoader.load(getClass().getResource("AddUsersPopup-view.fxml"));
 		BorderPane users      = (BorderPane) FXMLLoader.load(getClass().getResource("Users-view.fxml"));
 		
 		ViewProvider.setView("directory", directory);
 		ViewProvider.setView("search", search);
-		ViewProvider.setView("settings", settings);
+		ViewProvider.setView("eventLog", eventLog);
 		ViewProvider.setView("share", share);
 		ViewProvider.setView("usersPopup", usersPopup);
 		ViewProvider.setView("users", users);
@@ -69,7 +69,7 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateAddBook() throws IOException {
-		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
+		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));///////////////////////////////////////////////
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
 	
@@ -86,9 +86,9 @@ public class StartScreenView {
 	}
 	
 	@FXML
-	private void activateSettings() throws IOException {
-		BorderPane settings = (BorderPane) ViewProvider.getView("settings");
-		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(settings);
+	private void activateEventLog() throws IOException {
+		BorderPane eventLog = (BorderPane) ViewProvider.getView("eventLog");
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(eventLog);
 	}
 	
 	@FXML

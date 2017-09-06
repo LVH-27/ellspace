@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.AddAuthorView">
+   <center>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <BorderPane style="-fx-border-color: #B1BCBE; -fx-background-color: #F4DDC9; -fx-border-radius: 15; -fx-border-width: 3.5; -fx-background-radius: 24;">
+                     <center>
+                        <GridPane alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" />
+                            <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label alignment="CENTER" text="First Name" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="middleNameField" promptText="Optional" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label text="Middle Name" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label text="Last Name" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                              </HBox>
+                              <TextField fx:id="yearOfBirthField" promptText="Optional" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label text="Year Of Birth" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets right="10.0" />
+                                 </opaqueInsets>
+                              </HBox>
+                              <TextField fx:id="yearOfDeathField" promptText="Optional" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label text="Year Of Death" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </HBox>
+                              <HBox alignment="CENTER" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                              <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Button>
+                              <Button fx:id="backButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <children>
+                                    <CheckBox fx:id="isAliveCheck" contentDisplay="CENTER" mnemonicParsing="false" />
+                                    <Label fx:id="errorLabelTooMuch" text="You may only use one" textFill="RED" visible="false" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="Author Is Alive" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label fx:id="errorLabelMiss" text="Missing Information" textFill="RED" visible="false" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </center>
+                     <top>
+                        <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Add Author">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="50.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
