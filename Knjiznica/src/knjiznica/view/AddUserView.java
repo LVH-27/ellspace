@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import knjiznica.model.AddUserToDatabase;
+import knjiznica.model.CheckInputLetters;
+import knjiznica.model.FormattingName;
 import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
 
@@ -94,15 +96,47 @@ public class AddUserView {
 		street = streetField.getText();
 		houseNumber = houseNumberField.getText();
 		
+		firstName = firstName.trim();
+		middleName = middleName.trim();
+		lastName = lastName.trim();
+		email = email.trim();
+		phoneNumber = phoneNumber.trim();
+		country = country.trim();
+		street = street.trim();
+		houseNumber = houseNumber.trim();
+		
+		/*
+		 * DOUBLED EMAIL NOT UNIQUE
+		 */
+		/*
+		 * FIX postalCode.isEmpty() /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		 */
 		if(postalCode.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
 			errorLabel.setVisible(true);
 		}
 		else {
-			if(middleName.isEmpty()) {
-				middleName = null;
+			firstName = FormattingName.format(firstName);
+			lastName = FormattingName.format(lastName);
+			
+			if(!CheckInputLetters.check(firstName)) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
 			}
-			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
+			
+			else if(!CheckInputLetters.check(middleName)) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
+			}
+			
+			else if(!CheckInputLetters.check(lastName)) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
+			}
+			else {
+				int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+				AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
+			}
+			
 		}
 	}
 }

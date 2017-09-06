@@ -3,16 +3,17 @@ package knjiznica.view;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import knjiznica.model.AddUserToDatabase;
-import knjiznica.model.PostalCodeComboThread;
+import knjiznica.model.AddAuthorToDatabase;
+import knjiznica.model.CheckInputLetters;
+import knjiznica.model.FormattingName;
 import knjiznica.model.ViewProvider;
 
 public class AddAuthorView {
@@ -53,6 +54,7 @@ public class AddAuthorView {
 	private boolean isAlive;
 	private String yearOfBirth;
 	private String yearOfDeath;
+
 	
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
@@ -67,28 +69,104 @@ public class AddAuthorView {
 	
 	@FXML
 	private void activateBack() throws IOException {
+		
 		BorderPane startScreenView = (BorderPane) ViewProvider.getView("startScreen");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(startScreenView);
+		
 	}
 	
 	@FXML
-	private void activateAdd() {
+	private void activateAdd() throws IOException {
+		
 		firstName = firstNameField.getText();
 		middleName = middleNameField.getText();
 		lastName = lastNameField.getText();
-		isAlive = isAliveCheck.isArmed();
+		isAlive = isAliveCheck.isSelected();
 		yearOfBirth = yearOfBirthField.getText();
 		yearOfDeath = yearOfDeathField.getText();
+		
+		firstName = firstName.trim();
+		middleName = middleName.trim();
+		lastName = lastName.trim();
+		yearOfBirth = yearOfBirth.trim();
+		yearOfDeath = yearOfDeath.trim();
 		
 		if(firstName.isEmpty() || lastName.isEmpty()) {
 			errorLabelMiss.setVisible(true);
 		}
 		else {
-			if(middleName.isEmpty()) {
-				middleName = null;
+			firstName = FormattingName.format(firstName);
+			lastName = FormattingName.format(lastName);
+			
+			boolean birth = true;
+			boolean death = true;
+			
+			try {
+				Integer.parseInt(yearOfBirth);
+				
+			}catch(Exception e) {
+				birth = false;
+				
+			}finally{
+				if(yearOfBirth.isEmpty()) {
+					birth = true;
+				}
 			}
-			if(isAlive && !yearOfDeath.isEmpty()) {
+			
+			try {
+				Integer.parseInt(yearOfDeath);
+				
+			}catch(Exception e) {
+				death = false;
+				
+			}finally{
+				if(yearOfDeath.isEmpty()) {
+					death = true;
+				}
+			}
+			
+			if(!birth) {
+				errorLabelTooMuch.setText("Please enter birth year\n"
+						+ "in 4 digits (e.g. 1973).");
 				errorLabelTooMuch.setVisible(true);
+			}
+			
+			else if(!death) {
+				errorLabelTooMuch.setText("Please enter death year\n"
+						+ "in 4 digits (e.g. 1973).");
+				errorLabelTooMuch.setVisible(true);
+			}
+			
+			else if(!CheckInputLetters.check(firstName)) {
+				errorLabelMiss.setText("Verify that you have entered the correct information.");
+				errorLabelMiss.setVisible(true);
+			}
+			
+			else if(!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
+				errorLabelMiss.setText("Verify that you have entered the correct information.");
+				errorLabelMiss.setVisible(true);
+			}
+			
+			else if(!CheckInputLetters.check(lastName)) {
+				errorLabelMiss.setText("Verify that you have entered the correct information.");
+				errorLabelMiss.setVisible(true);
+			}
+			
+			else if(isAlive && !yearOfDeath.isEmpty()) {
+				errorLabelTooMuch.setText("You may only use one.");//////////// HIGHLIGHT BORDERLINE IN RED AND OTHERS ///////////////////////////
+				errorLabelTooMuch.setVisible(true);
+			}
+			
+			else if(!yearOfBirth.isEmpty() && !yearOfDeath.isEmpty() && Integer.parseInt(yearOfBirth) > Integer.parseInt(yearOfDeath)) {
+				errorLabelTooMuch.setText("Year of birth cannot be\n"
+						+ "larger than year of death.");
+				errorLabelTooMuch.setVisible(true);
+			}
+			
+			else {
+				AddAuthorToDatabase.addAuthor(firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);
+				BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
+		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
 			}
 		}
 	}
