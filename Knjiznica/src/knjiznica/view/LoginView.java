@@ -16,16 +16,16 @@ import knjiznica.model.ViewProvider;
 import knjiznica.resources.ConnectionData;
 
 public class LoginView {
-
+	
 	@FXML
 	private TextField usernameText;
 	
 	@FXML
 	private PasswordField passwordText;
-	 
+	
 	@FXML
 	private Label errorLabel;
-		
+	
 	@FXML
 	private BorderPane localRoot;
 	
@@ -46,7 +46,7 @@ public class LoginView {
         	ConnectionData.setPassword(password);
         	BorderPane mainScreen = (BorderPane) FXMLLoader.load(
         			getClass().getResource("MainScreen-view.fxml"));
-        
+        	
         	ViewProvider.setView("mainScreen", mainScreen);
         	MainView root = (MainView) ViewProvider.getView("main");
         	root.getRoot().setCenter(mainScreen);
