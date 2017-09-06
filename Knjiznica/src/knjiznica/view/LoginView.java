@@ -34,8 +34,7 @@ public class LoginView {
 	private StackPane stackPane;
 	
 	public void initialize() {
-//		localRoot.setId("login");
-		stackPane.setId("login");
+		localRoot.setId("login");
 	}
 	
 	@FXML
