@@ -2,7 +2,7 @@ package knjiznica.resources;
 
 public class ConnectionData {
 	
-	private static String link = "jdbc:postgresql://localhost:5432/TestFill";
+	private static String link = "jdbc:postgresql://localhost:5432/LibraryDatabase";
 	private static String username = null;
 	private static String password = null;
 	
