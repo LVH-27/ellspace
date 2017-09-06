@@ -53,23 +53,14 @@ public class AddUserView {
 	private Label errorLabel;
 	
 	private String nameCombo = "postalCodeComboAddUser";
-	
 	private String firstName;
-	
 	private String middleName;
-	
 	private String lastName;
-	
 	private String email;
-	
 	private String phoneNumber;
-	
 	private String country;
-	
 	private String street;
-	
 	private String houseNumber;
-	
 	private String postalCode;
 	
 	public void initialize() {
@@ -113,6 +104,5 @@ public class AddUserView {
 			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
 		}
-		
 	}
 }

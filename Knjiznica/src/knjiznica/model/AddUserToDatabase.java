@@ -56,9 +56,6 @@ public class AddUserToDatabase implements Runnable{
 				}
 			}
 			
-
-			
-			
 			String queryUser = "INSERT INTO public.\"User\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)";
 			
 			pstmtUser = con.prepareStatement(queryUser);
@@ -69,14 +66,14 @@ public class AddUserToDatabase implements Runnable{
 			pstmtUser.setInt(4, Integer.parseInt(addressID));
 			pstmtUser.setString(5, phoneNumber);
 			pstmtUser.setString(6, email);
-
+			
 			pstmtUser.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
 	public static void addUser(String firstNameIn, String middleNameIn, String lastNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn) {
 		
 		firstName = firstNameIn;

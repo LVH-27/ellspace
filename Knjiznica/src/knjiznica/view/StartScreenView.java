@@ -69,49 +69,42 @@ public class StartScreenView {
 		ViewProvider.setView("usersPopup", usersPopup);
 		ViewProvider.setView("users", users);
 		ViewProvider.setView("addUser", addUser);
-		
 	}
 	
 	@FXML
 	private void activateAddBook() throws IOException {
 		BorderPane addBook = (BorderPane) ViewProvider.getView("addBook");
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
-
 	}
 	
 	@FXML
 	private void activateDirectory() throws IOException {
 		BorderPane directory = (BorderPane) ViewProvider.getView("directory");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(directory);
-
 	}
 	
 	@FXML
 	private void activateSearch() throws IOException {
 		BorderPane search = (BorderPane) ViewProvider.getView("search");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(search);
-
 	}
 	
 	@FXML
 	private void activateSettings() throws IOException {
 		BorderPane settings = (BorderPane) ViewProvider.getView("settings");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(settings);
-
 	}
 	
 	@FXML
 	private void activateShare() throws IOException {
 		BorderPane share = (BorderPane) ViewProvider.getView("share");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(share);
-
 	}
 	
 	@FXML
 	private void activateUsersPopup() throws IOException {
 		BorderPane usersPopup = (BorderPane) ViewProvider.getView("usersPopup");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(usersPopup);
-
 	}
 	
 	/*startScreenPane.setId("booklist");

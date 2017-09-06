@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.scene.control.ComboBox;
 
-
 public class PostalCodeComboThread implements Runnable {
 	
 	private static String which;
@@ -28,10 +27,8 @@ public class PostalCodeComboThread implements Runnable {
 		}
 	}
 	
-	
 	public static void setComboData(String whichCombo) {
 		which = whichCombo;
 		(new Thread(new PostalCodeComboThread())).start();
 	}
-
 }

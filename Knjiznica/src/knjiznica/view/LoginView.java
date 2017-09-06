@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.ViewProvider;
 import knjiznica.resources.ConnectionData;
 
@@ -29,8 +30,12 @@ public class LoginView {
 	@FXML
 	private BorderPane localRoot;
 	
+	@FXML
+	private StackPane stackPane;
+	
 	public void initialize() {
-		localRoot.setId("login");
+//		localRoot.setId("login");
+		stackPane.setId("login");
 	}
 	
 	@FXML
@@ -64,7 +69,7 @@ public class LoginView {
 		
         //progress bar?
         
-		//error za no internet?
+		//error za no internet?  SQLTimeoutException?
 		
 	}
 	

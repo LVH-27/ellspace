@@ -32,9 +32,11 @@ public class PostalCodeCombo {
 			ResultSet result = stmt.executeQuery(query);
 			
 			while (result.next()) {
-				comboData.add(result.getInt(1) + " - " + result.getString(2));
-				postalCodes.add(result.getInt(1));
-				names.add(result.getString(2));
+				int tempPostalCode = result.getInt(1);
+				String tempName = result.getString(2);
+				postalCodes.add(tempPostalCode);
+				names.add(tempName);
+				comboData.add(tempPostalCode + " - " + tempName);
 			}
 			
 			returnData.add((ArrayList<String>) comboData);

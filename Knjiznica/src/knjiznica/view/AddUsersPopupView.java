@@ -26,6 +26,5 @@ public class AddUsersPopupView {
 	private void activateAddUser() throws IOException {
 		BorderPane addUser = (BorderPane) ViewProvider.getView("addUser");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
-
 	}
 }
