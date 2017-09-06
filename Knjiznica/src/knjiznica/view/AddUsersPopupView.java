@@ -3,6 +3,7 @@ package knjiznica.view;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +25,7 @@ public class AddUsersPopupView {
 	
 	@FXML
 	private void activateAddUser() throws IOException {
-		BorderPane addUser = (BorderPane) ViewProvider.getView("addUser");
+		BorderPane addUser    = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
 	}
 }

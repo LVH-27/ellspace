@@ -30,12 +30,12 @@ public class LoginView {
 	@FXML
 	private BorderPane localRoot;
 	
-	@FXML
-	private StackPane stackPane;
+	/*@FXML
+	private StackPane stackPane;*/
 	
 	public void initialize() {
-//		localRoot.setId("login");
-		stackPane.setId("login");
+		localRoot.setId("login");
+//		stackPane.setId("login");
 	}
 	
 	@FXML

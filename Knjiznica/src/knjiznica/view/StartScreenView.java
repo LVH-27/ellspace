@@ -52,28 +52,24 @@ public class StartScreenView {
 		share.    setGraphic(new ImageView(imageShare));
 		users.    setGraphic(new ImageView(imageUsers));
 		
-		BorderPane addBook    = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
 		BorderPane directory  = (BorderPane) FXMLLoader.load(getClass().getResource("Directory-view.fxml"));
 		BorderPane search     = (BorderPane) FXMLLoader.load(getClass().getResource("Search-view.fxml"));
 		BorderPane settings   = (BorderPane) FXMLLoader.load(getClass().getResource("Settings-view.fxml"));
 		BorderPane share      = (BorderPane) FXMLLoader.load(getClass().getResource("Share-view.fxml"));
 		BorderPane usersPopup = (BorderPane) FXMLLoader.load(getClass().getResource("AddUsersPopup-view.fxml"));
 		BorderPane users      = (BorderPane) FXMLLoader.load(getClass().getResource("Users-view.fxml"));
-		BorderPane addUser    = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
 		
-		ViewProvider.setView("addBook", addBook);
 		ViewProvider.setView("directory", directory);
 		ViewProvider.setView("search", search);
 		ViewProvider.setView("settings", settings);
 		ViewProvider.setView("share", share);
 		ViewProvider.setView("usersPopup", usersPopup);
 		ViewProvider.setView("users", users);
-		ViewProvider.setView("addUser", addUser);
 	}
 	
 	@FXML
 	private void activateAddBook() throws IOException {
-		BorderPane addBook = (BorderPane) ViewProvider.getView("addBook");
+		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
 	
