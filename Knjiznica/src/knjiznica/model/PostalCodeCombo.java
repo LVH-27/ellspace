@@ -13,8 +13,11 @@ import knjiznica.resources.ConnectionData;
 public class PostalCodeCombo {
 	
 	private static List<String> comboData = new ArrayList<String>();
+	private static List<Integer> postalCodes = new ArrayList<Integer>();
+	private static List<String> names = new ArrayList<String>();
+	private static ArrayList<ArrayList<?>> returnData = new ArrayList<ArrayList<?>>();
 	
-	public static ArrayList<String> getData() throws SQLException {
+	public static List<ArrayList<?>> getData() throws SQLException {
 		
 		Statement stmt = null;
 		
@@ -30,8 +33,15 @@ public class PostalCodeCombo {
 			
 			while (result.next()) {
 				comboData.add(result.getInt(1) + " - " + result.getString(2));
+				postalCodes.add(result.getInt(1));
+				names.add(result.getString(2));
 			}
-			return (ArrayList<String>) comboData;
+			
+			returnData.add((ArrayList<String>) comboData);
+			returnData.add((ArrayList<Integer>) postalCodes);
+			returnData.add((ArrayList<String>) names);
+			
+			return returnData;
 				
 		} catch(SQLException e){
 			e.printStackTrace();

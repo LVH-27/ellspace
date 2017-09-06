@@ -26,7 +26,7 @@ public class KnjiznicaMain extends Application {
 			scene.getStylesheets().add(getClass().getResource(
 					"resources/BackgroundStyle.css").toExternalForm());
 			
-			primaryStage.setTitle("Knjižnica");
+			primaryStage.setTitle("ICM SoC 17 - Library");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
