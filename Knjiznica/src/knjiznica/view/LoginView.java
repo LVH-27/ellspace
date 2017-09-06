@@ -35,7 +35,10 @@ public class LoginView {
 	
 	public void initialize() {
 		localRoot.setId("login");
+<<<<<<< HEAD
 //		stackPane.setId("login");
+=======
+>>>>>>> 7121874bd126e4a253774a54c482870a5f7b7719
 	}
 	
 	@FXML
