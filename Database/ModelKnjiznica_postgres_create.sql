@@ -20,7 +20,7 @@ CREATE TABLE "Book" (
 	"OwnerID" int NOT NULL,
 	"CurrentLocationID" int NOT NULL,
 	"Available" BOOLEAN NOT NULL,
-	"DatumVracanja" DATE,
+	"ReturnDate" DATE,
 	"Information" TEXT,
 	CONSTRAINT Book_pk PRIMARY KEY ("BookID")
 ) WITH (

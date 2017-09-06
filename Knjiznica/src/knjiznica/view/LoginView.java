@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import knjiznica.model.ViewProvider;
 import knjiznica.resources.ConnectionData;
 
@@ -30,15 +29,8 @@ public class LoginView {
 	@FXML
 	private BorderPane localRoot;
 	
-	/*@FXML
-	private StackPane stackPane;*/
-	
 	public void initialize() {
 		localRoot.setId("login");
-<<<<<<< HEAD
-//		stackPane.setId("login");
-=======
->>>>>>> 7121874bd126e4a253774a54c482870a5f7b7719
 	}
 	
 	@FXML
