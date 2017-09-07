@@ -39,8 +39,9 @@ public class LoginView {
     			getClass().getResource("MainScreen-view.fxml"));
     	
     	ViewProvider.setView("mainScreen", mainScreen);
-    	MainView root = (MainView) ViewProvider.getView("main");
-    	root.getRoot().setCenter(mainScreen);   	
+    	MainView root = (MainView) ViewProvider.getView("main");	
+    	root.setBorderPane(mainScreen);
+    	//root.getRoot().setCenter(mainScreen);
         	
         
 //		System.out.println(username + '\t' + password);
