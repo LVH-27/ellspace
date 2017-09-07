@@ -26,7 +26,7 @@ public class LoginView {
 	private BorderPane localRoot;
 	
 	public void initialize() {
-		localRoot.setId("login");
+		//localRoot.setId("login");
 	}
 	
 	@FXML
