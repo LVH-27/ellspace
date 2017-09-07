@@ -274,20 +274,67 @@ public class AddLibraryView {
 				if(email == "") {
 					email = null;
 				}
+				boolean check = true;
 				beginTime = new ArrayList<String>();
 				for(int i = 0; i < checkBoxList.size(); ++i) {
 					if(checkBoxList.get(i).isSelected()) {
+						if(!isValid(beginTimeList.get(i).getText()) || !isValid(endTimeList.get(i).getText())) {
+							check = false;
+							break;
+						}
 						beginTime.add(beginTimeList.get(i).getText());
 						endTime.add(endTimeList.get(i).getText());
+						
 					}else {
 						beginTime.add("00:00");
 						endTime.add("00:00");
 					}
 				}
-				int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-				AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList);
+				if(check) {
+					int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+					AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList);
+				}
+				else {
+					System.out.println("Input is wrong");
+				}
 			}
 			
+		}
+	}
+	private static boolean isValid(String time) {
+		String[] timeSplit = time.split(":");
+		if(timeSplit.length != 2) {
+			return false;
+			
+		}else if(timeSplit[0].length() > 2 || timeSplit[0].length() < 1 || timeSplit[1].length() != 2){
+			return false;
+			
+		}
+		
+		boolean check = true;
+		int checkHours = 0;
+		int checkMin = 0;
+
+		for(int i = 0; i < timeSplit.length; ++i) {
+			try {
+				if(i == 0) {
+					checkHours = Integer.parseInt(timeSplit[i]);
+				}else {
+					checkMin = Integer.parseInt(timeSplit[i]);
+				}
+			}catch(Exception e) {
+				check = false;
+				break;
+			}
+		}
+		if(!check) {
+			return false;
+			
+		}else if(checkHours > 23 || checkHours < 0 || checkMin > 59 || checkMin < 0) {
+			return false;
+			
+		}else {
+			return true;
 		}
 	}
 }

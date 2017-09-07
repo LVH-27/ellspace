@@ -115,9 +115,6 @@ public class AddLibraryToDatabase implements Runnable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		//FOR LOOP WITH 7 DATABASE INSERTS "BusinessHours"
 
 		
 	}
