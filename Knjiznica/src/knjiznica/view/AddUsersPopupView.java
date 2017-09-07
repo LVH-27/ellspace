@@ -28,6 +28,14 @@ public class AddUsersPopupView {
 	private Button listLibrariesButton;
 	
 	public void initialize() {
+		
+		addUserButton.      setId("transparentButton");
+		listUsersButton.    setId("transparentButton");
+		addLibraryButton.   setId("transparentButton");
+		listLibrariesButton.setId("transparentButton");
+		
+		//TODO Find images (names specified) and uncomment 6 lines below.
+		
 		Image imageAddUser       = new Image(getClass().getResourceAsStream("../resources/addUser-button.png"));
 //		Image imageListUsers     = new Image(getClass().getResourceAsStream("../resources/listUsers-button.png"));
 //		Image imageAddLibrary    = new Image(getClass().getResourceAsStream("../resources/addLibrary-button.png"));

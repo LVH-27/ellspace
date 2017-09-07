@@ -122,7 +122,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="7">
+                              <HBox fx:id="countryHBox" alignment="CENTER_RIGHT" GridPane.rowIndex="7">
                                  <GridPane.margin>
                                     <Insets left="20.0" right="10.0" />
                                  </GridPane.margin>
@@ -139,7 +139,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="8">
+                              <HBox fx:id="streetHBox" alignment="CENTER_RIGHT" GridPane.rowIndex="8">
                                  <children>
                                     <Label text="Street" />
                                  </children>
@@ -152,7 +152,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="9">
+                              <HBox fx:id="houseNumberHBox" alignment="CENTER_RIGHT" GridPane.rowIndex="9">
                                  <children>
                                     <Label text="House Number" />
                                  </children>
@@ -364,7 +364,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <CheckBox mnemonicParsing="false" text="Online Library" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <CheckBox fx:id="onlineLibraryCheck" mnemonicParsing="false" onAction="#onlineLibrary" text="Online Library" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                            </children>
                         </GridPane>
                      </center>

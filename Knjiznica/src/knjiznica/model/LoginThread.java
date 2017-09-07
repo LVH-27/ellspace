@@ -3,6 +3,9 @@ package knjiznica.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import org.postgresql.util.PSQLException;
+
 import knjiznica.resources.ConnectionData;
 
 
@@ -21,10 +24,12 @@ public class LoginThread implements Runnable {
 			ConnectionData.setUsername(username);
 	    	ConnectionData.setPassword(password);
 	    	
-		} catch (SQLException e) {
+		} catch (PSQLException e) {
 			e.printStackTrace();
 			
-		}   
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

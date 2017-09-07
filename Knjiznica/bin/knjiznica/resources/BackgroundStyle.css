@@ -13,26 +13,19 @@
 }
 
 #homeButton{
-	-fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-text-fill: #828282;
-    -fx-border-color: transparent;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid, segments(1, 2);
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
+	-fx-border-color: transparent;
 }
 
-#testButton{
-	-fx-border-color:  #B1BCBE;
-	-fx-border-radius: 15;
-	-fx-border-width: 3;
+#transparentButton{
+	-fx-background-color: transparent;
 	-fx-background-radius: 18;
-	/*-fx-background-color: transparent;*/
+	-fx-border-color: transparent;
+	-fx-border-radius: 15;
 }
 
-#testButton:focused{
-	-fx-background-color: red;
+#transparentButton:hover{
+	-fx-background-color: #E0CBB9;
+	-fx-border-color: #D4C0AF;
+	-fx-border-width: 3;
 }
