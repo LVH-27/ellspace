@@ -47,6 +47,9 @@ public class AddLibraryView {
 	private ComboBox<String> postalCodeCombo;
 	
 	@FXML
+	private CheckBox onlineLibraryCheck;
+	
+	@FXML
 	private CheckBox  check1;
 	
 	@FXML
