@@ -37,7 +37,14 @@ public class StartScreenView {
 	private Button users;
 	
 	public void initialize() throws IOException {
-		addBook.setId("testButton"); users.setId("testButton");directory.setId("testButton"); search.setId("testButton");eventLog.setId("testButton"); share.setId("testButton");
+		
+		addBook.  setId("transparentButton");
+		users.    setId("transparentButton");
+		directory.setId("transparentButton");
+		search.   setId("transparentButton");
+		eventLog. setId("transparentButton");
+		share.    setId("transparentButton");
+		
 		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/addBook-button.png"));
 		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-button.png"));
 		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-button.png"));
@@ -69,7 +76,8 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateAddBook() throws IOException {
-		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));///////////////////////////////////////////////
+		//TODO Change loaded FXML back to AddBook-view.fxml
+		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
 	
