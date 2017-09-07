@@ -3,9 +3,11 @@ package knjiznica.view;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -63,7 +65,9 @@ public class AddUserView {
 	private String country;
 	private String street;
 	private String houseNumber;
-	private String postalCode;
+	String postalCode;
+	private SingleSelectionModel<String> postalCodeSingle;
+	private boolean check;
 	
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
@@ -85,8 +89,9 @@ public class AddUserView {
 	}
 	
 	@FXML
-	private void activateAdd() {
-		postalCode = postalCodeCombo.getSelectionModel().getSelectedItem();
+	private void activateAdd() throws IOException {
+		errorLabel.setVisible(false);
+		postalCodeSingle = postalCodeCombo.getSelectionModel();
 		firstName = firstNameField.getText();
 		middleName = middleNameField.getText();
 		lastName = lastNameField.getText();
@@ -105,36 +110,84 @@ public class AddUserView {
 		street = street.trim();
 		houseNumber = houseNumber.trim();
 		
+		firstNameField.setStyle("");
+		middleNameField.setStyle("");
+		lastNameField.setStyle("");
+		postalCodeCombo.setStyle("");
+		emailField.setStyle("");
+		phoneNumberField.setStyle("");
+		countryField.setStyle("");
+		streetField.setStyle("");
+		houseNumberField.setStyle("");
+		
+		final String redBorder ="-fx-border-color: #ff0000;\n";
+		
 		/*
 		 * DOUBLED EMAIL NOT UNIQUE
 		 */
-		/*
-		 * FIX postalCode.isEmpty() /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		 */
-		if(postalCode.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
+		
+		if(postalCodeSingle.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
+			errorLabel.setText("Missing information");
+			
+			if(firstName.isEmpty()) {
+				firstNameField.setStyle(redBorder);
+				
+			}if(lastName.isEmpty()) {
+				lastNameField.setStyle(redBorder);
+				
+			}if(postalCodeSingle.isEmpty()) {
+				postalCodeCombo.setStyle(redBorder);
+				
+			}if(email.isEmpty()) {
+				emailField.setStyle(redBorder);
+				
+			}if(phoneNumber.isEmpty()) {
+				phoneNumberField.setStyle(redBorder);
+				
+			}if(country.isEmpty()) {
+				countryField.setStyle(redBorder);
+				
+			}if(street.isEmpty()) {
+				streetField.setStyle(redBorder);
+				
+			}if(houseNumber.isEmpty()) {
+				houseNumberField.setStyle(redBorder);
+				
+			}
+			
 			errorLabel.setVisible(true);
 		}
 		else {
+			postalCode = postalCodeSingle.getSelectedItem();
 			firstName = FormattingName.format(firstName);
 			lastName = FormattingName.format(lastName);
+			check = true;
 			
 			if(!CheckInputLetters.check(firstName)) {
+				check = false;
+				firstNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
 			
-			else if(!CheckInputLetters.check(middleName)) {
+			if(!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
+				check = false;
+				middleNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
 			
-			else if(!CheckInputLetters.check(lastName)) {
+			if(!CheckInputLetters.check(lastName)) {
+				check = false;
+				lastNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
-			else {
+			if(check) {
 				int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 				AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
+				BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
+		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
 			}
 			
 		}

@@ -38,7 +38,7 @@
                               <RowConstraints vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="4">
                                  <children>
                                     <Label fx:id="errorLabel" text="Missing Information" textFill="RED" visible="false">
                                        <HBox.margin>
@@ -52,7 +52,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER" GridPane.rowIndex="1">
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
@@ -65,7 +65,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER" GridPane.rowIndex="2">
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
@@ -78,9 +78,12 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
                                  <children>
-                                    <Label text="Last Name" />
+                                    <Label text="Last Name">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin></Label>
                                  </children>
                               </HBox>
                               <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -88,14 +91,17 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="TOP_CENTER" GridPane.rowIndex="4">
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="4">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="RIGHT" text="Email">
                                        <HBox.margin>
-                                          <Insets top="14.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
                               </HBox>
                               <HBox alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
@@ -106,27 +112,30 @@
                                     </TextField>
                                  </children>
                               </HBox>
-                              <HBox alignment="TOP_CENTER" GridPane.rowIndex="5">
+                              <HBox alignment="TOP_RIGHT" GridPane.rowIndex="5">
                                  <children>
                                     <Label text="Phone Number">
                                        <padding>
                                           <Insets top="14.0" />
                                        </padding></Label>
                                  </children>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
                               </HBox>
                               <TextField fx:id="countryField" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="TOP_CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                  <GridPane.margin>
-                                    <Insets right="10.0" />
+                                    <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                                  <children>
                                     <Label text="Country">
                                        <HBox.margin>
-                                          <Insets top="14.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </Label>
                                  </children>
@@ -136,12 +145,12 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <children>
                                     <Label text="Street" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets right="10.0" />
+                                    <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
                               <TextField fx:id="houseNumberField" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -149,12 +158,12 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                  <children>
                                     <Label text="House Number" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets right="10.0" />
+                                    <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
                               <HBox alignment="CENTER" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4">
