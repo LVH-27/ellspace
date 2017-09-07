@@ -339,4 +339,9 @@ public class AddLibraryView {
 			return true;
 		}
 	}
+	
+	@FXML
+	private static void onlineLibrary() {
+		
+	}
 }
