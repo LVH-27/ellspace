@@ -24,3 +24,15 @@
     -fx-border-radius: 0, 0;
     -fx-border-insets: 1 1 1 1, 0;
 }
+
+#testButton{
+	-fx-border-color:  #B1BCBE;
+	-fx-border-radius: 15;
+	-fx-border-width: 3;
+	-fx-background-radius: 18;
+	/*-fx-background-color: transparent;*/
+}
+
+#testButton:focused{
+	-fx-background-color: red;
+}
