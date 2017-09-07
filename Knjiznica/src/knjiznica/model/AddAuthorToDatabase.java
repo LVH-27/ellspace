@@ -40,6 +40,9 @@ public class AddAuthorToDatabase implements Runnable{
 				middleName = FormattingName.format(middleName);
 			}
 			
+			firstName = FormattingName.format(firstName);
+			lastName = FormattingName.format(lastName);
+			
 			pstmtAuthor.setString(1, firstName);
 			pstmtAuthor.setString(2, middleName);
 			pstmtAuthor.setString(3, lastName);
