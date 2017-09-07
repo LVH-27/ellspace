@@ -5,33 +5,47 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
+
+import javafx.scene.control.CheckBox;
 import knjiznica.resources.ConnectionData;
 
 public class AddLibraryToDatabase implements Runnable{
 	
 	private static String firstName;
 	
-	private static String middleName;
-	
-	private static String lastName;
+	private static String phoneNumber;
 	
 	private static String email;
 	
-	private static String phoneNumber;
+	private static String information;
 	
 	private static String country;
 	
+	private static String street;
+
+	private static String houseNumber;
+
 	private static int postalCode;
 	
-	private static String street;
+	private static ArrayList<String> beginTime;
 	
-	private static String houseNumber;
+	private static ArrayList<String> endTime;
+	
+	private static ArrayList<CheckBox> checkBoxList;
+	
+	private static Time timeBegin;
+	
+	private static Time timeEnd;
+
 	
 	@Override
 	public void run() {
 		
 		PreparedStatement pstmtAddress = null;
 		PreparedStatement pstmtLibrary = null;
+		PreparedStatement pstmtBusiness = null;
 		
 		try {
 			Connection con = DriverManager.getConnection(
@@ -56,18 +70,47 @@ public class AddLibraryToDatabase implements Runnable{
 				}
 			}
 						
-			String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)";
+			String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, ?, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
 			
-			pstmtLibrary = con.prepareStatement(queryLibrary);
+			pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
 			
 			pstmtLibrary.setString(1, firstName);
-			pstmtLibrary.setString(2, middleName);
-			pstmtLibrary.setString(3, lastName);
-			pstmtLibrary.setInt(4, Integer.parseInt(addressID));
-			pstmtLibrary.setString(5, phoneNumber);
-			pstmtLibrary.setString(6, email);
+			pstmtLibrary.setInt(2, Integer.parseInt(addressID));
+			pstmtLibrary.setString(3, phoneNumber);
+			pstmtLibrary.setString(4, email);
+			pstmtLibrary.setString(5, information);
 			
-			pstmtLibrary.executeUpdate();
+			i = pstmtLibrary.executeUpdate();
+			
+			String libraryID = null;
+		
+			if (i > 0) {
+				ResultSet rs = pstmtLibrary.getGeneratedKeys();
+				while (rs.next()) {
+					libraryID = rs.getString(1);
+				}
+			}
+			
+			String queryBusiness = "INSERT INTO public.\"BusinessHours\" VALUES(?, ?, ?, ?, ?)";
+			
+			pstmtBusiness = con.prepareStatement(queryBusiness);
+			
+			for(int j = 0; j < 7; ++j) {
+				timeBegin = java.sql.Time.valueOf(beginTime.get(j) + ":00");
+				timeEnd = java.sql.Time.valueOf(endTime.get(j) + ":00");
+				
+				pstmtBusiness.setInt(1, Integer.parseInt(libraryID));
+				pstmtBusiness.setInt(2, j + 1);
+				if(checkBoxList.get(j).isSelected()) {
+					pstmtBusiness.setBoolean(3, false);
+				}else {
+					pstmtBusiness.setBoolean(3, true);
+				}
+				pstmtBusiness.setTime(4, timeBegin);
+				pstmtBusiness.setTime(5, timeEnd);
+				
+				pstmtBusiness.executeUpdate();
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,15 +122,19 @@ public class AddLibraryToDatabase implements Runnable{
 		
 	}
 	
-	public static void addLibrary(String firstNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn) {
+	public static void addLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn) {
 		
 		firstName = firstNameIn;
-		email = emailIn;
 		phoneNumber = phoneNumberIn;
+		email = emailIn;
+		information = informationIn;
 		country = countryIn;
-		postalCode = postalCodeIn;
 		street = streetIn;
 		houseNumber = houseNumberIn;
+		postalCode = postalCodeIn;
+		beginTime = beginTimeIn;
+		endTime = endTimeIn;
+		checkBoxList = checkBoxListIn;
 		
 		(new Thread(new AddLibraryToDatabase())).start();
 	}
