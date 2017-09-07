@@ -1,6 +1,8 @@
 package knjiznica.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -119,12 +122,19 @@ public class AddLibraryView {
 	private CheckBox testCheck;
 	private String nameCombo = "postalCodeComboAddLibrary";
 	private String firstName;
-	private String email;
 	private String phoneNumber;
+	private String email;
+	private String information;
 	private String country;
 	private String street;
 	private String houseNumber;
 	private String postalCode;
+	private SingleSelectionModel<String> postalCodeSingle;
+	private ArrayList<String> beginTime;
+	private ArrayList<String> endTime;
+	private ArrayList<TextField> beginTimeList;
+	private ArrayList<TextField> endTimeList;
+	private ArrayList<CheckBox> checkBoxList;
 	
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
@@ -209,30 +219,44 @@ public class AddLibraryView {
 	
 	@FXML
 	private void activateAdd() {
-		postalCode = postalCodeCombo.getSelectionModel().getSelectedItem();
+		errorLabel.setVisible(false);
+		
+		postalCodeSingle = postalCodeCombo.getSelectionModel();
+		postalCode = postalCodeSingle.getSelectedItem();
 		
 		firstName = firstNameField.getText();
-		email = emailField.getText();
 		phoneNumber = phoneNumberField.getText();
+		email = emailField.getText();
+		information = informationField.getText();
 		country = countryField.getText();
 		street = streetField.getText();
 		houseNumber = houseNumberField.getText();
 		
 		firstName = firstName.trim();
-		email = email.trim();
 		phoneNumber = phoneNumber.trim();
+		email = email.trim();
+		information = information.trim();
 		country = country.trim();
 		street = street.trim();
 		houseNumber = houseNumber.trim();
 		
+		checkBoxList = new ArrayList<CheckBox>();
+		beginTimeList = new ArrayList<TextField>();
+		endTimeList = new ArrayList<TextField>();
+		
+		beginTime = new ArrayList<String>();
+		endTime = new ArrayList<String>();
+		
 		/*
 		 * DOUBLED EMAIL NOT UNIQUE
 		 */
-		/*
-		 * FIX postalCode.isEmpty() /////////////////////////////////////////////////////////////////////////////////////////////////////////
-		 */
+		checkBoxList.add(check1); checkBoxList.add(check2); checkBoxList.add(check3); checkBoxList.add(check4); checkBoxList.add(check5); checkBoxList.add(check6); checkBoxList.add(check7);
+		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
+		endTimeList.add(end1); endTimeList.add(end2); endTimeList.add(end3); endTimeList.add(end4); endTimeList.add(end5); endTimeList.add(end6); endTimeList.add(end7);
+
 		
-		if (postalCode.isEmpty() || firstName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
+		if (postalCodeSingle.isEmpty() || firstName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
+			errorLabel.setText("Missing information");
 			errorLabel.setVisible(true);
 		}
 		else {
@@ -244,8 +268,24 @@ public class AddLibraryView {
 			}
 			
 			else {
+				if(information == "") {
+					information = null;
+				}
+				if(email == "") {
+					email = null;
+				}
+				beginTime = new ArrayList<String>();
+				for(int i = 0; i < checkBoxList.size(); ++i) {
+					if(checkBoxList.get(i).isSelected()) {
+						beginTime.add(beginTimeList.get(i).getText());
+						endTime.add(endTimeList.get(i).getText());
+					}else {
+						beginTime.add("00:00");
+						endTime.add("00:00");
+					}
+				}
 				int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-				AddLibraryToDatabase.addLibrary(firstName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
+				AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList);
 			}
 			
 		}
