@@ -66,7 +66,7 @@ public class AddAuthorView {
 		
 	}
 	
-	@FXML
+	@FXML 
 	private void activateBack() throws IOException {
 		
 		BorderPane startScreenView = (BorderPane) ViewProvider.getView("startScreen");

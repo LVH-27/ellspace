@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import knjiznica.model.AddLibraryToDatabase;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.FormattingName;
@@ -47,7 +49,7 @@ public class AddLibraryView {
 	private ComboBox<String> postalCodeCombo;
 	
 	@FXML
-	private CheckBox onlineLibraryCheck;
+	private CheckBox  onlineLibraryCheck;
 	
 	@FXML
 	private CheckBox  check1;
@@ -120,6 +122,15 @@ public class AddLibraryView {
 	
 	@FXML
 	private Label errorLabel;
+
+	@FXML
+	private HBox countryHBox;
+		
+	@FXML
+	private HBox streetHBox;
+		
+	@FXML
+	private HBox houseNumberHBox;
 	
 	private CheckBox testCheck;
 	private String nameCombo = "postalCodeComboAddLibrary";
@@ -220,7 +231,7 @@ public class AddLibraryView {
 	}
 	
 	@FXML
-	private void activateAdd() {
+	private void activateAdd() throws IOException {
 		errorLabel.setVisible(false);
 		
 		postalCodeSingle = postalCodeCombo.getSelectionModel();
@@ -249,21 +260,39 @@ public class AddLibraryView {
 		beginTime = new ArrayList<String>();
 		endTime = new ArrayList<String>();
 		
-		/*
-		 * DOUBLED EMAIL NOT UNIQUE
-		 */
+		
+		 //TODO DOUBLED EMAIL NOT UNIQUE
+		
+		//TODO add error messages
+		 
 		checkBoxList.add(check1); checkBoxList.add(check2); checkBoxList.add(check3); checkBoxList.add(check4); checkBoxList.add(check5); checkBoxList.add(check6); checkBoxList.add(check7);
 		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
 		endTimeList.add(end1); endTimeList.add(end2); endTimeList.add(end3); endTimeList.add(end4); endTimeList.add(end5); endTimeList.add(end6); endTimeList.add(end7);
 
 		
-		if (postalCodeSingle.isEmpty() || firstName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
+		if (firstName.isEmpty() || phoneNumber.isEmpty()) {
 			errorLabel.setText("Missing information");
 			errorLabel.setVisible(true);
 		}
+		else if(!onlineLibraryCheck.isSelected() && (country.isEmpty() || street.isEmpty() || houseNumber.isEmpty() || postalCodeSingle.isEmpty())) {
+			errorLabel.setText("Missing some information");
+			errorLabel.setVisible(true);
+						 
+		}
 		else {
+			if(information.isEmpty()) {
+				information = null;
+			}
+			if(email.isEmpty()) {
+				email = null;
+			}
 			firstName = FormattingName.format(firstName);
-			
+			int postalCodeInt;
+			try{
+				postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			} catch (Exception e){
+				postalCodeInt = 0;
+			}
 			if (!CheckInputLetters.check(firstName)) {
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
@@ -293,8 +322,10 @@ public class AddLibraryView {
 					}
 				}
 				if(check) {
-					int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-					AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList);
+					AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
+					BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
+			    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
+				
 				}
 				else {
 					System.out.println("Input is wrong");
@@ -341,7 +372,26 @@ public class AddLibraryView {
 	}
 	
 	@FXML
-	private static void onlineLibrary() {
+	private void onlineLibrary() {
+		if(onlineLibraryCheck.isSelected()) {
+			countryHBox.setVisible(false);
+			countryField.setVisible(false);
+			streetHBox.setVisible(false);
+			streetField.setVisible(false);
+			houseNumberHBox.setVisible(false);
+			houseNumberField.setVisible(false);
+			postalCodeCombo.setVisible(false);
+			
+		}else if(!onlineLibraryCheck.isSelected()) {
+			countryHBox.setVisible(true);
+			countryField.setVisible(true);
+			streetHBox.setVisible(true);
+			streetField.setVisible(true);
+			houseNumberHBox.setVisible(true);
+			houseNumberField.setVisible(true);
+			postalCodeCombo.setVisible(true);
+			
+		}
 		
 	}
 }

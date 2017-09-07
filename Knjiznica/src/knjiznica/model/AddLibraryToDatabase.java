@@ -38,6 +38,8 @@ public class AddLibraryToDatabase implements Runnable{
 	private static Time timeBegin;
 	
 	private static Time timeEnd;
+	
+	private static boolean onlineLibraryCheck;
 
 	
 	@Override
@@ -46,48 +48,68 @@ public class AddLibraryToDatabase implements Runnable{
 		PreparedStatement pstmtAddress = null;
 		PreparedStatement pstmtLibrary = null;
 		PreparedStatement pstmtBusiness = null;
+		String libraryID = null;
 		
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 			
-			String queryAddress = "INSERT INTO public.\"Address\" VALUES(DEFAULT, ?, ?, ?, ?) RETURNING \"Address\".\"AddressID\"";
-			
-			pstmtAddress = con.prepareStatement(queryAddress, new String[]{"Address.AddressID"});
-			
-			pstmtAddress.setString(1, country);
-			pstmtAddress.setInt(2, postalCode);
-			pstmtAddress.setString(3, street);
-			pstmtAddress.setString(4, houseNumber);
-			
-			String addressID = null;
-			
-			int i = pstmtAddress.executeUpdate();
-			if (i > 0) {
-				ResultSet rs = pstmtAddress.getGeneratedKeys();
-				while (rs.next()) {
-					addressID = rs.getString(1);
+			if(!onlineLibraryCheck) {
+				String queryAddress = "INSERT INTO public.\"Address\" VALUES(DEFAULT, ?, ?, ?, ?) RETURNING \"Address\".\"AddressID\"";
+				
+				pstmtAddress = con.prepareStatement(queryAddress, new String[]{"Address.AddressID"});
+				
+				pstmtAddress.setString(1, country);
+				pstmtAddress.setInt(2, postalCode);
+				pstmtAddress.setString(3, street);
+				pstmtAddress.setString(4, houseNumber);
+				
+				String addressID = null;
+				
+				int i = pstmtAddress.executeUpdate();
+				if (i > 0) {
+					ResultSet rs = pstmtAddress.getGeneratedKeys();
+					while (rs.next()) {
+						addressID = rs.getString(1);
+					}
 				}
-			}
-						
-			String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, ?, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
+							
+				String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, ?, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
+				
+				pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
+				
+				pstmtLibrary.setString(1, firstName);
+				pstmtLibrary.setInt(2, Integer.parseInt(addressID));
+				pstmtLibrary.setString(3, phoneNumber);
+				pstmtLibrary.setString(4, email);
+				pstmtLibrary.setString(5, information);
+				
+				i = pstmtLibrary.executeUpdate();
 			
-			pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
+				if (i > 0) {
+					ResultSet rs = pstmtLibrary.getGeneratedKeys();
+					while (rs.next()) {
+						libraryID = rs.getString(1);
+					}
+				}
 			
-			pstmtLibrary.setString(1, firstName);
-			pstmtLibrary.setInt(2, Integer.parseInt(addressID));
-			pstmtLibrary.setString(3, phoneNumber);
-			pstmtLibrary.setString(4, email);
-			pstmtLibrary.setString(5, information);
+			}else {
+				String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, null, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
+				
+				pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
+				
+				pstmtLibrary.setString(1, firstName);
+				pstmtLibrary.setString(2, phoneNumber);
+				pstmtLibrary.setString(3, email);
+				pstmtLibrary.setString(4, information);
+				
+				int i = pstmtLibrary.executeUpdate();
 			
-			i = pstmtLibrary.executeUpdate();
-			
-			String libraryID = null;
-		
-			if (i > 0) {
-				ResultSet rs = pstmtLibrary.getGeneratedKeys();
-				while (rs.next()) {
-					libraryID = rs.getString(1);
+				if (i > 0) {
+					ResultSet rs = pstmtLibrary.getGeneratedKeys();
+					while (rs.next()) { 
+						libraryID = rs.getString(1);
+					}
 				}
 			}
 			
@@ -119,7 +141,7 @@ public class AddLibraryToDatabase implements Runnable{
 		
 	}
 	
-	public static void addLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn) {
+	public static void addLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn, boolean onlineLibraryCheckIn) {
 		
 		firstName = firstNameIn;
 		phoneNumber = phoneNumberIn;
@@ -132,6 +154,7 @@ public class AddLibraryToDatabase implements Runnable{
 		beginTime = beginTimeIn;
 		endTime = endTimeIn;
 		checkBoxList = checkBoxListIn;
+		onlineLibraryCheck = onlineLibraryCheckIn;
 		
 		(new Thread(new AddLibraryToDatabase())).start();
 	}
