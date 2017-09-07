@@ -24,6 +24,13 @@ public class PostalCodeComboThread implements Runnable {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
+		case "postalCodeComboAddLibrary":
+			try {
+				((ComboBox<String>) ViewProvider.getView(which)).getItems().addAll((ArrayList<String>) PostalCodeCombo.getData().get(0));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
