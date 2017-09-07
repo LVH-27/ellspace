@@ -2,8 +2,6 @@ package knjiznica.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +18,7 @@ import knjiznica.model.CheckInputLetters;
 import knjiznica.model.FormattingName;
 import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
+
 
 public class AddLibraryView {
 	
