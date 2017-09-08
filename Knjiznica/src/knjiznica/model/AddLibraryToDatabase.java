@@ -67,6 +67,7 @@ public class AddLibraryToDatabase implements Runnable{
 				String addressID = null;
 				
 				int i = pstmtAddress.executeUpdate();
+				
 				if (i > 0) {
 					ResultSet rs = pstmtAddress.getGeneratedKeys();
 					while (rs.next()) {
