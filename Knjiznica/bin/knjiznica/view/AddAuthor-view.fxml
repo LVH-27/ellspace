@@ -19,13 +19,13 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <BorderPane style="-fx-border-color: #B1BCBE; -fx-background-color: #F4DDC9; -fx-border-radius: 15; -fx-border-width: 3.5; -fx-background-radius: 24;">
+                  <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css">
                      <center>
                         <GridPane alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" />
                             <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
                               <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" />
                           </columnConstraints>
@@ -45,7 +45,7 @@
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
                                  <GridPane.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets left="15.0" right="10.0" />
                                  </GridPane.margin>
                                  <children>
                                     <Label alignment="CENTER" text="First Name" />
@@ -58,7 +58,7 @@
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets left="15.0" right="10.0" />
                                  </GridPane.margin>
                                  <children>
                                     <Label text="Middle Name" />
@@ -74,12 +74,12 @@
                                     <Label text="Last Name" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets left="15.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
                               <TextField fx:id="yearOfBirthField" promptText="Optional" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets right="10.0" />
+                                    <Insets right="20.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="2">
@@ -95,7 +95,7 @@
                               </HBox>
                               <TextField fx:id="yearOfDeathField" promptText="Optional" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                  <GridPane.margin>
-                                    <Insets right="10.0" />
+                                    <Insets right="20.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="3">

@@ -122,6 +122,9 @@ public class AddLibraryView {
 	
 	@FXML
 	private Label errorLabel;
+	
+	@FXML
+	private Label errorLabelTime;
 
 	@FXML
 	private HBox countryHBox;
@@ -232,7 +235,20 @@ public class AddLibraryView {
 	
 	@FXML
 	private void activateAdd() throws IOException {
+		
+		final String redBorder ="-fx-border-color: #ff0000;\n";
+		
+		firstNameField.setStyle("");
+		phoneNumberField.setStyle("");
+		emailField.setStyle("");
+		informationField.setStyle("");
+		countryField.setStyle("");
+		streetField.setStyle("");
+		houseNumberField.setStyle("");
+		postalCodeCombo.setStyle("");
+		
 		errorLabel.setVisible(false);
+		errorLabelTime.setVisible(false);
 		
 		postalCodeSingle = postalCodeCombo.getSelectionModel();
 		postalCode = postalCodeSingle.getSelectedItem();
@@ -260,86 +276,148 @@ public class AddLibraryView {
 		beginTime = new ArrayList<String>();
 		endTime = new ArrayList<String>();
 		
+		boolean errorInfo = false;
 		
 		 //TODO DOUBLED EMAIL NOT UNIQUE
-		
-		//TODO add error messages
 		 
 		checkBoxList.add(check1); checkBoxList.add(check2); checkBoxList.add(check3); checkBoxList.add(check4); checkBoxList.add(check5); checkBoxList.add(check6); checkBoxList.add(check7);
 		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
 		endTimeList.add(end1); endTimeList.add(end2); endTimeList.add(end3); endTimeList.add(end4); endTimeList.add(end5); endTimeList.add(end6); endTimeList.add(end7);
+		
+		for(int i = 0; i < beginTimeList.size(); ++i) {
+			beginTimeList.get(i).setStyle("");
+			endTimeList.get(i).setStyle("");
+		}
 
 		
-		if (firstName.isEmpty() || phoneNumber.isEmpty()) {
-			errorLabel.setText("Missing information");
-			errorLabel.setVisible(true);
-		}
-		else if(!onlineLibraryCheck.isSelected() && (country.isEmpty() || street.isEmpty() || houseNumber.isEmpty() || postalCodeSingle.isEmpty())) {
+		if (firstName.isEmpty()) {
 			errorLabel.setText("Missing some information");
 			errorLabel.setVisible(true);
-						 
+			firstNameField.setStyle(redBorder);
+			errorInfo = true;
+			
 		}
-		else {
-			if(information.isEmpty()) {
-				information = null;
+		
+		if (phoneNumber.isEmpty()) {
+			errorLabel.setText("Missing some information");
+			errorLabel.setVisible(true);
+			phoneNumberField.setStyle(redBorder);
+			errorInfo = true;
+			
+		}
+		
+		if(!onlineLibraryCheck.isSelected() && (country.isEmpty() || street.isEmpty() || houseNumber.isEmpty() || postalCodeSingle.isEmpty())) {
+			
+			errorLabel.setText("Missing some information");
+			errorLabel.setVisible(true);
+
+			if(country.isEmpty()) {
+				countryField.setStyle(redBorder);
 			}
-			if(email.isEmpty()) {
-				email = null;
+			if(street.isEmpty()) {
+				streetField.setStyle(redBorder);
 			}
+			if(houseNumber.isEmpty()) {
+				houseNumberField.setStyle(redBorder);
+			}
+			if(postalCodeSingle.isEmpty()) {
+				postalCodeCombo.setStyle(redBorder);
+			}
+			
+			errorInfo = true;
+			
+		}
+			
+		if(information.isEmpty()) {
+			information = null;
+			
+		}
+		if(email.isEmpty()) {
+			email = null;
+			
+		}
+		
+		if(!firstName.isEmpty()) {
 			firstName = FormattingName.format(firstName);
-			int postalCodeInt;
-			try{
-				postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-			} catch (Exception e){
-				postalCodeInt = 0;
-			}
-			if (!CheckInputLetters.check(firstName)) {
+		}
+		
+		
+		int postalCodeInt;
+		try{
+			postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+		} catch (Exception e){
+			postalCodeInt = 0;
+		}
+		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
+			firstNameField.setStyle(redBorder);
+			if(!errorInfo) {
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
 			
-			else {
-				if(information == "") {
-					information = null;
-				}
-				if(email == "") {
-					email = null;
-				}
-				boolean check = true;
-				beginTime = new ArrayList<String>();
-				for(int i = 0; i < checkBoxList.size(); ++i) {
-					if(checkBoxList.get(i).isSelected()) {
-						if(!isValid(beginTimeList.get(i).getText()) || !isValid(endTimeList.get(i).getText())) {
-							check = false;
-							break;
-						}
-						beginTime.add(beginTimeList.get(i).getText());
-						endTime.add(endTimeList.get(i).getText());
-						
-					}else {
-						beginTime.add("00:00");
-						endTime.add("00:00");
-					}
-				}
-				if(check) {
-					AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
-					BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
-			    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
-				
-				}
-				else {
-					System.out.println("Input is wrong");
-				}
-			}
+			errorInfo = true;
 			
 		}
+		
+		
+		if(information == "") {
+			information = null;
+			
+		}
+		if(email == "") {
+			email = null;
+			
+		} 
+		
+		boolean check = true;
+		
+		beginTime = new ArrayList<String>();
+		
+		for(int i = 0; i < checkBoxList.size(); ++i) {
+			if(checkBoxList.get(i).isSelected()) {
+				if(!isValid(beginTimeList.get(i).getText()) || !isValid(endTimeList.get(i).getText())) {
+					if(!isValid(beginTimeList.get(i).getText())) {
+						beginTimeList.get(i).setStyle(redBorder);
+						
+					}if(!isValid(endTimeList.get(i).getText())) {
+						endTimeList.get(i).setStyle(redBorder);
+						
+					}
+					check = false;
+			
+				} else {
+					beginTime.add(beginTimeList.get(i).getText());
+					endTime.add(endTimeList.get(i).getText());
+					
+				}
+				
+			} else {
+				beginTime.add("00:00");
+				endTime.add("00:00");
+			}
+		}
+		if(check && !errorInfo) {
+			AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
+			BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
+	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
+		
+		}
+		if(!check) {
+			errorLabelTime.setText("Please enter birth year\n"
+					+ "in 4 digits (e.g. 1973).");
+			errorLabelTime.setVisible(true);
+		}
+			
+			
+		
 	}
+	
 	private static boolean isValid(String time) {
 		String[] timeSplit = time.split(":");
 		if(timeSplit.length != 2) {
 			return false;
 			
-		}else if(timeSplit[0].length() > 2 || timeSplit[0].length() < 1 || timeSplit[1].length() != 2){
+		} else if(timeSplit[0].length() > 2 || timeSplit[0].length() < 1 || timeSplit[1].length() != 2){
 			return false;
 			
 		}
@@ -352,10 +430,13 @@ public class AddLibraryView {
 			try {
 				if(i == 0) {
 					checkHours = Integer.parseInt(timeSplit[i]);
+					
 				}else {
 					checkMin = Integer.parseInt(timeSplit[i]);
+					
 				}
-			}catch(Exception e) {
+				
+			} catch(Exception e) {
 				check = false;
 				break;
 			}
@@ -363,10 +444,10 @@ public class AddLibraryView {
 		if(!check) {
 			return false;
 			
-		}else if(checkHours > 23 || checkHours < 0 || checkMin > 59 || checkMin < 0) {
+		} else if(checkHours > 23 || checkHours < 0 || checkMin > 59 || checkMin < 0) {
 			return false;
 			
-		}else {
+		} else {
 			return true;
 		}
 	}
@@ -382,7 +463,7 @@ public class AddLibraryView {
 			houseNumberField.setVisible(false);
 			postalCodeCombo.setVisible(false);
 			
-		}else if(!onlineLibraryCheck.isSelected()) {
+		} else if(!onlineLibraryCheck.isSelected()) {
 			countryHBox.setVisible(true);
 			countryField.setVisible(true);
 			streetHBox.setVisible(true);
