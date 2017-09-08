@@ -61,12 +61,11 @@ public class AddAuthorView {
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
-		addButton.setId("homeButton");
+		addButton.setId("transparentButton");
 		
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
-		backButton.setId("homeButton");
-		
+		backButton.setId("transparentButton");
 	}
 	
 	@FXML 
