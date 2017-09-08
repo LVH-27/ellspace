@@ -32,7 +32,7 @@ public class LoginView {
 	public static String password;
 	
 	public void initialize() {
-		//localRoot.setId("login");
+		
 	}
 	
 	@FXML
@@ -41,29 +41,22 @@ public class LoginView {
 		username = usernameText.getText();
 		password = passwordText.getText();
 		
-		Thread login = new LoginThread();
-		
-		login.start();
-		
-		try {
-			login.join();
-			if(isCorrect) {
-				errorLabel.setVisible(false);
-				BorderPane mainScreen = (BorderPane) FXMLLoader.load(
-	        			getClass().getResource("MainScreen-view.fxml"));
-	        	
-	        	ViewProvider.setView("mainScreen", mainScreen);
-	        	MainView root = (MainView) ViewProvider.getView("main");	
-	        	root.setBorderPane(mainScreen);
-			}
-			else {
-				errorLabel.setVisible(true);
-			}
-			
-		} catch (InterruptedException e) {
-			System.out.println("Thread was interrupted");
-			
+		LoginThread.login();
+
+		if(isCorrect) {
+			errorLabel.setVisible(false);
+			BorderPane mainScreen = (BorderPane) FXMLLoader.load(
+        			getClass().getResource("MainScreen-view.fxml"));
+        	
+        	ViewProvider.setView("mainScreen", mainScreen);
+        	MainView root = (MainView) ViewProvider.getView("main");	
+        	root.setBorderPane(mainScreen);
 		}
+		else {
+			errorLabel.setText("Username or password is incorrect. Please try again.");
+			errorLabel.setVisible(true);
+		}
+			
     	
     	//root.getRoot().setCenter(mainScreen);
         	

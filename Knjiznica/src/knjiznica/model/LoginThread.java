@@ -9,7 +9,7 @@ import knjiznica.view.LoginView;
 
 
 
-public class LoginThread extends Thread {
+public class LoginThread implements Runnable {
 	
 
 	@Override
@@ -31,6 +31,17 @@ public class LoginThread extends Thread {
 			LoginView.isCorrect = false;
 			
 		} 
+	}
+	
+	public static void login() {
+		Thread t = new Thread(new LoginThread());
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			LoginView.isCorrect = false;
+			System.out.println("Something went wrong!");
+		}
 	}
 	
 }
