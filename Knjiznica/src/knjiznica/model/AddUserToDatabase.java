@@ -5,7 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.postgresql.util.PSQLException;
+
 import knjiznica.resources.ConnectionData;
+import knjiznica.view.AddUserView;
 
 public class AddUserToDatabase implements Runnable{
 	
@@ -76,8 +80,12 @@ public class AddUserToDatabase implements Runnable{
 			
 			pstmtUser.executeUpdate();
 			
+		} catch (PSQLException e) {
+			AddUserView.isReached = false;
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			AddUserView.isReached = false;
+			
 		}
 	}
 	
@@ -93,6 +101,12 @@ public class AddUserToDatabase implements Runnable{
 		street = streetIn;
 		houseNumber = houseNumberIn;
 		
-		(new Thread(new AddUserToDatabase())).start();
+		Thread t = new Thread(new AddUserToDatabase());
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			AddUserView.isInterrupted = true;
+		}
 	}
 }

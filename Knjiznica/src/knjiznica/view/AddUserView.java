@@ -56,6 +56,9 @@ public class AddUserView {
 	@FXML
 	private Label errorLabel;
 	
+	public static boolean isInterrupted = false;
+	public static boolean isReached = true;
+	
 	private String nameCombo = "postalCodeComboAddUser";
 	private String firstName;
 	private String middleName;
@@ -90,6 +93,10 @@ public class AddUserView {
 	
 	@FXML
 	private void activateAdd() throws IOException {
+		
+		isInterrupted = false;
+		isReached = true;
+		
 		errorLabel.setVisible(false);
 		postalCodeSingle = postalCodeCombo.getSelectionModel();
 		firstName = firstNameField.getText();
@@ -168,6 +175,7 @@ public class AddUserView {
 				firstNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
+				
 			}
 			
 			if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
@@ -175,6 +183,7 @@ public class AddUserView {
 				middleNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
+				
 			}
 			
 			if (!CheckInputLetters.check(lastName)) {
@@ -182,12 +191,30 @@ public class AddUserView {
 				lastNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
+				
 			}
 			if (check) {
+				
+				errorLabel.setVisible(false);
+				
 				int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+				
 				AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
-				BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
-		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
+				
+				if(!isInterrupted && isReached) {
+					BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
+			    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
+			    	
+				} else if (isInterrupted) {
+					errorLabel.setText("Something went wrong!");
+					errorLabel.setVisible(true);
+					
+				} else {
+					errorLabel.setText("Couldn't reach database!");
+					errorLabel.setVisible(true); 
+					
+				}
+				
 			}
 			
 		}

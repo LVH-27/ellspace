@@ -134,6 +134,9 @@ public class AddLibraryView {
 	@FXML
 	private HBox houseNumberHBox;
 	
+	public static boolean isInterrupted = false;
+	public static boolean isReached = true;
+	
 	private CheckBox testCheck;
 	private String nameCombo = "postalCodeComboAddLibrary";
 	private String firstName;
@@ -235,6 +238,8 @@ public class AddLibraryView {
 	@FXML
 	private void activateAdd() throws IOException {
 		
+		isInterrupted = false;
+		isReached = true;
 		final String redBorder ="-fx-border-color: #ff0000;\n";
 		
 		firstNameField.setStyle("");
@@ -382,9 +387,24 @@ public class AddLibraryView {
 			}
 		}
 		if (check && !errorInfo) {
+			
+			errorLabel.setVisible(false); 
+			errorLabelTime.setVisible(false);
+			
 			AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
-			BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
-	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
+			
+	    	if(!isInterrupted && isReached) {
+	    		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
+	    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
+	    		
+	    	} else if (isInterrupted) {
+	    		errorLabel.setText("Something went wrong!");
+	    		errorLabel.setVisible(true);
+	    		
+	    	} else {
+	    		errorLabel.setText("Couldn't reach database!");
+	    		errorLabel.setVisible(true);
+	    	}
 		}
 		
 		if (!check) {

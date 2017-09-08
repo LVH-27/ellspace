@@ -8,8 +8,11 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import org.postgresql.util.PSQLException;
+
 import javafx.scene.control.CheckBox;
 import knjiznica.resources.ConnectionData;
+import knjiznica.view.AddLibraryView;
 
 public class AddLibraryToDatabase implements Runnable{
 	
@@ -135,8 +138,12 @@ public class AddLibraryToDatabase implements Runnable{
 				pstmtBusiness.executeUpdate();
 			}
 			
+		} catch (PSQLException e) {
+			AddLibraryView.isReached = false;
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			AddLibraryView.isReached = false;
+			
 		}
 
 		
@@ -157,6 +164,12 @@ public class AddLibraryToDatabase implements Runnable{
 		checkBoxList = checkBoxListIn;
 		onlineLibraryCheck = onlineLibraryCheckIn;
 		
-		(new Thread(new AddLibraryToDatabase())).start();
+		Thread t = new Thread(new AddLibraryToDatabase());
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			AddLibraryView.isInterrupted = true;
+		}
 	}
 }

@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import org.postgresql.util.PSQLException;
 import knjiznica.resources.ConnectionData;
+import knjiznica.view.AddAuthorView;
+
 
 public class AddAuthorToDatabase implements Runnable{
 	
@@ -52,8 +55,12 @@ public class AddAuthorToDatabase implements Runnable{
 			
 			pstmtAuthor.executeUpdate();
 			
+		} catch (PSQLException e) {
+			AddAuthorView.isReached = false;
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			AddAuthorView.isReached = false;
+			
 		}
 	}
 	
@@ -66,6 +73,12 @@ public class AddAuthorToDatabase implements Runnable{
 		yearOfBirth = yearOfBirthIn;
 		yearOfDeath = yearOfDeathIn;
 		
-		(new Thread(new AddAuthorToDatabase())).start();
+		Thread t = new Thread(new AddAuthorToDatabase());
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			AddAuthorView.isInterrupted = true;
+		}
 	}
 }

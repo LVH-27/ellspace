@@ -47,6 +47,9 @@ public class AddAuthorView {
 	@FXML
 	private Label errorLabelTooMuch;
 	
+	public static boolean isInterrupted = false;
+	public static boolean isReached = true;
+	
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -76,6 +79,9 @@ public class AddAuthorView {
 	
 	@FXML
 	private void activateAdd() throws IOException {
+		
+		isInterrupted = false;
+		isReached = true;
 		
 		errorLabelMiss.setVisible(false);
 		errorLabelTooMuch.setVisible(false);
@@ -231,9 +237,22 @@ public class AddAuthorView {
 		}
 		
 		if (!showMiss && !showTooMuch) {
+			
 			AddAuthorToDatabase.addAuthor(firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);
-			BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
-	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
+			errorLabelMiss.setVisible(false);
+			errorLabelTooMuch.setVisible(false);
+			
+	    	if (!isInterrupted && isReached) { 
+	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
+		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
+	    		
+	    	} else if (isInterrupted) {
+	    		errorLabelMiss.setText("Something went wrong!");
+	    		errorLabelMiss.setVisible(true);
+	    	} else {
+	    		errorLabelMiss.setText("Couldn't reach database!");
+	    		errorLabelMiss.setVisible(true);
+	    	}
 		}
 	}
 	

@@ -1,6 +1,5 @@
 package knjiznica.view;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.beans.value.ObservableValue;
