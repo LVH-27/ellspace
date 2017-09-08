@@ -126,31 +126,31 @@ public class AddUserView {
 		 * DOUBLED EMAIL NOT UNIQUE
 		 */
 		
-		if(postalCodeSingle.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
+		if (postalCodeSingle.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
 			errorLabel.setText("Missing information");
 			
-			if(firstName.isEmpty()) {
+			if (firstName.isEmpty()) {
 				firstNameField.setStyle(redBorder);
 				
-			}if(lastName.isEmpty()) {
+			} if (lastName.isEmpty()) {
 				lastNameField.setStyle(redBorder);
 				
-			}if(postalCodeSingle.isEmpty()) {
+			} if (postalCodeSingle.isEmpty()) {
 				postalCodeCombo.setStyle(redBorder);
 				
-			}if(email.isEmpty()) {
+			} if (email.isEmpty()) {
 				emailField.setStyle(redBorder);
 				
-			}if(phoneNumber.isEmpty()) {
+			} if (phoneNumber.isEmpty()) {
 				phoneNumberField.setStyle(redBorder);
 				
-			}if(country.isEmpty()) {
+			} if (country.isEmpty()) {
 				countryField.setStyle(redBorder);
 				
-			}if(street.isEmpty()) {
+			} if (street.isEmpty()) {
 				streetField.setStyle(redBorder);
 				
-			}if(houseNumber.isEmpty()) {
+			} if (houseNumber.isEmpty()) {
 				houseNumberField.setStyle(redBorder);
 				
 			}
@@ -163,27 +163,27 @@ public class AddUserView {
 			lastName = FormattingName.format(lastName);
 			check = true;
 			
-			if(!CheckInputLetters.check(firstName)) {
+			if (!CheckInputLetters.check(firstName)) {
 				check = false;
 				firstNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
 			
-			if(!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
+			if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
 				check = false;
 				middleNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
 			
-			if(!CheckInputLetters.check(lastName)) {
+			if (!CheckInputLetters.check(lastName)) {
 				check = false;
 				lastNameField.setStyle(redBorder);
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
-			if(check) {
+			if (check) {
 				int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 				AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
 				BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));

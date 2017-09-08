@@ -110,7 +110,7 @@ public class AddAuthorView {
 			birth = false;
 			
 		}finally{
-			if(yearOfBirth.isEmpty()) {
+			if (yearOfBirth.isEmpty()) {
 				birth = true;
 			}
 		}
@@ -122,7 +122,7 @@ public class AddAuthorView {
 			death = false;
 			
 		}finally{
-			if(yearOfDeath.isEmpty()) {
+			if (yearOfDeath.isEmpty()) {
 				death = true;
 			}
 		}
@@ -132,21 +132,21 @@ public class AddAuthorView {
 		
 		final String redBorder ="-fx-border-color: #ff0000;\n";
 		
-		if(firstName.isEmpty()) {
+		if (firstName.isEmpty()) {
 			firstNameField.setStyle(redBorder);
 			showMiss = true;
 			errorLabelMiss.setText("Missing information");
 			errorLabelMiss.setVisible(true);
 		}
 		
-		if(lastName.isEmpty()) {
+		if (lastName.isEmpty()) {
 			lastNameField.setStyle(redBorder);
 			showMiss = true;
 			errorLabelMiss.setText("Missing information");
 			errorLabelMiss.setVisible(true);
 		}
 		
-		if(!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
+		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
 			
 			firstNameField.setStyle(redBorder);
 			
@@ -156,11 +156,11 @@ public class AddAuthorView {
 			
 		}
 		
-		if(!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
+		if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
 			
 			middleNameField.setStyle(redBorder);
 			
-			if(!showMiss) {
+			if (!showMiss) {
 				showMiss = true;
 				errorLabelMiss.setText("Verify that you have entered the correct information.");
 				errorLabelMiss.setVisible(true);
@@ -168,11 +168,11 @@ public class AddAuthorView {
 			
 		}
 		
-		if(!lastName.isEmpty() && !CheckInputLetters.check(lastName)) {
+		if (!lastName.isEmpty() && !CheckInputLetters.check(lastName)) {
 			
 			lastNameField.setStyle(redBorder);
 			
-			if(!showMiss) {
+			if (!showMiss) {
 				showMiss = true;
 				errorLabelMiss.setText("Verify that you have entered the correct information.");
 				errorLabelMiss.setVisible(true);
@@ -180,7 +180,7 @@ public class AddAuthorView {
 			
 		}
 		
-		if(!birth) {
+		if (!birth) {
 			
 			yearOfBirthField.setStyle(redBorder);
 			
@@ -191,11 +191,11 @@ public class AddAuthorView {
 			
 		}
 		
-		if(!death) {
+		if (!death) {
 			
 			yearOfDeathField.setStyle(redBorder);
 			
-			if(!showTooMuch) {
+			if (!showTooMuch) {
 				showTooMuch = true;
 				errorLabelTooMuch.setText("Please enter death year\n"
 						+ "in 4 digits (e.g. 1973).");
@@ -203,12 +203,12 @@ public class AddAuthorView {
 			}
 			
 		}
-		if(isAlive && !yearOfDeath.isEmpty()) {
+		if (isAlive && !yearOfDeath.isEmpty()) {
 			
 			isAliveCheck.setStyle(redBorder);
 			yearOfDeathField.setStyle(redBorder);
 			
-			if(!showTooMuch) {
+			if (!showTooMuch) {
 				showTooMuch = true;
 				errorLabelTooMuch.setText("You may only use one.");
 				errorLabelTooMuch.setVisible(true);
@@ -216,12 +216,12 @@ public class AddAuthorView {
 			
 		}			
 		
-		if(!yearOfBirth.isEmpty() && !yearOfDeath.isEmpty() && Integer.parseInt(yearOfBirth) > Integer.parseInt(yearOfDeath)) {
+		if (!yearOfBirth.isEmpty() && !yearOfDeath.isEmpty() && Integer.parseInt(yearOfBirth) > Integer.parseInt(yearOfDeath)) {
 			
 			yearOfBirthField.setStyle(redBorder);
 			yearOfDeathField.setStyle(redBorder);
 			
-			if(!showTooMuch) {
+			if (!showTooMuch) {
 				showTooMuch = true;
 				errorLabelTooMuch.setText("Year of birth cannot be\n"
 						+ "larger than year of death.");
@@ -230,7 +230,7 @@ public class AddAuthorView {
 			
 		}
 		
-		if(!showMiss && !showTooMuch){
+		if (!showMiss && !showTooMuch) {
 			AddAuthorToDatabase.addAuthor(firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);
 			BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
 	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);

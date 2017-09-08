@@ -60,7 +60,7 @@ public class AddUserToDatabase implements Runnable{
 			
 			pstmtUser = con.prepareStatement(queryUser);
 			
-			if(middleName.isEmpty()) {
+			if (middleName.isEmpty()) {
 				middleName = null;
 			}
 			else {

@@ -14,7 +14,7 @@ public class FormattingName {
 			
 			nameList[i] = nameList[i].trim();
 			newName += nameList[i].substring(0, 1).toUpperCase() + nameList[i].substring(1);
-			if(i < nameList.length - 1) {
+			if (i < nameList.length - 1) {
 				newName += "-";
 			}
 			
@@ -27,7 +27,7 @@ public class FormattingName {
 		for(int i = 0; i < nameList.length; ++i) {
 			
 			newName += nameList[i].substring(0, 1).toUpperCase() + nameList[i].substring(1);
-			if(i < nameList.length - 1) {
+			if (i < nameList.length - 1) {
 				newName += " ";
 			}
 			

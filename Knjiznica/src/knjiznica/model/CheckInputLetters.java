@@ -10,14 +10,14 @@ public class CheckInputLetters {
 		for(int i = 0; i < wordIn.length(); ++i) {
 			checkLetter = false;
 			for(int j = 0; j < letters.length; ++j) {
-				if((i == 0 || i == wordIn.length() - 1) && wordIn.charAt(i) == '-') {
+				if ((i == 0 || i == wordIn.length() - 1) && wordIn.charAt(i) == '-') {
 					isPossible = false;
 				}
-				if(wordIn.charAt(i) == letters[j]) {
+				if (wordIn.charAt(i) == letters[j]) {
 					checkLetter = true;
 				}
 			}
-			if(!checkLetter) {
+			if (!checkLetter) {
 				isPossible = false;
 				break;
 			}

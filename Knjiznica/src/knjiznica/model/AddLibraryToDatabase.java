@@ -54,7 +54,7 @@ public class AddLibraryToDatabase implements Runnable{
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 			
-			if(!onlineLibraryCheck) {
+			if (!onlineLibraryCheck) {
 				String queryAddress = "INSERT INTO public.\"Address\" VALUES(DEFAULT, ?, ?, ?, ?) RETURNING \"Address\".\"AddressID\"";
 				
 				pstmtAddress = con.prepareStatement(queryAddress, new String[]{"Address.AddressID"});
@@ -124,7 +124,7 @@ public class AddLibraryToDatabase implements Runnable{
 				
 				pstmtBusiness.setInt(1, Integer.parseInt(libraryID));
 				pstmtBusiness.setInt(2, j + 1);
-				if(checkBoxList.get(j).isSelected()) {
+				if (checkBoxList.get(j).isSelected()) {
 					pstmtBusiness.setBoolean(3, false);
 				}else {
 					pstmtBusiness.setBoolean(3, true);

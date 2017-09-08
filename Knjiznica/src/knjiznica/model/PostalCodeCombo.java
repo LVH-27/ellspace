@@ -45,7 +45,7 @@ public class PostalCodeCombo {
 			
 			return returnData;
 				
-		} catch(SQLException e){
+		} catch(SQLException e) {
 			e.printStackTrace();
 			
 		} finally {

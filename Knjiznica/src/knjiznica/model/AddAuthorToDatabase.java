@@ -33,7 +33,7 @@ public class AddAuthorToDatabase implements Runnable{
 			
 			pstmtAuthor = con.prepareStatement(queryAuthor);
 			
-			if(middleName.isEmpty()) {
+			if (middleName.isEmpty()) {
 				middleName = null;
 			}
 			else {

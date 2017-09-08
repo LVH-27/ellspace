@@ -21,7 +21,6 @@ import knjiznica.model.FormattingName;
 import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
 
-
 public class AddLibraryView {
 	
 	@FXML
@@ -176,7 +175,7 @@ public class AddLibraryView {
 				begin1.setDisable(true);
 				end1.setDisable(true);
 			}
-		} else if(testCheck == check2) {
+		} else if (testCheck == check2) {
 			if (check2.isSelected()) {
 				begin2.setDisable(false);
 				end2.setDisable(false);
@@ -184,7 +183,7 @@ public class AddLibraryView {
 				begin2.setDisable(true);
 				end2.setDisable(true);
 			}
-		} else if(testCheck == check3) {
+		} else if (testCheck == check3) {
 			if (check3.isSelected()) {
 				begin3.setDisable(false);
 				end3.setDisable(false);
@@ -192,7 +191,7 @@ public class AddLibraryView {
 				begin3.setDisable(true);
 				end3.setDisable(true);
 			}
-		} else if(testCheck == check4) {
+		} else if (testCheck == check4) {
 			if (check4.isSelected()) {
 				begin4.setDisable(false);
 				end4.setDisable(false);
@@ -200,7 +199,7 @@ public class AddLibraryView {
 				begin4.setDisable(true);
 				end4.setDisable(true);
 			}
-		} else if(testCheck == check5) {
+		} else if (testCheck == check5) {
 			if (check5.isSelected()) {
 				begin5.setDisable(false);
 				end5.setDisable(false);
@@ -208,7 +207,7 @@ public class AddLibraryView {
 				begin5.setDisable(true);
 				end5.setDisable(true);
 			}
-		} else if(testCheck == check6) {
+		} else if (testCheck == check6) {
 			if (check6.isSelected()) {
 				begin6.setDisable(false);
 				end6.setDisable(false);
@@ -216,7 +215,7 @@ public class AddLibraryView {
 				begin6.setDisable(true);
 				end6.setDisable(true);
 			}
-		} else if(testCheck == check7) {
+		} else if (testCheck == check7) {
 			if (check7.isSelected()) {
 				begin7.setDisable(false);
 				end7.setDisable(false);
@@ -289,106 +288,92 @@ public class AddLibraryView {
 			endTimeList.get(i).setStyle("");
 		}
 
-		
 		if (firstName.isEmpty()) {
-			errorLabel.setText("Missing some information");
+			errorLabel.setText("Missing some information!");
 			errorLabel.setVisible(true);
 			firstNameField.setStyle(redBorder);
 			errorInfo = true;
-			
 		}
 		
 		if (phoneNumber.isEmpty()) {
-			errorLabel.setText("Missing some information");
+			errorLabel.setText("Missing some information!");
 			errorLabel.setVisible(true);
 			phoneNumberField.setStyle(redBorder);
 			errorInfo = true;
-			
 		}
 		
-		if(!onlineLibraryCheck.isSelected() && (country.isEmpty() || street.isEmpty() || houseNumber.isEmpty() || postalCodeSingle.isEmpty())) {
+		if (!onlineLibraryCheck.isSelected() && (country.isEmpty() || street.isEmpty() || houseNumber.isEmpty() || postalCodeSingle.isEmpty())) {
 			
-			errorLabel.setText("Missing some information");
+			errorLabel.setText("Missing some information!");
 			errorLabel.setVisible(true);
 
-			if(country.isEmpty()) {
+			if (country.isEmpty()) {
 				countryField.setStyle(redBorder);
 			}
-			if(street.isEmpty()) {
+			if (street.isEmpty()) {
 				streetField.setStyle(redBorder);
 			}
-			if(houseNumber.isEmpty()) {
+			if (houseNumber.isEmpty()) {
 				houseNumberField.setStyle(redBorder);
 			}
-			if(postalCodeSingle.isEmpty()) {
+			if (postalCodeSingle.isEmpty()) {
 				postalCodeCombo.setStyle(redBorder);
 			}
 			
 			errorInfo = true;
-			
 		}
 			
-		if(information.isEmpty()) {
+		if (information.isEmpty()) {
 			information = null;
-			
 		}
-		if(email.isEmpty()) {
+		if (email.isEmpty()) {
 			email = null;
-			
 		}
-		
-		if(!firstName.isEmpty()) {
+		if (!firstName.isEmpty()) {
 			firstName = FormattingName.format(firstName);
 		}
-		
 		
 		int postalCodeInt;
 		try{
 			postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-		} catch (Exception e){
+		} catch (Exception e) {
 			postalCodeInt = 0;
 		}
 		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
 			firstNameField.setStyle(redBorder);
-			if(!errorInfo) {
+			if (!errorInfo) {
 				errorLabel.setText("Verify that you have entered the correct information.");
 				errorLabel.setVisible(true);
 			}
 			
 			errorInfo = true;
-			
 		}
 		
-		
-		if(information == "") {
+		if (information == "") {
 			information = null;
-			
 		}
-		if(email == "") {
+		if (email == "") {
 			email = null;
-			
 		} 
 		
 		boolean check = true;
 		
 		beginTime = new ArrayList<String>();
 		
-		for(int i = 0; i < checkBoxList.size(); ++i) {
-			if(checkBoxList.get(i).isSelected()) {
-				if(!isValid(beginTimeList.get(i).getText()) || !isValid(endTimeList.get(i).getText())) {
-					if(!isValid(beginTimeList.get(i).getText())) {
+		for (int i = 0; i < checkBoxList.size(); ++i) {
+			if (checkBoxList.get(i).isSelected()) {
+				if (!isValid(beginTimeList.get(i).getText()) || !isValid(endTimeList.get(i).getText())) {
+					if (!isValid(beginTimeList.get(i).getText())) {
 						beginTimeList.get(i).setStyle(redBorder);
 						
-					}if(!isValid(endTimeList.get(i).getText())) {
+					} if (!isValid(endTimeList.get(i).getText())) {
 						endTimeList.get(i).setStyle(redBorder);
-						
 					}
 					check = false;
 			
 				} else {
 					beginTime.add(beginTimeList.get(i).getText());
 					endTime.add(endTimeList.get(i).getText());
-					
 				}
 				
 			} else {
@@ -396,28 +381,25 @@ public class AddLibraryView {
 				endTime.add("00:00");
 			}
 		}
-		if(check && !errorInfo) {
+		if (check && !errorInfo) {
 			AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
 			BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
 	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
-		
 		}
-		if(!check) {
-			errorLabelTime.setText("Please enter birth year\n"
-					+ "in 4 digits (e.g. 1973).");
+		
+		if (!check) {
+			errorLabelTime.setText("Please enter time between\n"
+					+ "00:00 and 23:59.");
 			errorLabelTime.setVisible(true);
 		}
-			
-			
-		
 	}
 	
 	private static boolean isValid(String time) {
 		String[] timeSplit = time.split(":");
-		if(timeSplit.length != 2) {
+		if (timeSplit.length != 2) {
 			return false;
 			
-		} else if(timeSplit[0].length() > 2 || timeSplit[0].length() < 1 || timeSplit[1].length() != 2){
+		} else if (timeSplit[0].length() > 2 || timeSplit[0].length() < 1 || timeSplit[1].length() != 2) {
 			return false;
 			
 		}
@@ -426,27 +408,24 @@ public class AddLibraryView {
 		int checkHours = 0;
 		int checkMin = 0;
 
-		for(int i = 0; i < timeSplit.length; ++i) {
+		for (int i = 0; i < timeSplit.length; ++i) {
 			try {
-				if(i == 0) {
+				if (i == 0) {
 					checkHours = Integer.parseInt(timeSplit[i]);
-					
-				}else {
+				} else {
 					checkMin = Integer.parseInt(timeSplit[i]);
-					
 				}
 				
-			} catch(Exception e) {
+			} catch (Exception e) {
 				check = false;
 				break;
 			}
 		}
-		if(!check) {
+		
+		if (!check) {
 			return false;
-			
-		} else if(checkHours > 23 || checkHours < 0 || checkMin > 59 || checkMin < 0) {
+		} else if (checkHours > 23 || checkHours < 0 || checkMin > 59 || checkMin < 0) {
 			return false;
-			
 		} else {
 			return true;
 		}
@@ -454,7 +433,7 @@ public class AddLibraryView {
 	
 	@FXML
 	private void onlineLibrary() {
-		if(onlineLibraryCheck.isSelected()) {
+		if (onlineLibraryCheck.isSelected()) {
 			countryHBox.setVisible(false);
 			countryField.setVisible(false);
 			streetHBox.setVisible(false);
@@ -463,7 +442,7 @@ public class AddLibraryView {
 			houseNumberField.setVisible(false);
 			postalCodeCombo.setVisible(false);
 			
-		} else if(!onlineLibraryCheck.isSelected()) {
+		} else if (!onlineLibraryCheck.isSelected()) {
 			countryHBox.setVisible(true);
 			countryField.setVisible(true);
 			streetHBox.setVisible(true);
@@ -471,8 +450,6 @@ public class AddLibraryView {
 			houseNumberHBox.setVisible(true);
 			houseNumberField.setVisible(true);
 			postalCodeCombo.setVisible(true);
-			
 		}
-		
 	}
 }
