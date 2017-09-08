@@ -337,9 +337,11 @@ public class AddLibraryView {
 		if (information.isEmpty()) {
 			information = null;
 		}
+		
 		if (email.isEmpty()) {
 			email = null;
 		}
+		
 		if (!firstName.isEmpty()) {
 			firstName = FormattingName.format(firstName);
 		}
@@ -360,13 +362,31 @@ public class AddLibraryView {
 			errorInfo = true;
 		}
 		
-		if (information == "") {
-			information = null;
+		if (houseNumber.length() > 6) {
+			
+			houseNumberField.setStyle(redBorder);
+			
+			if (!errorInfo) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);	
+			}
+			
+			errorInfo = true;
+			
 		}
-		if (email == "") {
-			email = null;
-		} 
 		
+		if (phoneNumber.length() > 20) {
+			
+			phoneNumberField.setStyle(redBorder);
+			
+			if (!errorInfo) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);	
+			}
+			
+			errorInfo = true;
+			
+		}
 		boolean check = true;
 		
 		beginTime = new ArrayList<String>();

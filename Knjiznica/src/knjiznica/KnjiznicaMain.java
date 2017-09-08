@@ -16,14 +16,14 @@ public class KnjiznicaMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
+
 			Group root = (Group) FXMLLoader.load(
 					getClass().getResource("view/Main-view.fxml"));
 			
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			
 			Scene scene = new Scene(root,
-					screenSize.getWidth() / 2, screenSize.getHeight() / 2);
+					screenSize.getWidth() / 1.5, screenSize.getHeight() / 1.5);
 			
 			MainView main = (MainView) ViewProvider.getView("main");
 			

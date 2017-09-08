@@ -4,14 +4,18 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import knjiznica.model.AddUserToDatabase;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.FormattingName;
@@ -133,90 +137,153 @@ public class AddUserView {
 		 * DOUBLED EMAIL NOT UNIQUE
 		 */
 		
-		if (postalCodeSingle.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || country.isEmpty() || street.isEmpty() || houseNumber.isEmpty()) {
-			errorLabel.setText("Missing information");
+		check = true;
 			
-			if (firstName.isEmpty()) {
-				firstNameField.setStyle(redBorder);
-				
-			} if (lastName.isEmpty()) {
-				lastNameField.setStyle(redBorder);
-				
-			} if (postalCodeSingle.isEmpty()) {
-				postalCodeCombo.setStyle(redBorder);
-				
-			} if (email.isEmpty()) {
-				emailField.setStyle(redBorder);
-				
-			} if (phoneNumber.isEmpty()) {
-				phoneNumberField.setStyle(redBorder);
-				
-			} if (country.isEmpty()) {
-				countryField.setStyle(redBorder);
-				
-			} if (street.isEmpty()) {
-				streetField.setStyle(redBorder);
-				
-			} if (houseNumber.isEmpty()) {
-				houseNumberField.setStyle(redBorder);
+			
+		if (firstName.isEmpty()) {
+			check = false;
+			firstNameField.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		} if (lastName.isEmpty()) {
+			check = false;
+			lastNameField.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		} if (postalCodeSingle.isEmpty()) {
+			check = false;
+			postalCodeCombo.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		} if (email.isEmpty()) {
+			check = false;
+			emailField.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		} if (phoneNumber.isEmpty()) {
+			check = false;
+			phoneNumberField.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		} if (country.isEmpty()) {
+			check = false;
+			countryField.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		} if (street.isEmpty()) {
+			check = false;
+			streetField.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		} if (houseNumber.isEmpty()) {
+			check = false;
+			houseNumberField.setStyle(redBorder);
+			errorLabel.setText("Missing information");
+			errorLabel.setVisible(true);
+			
+		}
+		
+		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
+			check = false;
+			firstNameField.setStyle(redBorder);
+			if(!errorLabel.isVisible()) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
 				
 			}
 			
-			errorLabel.setVisible(true);
 		}
-		else {
+		
+		if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
+			check = false;
+			middleNameField.setStyle(redBorder);
+			if(!errorLabel.isVisible()) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
+				
+			}
+			
+		}
+		
+		if (!lastName.isEmpty() && !CheckInputLetters.check(lastName)) {
+			check = false;
+			lastNameField.setStyle(redBorder);
+			if(!errorLabel.isVisible()) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
+				
+			}
+			
+		}
+		
+		if (houseNumber.length() > 6) {
+			check = false;
+			houseNumberField.setStyle(redBorder);
+			if(!errorLabel.isVisible()) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
+				
+			}
+			
+		}
+		
+		if (phoneNumber.length() > 20) {
+			check = false;
+			phoneNumberField.setStyle(redBorder);
+			if(!errorLabel.isVisible()) {
+				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setVisible(true);
+				
+			}
+			
+		}
+		
+		if (check) {
+			
 			postalCode = postalCodeSingle.getSelectedItem();
 			firstName = FormattingName.format(firstName);
 			lastName = FormattingName.format(lastName);
-			check = true;
 			
-			if (!CheckInputLetters.check(firstName)) {
-				check = false;
-				firstNameField.setStyle(redBorder);
-				errorLabel.setText("Verify that you have entered the correct information.");
+			errorLabel.setVisible(false);
+			
+			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			
+			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
+			
+			if(!isInterrupted && isReached) {
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+	    		alert.setTitle("Information Dialog");
+	    		alert.setHeaderText(null);
+	    		alert.setContentText("User successfully added!");
+	    		
+	    		alert.initModality(Modality.APPLICATION_MODAL);
+	    		alert.initOwner((Stage) ViewProvider.getView("primaryStage"));  
+	    		
+	    		alert.showAndWait();
+	    		
+				BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
+		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
+		    	
+			} else if (isInterrupted) {
+				errorLabel.setText("Something went wrong!");
 				errorLabel.setVisible(true);
 				
-			}
-			
-			if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
-				check = false;
-				middleNameField.setStyle(redBorder);
-				errorLabel.setText("Verify that you have entered the correct information.");
-				errorLabel.setVisible(true);
-				
-			}
-			
-			if (!CheckInputLetters.check(lastName)) {
-				check = false;
-				lastNameField.setStyle(redBorder);
-				errorLabel.setText("Verify that you have entered the correct information.");
-				errorLabel.setVisible(true);
-				
-			}
-			if (check) {
-				
-				errorLabel.setVisible(false);
-				
-				int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-				
-				AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
-				
-				if(!isInterrupted && isReached) {
-					BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
-			    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
-			    	
-				} else if (isInterrupted) {
-					errorLabel.setText("Something went wrong!");
-					errorLabel.setVisible(true);
-					
-				} else {
-					errorLabel.setText("Couldn't reach database!");
-					errorLabel.setVisible(true); 
-					
-				}
+			} else {
+				errorLabel.setText("Couldn't reach database!");
+				errorLabel.setVisible(true); 
 				
 			}
 			
 		}
+			
+		
 	}
 }
