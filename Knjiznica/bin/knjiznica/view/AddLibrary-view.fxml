@@ -20,19 +20,19 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <BorderPane style="-fx-border-color: #B1BCBE; -fx-background-color: #F4DDC9; -fx-border-radius: 15; -fx-border-width: 3.5; -fx-background-radius: 24;">
+                  <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css">
                      <center>
                         <GridPane alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
                             <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
                               <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
                           </columnConstraints>
                           <rowConstraints>
                               <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -46,10 +46,10 @@
                               <RowConstraints vgrow="SOMETIMES" />
                               <RowConstraints vgrow="SOMETIMES" />
                               <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <children>
                                     <Label fx:id="errorLabel" text="Missing some information!" textFill="RED" visible="false">
                                        <HBox.margin>
@@ -58,27 +58,27 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <TextField fx:id="firstNameField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <TextField fx:id="firstNameField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="20.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                                  <children>
                                     <Label alignment="CENTER" text="Name" />
                                  </children>
                               </HBox>
-                              <TextField fx:id="phoneNumberField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <TextField fx:id="phoneNumberField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
                                  <GridPane.margin>
-                                    <Insets left="20.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                                  <children>
                                     <Label text="Phone Number" />
@@ -87,7 +87,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </HBox>
-                              <TextField fx:id="emailField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" promptText="Optional" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <TextField fx:id="emailField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
@@ -97,10 +97,10 @@
                                     <Label text="Email" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="20.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="informationField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" promptText="Optional" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <TextField fx:id="informationField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
@@ -114,17 +114,17 @@
                                     </Label>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="20.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="countryField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                              <TextField fx:id="countryField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox fx:id="countryHBox" alignment="CENTER_RIGHT" GridPane.rowIndex="7">
                                  <GridPane.margin>
-                                    <Insets left="20.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                                  <children>
                                     <Label text="Country">
@@ -134,7 +134,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <TextField fx:id="streetField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                              <TextField fx:id="streetField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
@@ -144,10 +144,10 @@
                                     <Label text="Street" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="20.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="houseNumberField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                              <TextField fx:id="houseNumberField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="2" GridPane.rowIndex="9">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
@@ -157,15 +157,15 @@
                                     <Label text="House Number" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="20.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <ComboBox fx:id="postalCodeCombo" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" promptText="Choose Postal Code" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                              <ComboBox fx:id="postalCodeCombo" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" promptText="Choose Postal Code" GridPane.columnIndex="2" GridPane.rowIndex="10">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </ComboBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <children>
                                     <Label text="Monday" />
                                  </children>
@@ -173,7 +173,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                  <children>
                                     <Label text="Tuesday" />
                                  </children>
@@ -181,7 +181,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                  <children>
                                     <Label text="Wednesday" />
                                  </children>
@@ -189,7 +189,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="5">
                                  <children>
                                     <Label text="Thursday" />
                                  </children>
@@ -197,7 +197,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="6">
                                  <children>
                                     <Label text="Friday" />
                                  </children>
@@ -205,7 +205,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="7">
                                  <children>
                                     <Label text="Saturday" />
                                  </children>
@@ -213,7 +213,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="8">
                                  <children>
                                     <Label text="Sunday" />
                                  </children>
@@ -221,63 +221,63 @@
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <CheckBox fx:id="check1" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                              <TextField fx:id="begin1" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                              <CheckBox fx:id="check1" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <TextField fx:id="begin1" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="6" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="end1" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                              <TextField fx:id="end1" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="8" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <CheckBox fx:id="check2" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                              <TextField fx:id="begin2" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                              <TextField fx:id="end2" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="7" GridPane.rowIndex="3">
+                              <CheckBox fx:id="check2" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                              <TextField fx:id="begin2" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                              <TextField fx:id="end2" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="8" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <CheckBox fx:id="check3" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                              <TextField fx:id="begin3" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                              <TextField fx:id="end3" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="7" GridPane.rowIndex="4">
+                              <CheckBox fx:id="check3" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                              <TextField fx:id="begin3" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                              <TextField fx:id="end3" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="8" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <CheckBox fx:id="check4" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                              <TextField fx:id="begin4" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                              <TextField fx:id="end4" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="7" GridPane.rowIndex="5">
+                              <CheckBox fx:id="check4" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                              <TextField fx:id="begin4" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                              <TextField fx:id="end4" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="8" GridPane.rowIndex="5">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <CheckBox fx:id="check5" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                              <TextField fx:id="begin5" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="5" GridPane.rowIndex="6">
+                              <CheckBox fx:id="check5" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                              <TextField fx:id="begin5" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="6" GridPane.rowIndex="6">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin></TextField>
-                              <TextField fx:id="end5" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="7" GridPane.rowIndex="6">
+                              <TextField fx:id="end5" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="20:00" GridPane.columnIndex="8" GridPane.rowIndex="6">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <CheckBox fx:id="check6" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                              <TextField fx:id="begin6" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-                              <TextField fx:id="end6" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="14:30" GridPane.columnIndex="7" GridPane.rowIndex="7">
+                              <CheckBox fx:id="check6" mnemonicParsing="false" onAction="#toggleCheck" selected="true" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                              <TextField fx:id="begin6" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="08:00" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                              <TextField fx:id="end6" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="14:30" GridPane.columnIndex="8" GridPane.rowIndex="7">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <CheckBox fx:id="check7" mnemonicParsing="false" onAction="#toggleCheck" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                              <TextField fx:id="begin7" disable="true" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="09:00" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-                              <TextField fx:id="end7" disable="true" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="14:30" GridPane.columnIndex="7" GridPane.rowIndex="8">
+                              <CheckBox fx:id="check7" mnemonicParsing="false" onAction="#toggleCheck" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                              <TextField fx:id="begin7" disable="true" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="09:00" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                              <TextField fx:id="end7" disable="true" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" promptText="14:30" GridPane.columnIndex="8" GridPane.rowIndex="8">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="5" GridPane.columnSpan="3">
+                              <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="6" GridPane.columnSpan="3">
                                  <children>
                                     <Label text="Working Hours">
                                        <font>
@@ -285,62 +285,65 @@
                                        </font></Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                              <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="Opens" />
                                  </children>
                               </HBox>
-                              <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                              <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="Closes" />
                                  </children>
                               </HBox>
-                              <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" GridPane.rowSpan="2">
+                              <HBox GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" GridPane.rowSpan="2147483647">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
-                              </Button>
-                              <Button fx:id="backButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="3" GridPane.rowIndex="10" GridPane.rowSpan="2">
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                              </Button>
-                              <Label text=" - " GridPane.columnIndex="6" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0" />
+                                    <Button fx:id="backButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Label text=" - " GridPane.columnIndex="7" GridPane.rowIndex="2">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text=" - " GridPane.columnIndex="6" GridPane.rowIndex="3">
+                              <Label text=" - " GridPane.columnIndex="7" GridPane.rowIndex="3">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text=" - " GridPane.columnIndex="6" GridPane.rowIndex="4">
+                              <Label text=" - " GridPane.columnIndex="7" GridPane.rowIndex="4">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text=" - " GridPane.columnIndex="6" GridPane.rowIndex="5">
+                              <Label text=" - " GridPane.columnIndex="7" GridPane.rowIndex="5">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text=" - " GridPane.columnIndex="6" GridPane.rowIndex="6">
+                              <Label text=" - " GridPane.columnIndex="7" GridPane.rowIndex="6">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text=" - " GridPane.columnIndex="6" GridPane.rowIndex="7">
+                              <Label text=" - " GridPane.columnIndex="7" GridPane.rowIndex="7">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text=" - " GridPane.columnIndex="6" GridPane.rowIndex="8">
+                              <Label text=" - " GridPane.columnIndex="7" GridPane.rowIndex="8">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowSpan="2">
+                              <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowSpan="2">
                                  <children>
                                     <Label fx:id="errorLabelTime" text="Incorrect time format!" textFill="RED" visible="false">
                                        <HBox.margin>
@@ -355,7 +358,7 @@
                                     <Insets right="7.0" />
                                  </padding>
                               </HBox>
-                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1">
+                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2">
                                  <children>
                                     <Label text="Library Information">
                                        <font>
@@ -364,8 +367,14 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <CheckBox fx:id="onlineLibraryCheck" mnemonicParsing="false" onAction="#onlineLibrary" text="Online Library" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <CheckBox fx:id="onlineLibraryCheck" mnemonicParsing="false" onAction="#onlineLibrary" text="Online Library" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="20.0" right="30.0" />
+                           </padding>
                         </GridPane>
                      </center>
                      <top>

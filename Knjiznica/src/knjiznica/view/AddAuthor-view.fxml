@@ -24,6 +24,7 @@
                         <GridPane alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
                             <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
                               <ColumnConstraints hgrow="SOMETIMES" />
@@ -38,33 +39,33 @@
                               <RowConstraints vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TextField fx:id="firstNameField" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
                                  <GridPane.margin>
-                                    <Insets left="15.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                                  <children>
                                     <Label alignment="CENTER" text="First Name" />
                                  </children>
                               </HBox>
-                              <TextField fx:id="middleNameField" promptText="Optional" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <TextField fx:id="middleNameField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="15.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                                  <children>
                                     <Label text="Middle Name" />
                                  </children>
                               </HBox>
-                              <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <TextField fx:id="lastNameField" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
@@ -74,15 +75,15 @@
                                     <Label text="Last Name" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets left="15.0" right="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="yearOfBirthField" promptText="Optional" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                              <TextField fx:id="yearOfBirthField" promptText="Optional" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets right="20.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <children>
                                     <Label text="Year Of Birth" />
                                  </children>
@@ -93,12 +94,12 @@
                                     <Insets right="10.0" />
                                  </opaqueInsets>
                               </HBox>
-                              <TextField fx:id="yearOfDeathField" promptText="Optional" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                              <TextField fx:id="yearOfDeathField" promptText="Optional" GridPane.columnIndex="5" GridPane.rowIndex="3">
                                  <GridPane.margin>
-                                    <Insets right="20.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                  <children>
                                     <Label text="Year Of Death" />
                                  </children>
@@ -106,14 +107,20 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                              <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                              <HBox GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.rowSpan="2147483647">
                                  <GridPane.margin>
-                                    <Insets left="10.0" />
+                                    <Insets left="5.0" />
                                  </GridPane.margin>
-                              </Button>
-                              <Button fx:id="backButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0" />
+                                    <Button fx:id="backButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                  <children>
                                     <CheckBox fx:id="isAliveCheck" contentDisplay="CENTER" mnemonicParsing="false" />
                                     <Label fx:id="errorLabelTooMuch" text="You may only use one" textFill="RED" visible="false" />
@@ -122,7 +129,7 @@
                                     <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="Author Is Alive" />
                                  </children>
@@ -130,12 +137,15 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="4">
+                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="4">
                                  <children>
                                     <Label fx:id="errorLabelMiss" text="Missing Information" textFill="RED" visible="false" />
                                  </children>
                               </HBox>
                            </children>
+                           <padding>
+                              <Insets left="15.0" right="20.0" />
+                           </padding>
                         </GridPane>
                      </center>
                      <top>

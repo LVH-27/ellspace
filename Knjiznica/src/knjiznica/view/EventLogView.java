@@ -1,6 +1,6 @@
 package knjiznica.view;
 
-public class SettingsView {
+public class EventLogView {
 
 	public void initialize() {
 		

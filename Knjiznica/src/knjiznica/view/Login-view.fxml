@@ -15,14 +15,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane fx:id="localRoot" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.LoginView">
    <center>
       <HBox alignment="CENTER">
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <GridPane alignment="CENTER" style="-fx-border-color: #B1BCBE; -fx-background-color: #F4DDC9; -fx-border-radius: 15; -fx-border-width: 3.5; -fx-background-radius: 24;" vgap="10.0">
+                  <GridPane id="defaultBackgroundField" alignment="CENTER" stylesheets="@../resources/BackgroundStyle.css" vgap="10.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="70.0" prefWidth="85.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="140.0" prefWidth="220.0" />
