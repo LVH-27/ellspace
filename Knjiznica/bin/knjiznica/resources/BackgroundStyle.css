@@ -12,6 +12,14 @@
     -fx-background-size: cover;
 }
 
+#defaultBackgroundField{
+	-fx-background-color: #F4DDC9;
+	-fx-background-radius: 25;
+	-fx-border-color: #B1BCBE;
+	-fx-border-radius: 20;
+	-fx-border-width: 3.5;
+}
+
 #homeButton{
     -fx-background-color: transparent;
 	-fx-border-color: transparent;
