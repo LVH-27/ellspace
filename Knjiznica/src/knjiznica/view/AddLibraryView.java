@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -15,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import knjiznica.model.AddLibraryToDatabase;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.FormattingName;
@@ -157,11 +162,11 @@ public class AddLibraryView {
 	public void initialize() {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
-		addButton.setId("homeButton");
+		addButton.setId("transparentButton");
 		
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
-		backButton.setId("homeButton");
+		backButton.setId("transparentButton");
 		
 		ViewProvider.setView(nameCombo, postalCodeCombo);
 		PostalCodeComboThread.setComboData(nameCombo);
@@ -394,6 +399,17 @@ public class AddLibraryView {
 			AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
 			
 	    	if(!isInterrupted && isReached) {
+	    		
+	    		Alert alert = new Alert(AlertType.INFORMATION);
+	    		alert.setTitle("Information Dialog");
+	    		alert.setHeaderText(null);
+	    		alert.setContentText("Library successfully added!");
+	    		
+	    		alert.initModality(Modality.APPLICATION_MODAL);
+	    		alert.initOwner((Stage) ViewProvider.getView("primaryStage"));  
+	    		
+	    		alert.showAndWait();
+	    		
 	    		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
 	    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
 	    		
