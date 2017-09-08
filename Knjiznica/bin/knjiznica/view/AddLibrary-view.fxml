@@ -340,7 +340,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                              <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowSpan="2">
                                  <children>
                                     <Label fx:id="errorLabelTime" text="Incorrect time format!" textFill="RED" visible="false">
                                        <HBox.margin>
