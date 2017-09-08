@@ -55,6 +55,8 @@ public class LoginView {
 		else {
 			errorLabel.setText("Username or password is incorrect. Please try again.");
 			errorLabel.setVisible(true);
+			passwordText.setText("");
+			
 		}
 			
     	
