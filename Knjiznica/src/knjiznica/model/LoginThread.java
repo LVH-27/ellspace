@@ -3,42 +3,34 @@ package knjiznica.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import org.postgresql.util.PSQLException;
-
 import knjiznica.resources.ConnectionData;
+import knjiznica.view.LoginView;
 
 
-public class LoginThread implements Runnable {
+
+public class LoginThread extends Thread {
 	
-	private static String username;
-	
-	private static String password;
 
 	@Override
 	public void run() {
     	try {
 			@SuppressWarnings("unused")
 			Connection con = DriverManager.getConnection(
-					ConnectionData.getLink(), username, password);
-			ConnectionData.setUsername(username);
-	    	ConnectionData.setPassword(password);
+					ConnectionData.getLink(), LoginView.username, LoginView.password);
+		
+			ConnectionData.setUsername(LoginView.username);
+	    	ConnectionData.setPassword(LoginView.password);
+	    	LoginView.isCorrect = true;
+	    	
 	    	
 		} catch (PSQLException e) {
-			e.printStackTrace();
+			LoginView.isCorrect = false;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+			LoginView.isCorrect = false;
+			
+		} 
 	}
 	
-	public static void login(String usernameIn, String passwordIn) {
-		
-		username = usernameIn;
-		password = passwordIn;
-		
-		(new Thread(new LoginThread())).start();
-		
-	}
 }

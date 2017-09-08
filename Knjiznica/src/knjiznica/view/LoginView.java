@@ -25,22 +25,46 @@ public class LoginView {
 	@FXML
 	private BorderPane localRoot;
 	
+	public static boolean isCorrect = true;
+	
+	public static String username;
+	
+	public static String password;
+	
 	public void initialize() {
 		//localRoot.setId("login");
 	}
 	
 	@FXML
 	private void activateLogin() throws IOException {
-		String username = usernameText.getText();
-		String password = passwordText.getText();
+		errorLabel.setVisible(false);
+		username = usernameText.getText();
+		password = passwordText.getText();
 		
-    	LoginThread.login(username, password);
-    	BorderPane mainScreen = (BorderPane) FXMLLoader.load(
-    			getClass().getResource("MainScreen-view.fxml"));
+		Thread login = new LoginThread();
+		
+		login.start();
+		
+		try {
+			login.join();
+			if(isCorrect) {
+				errorLabel.setVisible(false);
+				BorderPane mainScreen = (BorderPane) FXMLLoader.load(
+	        			getClass().getResource("MainScreen-view.fxml"));
+	        	
+	        	ViewProvider.setView("mainScreen", mainScreen);
+	        	MainView root = (MainView) ViewProvider.getView("main");	
+	        	root.setBorderPane(mainScreen);
+			}
+			else {
+				errorLabel.setVisible(true);
+			}
+			
+		} catch (InterruptedException e) {
+			System.out.println("Thread was interrupted");
+			
+		}
     	
-    	ViewProvider.setView("mainScreen", mainScreen);
-    	MainView root = (MainView) ViewProvider.getView("main");	
-    	root.setBorderPane(mainScreen);
     	//root.getRoot().setCenter(mainScreen);
         	
         
