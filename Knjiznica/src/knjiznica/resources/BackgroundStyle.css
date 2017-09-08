@@ -4,6 +4,7 @@
 	-fx-border-color: #B1BCBE;
 	-fx-border-radius: 20;
 	-fx-border-width: 3.5;
+	-fx-effect: dropshadow(three-pass-box, rgba(70, 50, 30, 0.9), 30, 0, 7, 11);
 }
 
 #loginButton{
