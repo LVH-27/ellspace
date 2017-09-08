@@ -26,10 +26,6 @@ public class MainView {
 	private double imageWidth = 0;
 	private double imageHeight = 0;
 	
-	
-	//@FXML
-	//private MenuBar menuBar;
-	
 	public void initialize() {
 		ViewProvider.setView("main", this);
 	}
@@ -40,12 +36,9 @@ public class MainView {
 	
 	public void start() throws IOException {
 		this.scene = root.getScene();
-		//root.setId("booklist");		
-		File file = new File("./src/knjiznica/resources/login-background.jpeg");
-        Image backgroundImage = new Image(file.getAbsoluteFile().toURI().toString());
+        Image backgroundImage = new Image(getClass().getResourceAsStream("../resources/login-background.jpeg"));
         setBackground(backgroundImage);	
 		addListeners();
-		centerBackground();
 		BorderPane main = (BorderPane) FXMLLoader.load(getClass().getResource("Login-view.fxml"));
 		setBorderPane(main);
 		
@@ -55,14 +48,14 @@ public class MainView {
 		background.setImage(img);
 		this.imageWidth = img.getWidth();
 		this.imageHeight = img.getHeight();
+		centerBackground();
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void setBorderPane(BorderPane borderPane) {
 		Integer indexOfLast = root.getChildren().size() - 1;
 		if (root.getChildren().get(indexOfLast) instanceof BorderPane) {
-			root.getChildren().remove(indexOfLast);
-		}		
+			root.getChildren().remove(root.getChildren().get(indexOfLast));
+		} 
 		root.getChildren().add(borderPane);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
         borderPane.prefWidthProperty().bind(scene.widthProperty());

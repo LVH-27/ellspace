@@ -22,7 +22,6 @@ public class MainScreenView {
 		Image imageHomeButton = new Image(getClass().getResourceAsStream("../resources/home-button.png"));
 		homeButton.setGraphic(new ImageView(imageHomeButton));
 		homeButton.setId("homeButton");
-		mainScreen.setId("booklist");
 		BorderPane startScreen = (BorderPane) FXMLLoader.load(
     			getClass().getResource("StartScreen-view.fxml"));
     	ViewProvider.setView("startScreen", startScreen);

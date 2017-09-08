@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import knjiznica.model.LoginThread;
 import knjiznica.model.ViewProvider;
@@ -42,15 +43,26 @@ public class LoginView {
 		password = passwordText.getText();
 		
 		LoginThread.login();
+		
+		// REMOVE !!!!
+		//isCorrect = true;
+		// REMOVE !!!
 
 		if(isCorrect) {
 			errorLabel.setVisible(false);
+			
+			MainView root = (MainView) ViewProvider.getView("main");	
+			
+			Image backgroundImage = new Image(getClass().getResourceAsStream("../resources/booklist-background.jpg"));
+			root.setBackground(backgroundImage);	
+			
 			BorderPane mainScreen = (BorderPane) FXMLLoader.load(
         			getClass().getResource("MainScreen-view.fxml"));
+			root.setBorderPane(mainScreen);
         	
         	ViewProvider.setView("mainScreen", mainScreen);
-        	MainView root = (MainView) ViewProvider.getView("main");	
-        	root.setBorderPane(mainScreen);
+        	
+        	
 		}
 		else {
 			errorLabel.setText("Username or password is incorrect. Please try again.");
@@ -58,9 +70,7 @@ public class LoginView {
 			passwordText.setText("");
 			
 		}
-			
-    	
-    	//root.getRoot().setCenter(mainScreen);
+
         	
         
 //		System.out.println(username + '\t' + password);
