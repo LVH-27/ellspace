@@ -4,13 +4,17 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import knjiznica.model.AddAuthorToDatabase;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.ViewProvider;
@@ -59,6 +63,9 @@ public class AddAuthorView {
 
 	
 	public void initialize() {
+		
+		//TODO implement error when year has more than 4 digits and it should work when year is < 0
+		
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -208,6 +215,7 @@ public class AddAuthorView {
 			}
 			
 		}
+		
 		if (isAlive && !yearOfDeath.isEmpty()) {
 			
 			isAliveCheck.setStyle(redBorder);
@@ -221,7 +229,7 @@ public class AddAuthorView {
 			
 		}			
 		
-		if (!yearOfBirth.isEmpty() && !yearOfDeath.isEmpty() && Integer.parseInt(yearOfBirth) > Integer.parseInt(yearOfDeath)) {
+		if (!yearOfBirth.isEmpty() && !yearOfDeath.isEmpty() && birth && death && Integer.parseInt(yearOfBirth) > Integer.parseInt(yearOfDeath)) {
 			
 			yearOfBirthField.setStyle(redBorder);
 			yearOfDeathField.setStyle(redBorder);
@@ -242,6 +250,17 @@ public class AddAuthorView {
 			errorLabelTooMuch.setVisible(false);
 			
 	    	if (!isInterrupted && isReached) { 
+	    		
+	    		Alert alert = new Alert(AlertType.INFORMATION);
+	    		alert.setTitle("Information Dialog");
+	    		alert.setHeaderText(null);
+	    		alert.setContentText("Author successfully added!");
+	    		
+	    		alert.initModality(Modality.APPLICATION_MODAL);
+	    		alert.initOwner((Stage) ViewProvider.getView("primaryStage"));  
+	    		
+	    		alert.showAndWait();
+	    		
 	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
 		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
 	    		
