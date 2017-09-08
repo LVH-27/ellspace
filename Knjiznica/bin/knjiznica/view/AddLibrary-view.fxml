@@ -35,7 +35,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" />
                           </columnConstraints>
                           <rowConstraints>
-                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
@@ -57,6 +57,9 @@
                                        </HBox.margin>
                                     </Label>
                                  </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
                               </HBox>
                               <TextField fx:id="firstNameField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
@@ -287,7 +290,10 @@
                               </HBox>
                               <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="Opens" />
+                                    <Label text="Opens">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></Label>
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1">
