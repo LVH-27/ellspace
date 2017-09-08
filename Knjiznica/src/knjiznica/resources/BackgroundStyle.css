@@ -12,11 +12,11 @@
 }
 
 #homeButton:hover{
-    -fx-background-color: #FF5E00;
-	-fx-border-color: #D14D00;
+    -fx-background-color: #E7D4B4;
+	-fx-border-color: #D0AD93;
 	-fx-background-radius: 15;
 	-fx-border-radius: 13;
-	-fx-border-width: 3;
+	-fx-border-width: 4;
 }
 
 #transparentButton{
