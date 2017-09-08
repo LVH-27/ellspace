@@ -1,5 +1,6 @@
 package knjiznica.view;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.beans.value.ObservableValue;
@@ -39,17 +40,22 @@ public class MainView {
 	
 	public void start() throws IOException {
 		this.scene = root.getScene();
-		root.setId("booklist");		
-		Image backgroundImage = background.getImage();
-		//this.img = backgroundImage;
-		this.imageWidth = backgroundImage.getWidth();
-		this.imageHeight = backgroundImage.getHeight();
+		//root.setId("booklist");		
+		File file = new File("./src/knjiznica/resources/login-background.jpeg");
+        Image backgroundImage = new Image(file.getAbsoluteFile().toURI().toString());
+        setBackground(backgroundImage);	
 		addListeners();
 		centerBackground();
 		BorderPane main = (BorderPane) FXMLLoader.load(getClass().getResource("Login-view.fxml"));
 		setBorderPane(main);
+		
 	}
 	
+	public void setBackground(Image img) {
+		background.setImage(img);
+		this.imageWidth = img.getWidth();
+		this.imageHeight = img.getHeight();
+	}
 	
 	@SuppressWarnings("unlikely-arg-type")
 	public void setBorderPane(BorderPane borderPane) {
@@ -60,7 +66,7 @@ public class MainView {
 		root.getChildren().add(borderPane);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
         borderPane.prefWidthProperty().bind(scene.widthProperty());
-	}
+	}	
 	
 	public void addListeners() {
 		scene.heightProperty().addListener(
