@@ -88,12 +88,12 @@
                         </Label>
                         <TextField fx:id="usernameText" promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <PasswordField fx:id="passwordText" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                        <VBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.rowSpan="2147483647">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#activateLogin" style="-fx-background-color: #D98027;" text="LOGIN" textAlignment="CENTER">
+                              <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#activateLogin" text="LOGIN" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>

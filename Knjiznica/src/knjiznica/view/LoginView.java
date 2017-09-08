@@ -3,6 +3,7 @@ package knjiznica.view;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -21,6 +22,9 @@ public class LoginView {
 	private PasswordField passwordText;
 	
 	@FXML
+	private Button loginButton;
+	
+	@FXML
 	private Label errorLabel;
 	
 	@FXML
@@ -33,7 +37,7 @@ public class LoginView {
 	public static String password;
 	
 	public void initialize() {
-		
+		loginButton.setId("loginButton");
 	}
 	
 	@FXML

@@ -6,17 +6,21 @@
 	-fx-border-width: 3.5;
 }
 
+#loginButton{
+	-fx-background-color: #D98027;
+}
+
+#loginButton:hover{
+	-fx-effect: dropshadow(three-pass-box, rgba(100, 90, 70, 0.8), 5, 0, 1, 1);
+}
+
 #homeButton{
     -fx-background-color: transparent;
 	-fx-border-color: transparent;
 }
 
 #homeButton:hover{
-    -fx-background-color: #E7D4B4;
-	-fx-border-color: #D0AD93;
-	-fx-background-radius: 15;
-	-fx-border-radius: 13;
-	-fx-border-width: 4;
+	-fx-effect: dropshadow(three-pass-box, rgba(100, 90, 70, 0.9), 10, 0, 2, 4);
 }
 
 #transparentButton{
@@ -28,6 +32,7 @@
 }
 
 #transparentButton:hover{
-	-fx-background-color: #E0CBB9;
+	-fx-background-color: #E5D0BE;
 	-fx-border-color: #D4C0AF;
+	-fx-effect: dropshadow(three-pass-box, rgba(100, 90, 70, 0.9), 10, 0, 2, 4);
 }
