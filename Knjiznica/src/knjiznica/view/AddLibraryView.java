@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -17,10 +15,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import knjiznica.model.AddLibraryToDatabase;
+import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.CheckInputLetters;
+import knjiznica.model.ErrorLabelMessage;
 import knjiznica.model.FormattingName;
 import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
@@ -300,14 +298,14 @@ public class AddLibraryView {
 		}
 
 		if (firstName.isEmpty()) {
-			errorLabel.setText("Missing some information!");
+			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
 			firstNameField.setStyle(redBorder);
 			errorInfo = true;
 		}
 		
 		if (phoneNumber.isEmpty()) {
-			errorLabel.setText("Missing some information!");
+			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
 			phoneNumberField.setStyle(redBorder);
 			errorInfo = true;
@@ -315,7 +313,7 @@ public class AddLibraryView {
 		
 		if (!onlineLibraryCheck.isSelected() && (country.isEmpty() || street.isEmpty() || houseNumber.isEmpty() || postalCodeSingle.isEmpty())) {
 			
-			errorLabel.setText("Missing some information!");
+			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
 
 			if (country.isEmpty()) {
@@ -355,7 +353,7 @@ public class AddLibraryView {
 		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
 			firstNameField.setStyle(redBorder);
 			if (!errorInfo) {
-				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
 			}
 			
@@ -367,7 +365,7 @@ public class AddLibraryView {
 			houseNumberField.setStyle(redBorder);
 			
 			if (!errorInfo) {
-				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);	
 			}
 			
@@ -380,7 +378,7 @@ public class AddLibraryView {
 			phoneNumberField.setStyle(redBorder);
 			
 			if (!errorInfo) {
-				errorLabel.setText("Verify that you have entered the correct information.");
+				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);	
 			}
 			
@@ -421,25 +419,17 @@ public class AddLibraryView {
 			
 	    	if(!isInterrupted && isReached) {
 	    		
-	    		Alert alert = new Alert(AlertType.INFORMATION);
-	    		alert.setTitle("Information Dialog");
-	    		alert.setHeaderText(null);
-	    		alert.setContentText("Library successfully added!");
-	    		
-	    		alert.initModality(Modality.APPLICATION_MODAL);
-	    		alert.initOwner((Stage) ViewProvider.getView("primaryStage"));  
-	    		
-	    		alert.showAndWait();
+	    		AlertWindowOpen.openWindow("Library successfully added!");
 	    		
 	    		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
 	    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
 	    		
 	    	} else if (isInterrupted) {
-	    		errorLabel.setText("Something went wrong!");
+	    		errorLabel.setText(ErrorLabelMessage.getSomething());
 	    		errorLabel.setVisible(true);
 	    		
 	    	} else {
-	    		errorLabel.setText("Couldn't reach database!");
+	    		errorLabel.setText(ErrorLabelMessage.getFailReach());
 	    		errorLabel.setVisible(true);
 	    	}
 		}

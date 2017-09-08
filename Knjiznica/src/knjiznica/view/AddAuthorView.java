@@ -1,22 +1,19 @@
 package knjiznica.view;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import knjiznica.model.AddAuthorToDatabase;
+import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.CheckInputLetters;
+import knjiznica.model.ErrorLabelMessage;
 import knjiznica.model.ViewProvider;
 
 public class AddAuthorView {
@@ -147,14 +144,14 @@ public class AddAuthorView {
 		if (firstName.isEmpty()) {
 			firstNameField.setStyle(redBorder);
 			showMiss = true;
-			errorLabelMiss.setText("Missing information");
+			errorLabelMiss.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabelMiss.setVisible(true);
 		}
 		
 		if (lastName.isEmpty()) {
 			lastNameField.setStyle(redBorder);
 			showMiss = true;
-			errorLabelMiss.setText("Missing information");
+			errorLabelMiss.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabelMiss.setVisible(true);
 		}
 		
@@ -163,7 +160,7 @@ public class AddAuthorView {
 			firstNameField.setStyle(redBorder);
 			
 			showMiss = true;
-			errorLabelMiss.setText("Verify that you have entered the correct information.");
+			errorLabelMiss.setText(ErrorLabelMessage.getWrongFormat());
 			errorLabelMiss.setVisible(true);
 			
 		}
@@ -174,7 +171,7 @@ public class AddAuthorView {
 			
 			if (!showMiss) {
 				showMiss = true;
-				errorLabelMiss.setText("Verify that you have entered the correct information.");
+				errorLabelMiss.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabelMiss.setVisible(true);
 			}
 			
@@ -186,7 +183,7 @@ public class AddAuthorView {
 			
 			if (!showMiss) {
 				showMiss = true;
-				errorLabelMiss.setText("Verify that you have entered the correct information.");
+				errorLabelMiss.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabelMiss.setVisible(true);
 			}
 			
@@ -251,24 +248,16 @@ public class AddAuthorView {
 			
 	    	if (!isInterrupted && isReached) { 
 	    		
-	    		Alert alert = new Alert(AlertType.INFORMATION);
-	    		alert.setTitle("Information Dialog");
-	    		alert.setHeaderText(null);
-	    		alert.setContentText("Author successfully added!");
-	    		
-	    		alert.initModality(Modality.APPLICATION_MODAL);
-	    		alert.initOwner((Stage) ViewProvider.getView("primaryStage"));  
-	    		
-	    		alert.showAndWait();
+	    		AlertWindowOpen.openWindow("Author successfully added!");
 	    		
 	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
 		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
 	    		
 	    	} else if (isInterrupted) {
-	    		errorLabelMiss.setText("Something went wrong!");
+	    		errorLabelMiss.setText(ErrorLabelMessage.getSomething());
 	    		errorLabelMiss.setVisible(true);
 	    	} else {
-	    		errorLabelMiss.setText("Couldn't reach database!");
+	    		errorLabelMiss.setText(ErrorLabelMessage.getFailReach());
 	    		errorLabelMiss.setVisible(true);
 	    	}
 		}
