@@ -35,7 +35,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" />
                           </columnConstraints>
                           <rowConstraints>
-                              <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
