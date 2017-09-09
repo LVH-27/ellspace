@@ -1,5 +1,7 @@
 package knjiznica.view;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import knjiznica.model.GlobalCollection;
+import knjiznica.model.SelectUsers;
 import knjiznica.model.User;
 
 public class ListUsersView {
@@ -42,8 +45,9 @@ public class ListUsersView {
 	
 	public <T> void initialize() {
 		
-		for (int i = 0; i < 30; ++i) {
-			GlobalCollection.getList().add(new User(i, "Luka", "", "Mesaric", "Croatia", 10000, "Ilica", "10a", "019827"));
+		ArrayList<User> users = SelectUsers.select();
+		for (int i = 0; i < users.size(); ++i) {
+			GlobalCollection.getList().add(users.get(i));
 		}
 		
 		tableUserList.setItems(GlobalCollection.getList());
