@@ -40,7 +40,7 @@ public class LoginThread implements Runnable {
 			t.join();
 		} catch (InterruptedException e) {
 			LoginView.isCorrect = false;
-			System.out.println("Something went wrong!");
+			System.out.println(ErrorLabelMessage.getFailReach());
 		}
 	}
 	

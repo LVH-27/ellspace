@@ -125,7 +125,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                  <children>
-                                    <CheckBox fx:id="isAliveCheck" contentDisplay="CENTER" mnemonicParsing="false" />
+                                    <CheckBox fx:id="isAliveCheck" contentDisplay="CENTER" mnemonicParsing="false" onAction="#disableYearOfDeath" />
                                     <Label fx:id="errorLabelTooMuch" text="You may only use one" textFill="RED" visible="false" />
                                  </children>
                                  <GridPane.margin>

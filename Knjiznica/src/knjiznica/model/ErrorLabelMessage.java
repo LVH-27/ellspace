@@ -6,7 +6,7 @@ public class ErrorLabelMessage {
 	
 	private static String wrongFormat = "Verify that you have entered the correct information.";
 	
-	private static String failReach = "Couldn't reach database!";
+	private static String failReach = "Could not reach database!";
 	
 	private static String something = "Something went wrong!";
 

@@ -200,7 +200,7 @@ public class AddAuthorView {
 			
 		}
 		
-		if (!death) {
+		if (!death && !isAliveCheck.isSelected()) {
 			
 			yearOfDeathField.setStyle(redBorder);
 			
@@ -208,19 +208,6 @@ public class AddAuthorView {
 				showTooMuch = true;
 				errorLabelTooMuch.setText("Please enter death year\n"
 						+ "in 4 digits (e.g. 1973).");
-				errorLabelTooMuch.setVisible(true);
-			}
-			
-		}
-		
-		if (isAlive && !yearOfDeath.isEmpty()) {
-			
-			isAliveCheck.setStyle(redBorder);
-			yearOfDeathField.setStyle(redBorder);
-			
-			if (!showTooMuch) {
-				showTooMuch = true;
-				errorLabelTooMuch.setText("You may only use one.");
 				errorLabelTooMuch.setVisible(true);
 			}
 			
@@ -242,6 +229,14 @@ public class AddAuthorView {
 		
 		if (!showMiss && !showTooMuch) {
 			
+			if (isAliveCheck.isSelected() || yearOfDeath.isEmpty()) {
+    			yearOfDeath = null;
+    		}
+			
+			if (yearOfBirth.isEmpty()) {
+				yearOfBirth = null;
+			}
+			
 			AddAuthorToDatabase.addAuthor(firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);
 			errorLabelMiss.setVisible(false);
 			errorLabelTooMuch.setVisible(false);
@@ -260,6 +255,16 @@ public class AddAuthorView {
 	    		errorLabelMiss.setText(ErrorLabelMessage.getFailReach());
 	    		errorLabelMiss.setVisible(true);
 	    	}
+		}
+	}
+	
+	@FXML
+	public void disableYearOfDeath() {
+		if (isAliveCheck.isSelected()) {
+			yearOfDeathField.setStyle("");
+			yearOfDeathField.setDisable(true);
+		} else {
+			yearOfDeathField.setDisable(false);
 		}
 	}
 	

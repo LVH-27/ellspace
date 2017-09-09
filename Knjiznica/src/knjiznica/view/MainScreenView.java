@@ -25,6 +25,7 @@ public class MainScreenView {
 		BorderPane startScreen = (BorderPane) FXMLLoader.load(
     			getClass().getResource("StartScreen-view.fxml"));
     	ViewProvider.setView("startScreen", startScreen);
+    	ViewProvider.setView("homeButton", homeButton);
     	mainScreen.setCenter(startScreen);
 	}
 	
