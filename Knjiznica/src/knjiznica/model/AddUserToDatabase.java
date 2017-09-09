@@ -36,6 +36,7 @@ public class AddUserToDatabase implements Runnable{
 		
 		PreparedStatement pstmtAddress = null;
 		PreparedStatement pstmtUser = null;
+		PreparedStatement pstmtLocation = null;
 		
 		try {
 			Connection con = DriverManager.getConnection(
@@ -60,9 +61,9 @@ public class AddUserToDatabase implements Runnable{
 				}
 			}
 			
-			String queryUser = "INSERT INTO public.\"User\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)";
+			String queryUser = "INSERT INTO public.\"User\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?) RETURNING \"User\".\"UserID\"";
 			
-			pstmtUser = con.prepareStatement(queryUser);
+			pstmtUser = con.prepareStatement(queryUser, new String[]{"User.UserID"});
 			
 			pstmtUser.setString(1, firstName);
 			pstmtUser.setString(2, middleName);
@@ -71,7 +72,23 @@ public class AddUserToDatabase implements Runnable{
 			pstmtUser.setString(5, phoneNumber);
 			pstmtUser.setString(6, email);
 			
-			pstmtUser.executeUpdate();
+			String userID = null;
+			
+			int j = pstmtUser.executeUpdate();
+			if (j > 0) {
+				ResultSet rs = pstmtUser.getGeneratedKeys();
+				while (rs.next()) {
+					userID = rs.getString(1);
+				}
+			}
+			
+			String queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, null, ?)";
+			
+			pstmtLocation = con.prepareStatement(queryLocation);
+			
+			pstmtLocation.setInt(1, 2);
+			pstmtLocation.setInt(2, Integer.parseInt(userID));
+			pstmtLocation.executeUpdate();
 			
 		} catch (PSQLException e) {
 			AddUserView.isReached = false;

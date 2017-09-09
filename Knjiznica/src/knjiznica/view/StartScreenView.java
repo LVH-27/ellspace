@@ -102,16 +102,5 @@ public class StartScreenView {
 		BorderPane eventLog = (BorderPane) ViewProvider.getView("eventLog");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(eventLog);
 	}
-	
-	//TODO Delete after using elsewhere.
-	
-	/*startScreenPane.setId("booklist");
-	tabBookList.setId("booklist");
-	tabAddBook.setId("addBookTab");
-	tableBookList.setItems(GlobalCollection.getList());
-	titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-	authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
-	titleCol.prefWidthProperty().bind(tableBookList.widthProperty().divide(2));
-	authorCol.prefWidthProperty().bind(tableBookList.widthProperty().divide(2));*/
 
 }

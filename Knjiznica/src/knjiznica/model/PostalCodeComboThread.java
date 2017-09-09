@@ -14,22 +14,28 @@ public class PostalCodeComboThread implements Runnable {
 		case "postalCodeComboAddBook":
 			try {
 				((ComboBox<String>) ViewProvider.getView(which)).getItems().addAll((ArrayList<String>) PostalCodeCombo.getData().get(0));
+				break;
 			} catch (SQLException e) {
 				e.printStackTrace();
+				break;
 			}
 		
 		case "postalCodeComboAddUser":
 			try {
 				((ComboBox<String>) ViewProvider.getView(which)).getItems().addAll((ArrayList<String>) PostalCodeCombo.getData().get(0));
+				break;
 			} catch (SQLException e) {
 				e.printStackTrace();
+				break;
 			}
 			
 		case "postalCodeComboAddLibrary":
 			try {
 				((ComboBox<String>) ViewProvider.getView(which)).getItems().addAll((ArrayList<String>) PostalCodeCombo.getData().get(0));
+				break;
 			} catch (SQLException e) {
 				e.printStackTrace();
+				break;
 			}
 		}
 	}
