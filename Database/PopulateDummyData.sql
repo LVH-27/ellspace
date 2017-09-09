@@ -10,7 +10,7 @@ INSERT INTO "Address" VALUES(8, 'Croatia', '52444', 'Maksimirska', '14');
 INSERT INTO "Library" VALUES(1, 'Knjižnica Vladimira Nazora', 1, '+38516352970', NULL, 'Uđite na stražnja vrata.');
 INSERT INTO "Library" VALUES(2, 'Knjižnica Petra Preradovića', 2, '01/2960-558', 'petra.preradovica@knjiznice.hr', NULL);
 INSERT INTO "Library" VALUES(3, 'Knjižnica Boško Buha', 8, '+385915480622', 'bosko.buha@libraries.com', 'Na Božić nećemo raditi.');
-INSERT INTO "Library" VALUES(4, 'Online knjižnica Evolucija tehnologije', NULL '+38523631974', 'evolucija-tehnologije@online-knjiznica.com', 'Dostavljamo na vaše zadovoljstvo i trošak.');
+INSERT INTO "Library" VALUES(4, 'Online knjižnica Evolucija tehnologije', NULL, '+38523631974', 'evolucija-tehnologije@online-knjiznica.com', 'Dostavljamo na vaše zadovoljstvo i trošak.');
 
 INSERT INTO "Location" VALUES(DEFAULT, 1, 1, NULL);
 INSERT INTO "Location" VALUES(DEFAULT, 1, 2, NULL);
