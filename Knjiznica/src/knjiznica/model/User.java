@@ -1,6 +1,9 @@
 package knjiznica.model;
 
 public class User {
+	
+	private int ID;
+
 	private String firstName;
 	
 	private String middleName;
@@ -17,7 +20,8 @@ public class User {
 	
 	private String phoneNumber;
 	
-	public User(String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber) {
+	public User(Integer ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber) {
+		this.ID = ID;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -90,6 +94,14 @@ public class User {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 	
 }

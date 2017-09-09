@@ -1,9 +1,13 @@
 package knjiznica.view;
 
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import knjiznica.model.GlobalCollection;
 import knjiznica.model.User;
 
@@ -36,13 +40,13 @@ public class ListUsersView {
 	@FXML
 	private TableColumn<User, String> phoneNumberCol;
 	
-	public void initialize() {
+	public <T> void initialize() {
 		
 		for(int i = 0; i < 30; ++i) {
-			GlobalCollection.getList().add(new User("Luka", "", "Mesaric", "Croatia", 10000, "Dugi dol", "13", "019827"));
+			GlobalCollection.getList().add(new User(i, "Luka", "", "Mesaric", "Croatia", 10000, "Dugi dol", "13", "019827"));
 		}
-		
 		tableUserList.setItems(GlobalCollection.getList());
+		
 		firstNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
 		middleNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("middleName"));
 		lastNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
@@ -52,6 +56,21 @@ public class ListUsersView {
 		houseNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("houseNumber"));
 		phoneNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("phoneNumber"));
 		
+		tableUserList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount()>1) {
+					@SuppressWarnings("rawtypes")
+					ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
+					for( TablePosition< T, ? > cell : cells ) {
+					   System.out.println(GlobalCollection.getList().get(cell.getRow()).getID());
+					}
+				}
+			}
+			
+		});
 		
 	}
 }
