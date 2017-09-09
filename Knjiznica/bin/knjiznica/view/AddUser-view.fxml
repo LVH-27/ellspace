@@ -139,7 +139,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <TextField fx:id="streetField" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                              <TextField fx:id="streetField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -152,7 +152,7 @@
                                     <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="houseNumberField" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                              <TextField fx:id="houseNumberField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>

@@ -37,6 +37,7 @@ public class AddLibraryToDatabase implements Runnable{
 		PreparedStatement pstmtAddress = null;
 		PreparedStatement pstmtLibrary = null;
 		PreparedStatement pstmtBusiness = null;
+		PreparedStatement pstmtLocation = null;
 		String libraryID = null;
 		
 		try {
@@ -123,6 +124,14 @@ public class AddLibraryToDatabase implements Runnable{
 				
 				pstmtBusiness.executeUpdate();
 			}
+			
+			String queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, ?, null)";
+			
+			pstmtLocation = con.prepareStatement(queryLocation);
+			
+			pstmtLocation.setInt(1, 1);
+			pstmtLocation.setInt(2, Integer.parseInt(libraryID));
+			pstmtLocation.executeUpdate();
 			
 		} catch (PSQLException e) {
 			AddLibraryView.isReached = false;
