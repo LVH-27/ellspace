@@ -1268,9 +1268,9 @@ INSERT INTO "City" VALUES(53294, 'Lun');
 INSERT INTO "City" VALUES(53296, 'Zubovići');
 
 
-INSERT INTO "EventTypeList" VALUES(DEFAULT, 'Borrow');
-INSERT INTO "EventTypeList" VALUES(DEFAULT, 'Return');
-INSERT INTO "EventTypeList" VALUES(DEFAULT, 'Transfer');
+INSERT INTO "EventTypeList" VALUES(1, 'Borrow');
+INSERT INTO "EventTypeList" VALUES(2, 'Return');
+INSERT INTO "EventTypeList" VALUES(3, 'Transfer');
 
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Unknown');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Other');
@@ -1297,7 +1297,7 @@ INSERT INTO "LanguageList" VALUES(DEFAULT, 'Other');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hrvatski');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Engleski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Njemačkiki');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Njemački');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Srpski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Češki');
@@ -1331,6 +1331,6 @@ INSERT INTO "LanguageList" VALUES(DEFAULT, 'Arapski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hindski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Pandžapski');
 
-INSERT INTO "LocationList" VALUES(DEFAULT, 'Library');
-INSERT INTO "LocationList" VALUES(DEFAULT, 'User');
+INSERT INTO "LocationList" VALUES(1, 'Library');
+INSERT INTO "LocationList" VALUES(2, 'User');
 

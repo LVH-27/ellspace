@@ -1,2 +1,2 @@
-INSERT INTO "LocationList" VALUES(DEFAULT, 'Library');
-INSERT INTO "LocationList" VALUES(DEFAULT, 'User');
+INSERT INTO "LocationList" VALUES(1, 'Library');
+INSERT INTO "LocationList" VALUES(2, 'User');

@@ -4,7 +4,7 @@ INSERT INTO "LanguageList" VALUES(DEFAULT, 'Other');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hrvatski');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Engleski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Njemačkiki');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Njemački');
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Srpski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Češki');

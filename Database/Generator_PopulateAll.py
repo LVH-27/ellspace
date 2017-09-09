@@ -36,5 +36,6 @@ def main():
 
 
 main()
+end = input('Press Enter to end.')
 
 

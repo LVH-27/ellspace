@@ -1,3 +1,3 @@
-INSERT INTO "EventTypeList" VALUES(DEFAULT, 'Borrow');
-INSERT INTO "EventTypeList" VALUES(DEFAULT, 'Return');
-INSERT INTO "EventTypeList" VALUES(DEFAULT, 'Transfer');
+INSERT INTO "EventTypeList" VALUES(1, 'Borrow');
+INSERT INTO "EventTypeList" VALUES(2, 'Return');
+INSERT INTO "EventTypeList" VALUES(3, 'Transfer');
