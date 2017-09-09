@@ -54,10 +54,9 @@ public class AddAuthorView {
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	private boolean isAlive;
 	private String yearOfBirth;
 	private String yearOfDeath;
-
+	private boolean isAlive;
 	
 	public void initialize() {
 		
@@ -74,10 +73,8 @@ public class AddAuthorView {
 	
 	@FXML 
 	private void activateBack() throws IOException {
-		
 		BorderPane startScreenView = (BorderPane) ViewProvider.getView("startScreen");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(startScreenView);
-		
 	}
 	
 	@FXML
@@ -102,10 +99,10 @@ public class AddAuthorView {
 		yearOfBirth = yearOfBirth.trim();
 		yearOfDeath = yearOfDeath.trim();
 		
-		firstNameField.setStyle("");
-		middleNameField.setStyle("");
-		lastNameField.setStyle("");
-		isAliveCheck.setStyle("");
+		firstNameField.  setStyle("");
+		middleNameField. setStyle("");
+		lastNameField.   setStyle("");
+		isAliveCheck.    setStyle("");
 		yearOfBirthField.setStyle("");
 		yearOfDeathField.setStyle("");
 		
@@ -115,10 +112,10 @@ public class AddAuthorView {
 		try {
 			Integer.parseInt(yearOfBirth);
 			
-		}catch(Exception e) {
+		} catch(Exception e) {
 			birth = false;
 			
-		}finally{
+		} finally {
 			if (yearOfBirth.isEmpty()) {
 				birth = true;
 			}
@@ -127,10 +124,10 @@ public class AddAuthorView {
 		try {
 			Integer.parseInt(yearOfDeath);
 			
-		}catch(Exception e) {
+		} catch(Exception e) {
 			death = false;
 			
-		}finally{
+		} finally {
 			if (yearOfDeath.isEmpty()) {
 				death = true;
 			}
@@ -224,7 +221,6 @@ public class AddAuthorView {
 						+ "larger than year of death.");
 				errorLabelTooMuch.setVisible(true);
 			}
-			
 		}
 		
 		if (!showMiss && !showTooMuch) {
@@ -267,5 +263,4 @@ public class AddAuthorView {
 			yearOfDeathField.setDisable(false);
 		}
 	}
-	
 }

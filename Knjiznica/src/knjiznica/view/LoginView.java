@@ -12,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import knjiznica.model.LoginThread;
 import knjiznica.model.ViewProvider;
 
-
 public class LoginView {
 	
 	@FXML
@@ -31,7 +30,6 @@ public class LoginView {
 	private BorderPane localRoot;
 	
 	public static boolean isCorrect = true;
-	
 	public static String username;
 	public static String password;
 	
@@ -46,12 +44,11 @@ public class LoginView {
 		password = passwordText.getText();
 		
 		LoginThread.login();
-		//TODO Remove isCorrect = true;
-		// REMOVE !!!!
+		
+		//TODO Remove comment "isCorrect = true";
 		//isCorrect = true;
-		// REMOVE !!!
 
-		if(isCorrect) {
+		if (isCorrect) {
 			errorLabel.setVisible(false);
 			
 			MainView root = (MainView) ViewProvider.getView("main");	
@@ -59,8 +56,7 @@ public class LoginView {
 			Image backgroundImage = new Image(getClass().getResourceAsStream("../resources/booklist-background.jpg"));
 			root.setBackground(backgroundImage);	
 			
-			BorderPane mainScreen = (BorderPane) FXMLLoader.load(
-        			getClass().getResource("MainScreen-view.fxml"));
+			BorderPane mainScreen = (BorderPane) FXMLLoader.load(getClass().getResource("MainScreen-view.fxml"));
 			root.setBorderPane(mainScreen);
         	
         	ViewProvider.setView("mainScreen", mainScreen);
@@ -70,15 +66,7 @@ public class LoginView {
 			errorLabel.setText("Username or password is incorrect. Please try again.");
 			errorLabel.setVisible(true);
 			passwordText.setText("");
-			
 		}
-		
-//		System.out.println(username + '\t' + password);
-//		System.out.println(Strings.getPassword());
-		
-        //progress bar?
-        
-		//error za no internet?  SQLTimeoutException?
-		
+		//TODO SQLTimeoutException ?
 	}
 }

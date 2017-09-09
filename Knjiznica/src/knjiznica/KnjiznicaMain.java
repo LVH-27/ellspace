@@ -15,8 +15,8 @@ public class KnjiznicaMain extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		
 		try {
-
 			Group root = (Group) FXMLLoader.load(
 					getClass().getResource("view/Main-view.fxml"));
 			
@@ -40,15 +40,8 @@ public class KnjiznicaMain extends Application {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-//		InitializeBooks();
+		}		
 	}
-	
-//	public void InitializeBooks(){
-//		Book book = new Book("AAA", "BBB");
-//		GlobalCollection.getList().add(book);
-//	}
 	
 	public static void main(String[] args) {
 		launch(args);

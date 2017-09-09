@@ -23,8 +23,6 @@ import knjiznica.model.FormattingName;
 import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
 
-
-
 public class AddLibraryView {
 	
 	@FXML
@@ -235,8 +233,8 @@ public class AddLibraryView {
 	
 	@FXML
 	private void activateBack() throws IOException {
-		BorderPane usersPopup = (BorderPane) ViewProvider.getView("usersPopup");
-		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(usersPopup);
+		BorderPane clientsMenu = (BorderPane) ViewProvider.getView("clientsMenu");
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(clientsMenu);
 	}
 	
 	@FXML
@@ -246,14 +244,14 @@ public class AddLibraryView {
 		isReached = true;
 		final String redBorder ="-fx-border-color: #ff0000;\n";
 		
-		firstNameField.setStyle("");
+		firstNameField.  setStyle("");
 		phoneNumberField.setStyle("");
-		emailField.setStyle("");
+		emailField.      setStyle("");
 		informationField.setStyle("");
-		countryField.setStyle("");
-		streetField.setStyle("");
+		countryField.    setStyle("");
+		streetField.     setStyle("");
 		houseNumberField.setStyle("");
-		postalCodeCombo.setStyle("");
+		postalCodeCombo. setStyle("");
 		
 		errorLabel.setVisible(false);
 		errorLabelTime.setVisible(false);
@@ -277,22 +275,22 @@ public class AddLibraryView {
 		street = street.trim();
 		houseNumber = houseNumber.trim();
 		
-		checkBoxList = new ArrayList<CheckBox>();
+		checkBoxList  = new ArrayList<CheckBox>();
 		beginTimeList = new ArrayList<TextField>();
-		endTimeList = new ArrayList<TextField>();
+		endTimeList   = new ArrayList<TextField>();
 		
 		beginTime = new ArrayList<String>();
-		endTime = new ArrayList<String>();
+		endTime   = new ArrayList<String>();
 		
 		boolean errorInfo = false;
 		
-		 //TODO DOUBLED EMAIL NOT UNIQUE
+		 //TODO Check if email is already in use (UNIQUE constraint)
 		 
 		checkBoxList.add(check1); checkBoxList.add(check2); checkBoxList.add(check3); checkBoxList.add(check4); checkBoxList.add(check5); checkBoxList.add(check6); checkBoxList.add(check7);
 		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
 		endTimeList.add(end1); endTimeList.add(end2); endTimeList.add(end3); endTimeList.add(end4); endTimeList.add(end5); endTimeList.add(end6); endTimeList.add(end7);
 		
-		for(int i = 0; i < beginTimeList.size(); ++i) {
+		for (int i = 0; i < beginTimeList.size(); ++i) {
 			beginTimeList.get(i).setStyle("");
 			endTimeList.get(i).setStyle("");
 		}
@@ -328,7 +326,6 @@ public class AddLibraryView {
 			if (postalCodeSingle.isEmpty()) {
 				postalCodeCombo.setStyle(redBorder);
 			}
-			
 			errorInfo = true;
 		}
 			
@@ -345,7 +342,7 @@ public class AddLibraryView {
 		}
 		
 		int postalCodeInt;
-		try{
+		try {
 			postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 		} catch (Exception e) {
 			postalCodeInt = 0;
@@ -370,7 +367,6 @@ public class AddLibraryView {
 			}
 			
 			errorInfo = true;
-			
 		}
 		
 		if (phoneNumber.length() > 20) {
@@ -410,6 +406,7 @@ public class AddLibraryView {
 				endTime.add("00:00");
 			}
 		}
+		
 		if (check && !errorInfo) {
 			
 			errorLabel.setVisible(false); 
@@ -448,7 +445,6 @@ public class AddLibraryView {
 			
 		} else if (timeSplit[0].length() > 2 || timeSplit[0].length() < 1 || timeSplit[1].length() != 2) {
 			return false;
-			
 		}
 		
 		boolean check = true;

@@ -17,33 +17,19 @@ import knjiznica.view.AddLibraryView;
 public class AddLibraryToDatabase implements Runnable{
 	
 	private static String firstName;
-	
 	private static String phoneNumber;
-	
 	private static String email;
-	
 	private static String information;
-	
 	private static String country;
-	
 	private static String street;
-
 	private static String houseNumber;
-
 	private static int postalCode;
-	
 	private static ArrayList<String> beginTime;
-	
 	private static ArrayList<String> endTime;
-	
 	private static ArrayList<CheckBox> checkBoxList;
-	
 	private static Time timeBegin;
-	
 	private static Time timeEnd;
-	
 	private static boolean onlineLibraryCheck;
-
 	
 	@Override
 	public void run() {
@@ -97,7 +83,7 @@ public class AddLibraryToDatabase implements Runnable{
 					}
 				}
 			
-			}else {
+			} else {
 				String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, null, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
 				
 				pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
@@ -121,7 +107,7 @@ public class AddLibraryToDatabase implements Runnable{
 			
 			pstmtBusiness = con.prepareStatement(queryBusiness);
 			
-			for(int j = 0; j < 7; ++j) {
+			for (int j = 0; j < 7; ++j) {
 				timeBegin = java.sql.Time.valueOf(beginTime.get(j) + ":00");
 				timeEnd = java.sql.Time.valueOf(endTime.get(j) + ":00");
 				
@@ -129,7 +115,7 @@ public class AddLibraryToDatabase implements Runnable{
 				pstmtBusiness.setInt(2, j + 1);
 				if (checkBoxList.get(j).isSelected()) {
 					pstmtBusiness.setBoolean(3, false);
-				}else {
+				} else {
 					pstmtBusiness.setBoolean(3, true);
 				}
 				pstmtBusiness.setTime(4, timeBegin);
@@ -142,11 +128,8 @@ public class AddLibraryToDatabase implements Runnable{
 			AddLibraryView.isReached = false;
 			
 		} catch (SQLException e) {
-			AddLibraryView.isReached = false;
-			
+			AddLibraryView.isReached = false;	
 		}
-
-		
 	}
 	
 	public static void addLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn, boolean onlineLibraryCheckIn) {

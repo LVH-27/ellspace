@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="startScreen" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.StartScreenView">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.StartScreenView">
    <center>
       <HBox alignment="CENTER">
          <children>
@@ -18,7 +18,7 @@
                   <Insets />
                </HBox.margin>
                <children>
-                  <BorderPane fx:id="startScreenPopup" BorderPane.alignment="CENTER">
+                  <BorderPane BorderPane.alignment="CENTER">
                      <center>
                         <GridPane id="defaultBackgroundField" alignment="CENTER" hgap="10.0" stylesheets="@../resources/BackgroundStyle.css" vgap="10.0">
                           <columnConstraints>
@@ -36,7 +36,7 @@
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="users" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateUsersPopup" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1">
+                              <Button fx:id="clients" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateClientsMenu" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>

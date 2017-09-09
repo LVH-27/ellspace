@@ -89,8 +89,8 @@ public class AddUserView {
 	
 	@FXML
 	private void activateBack() throws IOException {
-		BorderPane usersPopup = (BorderPane) ViewProvider.getView("usersPopup");
-		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(usersPopup);
+		BorderPane clientsMenu = (BorderPane) ViewProvider.getView("clientsMenu");
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(clientsMenu);
 	}
 	
 	@FXML
