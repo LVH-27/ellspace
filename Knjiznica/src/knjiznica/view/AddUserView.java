@@ -168,19 +168,7 @@ public class AddUserView {
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
 			
-		} if (street.isEmpty()) {
-			check = false;
-			streetField.setStyle(redBorder);
-			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
-			errorLabel.setVisible(true);
-			
-		} if (houseNumber.isEmpty()) {
-			check = false;
-			houseNumberField.setStyle(redBorder);
-			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
-			errorLabel.setVisible(true);
-			
-		}
+		} 
 		
 		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
 			check = false;
@@ -239,14 +227,22 @@ public class AddUserView {
 		
 		if (check) {
 			
+			if (street.isEmpty()) {
+				street = null;
+				
+			} if (houseNumber.isEmpty()) {
+				houseNumber = null;
+				
+			}
+			
 			postalCode = postalCodeSingle.getSelectedItem();
 			firstName = FormattingName.format(firstName);
 			lastName = FormattingName.format(lastName);
 			
 			if (middleName.isEmpty()) {
 				middleName = null;
-			}
-			else {
+				
+			} else {
 				middleName = FormattingName.format(middleName);
 			}
 			

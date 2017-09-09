@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 public class GlobalCollection {
 	
-	private static ObservableList<Book> l;
+	private static ObservableList<User> l;
 	
 	static {
 		l = FXCollections.observableArrayList();
@@ -15,7 +15,7 @@ public class GlobalCollection {
 		 
 	}
 
-	public static ObservableList<Book> getList() {
+	public static ObservableList<User> getList() {
 		return l;
 	}
 }
