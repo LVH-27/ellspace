@@ -33,7 +33,6 @@ public class LoginView {
 	public static boolean isCorrect = true;
 	
 	public static String username;
-	
 	public static String password;
 	
 	public void initialize() {
@@ -47,7 +46,7 @@ public class LoginView {
 		password = passwordText.getText();
 		
 		LoginThread.login();
-		
+		//TODO Remove isCorrect = true;
 		// REMOVE !!!!
 		//isCorrect = true;
 		// REMOVE !!!
@@ -65,18 +64,15 @@ public class LoginView {
 			root.setBorderPane(mainScreen);
         	
         	ViewProvider.setView("mainScreen", mainScreen);
-        	
-        	
 		}
+		
 		else {
 			errorLabel.setText("Username or password is incorrect. Please try again.");
 			errorLabel.setVisible(true);
 			passwordText.setText("");
 			
 		}
-
-        	
-        
+		
 //		System.out.println(username + '\t' + password);
 //		System.out.println(Strings.getPassword());
 		
@@ -85,5 +81,4 @@ public class LoginView {
 		//error za no internet?  SQLTimeoutException?
 		
 	}
-	
 }
