@@ -42,17 +42,18 @@ public class ListUsersView {
 	
 	public <T> void initialize() {
 		
-		for(int i = 0; i < 30; ++i) {
-			GlobalCollection.getList().add(new User(i, "Luka", "", "Mesaric", "Croatia", 10000, "Dugi dol", "13", "019827"));
+		for (int i = 0; i < 30; ++i) {
+			GlobalCollection.getList().add(new User(i, "Luka", "", "Mesaric", "Croatia", 10000, "Ilica", "10a", "019827"));
 		}
+		
 		tableUserList.setItems(GlobalCollection.getList());
 		
-		firstNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
-		middleNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("middleName"));
-		lastNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
-		countryCol.setCellValueFactory(new PropertyValueFactory<User, String>("country"));
-		postalCodeCol.setCellValueFactory(new PropertyValueFactory<User, Integer>("postalCode"));
-		streetCol.setCellValueFactory(new PropertyValueFactory<User, String>("street"));
+		firstNameCol.  setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
+		middleNameCol. setCellValueFactory(new PropertyValueFactory<User, String>("middleName"));
+		lastNameCol.   setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
+		countryCol.    setCellValueFactory(new PropertyValueFactory<User, String>("country"));
+		postalCodeCol. setCellValueFactory(new PropertyValueFactory<User, Integer>("postalCode"));
+		streetCol.     setCellValueFactory(new PropertyValueFactory<User, String>("street"));
 		houseNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("houseNumber"));
 		phoneNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("phoneNumber"));
 		
@@ -61,16 +62,14 @@ public class ListUsersView {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(MouseEvent event) {
-				if (event.getClickCount()>1) {
+				if (event.getClickCount() > 1) {
 					@SuppressWarnings("rawtypes")
 					ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
-					for( TablePosition< T, ? > cell : cells ) {
+					for (TablePosition<T, ?> cell : cells) {
 					   System.out.println(GlobalCollection.getList().get(cell.getRow()).getID());
 					}
 				}
 			}
-			
 		});
-		
 	}
 }
