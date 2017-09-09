@@ -14,8 +14,14 @@ public class GlobalCollection {
 	private GlobalCollection() {
 		 
 	}
-
+	
+	public static void emptyList() {
+		l = FXCollections.observableArrayList();
+		
+	}
+	
 	public static ObservableList<User> getList() {
 		return l;
+		
 	}
 }

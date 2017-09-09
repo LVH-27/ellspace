@@ -46,6 +46,9 @@ public class ListUsersView {
 	public <T> void initialize() {
 		
 		ArrayList<User> users = SelectUsers.select();
+		
+		GlobalCollection.emptyList();
+		
 		for (int i = 0; i < users.size(); ++i) {
 			GlobalCollection.getList().add(users.get(i));
 		}
