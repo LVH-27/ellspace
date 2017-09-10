@@ -6,6 +6,8 @@ INSERT INTO "Address" VALUES(5, 'Croatia', '31000', NULL, NULL);
 INSERT INTO "Address" VALUES(6, 'Croatia', '31511', 'Petrova', '52c');
 INSERT INTO "Address" VALUES(7, 'Croatia', '42205', 'Ilica', NULL);
 INSERT INTO "Address" VALUES(8, 'Croatia', '52444', 'Maksimirska', '14');
+INSERT INTO "Address" VALUES(9, 'Croatia', '10020', 'Ilica', '18');
+INSERT INTO "Address" VALUES(10, 'Croatia', '10040', 'Maksimirska', '12');
 
 INSERT INTO "Library" VALUES(1, 'Knjižnica Vladimira Nazora', 1, '+38516352970', NULL, 'Uđite na stražnja vrata.');
 INSERT INTO "Library" VALUES(2, 'Knjižnica Petra Preradovića', 2, '01/2960-558', 'petra.preradovica@knjiznice.hr', NULL);
@@ -51,9 +53,9 @@ INSERT INTO "BusinessHours" VALUES(4, 7, FALSE, '00:00:00', '23:59:00');
 
 INSERT INTO "User" VALUES(1, 'Jurica', 'Petar', 'Paterović', 5, NULL, 'jurica-petar.pater@gmail.com');
 INSERT INTO "User" VALUES(2, 'Chuck', NULL, 'Norris', 4, '095/7162-666', 'gmail@chuck-norris.com');
-INSERT INTO "User" VALUES(3, 'Matea', NULL, 'Kalašić', NULL, '+38523973367', 'matea-kalasic@fer.hr');
+INSERT INTO "User" VALUES(3, 'Matea', NULL, 'Kalašić', 9, '+38523973367', 'matea-kalasic@fer.hr');
 INSERT INTO "User" VALUES(4, 'Željko', NULL, 'Kerum', 3, '021/7777-777', 'zeljko.kerum@gradonacelnik-svijeta.hr');
-INSERT INTO "User" VALUES(5, 'Ana', 'Marija', 'Anastazović', NULL, NULL, 'ana-marija.anastazovic@yahoo.com');
+INSERT INTO "User" VALUES(5, 'Ana', 'Marija', 'Anastazović', 10, NULL, 'ana-marija.anastazovic@yahoo.com');
 
 INSERT INTO "Location" VALUES(DEFAULT, 2, NULL, 1);
 INSERT INTO "Location" VALUES(DEFAULT, 2, NULL, 2);

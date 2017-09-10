@@ -28,18 +28,36 @@ public class SelectUsers implements Runnable {
 			
 			ResultSet rs = stmt.executeQuery(query);
 			
+			String middleName = "-";
+			
+			String street = "-";
+			
+			String houseNumber = "-";
+			
+			String phoneNumber = "-";
+			
 			while (rs.next()) {
-				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), rs.getString("MiddleName"), rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), rs.getString("Street"), rs.getString("HouseNumber"), rs.getString("PhoneNumber")));
+				
+				middleName = "-";
+				street = "-";
+				houseNumber = "-";
+				phoneNumber = "-";
+				
+				if(rs.getString("MiddleName") != null) {
+					middleName = rs.getString("MiddleName");
+				}
+				if(rs.getString("Street") != null) {
+					street = rs.getString("Street");
+				}
+				if(rs.getString("HouseNumber") != null) {
+					houseNumber = rs.getString("HouseNumber");
+				}
+				if(rs.getString("PhoneNumber") != null) {
+					phoneNumber = rs.getString("PhoneNumber");
+				}
+				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), street, houseNumber, phoneNumber));
 			}
 			
-			query = "SELECT * FROM public.\"User\" WHERE \"User\".\"AddressID\" IS NULL";
-			stmt = con.createStatement();
-			
-			rs = stmt.executeQuery(query);
-			
-			while (rs.next()) {
-				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), rs.getString("MiddleName"), rs.getString("LastName"), "", 0, "", "", rs.getString("PhoneNumber")));
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
