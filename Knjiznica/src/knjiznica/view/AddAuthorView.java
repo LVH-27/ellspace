@@ -48,8 +48,10 @@ public class AddAuthorView {
 	@FXML
 	private Label errorLabelTooMuch;
 	
+	public static boolean checkIndeterminate;
+	
 	public static boolean isInterrupted = false;
-	public static boolean isReached = true;
+	public static boolean isReached = true; 
 	
 	private String firstName;
 	private String middleName;
@@ -80,6 +82,8 @@ public class AddAuthorView {
 	@FXML
 	private void activateAdd() throws IOException {
 		
+		checkIndeterminate = false;
+		
 		isInterrupted = false;
 		isReached = true;
 		
@@ -90,6 +94,12 @@ public class AddAuthorView {
 		middleName = middleNameField.getText();
 		lastName = lastNameField.getText();
 		isAlive = isAliveCheck.isSelected();
+		if(!isAlive) {
+			isAlive = isAliveCheck.isIndeterminate();
+			if(isAlive) {
+				checkIndeterminate = true;
+			}
+		}
 		yearOfBirth = yearOfBirthField.getText();
 		yearOfDeath = yearOfDeathField.getText();
 		
@@ -197,7 +207,7 @@ public class AddAuthorView {
 			
 		}
 		
-		if (!death && !isAliveCheck.isSelected()) {
+		if (!death && !isAliveCheck.isSelected() && !isAliveCheck.isIndeterminate()) {
 			
 			yearOfDeathField.setStyle(redBorder);
 			
@@ -225,7 +235,7 @@ public class AddAuthorView {
 		
 		if (!showMiss && !showTooMuch) {
 			
-			if (isAliveCheck.isSelected() || yearOfDeath.isEmpty()) {
+			if (isAliveCheck.isSelected() || isAliveCheck.isIndeterminate() || yearOfDeath.isEmpty()) {
     			yearOfDeath = null;
     		}
 			
@@ -256,7 +266,7 @@ public class AddAuthorView {
 	
 	@FXML
 	public void disableYearOfDeath() {
-		if (isAliveCheck.isSelected()) {
+		if (isAliveCheck.isSelected() || isAliveCheck.isIndeterminate()) {
 			yearOfDeathField.setStyle("");
 			yearOfDeathField.setDisable(true);
 		} else {
