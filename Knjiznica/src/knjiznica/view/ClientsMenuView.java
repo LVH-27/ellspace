@@ -27,7 +27,7 @@ public class ClientsMenuView {
 	
 	public void initialize() {
 		
-		addUserButton.      setId("transparentButton");
+		addUserButton.      setId("transparentButton"); 
 		listUsersButton.    setId("transparentButton");
 		addLibraryButton.   setId("transparentButton");
 		listLibrariesButton.setId("transparentButton");
@@ -47,7 +47,6 @@ public class ClientsMenuView {
 	
 	@FXML
 	private void activateAddUser() throws IOException {
-		GlobalCollection.setUser(null);
 		BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
 	}

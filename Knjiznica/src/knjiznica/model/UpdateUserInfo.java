@@ -64,7 +64,7 @@ private static String firstName;
 			pstmtUser.setString(1, firstName);
 			pstmtUser.setString(2, middleName);
 			pstmtUser.setString(3, lastName);
-			pstmtUser.setString(4, phoneNumber);
+			pstmtUser.setString(4, phoneNumber); 
 			pstmtUser.setString(5, email);
 			pstmtUser.setInt(6, userID);
 			pstmtUser.executeUpdate();

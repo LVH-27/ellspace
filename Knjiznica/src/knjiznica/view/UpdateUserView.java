@@ -65,21 +65,21 @@ public class UpdateUserView {
 	
 	public static boolean isEditable;
 	
-	public static User user = null;
+	public static User user;
 	
 	public static boolean isInterrupted = false;
 	public static boolean isReached = true;
 	
 	private String nameCombo = "postalCodeComboAddUser";
-	private String firstName;
-	private String middleName;
-	private String lastName;
-	private String email;
-	private String phoneNumber;
-	private String country;
-	private String street;
-	private String houseNumber;
-	private String postalCode;
+	private String firstName = "";
+	private String middleName = "";
+	private String lastName = "";
+	private String email = "";
+	private String phoneNumber = "";
+	private String country = "";
+	private String street = "";
+	private String houseNumber = "";
+	private String postalCode = "";
 	private SingleSelectionModel<String> postalCodeSingle;
 	private boolean check;
 	
@@ -88,7 +88,7 @@ public class UpdateUserView {
 		isEditable = GlobalCollection.isEditable();
 		user = GlobalCollection.getUser();
 		
-		ViewProvider.setView(nameCombo, postalCodeCombo);
+		ViewProvider.setView(nameCombo, postalCodeCombo); 
 		PostalCodeComboThread.setComboData(nameCombo);
 		
 		if (!isEditable) {
@@ -131,7 +131,7 @@ public class UpdateUserView {
 		
 		firstNameField.setText(user.getFirstName());
 		
-		if (user.getMiddleName() != "-") {
+		if (user.getMiddleName() != "-" && user.getMiddleName() != null) {
 			middleNameField.setText(user.getMiddleName());
 		} else {
 			middleNameField.setText("");
@@ -140,7 +140,7 @@ public class UpdateUserView {
 		lastNameField.setText(user.getLastName());
 		emailField.setText(user.getEmail());
 		
-		if (user.getPhoneNumber() != "-") {
+		if (user.getPhoneNumber() != "-" && user.getPhoneNumber() != null) {
 			phoneNumberField.setText(user.getPhoneNumber());
 		} else {
 			phoneNumberField.setText("");
@@ -148,13 +148,13 @@ public class UpdateUserView {
 		
 		countryField.setText(user.getCountry());
 		
-		if (user.getStreet() != "-") {
+		if (user.getStreet() != "-" && user.getStreet() != null) {
 			streetField.setText(user.getStreet());
 		} else {
 			streetField.setText("");
 		}
 		
-		if (user.getHouseNumber() != "-") {
+		if (user.getHouseNumber() != "-" && user.getHouseNumber() != null) {
 			houseNumberField.setText(user.getHouseNumber());
 		} else {
 			houseNumberField.setText("");
@@ -349,7 +349,6 @@ public class UpdateUserView {
 			GlobalCollection.getUser().setStreet(street);
 			GlobalCollection.getUser().setHouseNumber(houseNumber);
 			
-			GlobalCollection.setEditable(true);
 			UpdateUserInfo.updateUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber, user.getAddressID(), user.getID());
 			
 			

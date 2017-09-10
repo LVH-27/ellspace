@@ -55,7 +55,7 @@ public class ListUsersView {
 	
 	public void initialize() {
 		
-		ArrayList<User> users = SelectUsers.select();
+		ArrayList<User> users = SelectUsers.select(); 
 		
 		GlobalCollection.emptyList();
 		

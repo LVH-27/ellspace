@@ -20,7 +20,7 @@ import knjiznica.model.FormattingName;
 import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.ViewProvider;
 
-public class AddUserView {
+public class AddUserView { 
 	
 	@FXML
 	private TextField firstNameField;
