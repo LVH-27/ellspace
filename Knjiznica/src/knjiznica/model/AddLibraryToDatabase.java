@@ -38,11 +38,13 @@ public class AddLibraryToDatabase implements Runnable{
 		PreparedStatement pstmtLibrary = null;
 		PreparedStatement pstmtBusiness = null;
 		PreparedStatement pstmtLocation = null;
-		String libraryID = null;
+		String libraryID = null; 
 		
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
+			
+			String addressID = null;
 			
 			if (!onlineLibraryCheck) {
 				String queryAddress = "INSERT INTO public.\"Address\" VALUES(DEFAULT, ?, ?, ?, ?) RETURNING \"Address\".\"AddressID\"";
@@ -54,8 +56,6 @@ public class AddLibraryToDatabase implements Runnable{
 				pstmtAddress.setString(3, street);
 				pstmtAddress.setString(4, houseNumber);
 				
-				String addressID = null;
-				
 				int i = pstmtAddress.executeUpdate();
 				
 				if (i > 0) {
@@ -64,45 +64,31 @@ public class AddLibraryToDatabase implements Runnable{
 						addressID = rs.getString(1);
 					}
 				}
-							
-				String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, ?, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
-				
-				pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
-				
-				pstmtLibrary.setString(1, firstName);
-				pstmtLibrary.setInt(2, Integer.parseInt(addressID));
-				pstmtLibrary.setString(3, phoneNumber);
-				pstmtLibrary.setString(4, email);
-				pstmtLibrary.setString(5, information);
-				
-				i = pstmtLibrary.executeUpdate();
 			
-				if (i > 0) {
-					ResultSet rs = pstmtLibrary.getGeneratedKeys();
-					while (rs.next()) {
-						libraryID = rs.getString(1);
-					}
-				}
+			}
+			String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, ?, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
 			
+			pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
+			
+			pstmtLibrary.setString(1, firstName);
+			if (addressID == null) {
+				pstmtLibrary.setNull(2, java.sql.Types.INTEGER);
 			} else {
-				String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, null, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
-				
-				pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
-				
-				pstmtLibrary.setString(1, firstName);
-				pstmtLibrary.setString(2, phoneNumber);
-				pstmtLibrary.setString(3, email);
-				pstmtLibrary.setString(4, information);
-				
-				int i = pstmtLibrary.executeUpdate();
+				pstmtLibrary.setInt(2, Integer.parseInt(addressID));
+			}
+			pstmtLibrary.setString(3, phoneNumber);
+			pstmtLibrary.setString(4, email);
+			pstmtLibrary.setString(5, information);
 			
-				if (i > 0) {
-					ResultSet rs = pstmtLibrary.getGeneratedKeys();
-					while (rs.next()) { 
-						libraryID = rs.getString(1);
-					}
+			int i = pstmtLibrary.executeUpdate();
+		
+			if (i > 0) {
+				ResultSet rs = pstmtLibrary.getGeneratedKeys();
+				while (rs.next()) { 
+					libraryID = rs.getString(1);
 				}
 			}
+			
 			
 			String queryBusiness = "INSERT INTO public.\"BusinessHours\" VALUES(?, ?, ?, ?, ?)";
 			
@@ -122,7 +108,7 @@ public class AddLibraryToDatabase implements Runnable{
 				pstmtBusiness.setTime(4, timeBegin);
 				pstmtBusiness.setTime(5, timeEnd);
 				
-				pstmtBusiness.executeUpdate();
+				pstmtBusiness.executeUpdate(); 
 			}
 			
 			String queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, ?, null)";

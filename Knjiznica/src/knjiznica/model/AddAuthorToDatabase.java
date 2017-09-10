@@ -26,7 +26,7 @@ public class AddAuthorToDatabase implements Runnable{
 	@Override
 	public void run() {
 		
-		PreparedStatement pstmtAuthor = null;
+		PreparedStatement pstmtAuthor = null; 
 		
 		try {
 			Connection con = DriverManager.getConnection(
@@ -49,7 +49,11 @@ public class AddAuthorToDatabase implements Runnable{
 			pstmtAuthor.setString(1, firstName);
 			pstmtAuthor.setString(2, middleName);
 			pstmtAuthor.setString(3, lastName);
-			pstmtAuthor.setBoolean(4, isAlive);
+			if(!AddAuthorView.checkIndeterminate) {
+				pstmtAuthor.setBoolean(4, isAlive);
+			} else {
+				pstmtAuthor.setNull(4, java.sql.Types.BOOLEAN);
+			}
 			pstmtAuthor.setString(5, yearOfBirth);
 			pstmtAuthor.setString(6, yearOfDeath);
 			

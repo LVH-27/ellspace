@@ -40,7 +40,7 @@ public class SelectUsers implements Runnable {
 				
 				middleName = "-";
 				street = "-";
-				houseNumber = "-";
+				houseNumber = "-"; 
 				phoneNumber = "-";
 				
 				if(rs.getString("MiddleName") != null) {
@@ -55,7 +55,8 @@ public class SelectUsers implements Runnable {
 				if(rs.getString("PhoneNumber") != null) {
 					phoneNumber = rs.getString("PhoneNumber");
 				}
-				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), street, houseNumber, phoneNumber));
+				
+				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), street, houseNumber, phoneNumber, rs.getString("Email")));
 			}
 			
 			
