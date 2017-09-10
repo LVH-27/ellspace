@@ -43,6 +43,9 @@ public class ListUsersView {
 	@FXML
 	private TableColumn<User, String> phoneNumberCol;
 	
+	@FXML
+	private TableColumn<User, String> emailCol;
+	
 	public void initialize() {
 		
 		ArrayList<User> users = SelectUsers.select();
@@ -53,28 +56,30 @@ public class ListUsersView {
 				
 			GlobalCollection.getList().add(users.get(i));
 			
-		}
+		} 
 		
-		tableUserList.setItems(GlobalCollection.getList());
-		firstNameCol.  setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
-		firstNameCol.setStyle("-fx-alignment: CENTER;");
-		middleNameCol. setCellValueFactory(new PropertyValueFactory<User, String>("middleName"));
-		middleNameCol.setStyle("-fx-alignment: CENTER;");
-		lastNameCol.   setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
-		lastNameCol.setStyle("-fx-alignment: CENTER;");
-		countryCol.    setCellValueFactory(new PropertyValueFactory<User, String>("country"));
-		countryCol.setStyle("-fx-alignment: CENTER;");
-		postalCodeCol. setCellValueFactory(new PropertyValueFactory<User, Integer>("postalCode"));
-		postalCodeCol.setStyle("-fx-alignment: CENTER;");
-		streetCol.     setCellValueFactory(new PropertyValueFactory<User, String>("street"));
-		streetCol.setStyle("-fx-alignment: CENTER;");
-		houseNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("houseNumber"));
-		houseNumberCol.setStyle("-fx-alignment: CENTER;");
-		phoneNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("phoneNumber"));
-		phoneNumberCol.setStyle("-fx-alignment: CENTER;");
+		tableUserList.  setItems(GlobalCollection.getList());
+		firstNameCol.   setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
+		firstNameCol.   setStyle("-fx-alignment: CENTER;");
+		middleNameCol.  setCellValueFactory(new PropertyValueFactory<User, String>("middleName"));
+		middleNameCol.  setStyle("-fx-alignment: CENTER;");
+		lastNameCol.    setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
+		lastNameCol.    setStyle("-fx-alignment: CENTER;");
+		countryCol.     setCellValueFactory(new PropertyValueFactory<User, String>("country"));
+		countryCol.     setStyle("-fx-alignment: CENTER;");
+		postalCodeCol.  setCellValueFactory(new PropertyValueFactory<User, Integer>("postalCode"));
+		postalCodeCol.  setStyle("-fx-alignment: CENTER;");
+		streetCol.      setCellValueFactory(new PropertyValueFactory<User, String>("street"));
+		streetCol.      setStyle("-fx-alignment: CENTER;");
+		houseNumberCol. setCellValueFactory(new PropertyValueFactory<User, String>("houseNumber"));
+		houseNumberCol. setStyle("-fx-alignment: CENTER;");
+		phoneNumberCol. setCellValueFactory(new PropertyValueFactory<User, String>("phoneNumber")); 
+		phoneNumberCol. setStyle("-fx-alignment: CENTER;");
+		emailCol.       setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+		emailCol.       setStyle("-fx-alignment: CENTER;");
 		
 		tableUserList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+ 
 			//@SuppressWarnings("unchecked")
 			@Override
 			public void handle(MouseEvent event) {

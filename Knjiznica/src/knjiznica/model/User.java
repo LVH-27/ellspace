@@ -20,18 +20,21 @@ public class User {
 	
 	private String phoneNumber;
 	
-	public User(Integer ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber) {
+	private String email;
+	
+	public User(Integer ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber, String email) {
 		this.ID = ID;
 		this.firstName = firstName;
-		this.middleName = middleName;
+		this.middleName = middleName; 
 		this.lastName = lastName;
 		this.country = country;
 		this.postalCode = postalCode;
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.phoneNumber = phoneNumber;
+		this.email = email;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -102,6 +105,14 @@ public class User {
 
 	public void setID(int iD) {
 		ID = iD;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }
