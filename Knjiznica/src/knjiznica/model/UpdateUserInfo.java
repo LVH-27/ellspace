@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
 import knjiznica.resources.ConnectionData;
 import knjiznica.view.AddUserView;
+import knjiznica.view.UpdateUserView;
 
 public class UpdateUserInfo implements Runnable {
 private static String firstName;
@@ -40,20 +41,20 @@ private static String firstName;
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
-			System.out.println("0");
+		
 			String queryAddress = "UPDATE public.\"Address\" "
 					+ "SET \"Country\"=?, \"PostalCode\"=?, \"Street\"=?, \"HouseNumber\"=? " 
 					+ "WHERE \"AddressID\"=?;";
-			System.out.println("0");
+			
 			pstmtAddress = con.prepareStatement(queryAddress);
-			System.out.println("0");
+		
 			pstmtAddress.setString(1, country);
 			pstmtAddress.setInt(2, postalCode);
 			pstmtAddress.setString(3, street);
 			pstmtAddress.setString(4, houseNumber);
 			pstmtAddress.setInt(5, addressID);
 			pstmtAddress.executeUpdate();
-			System.out.println("1");
+			
 			String queryUser = "UPDATE public.\"User\" " 
 					+ "SET \"FirstName\"=?, \"MiddleName\"=?, \"LastName\"=?, \"PhoneNumber\"=?, \"Email\"=?" 
 					+ "WHERE \"UserID\"=?";
@@ -67,14 +68,12 @@ private static String firstName;
 			pstmtUser.setString(5, email);
 			pstmtUser.setInt(6, userID);
 			pstmtUser.executeUpdate();
-			System.out.println("2");
+			
 		} catch (PSQLException e) {
-			e.printStackTrace();
-			AddUserView.isReached = false;
+			UpdateUserView.isReached = false;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			AddUserView.isReached = false;
+			UpdateUserView.isReached = false;
 			
 		}
 	}
