@@ -1,18 +1,22 @@
 package knjiznica.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import knjiznica.model.GlobalCollection;
 import knjiznica.model.SelectUsers;
 import knjiznica.model.User;
+import knjiznica.model.ViewProvider;
 
 public class ListUsersView {
 	
@@ -84,16 +88,24 @@ public class ListUsersView {
 		emailCol.       setStyle("-fx-alignment: CENTER;");
 		
 		tableUserList.setOnMouseClicked(new EventHandler<MouseEvent>() {
- 
-			//@SuppressWarnings("unchecked")
+
 			@Override
 			public void handle(MouseEvent event) {
 				if (event.getClickCount() > 1) {
 					@SuppressWarnings("rawtypes")
 					ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
-					for (TablePosition<?, ?> cell : cells) {
-					   System.out.println(GlobalCollection.getList().get(cell.getRow()).getID());
+					GlobalCollection.setUser(GlobalCollection.getList().get(cells.get(0).getRow()));
+					GlobalCollection.setEditable(false);
+					BorderPane updateUser;
+					try {
+						updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
+						((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+						
 					}
+			    	
 				}
 			}
 		});

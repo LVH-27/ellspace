@@ -24,7 +24,9 @@ public class User {
 	
 	private String city;
 	
-	public User(Integer ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber, String email, String city) {
+	private int addressID;
+	
+	public User(int ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber, String email, String city, Integer addressID) {
 		this.ID = ID;
 		this.firstName = firstName;
 		this.middleName = middleName; 
@@ -36,6 +38,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.city = city;
+		this.addressID = addressID;
 	}
 
 	public String getFirstName() {
@@ -124,6 +127,14 @@ public class User {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public int getAddressID() {
+		return addressID;
+	}
+
+	public void setAddressID(int addressID) {
+		this.addressID = addressID;
 	}
 	
 }

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.UpdateUserView">
+   <center>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css">
+                     <center>
+                        <GridPane alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="4">
+                                 <children>
+                                    <Label fx:id="errorLabel" text="Missing Information" textFill="RED" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="firstNameField" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label alignment="CENTER" text="First Name" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="middleNameField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label text="Middle Name" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="lastNameField" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label text="Last Name">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></Label>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                              <TextField fx:id="emailField" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="4">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="RIGHT" text="Email">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                              <TextField fx:id="phoneNumberField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="5">
+                                 <children>
+                                    <Label text="Phone Number" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                              <TextField fx:id="countryField" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label text="Country">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="streetField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label text="Street" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                              <TextField fx:id="houseNumberField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label text="House Number" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                              <HBox alignment="CENTER" GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                                 <children>
+                                    <ComboBox fx:id="postalCodeCombo" prefWidth="150.0" promptText="Choose Postal Code" />
+                                 </children>
+                              </HBox>
+                              <HBox GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Button fx:id="backButton" cancelButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="addButton" defaultButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateUpdate" prefHeight="80.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" right="20.0" />
+                           </padding>
+                        </GridPane>
+                     </center>
+                     <top>
+                        <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Update User">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="50.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
