@@ -32,6 +32,9 @@ public class ListUsersView {
 	private TableColumn<User, String> countryCol;
 	
 	@FXML
+	private TableColumn<User, String> cityCol;
+	
+	@FXML
 	private TableColumn<User, Integer> postalCodeCol;
 	
 	@FXML
@@ -67,6 +70,8 @@ public class ListUsersView {
 		lastNameCol.    setStyle("-fx-alignment: CENTER;");
 		countryCol.     setCellValueFactory(new PropertyValueFactory<User, String>("country"));
 		countryCol.     setStyle("-fx-alignment: CENTER;");
+		cityCol.        setCellValueFactory(new PropertyValueFactory<User, String>("city"));
+		cityCol.        setStyle("-fx-alignment: CENTER;");
 		postalCodeCol.  setCellValueFactory(new PropertyValueFactory<User, Integer>("postalCode"));
 		postalCodeCol.  setStyle("-fx-alignment: CENTER;");
 		streetCol.      setCellValueFactory(new PropertyValueFactory<User, String>("street"));

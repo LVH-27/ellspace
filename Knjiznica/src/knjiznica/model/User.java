@@ -22,7 +22,9 @@ public class User {
 	
 	private String email;
 	
-	public User(Integer ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber, String email) {
+	private String city;
+	
+	public User(Integer ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber, String email, String city) {
 		this.ID = ID;
 		this.firstName = firstName;
 		this.middleName = middleName; 
@@ -33,6 +35,7 @@ public class User {
 		this.houseNumber = houseNumber;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.city = city;
 	}
 
 	public String getFirstName() {
@@ -113,6 +116,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 }

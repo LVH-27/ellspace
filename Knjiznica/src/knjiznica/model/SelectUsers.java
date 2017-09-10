@@ -22,12 +22,12 @@ public class SelectUsers implements Runnable {
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
-			String query = "SELECT * FROM public.\"User\" JOIN public.\"Address\" ON \"User\".\"AddressID\" = \"Address\".\"AddressID\"";
+			String query = "SELECT * FROM public.\"User\" JOIN public.\"Address\" ON \"User\".\"AddressID\" = \"Address\".\"AddressID\" JOIN public.\"City\" ON \"Address\".\"PostalCode\" = \"City\".\"PostalCode\"";
 			
 			stmt = con.createStatement();
 			
 			ResultSet rs = stmt.executeQuery(query);
-			
+
 			String middleName = "-";
 			
 			String street = "-";
@@ -56,7 +56,7 @@ public class SelectUsers implements Runnable {
 					phoneNumber = rs.getString("PhoneNumber");
 				}
 				
-				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), street, houseNumber, phoneNumber, rs.getString("Email")));
+				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), street, houseNumber, phoneNumber, rs.getString("Email"), rs.getString("Name")));
 			}
 			
 			

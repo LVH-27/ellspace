@@ -36,7 +36,8 @@
                 <TableColumn fx:id="firstNameCol" minWidth="85.0" prefWidth="85.0" text="First Name" />
                 <TableColumn fx:id="middleNameCol" minWidth="85.0" prefWidth="85.0" text="Middle Name" />
                   <TableColumn fx:id="lastNameCol" minWidth="85.0" prefWidth="85.0" text="Last Name" />
-                  <TableColumn fx:id="countryCol" minWidth="70.0" prefWidth="70.0" text="Country" />
+                  <TableColumn fx:id="countryCol" minWidth="90.0" prefWidth="90.0" text="Country" />
+                  <TableColumn fx:id="cityCol" minWidth="90.0" prefWidth="90.0" text="City" />
                   <TableColumn fx:id="postalCodeCol" minWidth="80.0" text="Postal Code" />
                   <TableColumn fx:id="streetCol" minWidth="90.0" prefWidth="90.0" text="Street" />
                   <TableColumn fx:id="houseNumberCol" minWidth="90.0" prefWidth="90.0" text="House Number" />
