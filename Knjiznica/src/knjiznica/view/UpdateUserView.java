@@ -1,7 +1,8 @@
 package knjiznica.view;
 
 import java.io.IOException;
-
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -12,16 +13,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import knjiznica.model.AddUserToDatabase;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.ErrorLabelMessage;
 import knjiznica.model.FormattingName;
+import knjiznica.model.GlobalCollection;
 import knjiznica.model.PostalCodeComboThread;
+import knjiznica.model.UpdateUserInfo;
+import knjiznica.model.User;
 import knjiznica.model.ViewProvider;
 
-public class AddUserView {
-	
+
+public class UpdateUserView {
+
+		
 	@FXML
 	private TextField firstNameField;
 	
@@ -58,6 +63,10 @@ public class AddUserView {
 	@FXML
 	private Label errorLabel;
 	
+	public static boolean isEditable;
+	
+	public static User user = null;
+	
 	public static boolean isInterrupted = false;
 	public static boolean isReached = true;
 	
@@ -70,32 +79,108 @@ public class AddUserView {
 	private String country;
 	private String street;
 	private String houseNumber;
-	String postalCode;
+	private String postalCode;
 	private SingleSelectionModel<String> postalCodeSingle;
 	private boolean check;
 	
 	public void initialize() {
-		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
-		addButton.setGraphic(new ImageView(imageAddButton));
-		addButton.setId("transparentButton");
+		
+		isEditable = GlobalCollection.isEditable();
+		user = GlobalCollection.getUser();
+		
+		ViewProvider.setView(nameCombo, postalCodeCombo);
+		PostalCodeComboThread.setComboData(nameCombo);
+		
+		if (!isEditable) {
+			firstNameField.setEditable(false);
+			middleNameField.setEditable(false);
+			lastNameField.setEditable(false);
+			emailField.setEditable(false);
+			phoneNumberField.setEditable(false);
+			countryField.setEditable(false);
+			streetField.setEditable(false);
+			houseNumberField.setEditable(false);
+			postalCodeCombo.setDisable(true);
+			postalCodeCombo.setStyle("-fx-opacity: 1;");
+			
+			Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/edit-button.png"));
+			addButton.setGraphic(new ImageView(imageAddButton));
+			addButton.setId("transparentButton");
+			addButton.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			    	GlobalCollection.setEditable(true);
+			    	BorderPane updateUser;
+					try {
+						updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
+						((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
+						
+					} catch (IOException e1) {
+						e1.printStackTrace();
+						
+					}
+					
+			    }
+			});
+			
+		} else {
+			Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/editAccept-button.png"));
+			addButton.setGraphic(new ImageView(imageAddButton));
+			addButton.setId("transparentButton");
+		}
+		
+		
+		firstNameField.setText(user.getFirstName());
+		
+		if (user.getMiddleName() != "-") {
+			middleNameField.setText(user.getMiddleName());
+		} else {
+			middleNameField.setText("");
+		}
+		
+		lastNameField.setText(user.getLastName());
+		emailField.setText(user.getEmail());
+		
+		if (user.getPhoneNumber() != "-") {
+			phoneNumberField.setText(user.getPhoneNumber());
+		} else {
+			phoneNumberField.setText("");
+		}
+		
+		countryField.setText(user.getCountry());
+		
+		if (user.getStreet() != "-") {
+			streetField.setText(user.getStreet());
+		} else {
+			streetField.setText("");
+		}
+		
+		if (user.getHouseNumber() != "-") {
+			houseNumberField.setText(user.getHouseNumber());
+		} else {
+			houseNumberField.setText("");
+		}
+		
+		postalCodeCombo.getSelectionModel().select(Integer.toString(user.getPostalCode()) + " - " + user.getCity());
 		
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
 		
-		ViewProvider.setView(nameCombo, postalCodeCombo);
-		PostalCodeComboThread.setComboData(nameCombo);
+		
 	}
 	
 	@FXML
 	private void activateBack() throws IOException {
-		BorderPane clientsMenu = (BorderPane) ViewProvider.getView("clientsMenu");
-		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(clientsMenu);
+		GlobalCollection.setEditable(true);
+		
+		BorderPane listUsers = (BorderPane) FXMLLoader.load(getClass().getResource("ListUsers-view.fxml"));
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listUsers);
+
 	}
 	
 	@FXML
-	private void activateAdd() throws IOException {
-		
+	private void activateUpdate() throws IOException {
+
 		isInterrupted = false;
 		isReached = true;
 		
@@ -253,15 +338,26 @@ public class AddUserView {
 			errorLabel.setVisible(false);
 			
 			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+					
+			GlobalCollection.getUser().setFirstName(firstName);
+			GlobalCollection.getUser().setMiddleName(middleName);
+			GlobalCollection.getUser().setLastName(lastName);
+			GlobalCollection.getUser().setEmail(email);
+			GlobalCollection.getUser().setPhoneNumber(phoneNumber);
+			GlobalCollection.getUser().setCountry(country);
+			GlobalCollection.getUser().setPostalCode(postalCodeInt);
+			GlobalCollection.getUser().setStreet(street);
+			GlobalCollection.getUser().setHouseNumber(houseNumber);
 			
-			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
+			GlobalCollection.setEditable(true);
+			UpdateUserInfo.updateUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber, user.getAddressID(), user.getID());
+			
 			
 			if(!isInterrupted && isReached) {
-				
-				AlertWindowOpen.openWindow("User successfully added!");
-	    		
-				BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
-		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
+				AlertWindowOpen.openWindow("User successfully updated!");
+	    		GlobalCollection.setEditable(false);
+				BorderPane updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
+		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
 		    	
 			} else if (isInterrupted) {
 				errorLabel.setText(ErrorLabelMessage.getSomething());
@@ -273,8 +369,7 @@ public class AddUserView {
 				
 			}
 			
-		}
-			
+		}	
 		
 	}
 }
