@@ -13,6 +13,6 @@ INSERT INTO "GenreList" VALUES(DEFAULT, 'Esej');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Putopis');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Basna');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Bajka');
-INSERT INTO "GenreList" VALUES(DEFAULT, 'Životopis');
+INSERT INTO "GenreList" VALUES(DEFAULT, 'Biografija');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Udžbenik');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Enciklopedija');

@@ -3,7 +3,7 @@ CREATE TABLE "User" (
 	"FirstName" TEXT NOT NULL,
 	"MiddleName" TEXT,
 	"LastName" TEXT NOT NULL,
-	"AddressID" int,
+	"AddressID" int NOT NULL,
 	"PhoneNumber" varchar(20),
 	"Email" varchar(254) NOT NULL UNIQUE,
 	CONSTRAINT User_pk PRIMARY KEY ("UserID")

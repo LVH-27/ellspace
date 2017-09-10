@@ -3,7 +3,7 @@ CREATE TABLE "User" (
 	"FirstName" TEXT NOT NULL,
 	"MiddleName" TEXT,
 	"LastName" TEXT NOT NULL,
-	"AddressID" int,
+	"AddressID" int NOT NULL,
 	"PhoneNumber" varchar(20),
 	"Email" varchar(254) NOT NULL UNIQUE,
 	CONSTRAINT User_pk PRIMARY KEY ("UserID")
@@ -1272,6 +1272,7 @@ INSERT INTO "EventTypeList" VALUES(1, 'Borrow');
 INSERT INTO "EventTypeList" VALUES(2, 'Return');
 INSERT INTO "EventTypeList" VALUES(3, 'Transfer');
 
+
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Unknown');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Other');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Komedija');
@@ -1287,9 +1288,10 @@ INSERT INTO "GenreList" VALUES(DEFAULT, 'Esej');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Putopis');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Basna');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Bajka');
-INSERT INTO "GenreList" VALUES(DEFAULT, 'Životopis');
+INSERT INTO "GenreList" VALUES(DEFAULT, 'Biografija');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Udžbenik');
 INSERT INTO "GenreList" VALUES(DEFAULT, 'Enciklopedija');
+
 
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Unknown');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Other');
@@ -1331,6 +1333,8 @@ INSERT INTO "LanguageList" VALUES(DEFAULT, 'Arapski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hindski');
 INSERT INTO "LanguageList" VALUES(DEFAULT, 'Pandžapski');
 
+
 INSERT INTO "LocationList" VALUES(1, 'Library');
 INSERT INTO "LocationList" VALUES(2, 'User');
+
 

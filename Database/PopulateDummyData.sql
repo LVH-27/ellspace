@@ -8,6 +8,8 @@ INSERT INTO "Address" VALUES(7, 'Croatia', '42205', 'Ilica', NULL);
 INSERT INTO "Address" VALUES(8, 'Croatia', '52444', 'Maksimirska', '14');
 INSERT INTO "Address" VALUES(9, 'Croatia', '10020', 'Ilica', '18');
 INSERT INTO "Address" VALUES(10, 'Croatia', '10040', 'Maksimirska', '12');
+INSERT INTO "Address" VALUES(11, 'Croatia', '10000', 'Masarykova', '28');
+INSERT INTO "Address" VALUES(12, 'Croatia', '10000', 'Trnjanska cesta', '64');
 
 INSERT INTO "Library" VALUES(1, 'Knjižnica Vladimira Nazora', 1, '+38516352970', NULL, 'Uđite na stražnja vrata.');
 INSERT INTO "Library" VALUES(2, 'Knjižnica Petra Preradovića', 2, '01/2960-558', 'petra.preradovica@knjiznice.hr', NULL);
@@ -62,3 +64,48 @@ INSERT INTO "Location" VALUES(DEFAULT, 2, NULL, 2);
 INSERT INTO "Location" VALUES(DEFAULT, 2, NULL, 3);
 INSERT INTO "Location" VALUES(DEFAULT, 2, NULL, 4);
 INSERT INTO "Location" VALUES(DEFAULT, 2, NULL, 5);
+
+INSERT INTO "Publisher" VALUES(1, 'Školska knjiga d.d.', 11);
+INSERT INTO "Publisher" VALUES(2, 'Izvori', 12);
+INSERT INTO "Publisher" VALUES(3, 'Mozaik knjiga', NULL);
+INSERT INTO "Publisher" VALUES(4, 'It Books', NULL);
+
+INSERT INTO "Author" VALUES(1, 'Nevenka', NULL, 'Antončić', TRUE, NULL, NULL);
+INSERT INTO "Author" VALUES(2, 'Eva', NULL, 'Špalj', TRUE, NULL, NULL);
+INSERT INTO "Author" VALUES(3, 'Vladimir', NULL, 'Volenec', TRUE, NULL, NULL);
+INSERT INTO "Author" VALUES(4, 'Carmine', NULL, 'Gallo', NULL, NULL, NULL);
+INSERT INTO "Author" VALUES(5, 'Clifford', 'Alan', 'Pickover', TRUE, '1957', NULL);
+INSERT INTO "Author" VALUES(6, 'Jan', NULL, 'Payne', NULL, NULL, NULL);
+INSERT INTO "Author" VALUES(7, 'Wylie', NULL, 'Overstreet', TRUE, NULL, NULL);
+
+INSERT INTO "IsbnLinks" VALUES('9789530213470', 'Matematika 3', 'I. dio udžbenika za 3. razred prirodoslovno-matematičke gimnazije.');
+INSERT INTO "IsbnLinks" VALUES('9789530618114', 'Steve Jobs tajne njegovih inovacija', NULL);
+INSERT INTO "IsbnLinks" VALUES('9789532033847', 'Strast za matematikom', 'Brojevi, zagonetke, ludilo, religija i potraga za stvarnošću.');
+INSERT INTO "IsbnLinks" VALUES('9789531407250', 'Najbolja knjiga na svijetu', 'Svojevrstna Guinnessova knjiga rekorda.');
+INSERT INTO "IsbnLinks" VALUES('9780062076182', 'The History of the World According to Facebook', NULL);
+
+INSERT INTO "PublisherLinks" VALUES('9789530213470', 1);
+INSERT INTO "PublisherLinks" VALUES('9789530618114', 1);
+INSERT INTO "PublisherLinks" VALUES('9789532033847', 2);
+INSERT INTO "PublisherLinks" VALUES('9789531407250', 3);
+INSERT INTO "PublisherLinks" VALUES('9780062076182', 4);
+
+INSERT INTO "AuthorLinks" VALUES('9789530213470', 1);
+INSERT INTO "AuthorLinks" VALUES('9789530213470', 2);
+INSERT INTO "AuthorLinks" VALUES('9789530213470', 3);
+INSERT INTO "AuthorLinks" VALUES('9789530618114', 4);
+INSERT INTO "AuthorLinks" VALUES('9789532033847', 5);
+INSERT INTO "AuthorLinks" VALUES('9789531407250', 6);
+INSERT INTO "AuthorLinks" VALUES('9780062076182', 7);
+
+INSERT INTO "GenreLinks" VALUES('9789530213470', 17);
+INSERT INTO "GenreLinks" VALUES('9789530618114', 16);
+INSERT INTO "GenreLinks" VALUES('9789532033847', 2);
+INSERT INTO "GenreLinks" VALUES('9789531407250', 18);
+INSERT INTO "GenreLinks" VALUES('9780062076182', 3);
+
+INSERT INTO "LanguageLinks" VALUES('9789530213470', 3);
+INSERT INTO "LanguageLinks" VALUES('9789530618114', 3);
+INSERT INTO "LanguageLinks" VALUES('9789532033847', 3);
+INSERT INTO "LanguageLinks" VALUES('9789531407250', 3);
+INSERT INTO "LanguageLinks" VALUES('9780062076182', 4);
