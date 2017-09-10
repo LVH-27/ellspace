@@ -64,18 +64,20 @@ public class AddLibraryToDatabase implements Runnable{
 						addressID = rs.getString(1);
 					}
 				}
-			
 			}
+			
 			String queryLibrary = "INSERT INTO public.\"Library\" VALUES(DEFAULT, ?, ?, ?, ?, ?) RETURNING \"Library\".\"LibraryID\"";
 			
 			pstmtLibrary = con.prepareStatement(queryLibrary, new String[] {"Library.LibraryID"});
 			
 			pstmtLibrary.setString(1, firstName);
+			
 			if (addressID == null) {
 				pstmtLibrary.setNull(2, java.sql.Types.INTEGER);
 			} else {
 				pstmtLibrary.setInt(2, Integer.parseInt(addressID));
 			}
+			
 			pstmtLibrary.setString(3, phoneNumber);
 			pstmtLibrary.setString(4, email);
 			pstmtLibrary.setString(5, information);
@@ -89,7 +91,6 @@ public class AddLibraryToDatabase implements Runnable{
 				}
 			}
 			
-			
 			String queryBusiness = "INSERT INTO public.\"BusinessHours\" VALUES(?, ?, ?, ?, ?)";
 			
 			pstmtBusiness = con.prepareStatement(queryBusiness);
@@ -100,11 +101,13 @@ public class AddLibraryToDatabase implements Runnable{
 				
 				pstmtBusiness.setInt(1, Integer.parseInt(libraryID));
 				pstmtBusiness.setInt(2, j + 1);
+				
 				if (checkBoxList.get(j).isSelected()) {
 					pstmtBusiness.setBoolean(3, false);
 				} else {
 					pstmtBusiness.setBoolean(3, true);
 				}
+				
 				pstmtBusiness.setTime(4, timeBegin);
 				pstmtBusiness.setTime(5, timeEnd);
 				
@@ -117,6 +120,7 @@ public class AddLibraryToDatabase implements Runnable{
 			
 			pstmtLocation.setInt(1, 1);
 			pstmtLocation.setInt(2, Integer.parseInt(libraryID));
+			
 			pstmtLocation.executeUpdate();
 			
 		} catch (PSQLException e) {

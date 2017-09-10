@@ -32,16 +32,16 @@ public class ClientsMenuView {
 		addLibraryButton.   setId("transparentButton");
 		listLibrariesButton.setId("transparentButton");
 		
-		//TODO Find images (names specified) and uncomment 6 lines below.
+		//TODO Find images (names specified) and uncomment 4 lines below.
 		
 		Image imageAddUser       = new Image(getClass().getResourceAsStream("../resources/addUser-button.png"));
 //		Image imageListUsers     = new Image(getClass().getResourceAsStream("../resources/listUsers-button.png"));
-//		Image imageAddLibrary    = new Image(getClass().getResourceAsStream("../resources/addLibrary-button.png"));
+		Image imageAddLibrary    = new Image(getClass().getResourceAsStream("../resources/addLibrary-button.png"));
 //		Image imageListLibraries = new Image(getClass().getResourceAsStream("../resources/listLibraries-button.png"));
 
 		addUserButton.      setGraphic(new ImageView(imageAddUser));
 //		listUsersButton.    setGraphic(new ImageView(imageListUsers));
-//		addLibraryButton.   setGraphic(new ImageView(imageAddLibrary));
+		addLibraryButton.   setGraphic(new ImageView(imageAddLibrary));
 //		listLibrariesButton.setGraphic(new ImageView(imageListLibraries));
 	}
 	

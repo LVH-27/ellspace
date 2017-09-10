@@ -87,25 +87,27 @@ public class AddAuthorView {
 		isInterrupted = false;
 		isReached = true;
 		
-		errorLabelMiss.setVisible(false);
+		errorLabelMiss.   setVisible(false);
 		errorLabelTooMuch.setVisible(false);
 		
-		firstName = firstNameField.getText();
+		firstName  = firstNameField. getText();
 		middleName = middleNameField.getText();
-		lastName = lastNameField.getText();
-		isAlive = isAliveCheck.isSelected();
-		if(!isAlive) {
+		lastName   = lastNameField.  getText();
+		isAlive    = isAliveCheck.   isSelected();
+		
+		if (!isAlive) {
 			isAlive = isAliveCheck.isIndeterminate();
-			if(isAlive) {
+			if (isAlive) {
 				checkIndeterminate = true;
 			}
 		}
+		
 		yearOfBirth = yearOfBirthField.getText();
 		yearOfDeath = yearOfDeathField.getText();
 		
-		firstName = firstName.trim();
-		middleName = middleName.trim();
-		lastName = lastName.trim();
+		firstName   = firstName.  trim();
+		middleName  = middleName. trim();
+		lastName    = lastName.   trim();
 		yearOfBirth = yearOfBirth.trim();
 		yearOfDeath = yearOfDeath.trim();
 		
@@ -146,7 +148,7 @@ public class AddAuthorView {
 		boolean showMiss = false;
 		boolean showTooMuch = false;
 		
-		final String redBorder ="-fx-border-color: #ff0000;\n";
+		final String redBorder = "-fx-border-color: #ff0000;\n";
 		
 		if (firstName.isEmpty()) {
 			firstNameField.setStyle(redBorder);
@@ -163,17 +165,13 @@ public class AddAuthorView {
 		}
 		
 		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
-			
 			firstNameField.setStyle(redBorder);
-			
 			showMiss = true;
 			errorLabelMiss.setText(ErrorLabelMessage.getWrongFormat());
 			errorLabelMiss.setVisible(true);
-			
 		}
 		
 		if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
-			
 			middleNameField.setStyle(redBorder);
 			
 			if (!showMiss) {
@@ -181,11 +179,9 @@ public class AddAuthorView {
 				errorLabelMiss.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabelMiss.setVisible(true);
 			}
-			
 		}
 		
 		if (!lastName.isEmpty() && !CheckInputLetters.check(lastName)) {
-			
 			lastNameField.setStyle(redBorder);
 			
 			if (!showMiss) {
@@ -193,22 +189,18 @@ public class AddAuthorView {
 				errorLabelMiss.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabelMiss.setVisible(true);
 			}
-			
 		}
 		
 		if (!birth) {
-			
 			yearOfBirthField.setStyle(redBorder);
 			
 			showTooMuch = true;
 			errorLabelTooMuch.setText("Please enter birth year\n"
 					+ "in 4 digits (e.g. 1973).");
 			errorLabelTooMuch.setVisible(true);
-			
 		}
 		
 		if (!death && !isAliveCheck.isSelected() && !isAliveCheck.isIndeterminate()) {
-			
 			yearOfDeathField.setStyle(redBorder);
 			
 			if (!showTooMuch) {
@@ -217,11 +209,9 @@ public class AddAuthorView {
 						+ "in 4 digits (e.g. 1973).");
 				errorLabelTooMuch.setVisible(true);
 			}
-			
 		}			
 		
 		if (!yearOfBirth.isEmpty() && !yearOfDeath.isEmpty() && birth && death && Integer.parseInt(yearOfBirth) > Integer.parseInt(yearOfDeath)) {
-			
 			yearOfBirthField.setStyle(redBorder);
 			yearOfDeathField.setStyle(redBorder);
 			
@@ -248,7 +238,6 @@ public class AddAuthorView {
 			errorLabelTooMuch.setVisible(false);
 			
 	    	if (!isInterrupted && isReached) { 
-	    		
 	    		AlertWindowOpen.openWindow("Author successfully added!");
 	    		
 	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));

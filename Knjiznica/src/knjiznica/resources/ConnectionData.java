@@ -6,7 +6,7 @@ public class ConnectionData {
 	private static String username = null;
 	private static String password = null;
 	
-	public static String getLink() { 
+	public static String getLink() {
 		return link;
 	}
 	
@@ -25,5 +25,4 @@ public class ConnectionData {
 	public static void setUsername(String username) {
 		ConnectionData.username = username;
 	}
-	
 }

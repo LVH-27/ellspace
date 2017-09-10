@@ -8,19 +8,13 @@ import org.postgresql.util.PSQLException;
 import knjiznica.resources.ConnectionData;
 import knjiznica.view.AddAuthorView;
 
-
 public class AddAuthorToDatabase implements Runnable{
 	
 	private static String firstName;
-	
 	private static String middleName;
-	
 	private static String lastName;
-	
 	private static boolean isAlive;
-	
 	private static String yearOfBirth;
-	
 	private static String yearOfDeath;
 	
 	@Override
@@ -49,11 +43,13 @@ public class AddAuthorToDatabase implements Runnable{
 			pstmtAuthor.setString(1, firstName);
 			pstmtAuthor.setString(2, middleName);
 			pstmtAuthor.setString(3, lastName);
-			if(!AddAuthorView.checkIndeterminate) {
+			
+			if (!AddAuthorView.checkIndeterminate) {
 				pstmtAuthor.setBoolean(4, isAlive);
 			} else {
 				pstmtAuthor.setNull(4, java.sql.Types.BOOLEAN);
 			}
+			
 			pstmtAuthor.setString(5, yearOfBirth);
 			pstmtAuthor.setString(6, yearOfDeath);
 			
@@ -64,7 +60,6 @@ public class AddAuthorToDatabase implements Runnable{
 			
 		} catch (SQLException e) {
 			AddAuthorView.isReached = false;
-			
 		}
 	}
 	

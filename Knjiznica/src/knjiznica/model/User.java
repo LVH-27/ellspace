@@ -3,33 +3,22 @@ package knjiznica.model;
 public class User {
 	
 	private int ID;
-
 	private String firstName;
-	
 	private String middleName;
-	
 	private String lastName;
-
 	private String country;
-	
 	private int postalCode;
-	
 	private String street;
-	
 	private String houseNumber;
-	
 	private String phoneNumber;
-	
 	private String email;
-	
 	private String city;
-	
 	private int addressID;
 	
 	public User(int ID, String firstName, String middleName, String lastName, String country, int postalCode, String street, String houseNumber, String phoneNumber, String email, String city, Integer addressID) {
 		this.ID = ID;
 		this.firstName = firstName;
-		this.middleName = middleName; 
+		this.middleName = middleName;
 		this.lastName = lastName;
 		this.country = country;
 		this.postalCode = postalCode;
@@ -135,6 +124,5 @@ public class User {
 
 	public void setAddressID(int addressID) {
 		this.addressID = addressID;
-	}
-	
+	}	
 }

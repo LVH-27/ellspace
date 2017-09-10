@@ -6,9 +6,7 @@ import javafx.collections.ObservableList;
 public class GlobalCollection {
 	
 	private static ObservableList<User> l;
-	
 	private static User user;
-	
 	private static boolean isEditable;
 	
 	static {
@@ -20,13 +18,11 @@ public class GlobalCollection {
 	}
 	
 	public static void emptyList() {
-		l = FXCollections.observableArrayList();
-		
+		l = FXCollections.observableArrayList();	
 	}
 	
 	public static ObservableList<User> getList() {
 		return l;
-		
 	}
 
 	public static User getUser() {
@@ -43,8 +39,7 @@ public class GlobalCollection {
 
 	public static void setEditable(boolean isEditable) {
 		GlobalCollection.isEditable = isEditable;
-	}
-	
+	}	
 }
 
 //TODO Add new column with time/date when user was added

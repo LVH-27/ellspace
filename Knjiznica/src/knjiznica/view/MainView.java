@@ -40,7 +40,6 @@ public class MainView {
 		addListeners();
 		BorderPane main = (BorderPane) FXMLLoader.load(getClass().getResource("Login-view.fxml"));
 		setBorderPane(main);
-		
 	}
 	
 	public void setBackground(Image img) {

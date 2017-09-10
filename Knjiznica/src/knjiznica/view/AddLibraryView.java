@@ -347,6 +347,7 @@ public class AddLibraryView {
 		} catch (Exception e) {
 			postalCodeInt = 0;
 		}
+		
 		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
 			firstNameField.setStyle(redBorder);
 			if (!errorInfo) {
@@ -379,8 +380,8 @@ public class AddLibraryView {
 			}
 			
 			errorInfo = true;
-			
 		}
+		
 		boolean check = true;
 		
 		beginTime = new ArrayList<String>();
@@ -390,8 +391,8 @@ public class AddLibraryView {
 				if (!isValid(beginTimeList.get(i).getText()) || !isValid(endTimeList.get(i).getText())) {
 					if (!isValid(beginTimeList.get(i).getText())) {
 						beginTimeList.get(i).setStyle(redBorder);
-						
-					} if (!isValid(endTimeList.get(i).getText())) {
+					} 
+					if (!isValid(endTimeList.get(i).getText())) {
 						endTimeList.get(i).setStyle(redBorder);
 					}
 					check = false;
@@ -414,8 +415,7 @@ public class AddLibraryView {
 			
 			AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
 			
-	    	if(!isInterrupted && isReached) {
-	    		
+	    	if (!isInterrupted && isReached) {
 	    		AlertWindowOpen.openWindow("Library successfully added!");
 	    		
 	    		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
@@ -442,7 +442,6 @@ public class AddLibraryView {
 		String[] timeSplit = time.split(":");
 		if (timeSplit.length != 2) {
 			return false;
-			
 		} else if (timeSplit[0].length() > 2 || timeSplit[0].length() < 1 || timeSplit[1].length() != 2) {
 			return false;
 		}
@@ -477,22 +476,22 @@ public class AddLibraryView {
 	@FXML
 	private void onlineLibrary() {
 		if (onlineLibraryCheck.isSelected()) {
-			countryHBox.setVisible(false);
-			countryField.setVisible(false);
-			streetHBox.setVisible(false);
-			streetField.setVisible(false);
-			houseNumberHBox.setVisible(false);
+			countryHBox.	 setVisible(false);
+			countryField.	 setVisible(false);
+			streetHBox.      setVisible(false);
+			streetField.     setVisible(false);
+			houseNumberHBox. setVisible(false);
 			houseNumberField.setVisible(false);
-			postalCodeCombo.setVisible(false);
+			postalCodeCombo. setVisible(false);
 			
 		} else if (!onlineLibraryCheck.isSelected()) {
-			countryHBox.setVisible(true);
-			countryField.setVisible(true);
-			streetHBox.setVisible(true);
-			streetField.setVisible(true);
-			houseNumberHBox.setVisible(true);
+			countryHBox.	 setVisible(true);
+			countryField.	 setVisible(true);
+			streetHBox.		 setVisible(true);
+			streetField.	 setVisible(true);
+			houseNumberHBox. setVisible(true);
 			houseNumberField.setVisible(true);
-			postalCodeCombo.setVisible(true);
+			postalCodeCombo. setVisible(true);
 		}
 	}
 }

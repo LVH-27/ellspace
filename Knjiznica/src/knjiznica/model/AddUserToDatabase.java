@@ -14,21 +14,13 @@ import knjiznica.view.AddUserView;
 public class AddUserToDatabase implements Runnable{
 	
 	private static String firstName;
-	
 	private static String middleName;
-	
 	private static String lastName;
-	
 	private static String email;
-	
 	private static String phoneNumber;
-	
 	private static String country;
-	
 	private static int postalCode;
-	
 	private static String street;
-	
 	private static String houseNumber;
 	
 	@Override
@@ -88,6 +80,7 @@ public class AddUserToDatabase implements Runnable{
 			
 			pstmtLocation.setInt(1, 2);
 			pstmtLocation.setInt(2, Integer.parseInt(userID));
+			
 			pstmtLocation.executeUpdate();
 			
 		} catch (PSQLException e) {
@@ -95,7 +88,6 @@ public class AddUserToDatabase implements Runnable{
 			
 		} catch (SQLException e) {
 			AddUserView.isReached = false;
-			
 		}
 	}
 	
