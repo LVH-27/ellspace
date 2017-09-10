@@ -45,7 +45,7 @@ public class LoginView {
 		
 		LoginThread.login();
 		
-		//TODO Remove comment "isCorrect = true";
+		//TODO Remove comment "isCorrect = true" (bypass login);
 		//isCorrect = true;
 
 		if (isCorrect) {

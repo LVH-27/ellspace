@@ -18,6 +18,5 @@ public class AlertWindowOpen {
 		alert.initOwner((Stage) ViewProvider.getView("primaryStage"));  
 		
 		alert.showAndWait();
-		
 	}
 }

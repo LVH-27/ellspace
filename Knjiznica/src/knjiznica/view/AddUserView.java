@@ -70,7 +70,7 @@ public class AddUserView {
 	private String country;
 	private String street;
 	private String houseNumber;
-	String postalCode;
+	private String postalCode;
 	private SingleSelectionModel<String> postalCodeSingle;
 	private boolean check;
 	
@@ -129,7 +129,7 @@ public class AddUserView {
 		streetField.setStyle("");
 		houseNumberField.setStyle("");
 		
-		final String redBorder ="-fx-border-color: #ff0000;\n";
+		final String redBorder = "-fx-border-color: #ff0000;\n";
 		
 		/*
 		 * DOUBLED EMAIL NOT UNIQUE
@@ -142,97 +142,90 @@ public class AddUserView {
 			check = false;
 			firstNameField.setStyle(redBorder);
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
-			errorLabel.setVisible(true);
-			
-		} if (lastName.isEmpty()) {
+			errorLabel.setVisible(true);	
+		} 
+		
+		if (lastName.isEmpty()) {
 			check = false;
 			lastNameField.setStyle(redBorder);
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
-			
-		} if (postalCodeSingle.isEmpty()) {
+		} 
+		
+		if (postalCodeSingle.isEmpty()) {
 			check = false;
 			postalCodeCombo.setStyle(redBorder);
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
-			
-		} if (email.isEmpty()) {
+		} 
+		
+		if (email.isEmpty()) {
 			check = false;
 			emailField.setStyle(redBorder);
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
-			
-		} if (country.isEmpty()) {
+		} 
+		
+		if (country.isEmpty()) {
 			check = false;
 			countryField.setStyle(redBorder);
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
-			
 		} 
 		
 		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
 			check = false;
 			firstNameField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
-				
 			}
-			
 		}
 		
 		if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
 			check = false;
 			middleNameField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
-				
 			}
-			
 		}
 		
 		if (!lastName.isEmpty() && !CheckInputLetters.check(lastName)) {
 			check = false;
 			lastNameField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
-				
 			}
-			
 		}
 		
 		if (houseNumber.length() > 6) {
 			check = false;
 			houseNumberField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
-				
 			}
-			
 		}
 		
 		if (phoneNumber.length() > 20) {
 			check = false;
 			phoneNumberField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
-				errorLabel.setVisible(true);
-				
+				errorLabel.setVisible(true);	
 			}
-			
 		}
 		
 		if (check) {
 			
 			if (street.isEmpty()) {
 				street = null;
-				
-			} if (houseNumber.isEmpty()) {
+			} 
+			
+			if (houseNumber.isEmpty()) {
 				houseNumber = null;
-				
 			}
 			
 			postalCode = postalCodeSingle.getSelectedItem();
@@ -241,7 +234,6 @@ public class AddUserView {
 			
 			if (middleName.isEmpty()) {
 				middleName = null;
-				
 			} else {
 				middleName = FormattingName.format(middleName);
 			}
@@ -256,8 +248,7 @@ public class AddUserView {
 			
 			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
 			
-			if(!isInterrupted && isReached) {
-				
+			if (!isInterrupted && isReached) {
 				AlertWindowOpen.openWindow("User successfully added!");
 	    		
 				BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
@@ -269,12 +260,8 @@ public class AddUserView {
 				
 			} else {
 				errorLabel.setText(ErrorLabelMessage.getFailReach());
-				errorLabel.setVisible(true); 
-				
-			}
-			
+				errorLabel.setVisible(true); 	
+			}	
 		}
-			
-		
 	}
 }

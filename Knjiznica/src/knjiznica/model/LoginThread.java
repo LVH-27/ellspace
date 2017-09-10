@@ -7,11 +7,8 @@ import org.postgresql.util.PSQLException;
 import knjiznica.resources.ConnectionData;
 import knjiznica.view.LoginView;
 
-
-
 public class LoginThread implements Runnable {
 	
-
 	@Override
 	public void run() {
     	try {
@@ -23,13 +20,11 @@ public class LoginThread implements Runnable {
 	    	ConnectionData.setPassword(LoginView.password);
 	    	LoginView.isCorrect = true;
 	    	
-	    	
 		} catch (PSQLException e) {
 			LoginView.isCorrect = false;
 			
 		} catch (SQLException e) {
 			LoginView.isCorrect = false;
-			
 		} 
 	}
 	
@@ -42,6 +37,5 @@ public class LoginThread implements Runnable {
 			LoginView.isCorrect = false;
 			System.out.println(ErrorLabelMessage.getFailReach());
 		}
-	}
-	
+	}	
 }

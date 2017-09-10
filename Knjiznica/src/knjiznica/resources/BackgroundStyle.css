@@ -51,7 +51,7 @@
     -fx-text-fill: white;
 }
 
-.table-view .column-header {
+.table-view .column-header{
     -fx-background-color: transparent;
 }
 
@@ -65,13 +65,13 @@
     -fx-padding: 0.0em; 
 }
 
-.table-row-cell:selected {
+.table-row-cell:selected{
     -fx-background-color: #005797;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
 }
 
-.table-view .filler {
+.table-view .filler{
 	-fx-background-color: #F4DDC9;
 }
 
@@ -84,11 +84,7 @@
     -fx-background-color: transparent;
 }
 
-
-
 .table-view > .virtual-flow > .scroll-bar > .increment-button, 
 .table-view > .virtual-flow > .scroll-bar > .decrement-button {
     -fx-opacity: 0;
 }
-
-

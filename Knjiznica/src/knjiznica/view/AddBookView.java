@@ -18,5 +18,4 @@ public class AddBookView {
 		ViewProvider.setView(nameCombo, postalCodeCombo);
 		PostalCodeComboThread.setComboData(nameCombo);
 	}
-
 }

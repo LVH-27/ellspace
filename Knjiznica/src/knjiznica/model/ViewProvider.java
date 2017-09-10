@@ -14,8 +14,8 @@ public class ViewProvider {
 	public static void setView(String name, Object object) {
 		views.put(name, object);
 	}
-	 
+	
 	public static Object getView(String name) {
-		return views.get(name); 
+		return views.get(name);
 	}
 }

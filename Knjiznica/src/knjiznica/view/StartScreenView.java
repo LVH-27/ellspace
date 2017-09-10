@@ -102,5 +102,4 @@ public class StartScreenView {
 		BorderPane eventLog = (BorderPane) ViewProvider.getView("eventLog");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(eventLog);
 	}
-
 }

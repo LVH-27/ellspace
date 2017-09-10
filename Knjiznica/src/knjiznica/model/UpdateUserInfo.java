@@ -10,26 +10,17 @@ import knjiznica.view.AddUserView;
 import knjiznica.view.UpdateUserView;
 
 public class UpdateUserInfo implements Runnable {
-private static String firstName;
 	
+	private static String firstName;
 	private static String middleName;
-	
 	private static String lastName;
-	
 	private static String email;
-	
 	private static String phoneNumber;
-	
 	private static String country;
-	
 	private static int postalCode;
-	
 	private static String street;
-	
 	private static String houseNumber;
-	
 	private static int addressID;
-	
 	private static int userID;
 	
 	@Override
@@ -53,6 +44,7 @@ private static String firstName;
 			pstmtAddress.setString(3, street);
 			pstmtAddress.setString(4, houseNumber);
 			pstmtAddress.setInt(5, addressID);
+			
 			pstmtAddress.executeUpdate();
 			
 			String queryUser = "UPDATE public.\"User\" " 
@@ -67,6 +59,7 @@ private static String firstName;
 			pstmtUser.setString(4, phoneNumber);
 			pstmtUser.setString(5, email);
 			pstmtUser.setInt(6, userID);
+			
 			pstmtUser.executeUpdate();
 			
 		} catch (PSQLException e) {
@@ -74,7 +67,6 @@ private static String firstName;
 			
 		} catch (SQLException e) {
 			UpdateUserView.isReached = false;
-			
 		}
 	}
 	
