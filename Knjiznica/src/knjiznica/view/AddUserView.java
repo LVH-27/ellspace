@@ -246,6 +246,9 @@ public class AddUserView {
 			
 			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 			
+			isInterrupted = false;
+			isReached = true;
+			
 			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
 			
 			if (!isInterrupted && isReached) {

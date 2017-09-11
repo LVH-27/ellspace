@@ -1,6 +1,5 @@
 package knjiznica.view;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
@@ -90,18 +89,17 @@ public class ListUsersView {
 			@Override
 			public void handle(MouseEvent event) {
 				if (event.getClickCount() > 1) {
-					@SuppressWarnings("rawtypes")
-					ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
-					GlobalCollection.setUser(GlobalCollection.getUserList().get(cells.get(0).getRow()));
-					GlobalCollection.setEditable(false);
-					BorderPane updateUser;
-					
 					try {
+						@SuppressWarnings("rawtypes")
+						ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
+						GlobalCollection.setUser(GlobalCollection.getUserList().get(cells.get(0).getRow()));
+						GlobalCollection.setEditable(false);
+						BorderPane updateUser;
 						updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
 						((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
 						
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (Exception e) {
+
 					}
 				}
 			}

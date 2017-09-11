@@ -88,6 +88,16 @@ public class AddUserToDatabase implements Runnable{
 			
 		} catch (SQLException e) {
 			AddUserView.isReached = false;
+		} finally {
+			try {
+				pstmtAddress.close();
+				pstmtUser.close();
+				pstmtLocation.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
 	

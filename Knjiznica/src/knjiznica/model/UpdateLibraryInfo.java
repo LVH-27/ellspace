@@ -4,24 +4,34 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
+
 import org.postgresql.util.PSQLException;
+
+import javafx.scene.control.CheckBox;
 import knjiznica.resources.ConnectionData;
-import knjiznica.view.AddUserView;
+import knjiznica.view.UpdateLibraryView;
 import knjiznica.view.UpdateUserView;
 
-public class UpdateUserInfo implements Runnable {
+public class UpdateLibraryInfo implements Runnable {
 	
 	private static String firstName;
-	private static String middleName;
-	private static String lastName;
-	private static String email;
 	private static String phoneNumber;
+	private static String email;
+	private static String information;
 	private static String country;
-	private static int postalCode;
 	private static String street;
 	private static String houseNumber;
+	private static int postalCode;
+	private static ArrayList<String> beginTime;
+	private static ArrayList<String> endTime;
+	private static ArrayList<CheckBox> checkBoxList;
+	private static Time timeBegin;
+	private static Time timeEnd;
+	private static boolean onlineLibraryCheck;
 	private static int addressID;
-	private static int userID;
+	private static int libraryID;
 	
 	@Override
 	public void run() {
@@ -47,18 +57,18 @@ public class UpdateUserInfo implements Runnable {
 			
 			pstmtAddress.executeUpdate();
 			
-			String queryUser = "UPDATE public.\"User\" " 
-					+ "SET \"FirstName\"=?, \"MiddleName\"=?, \"LastName\"=?, \"PhoneNumber\"=?, \"Email\"=?" 
-					+ "WHERE \"UserID\"=?";
+			String queryUser = "UPDATE public.\"Library\" " 
+					+ "SET \"LibraryName\"=?, \"AddressID\"=?, \"PhoneNumber\"=?, \"Email\"=?, \"Information\"=?" 
+					+ "WHERE \"LibraryID\"=?";
 			
 			pstmtUser = con.prepareStatement(queryUser);
 			
 			pstmtUser.setString(1, firstName);
-			pstmtUser.setString(2, middleName);
-			pstmtUser.setString(3, lastName);
-			pstmtUser.setString(4, phoneNumber); 
-			pstmtUser.setString(5, email);
-			pstmtUser.setInt(6, userID);
+			pstmtUser.setInt(2, addressID);
+			pstmtUser.setString(3, phoneNumber);
+			pstmtUser.setString(4, email); 
+			pstmtUser.setString(5, information);
+			pstmtUser.setInt(6, libraryID);
 			
 			pstmtUser.executeUpdate();
 			
@@ -79,26 +89,26 @@ public class UpdateUserInfo implements Runnable {
 		}
 	}
 	
-	public static void updateUser(String firstNameIn, String middleNameIn, String lastNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn, int addressIDIn, int userIDIn) {
-		
+	public static void updateLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn, boolean onlineLibraryCheckIn) {
 		firstName = firstNameIn;
-		middleName = middleNameIn;
-		lastName = lastNameIn;
-		email = emailIn;
 		phoneNumber = phoneNumberIn;
+		email = emailIn;
+		information = informationIn;
 		country = countryIn;
-		postalCode = postalCodeIn;
 		street = streetIn;
 		houseNumber = houseNumberIn;
-		addressID = addressIDIn;
-		userID = userIDIn;
+		postalCode = postalCodeIn;
+		beginTime = beginTimeIn;
+		endTime = endTimeIn;
+		checkBoxList = checkBoxListIn;
+		onlineLibraryCheck = onlineLibraryCheckIn;
 		
-		Thread t = new Thread(new UpdateUserInfo());
+		Thread t = new Thread(new UpdateLibraryInfo());
 		t.start();
 		try {
 			t.join();
 		} catch (InterruptedException e) {
-			AddUserView.isInterrupted = true;
+			UpdateLibraryView.isInterrupted = true;
 		}
 	}
 }

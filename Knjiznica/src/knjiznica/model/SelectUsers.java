@@ -59,7 +59,14 @@ public class SelectUsers implements Runnable {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		} finally {
+			try {
+				stmt.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public static ArrayList<User> select() {
