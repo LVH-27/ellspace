@@ -39,7 +39,7 @@
                   <TableColumn fx:id="cityCol" minWidth="90.0" prefWidth="90.0" text="City" />
                   <TableColumn fx:id="streetCol" minWidth="90.0" prefWidth="90.0" text="Street" />
                   <TableColumn fx:id="houseNumberCol" minWidth="90.0" prefWidth="90.0" text="House Number" />
-                  <TableColumn fx:id="phoneNumberCol" minWidth="90.0" prefWidth="90.0" text="Phone Number" />
+                  <TableColumn fx:id="phoneNumberCol" minWidth="100.0" prefWidth="100.0" text="Phone Number" />
                   <TableColumn fx:id="emailCol" minWidth="200.0" prefWidth="-1.0" text="Email" />
                   <TableColumn fx:id="informationCol" minWidth="150.0" prefWidth="-1.0" text="Extra Information" />
               </columns>
