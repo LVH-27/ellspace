@@ -69,7 +69,7 @@ CREATE TABLE "Edition" (
 
 CREATE TABLE "Publisher" (
 	"PublisherID" serial NOT NULL,
-	"Name" TEXT NOT NULL,
+	"PublisherName" TEXT NOT NULL,
 	"AddressID" int,
 	CONSTRAINT Publisher_pk PRIMARY KEY ("PublisherID")
 ) WITH (
@@ -80,7 +80,7 @@ CREATE TABLE "Publisher" (
 
 CREATE TABLE "Library" (
 	"LibraryID" serial NOT NULL,
-	"Name" TEXT NOT NULL,
+	"LibraryName" TEXT NOT NULL,
 	"AddressID" int,
 	"PhoneNumber" varchar(20) NOT NULL,
 	"Email" varchar(254),
@@ -107,7 +107,7 @@ CREATE TABLE "Address" (
 
 CREATE TABLE "City" (
 	"PostalCode" serial NOT NULL,
-	"Name" TEXT NOT NULL,
+	"CityName" TEXT NOT NULL,
 	CONSTRAINT City_pk PRIMARY KEY ("PostalCode")
 ) WITH (
   OIDS=FALSE
@@ -131,7 +131,7 @@ CREATE TABLE "EventLog" (
 
 CREATE TABLE "LanguageList" (
 	"LanguageID" serial NOT NULL,
-	"Name" TEXT NOT NULL UNIQUE,
+	"LanguageName" TEXT NOT NULL UNIQUE,
 	CONSTRAINT LanguageList_pk PRIMARY KEY ("LanguageID")
 ) WITH (
   OIDS=FALSE
@@ -141,7 +141,7 @@ CREATE TABLE "LanguageList" (
 
 CREATE TABLE "GenreList" (
 	"GenreID" serial NOT NULL,
-	"Name" TEXT NOT NULL UNIQUE,
+	"GenreName" TEXT NOT NULL UNIQUE,
 	CONSTRAINT GenreList_pk PRIMARY KEY ("GenreID")
 ) WITH (
   OIDS=FALSE

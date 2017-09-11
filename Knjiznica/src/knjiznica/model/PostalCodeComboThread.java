@@ -10,15 +10,8 @@ public class PostalCodeComboThread implements Runnable {
 	
 	@SuppressWarnings("unchecked")
 	public void run() {
+		
 		switch(which) {
-		case "postalCodeComboAddBook":
-			try {
-				((ComboBox<String>) ViewProvider.getView(which)).getItems().addAll((ArrayList<String>) PostalCodeCombo.getData().get(0));
-				break;
-			} catch (SQLException e) {
-				e.printStackTrace();
-				break;
-			}
 		
 		case "postalCodeComboAddUser":
 			try {
