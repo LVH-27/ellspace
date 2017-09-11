@@ -38,6 +38,7 @@ public class AddLibraryToDatabase implements Runnable{
 		PreparedStatement pstmtLibrary = null;
 		PreparedStatement pstmtBusiness = null;
 		PreparedStatement pstmtLocation = null;
+		
 		String libraryID = null; 
 		
 		try {
@@ -124,10 +125,25 @@ public class AddLibraryToDatabase implements Runnable{
 			pstmtLocation.executeUpdate();
 			
 		} catch (PSQLException e) {
+			e.printStackTrace();
 			AddLibraryView.isReached = false;
 			
 		} catch (SQLException e) {
 			AddLibraryView.isReached = false;	
+		} finally {
+			try {
+				if(pstmtAddress != null) {
+					pstmtAddress.close();
+				}
+				pstmtLibrary.close();
+				if(pstmtBusiness != null) {
+					pstmtBusiness.close();
+				}
+				pstmtLocation.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

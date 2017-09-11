@@ -63,7 +63,7 @@ public class UpdateUserView {
 	@FXML
 	private Label errorLabel;
 	
-	public static boolean isEditable;
+	private static boolean isEditable;
 	
 	public static User user;
 	
@@ -184,6 +184,8 @@ public class UpdateUserView {
 		isInterrupted = false;
 		isReached = true;
 		
+		final String redBorder ="-fx-border-color: #ff0000;\n";
+		
 		errorLabel.setVisible(false);
 		postalCodeSingle = postalCodeCombo.getSelectionModel();
 		firstName = firstNameField.getText();
@@ -213,9 +215,7 @@ public class UpdateUserView {
 		countryField.setStyle("");
 		streetField.setStyle("");
 		houseNumberField.setStyle("");
-		
-		final String redBorder ="-fx-border-color: #ff0000;\n";
-		
+
 		/*
 		 * DOUBLED EMAIL NOT UNIQUE
 		 */

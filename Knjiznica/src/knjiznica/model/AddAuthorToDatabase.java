@@ -60,6 +60,12 @@ public class AddAuthorToDatabase implements Runnable{
 			
 		} catch (SQLException e) {
 			AddAuthorView.isReached = false;
+		} finally {
+			try {
+				pstmtAuthor.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
