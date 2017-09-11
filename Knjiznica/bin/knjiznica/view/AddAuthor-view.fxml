@@ -28,7 +28,7 @@
                             <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
                               <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
                           </columnConstraints>
                           <rowConstraints>
                               <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />

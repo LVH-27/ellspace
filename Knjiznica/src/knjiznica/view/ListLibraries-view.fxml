@@ -11,7 +11,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.ListLibrariesView">
    <center>
-      <BorderPane id="defaultBackgroundField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
+      <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
          <top>
             <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER">
                <children>
