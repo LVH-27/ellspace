@@ -60,10 +60,10 @@ public class ListUsersView {
 		GlobalCollection.emptyList();
 		
 		for (int i = 0; i < users.size(); ++i) {
-			GlobalCollection.getList().add(users.get(i));
+			GlobalCollection.getUserList().add(users.get(i));
 		} 
 		
-		tableUserList. setItems(GlobalCollection.getList());
+		tableUserList. setItems(GlobalCollection.getUserList());
 		firstNameCol.  setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
 		firstNameCol.  setStyle("-fx-alignment: CENTER;");
 		middleNameCol. setCellValueFactory(new PropertyValueFactory<User, String>("middleName"));
@@ -92,7 +92,7 @@ public class ListUsersView {
 				if (event.getClickCount() > 1) {
 					@SuppressWarnings("rawtypes")
 					ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
-					GlobalCollection.setUser(GlobalCollection.getList().get(cells.get(0).getRow()));
+					GlobalCollection.setUser(GlobalCollection.getUserList().get(cells.get(0).getRow()));
 					GlobalCollection.setEditable(false);
 					BorderPane updateUser;
 					

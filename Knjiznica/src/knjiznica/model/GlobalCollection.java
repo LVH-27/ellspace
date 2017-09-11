@@ -5,12 +5,14 @@ import javafx.collections.ObservableList;
 
 public class GlobalCollection {
 	
-	private static ObservableList<User> l;
+	private static ObservableList<User> lUser;
+	private static ObservableList<Library> lLibrary;
 	private static User user;
 	private static boolean isEditable;
 	
 	static {
-		l = FXCollections.observableArrayList();
+		lUser = FXCollections.observableArrayList();
+		lLibrary = FXCollections.observableArrayList();
 	}
 	
 	private GlobalCollection() {
@@ -18,11 +20,16 @@ public class GlobalCollection {
 	}
 	
 	public static void emptyList() {
-		l = FXCollections.observableArrayList();	
+		lUser = FXCollections.observableArrayList();	
+		lLibrary = FXCollections.observableArrayList();	
 	}
 	
-	public static ObservableList<User> getList() {
-		return l;
+	public static ObservableList<User> getUserList() {
+		return lUser;
+	}
+	
+	public static ObservableList<Library> getLibraryList() {
+		return lLibrary;
 	}
 
 	public static User getUser() {

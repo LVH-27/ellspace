@@ -54,7 +54,7 @@ public class SelectUsers implements Runnable {
 					phoneNumber = rs.getString("PhoneNumber");
 				}
 				
-				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), street, houseNumber, phoneNumber, rs.getString("Email"), rs.getString("Name"), rs.getInt("AddressID")));
+				users.add(new User(rs.getInt("UserID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getString("Country"), rs.getInt("PostalCode"), street, houseNumber, phoneNumber, rs.getString("Email"), rs.getString("CityName"), rs.getInt("AddressID")));
 			}
 			
 		} catch (SQLException e) {
