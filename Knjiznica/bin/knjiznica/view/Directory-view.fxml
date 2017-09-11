@@ -12,45 +12,40 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.DirectoryView">
    <center>
-      <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
+      <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css">
          <center>
-            <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <BorderPane>
-                           <center>
-                              <GridPane BorderPane.alignment="CENTER">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                              </GridPane>
-                           </center>
-                           <top>
-                              <HBox alignment="CENTER" BorderPane.alignment="TOP_CENTER">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Directory" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="Microsoft Sans Serif" size="50.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </top>
-                        </BorderPane>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
          </center>
+         <top>
+            <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="TOP_CENTER">
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Directory" textAlignment="CENTER">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="50.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets top="15.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
          <BorderPane.margin>
-            <Insets bottom="70.0" left="100.0" right="100.0" top="30.0" />
+            <Insets bottom="60.0" left="80.0" right="80.0" top="30.0" />
          </BorderPane.margin>
       </BorderPane>
    </center>

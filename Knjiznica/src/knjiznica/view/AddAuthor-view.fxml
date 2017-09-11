@@ -49,7 +49,7 @@
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <Label alignment="CENTER" text="First Name" />
+                                    <Label alignment="CENTER" text="First Name:" />
                                  </children>
                               </HBox>
                               <TextField fx:id="middleNameField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="2">
@@ -62,7 +62,7 @@
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <Label text="Middle Name" />
+                                    <Label text="Middle Name:" />
                                  </children>
                               </HBox>
                               <TextField fx:id="lastNameField" GridPane.columnIndex="2" GridPane.rowIndex="3">
@@ -72,7 +72,7 @@
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
                                  <children>
-                                    <Label text="Last Name" />
+                                    <Label text="Last Name:" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets />
@@ -85,7 +85,7 @@
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <children>
-                                    <Label text="Year Of Birth" />
+                                    <Label text="Year of birth:" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets right="10.0" />
@@ -101,7 +101,7 @@
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                  <children>
-                                    <Label text="Year Of Death" />
+                                    <Label text="Year of death:" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets right="10.0" />
@@ -134,7 +134,7 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="Author Is Alive" />
+                                    <Label text="Author is alive:" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets right="10.0" />
@@ -152,14 +152,21 @@
                         </GridPane>
                      </center>
                      <top>
-                        <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Add Author">
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="50.0" />
-                                 </font>
-                              </Label>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Add Author" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Microsoft Sans Serif" size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
                            </children>
+                           <BorderPane.margin>
+                              <Insets top="15.0" />
+                           </BorderPane.margin>
                         </HBox>
                      </top>
                   </BorderPane>

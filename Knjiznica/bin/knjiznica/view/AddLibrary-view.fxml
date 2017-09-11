@@ -71,7 +71,7 @@
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <Label alignment="CENTER" text="Name" />
+                                    <Label alignment="CENTER" text="Name:" />
                                  </children>
                               </HBox>
                               <TextField fx:id="phoneNumberField" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
@@ -84,7 +84,7 @@
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <Label text="Phone Number" />
+                                    <Label text="Phone Number:" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -97,7 +97,7 @@
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="4">
                                  <children>
-                                    <Label text="Email" />
+                                    <Label text="Email:" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets />
@@ -110,7 +110,7 @@
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="5">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="RIGHT" text="Extra Information">
+                                    <Label alignment="CENTER" contentDisplay="RIGHT" text="Extra Information:">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -130,7 +130,7 @@
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <Label text="Country">
+                                    <Label text="Country:">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -144,7 +144,7 @@
                               </TextField>
                               <HBox fx:id="streetHBox" alignment="CENTER_RIGHT" GridPane.rowIndex="8">
                                  <children>
-                                    <Label text="Street" />
+                                    <Label text="Street:" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets />
@@ -157,7 +157,7 @@
                               </TextField>
                               <HBox fx:id="houseNumberHBox" alignment="CENTER_RIGHT" GridPane.rowIndex="9">
                                  <children>
-                                    <Label text="House Number" />
+                                    <Label text="House Number:" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets />
@@ -387,14 +387,21 @@
                         </GridPane>
                      </center>
                      <top>
-                        <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Add Library">
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="50.0" />
-                                 </font>
-                              </Label>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Add Library">
+                                       <font>
+                                          <Font name="Microsoft Sans Serif" size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
                            </children>
+                           <BorderPane.margin>
+                              <Insets bottom="5.0" top="15.0" />
+                           </BorderPane.margin>
                         </HBox>
                      </top>
                   </BorderPane>
