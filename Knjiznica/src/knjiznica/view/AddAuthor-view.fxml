@@ -28,7 +28,7 @@
                             <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
                               <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
                           </columnConstraints>
                           <rowConstraints>
                               <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -107,9 +107,9 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.rowSpan="2147483647">
+                              <HBox GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.rowSpan="2147483647">
                                  <GridPane.margin>
-                                    <Insets bottom="10.0" left="5.0" />
+                                    <Insets bottom="10.0" left="20.0" />
                                  </GridPane.margin>
                                  <children>
                                     <Button fx:id="backButton" cancelButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0">
