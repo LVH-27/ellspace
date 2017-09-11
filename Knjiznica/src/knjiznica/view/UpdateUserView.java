@@ -131,7 +131,7 @@ public class UpdateUserView {
 		
 		firstNameField.setText(user.getFirstName());
 		
-		if (user.getMiddleName() != "-" && user.getMiddleName() != null) {
+		if (user.getMiddleName() != null && !user.getMiddleName().equals("-")) {
 			middleNameField.setText(user.getMiddleName());
 		} else {
 			middleNameField.setText("");
@@ -140,7 +140,7 @@ public class UpdateUserView {
 		lastNameField.setText(user.getLastName());
 		emailField.setText(user.getEmail());
 		
-		if (user.getPhoneNumber() != "-" && user.getPhoneNumber() != null) {
+		if (user.getPhoneNumber() != null && !user.getPhoneNumber().equals("-")) {
 			phoneNumberField.setText(user.getPhoneNumber());
 		} else {
 			phoneNumberField.setText("");
@@ -148,18 +148,18 @@ public class UpdateUserView {
 		
 		countryField.setText(user.getCountry());
 		
-		if (user.getStreet() != "-" && user.getStreet() != null) {
+		if (user.getStreet() != null && !user.getStreet().equals("-")) {
 			streetField.setText(user.getStreet());
 		} else {
 			streetField.setText("");
 		}
 		
-		if (user.getHouseNumber() != "-" && user.getHouseNumber() != null) {
+		if (user.getHouseNumber() != null && !user.getHouseNumber().equals("-")) {
 			houseNumberField.setText(user.getHouseNumber());
 		} else {
 			houseNumberField.setText("");
 		}
-		
+	
 		postalCodeCombo.getSelectionModel().select(Integer.toString(user.getPostalCode()) + " - " + user.getCity());
 		
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
