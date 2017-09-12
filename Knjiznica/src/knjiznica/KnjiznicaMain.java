@@ -1,8 +1,5 @@
 package knjiznica;
 	
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -24,7 +21,7 @@ public class KnjiznicaMain extends Application {
 			Group root = (Group) FXMLLoader.load(
 					getClass().getResource("view/Main-view.fxml"));
 			//FIXME Screen flashes during loading and switching to maximized window.
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			Scene scene = new Scene(root);
 					//screenSize.getWidth(), screenSize.getHeight());
 			
