@@ -338,21 +338,19 @@ public class UpdateUserView {
 			errorLabel.setVisible(false);
 			
 			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-					
-			GlobalCollection.getUser().setFirstName(firstName);
-			GlobalCollection.getUser().setMiddleName(middleName);
-			GlobalCollection.getUser().setLastName(lastName);
-			GlobalCollection.getUser().setEmail(email);
-			GlobalCollection.getUser().setPhoneNumber(phoneNumber);
-			GlobalCollection.getUser().setCountry(country);
-			GlobalCollection.getUser().setPostalCode(postalCodeInt);
-			GlobalCollection.getUser().setStreet(street);
-			GlobalCollection.getUser().setHouseNumber(houseNumber);
 			
 			UpdateUserInfo.updateUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber, user.getAddressID(), user.getID());
 			
-			
 			if(!isInterrupted && isReached) {
+				GlobalCollection.getUser().setFirstName(firstName);
+				GlobalCollection.getUser().setMiddleName(middleName);
+				GlobalCollection.getUser().setLastName(lastName);
+				GlobalCollection.getUser().setEmail(email);
+				GlobalCollection.getUser().setPhoneNumber(phoneNumber);
+				GlobalCollection.getUser().setCountry(country);
+				GlobalCollection.getUser().setPostalCode(postalCodeInt);
+				GlobalCollection.getUser().setStreet(street);
+				GlobalCollection.getUser().setHouseNumber(houseNumber);
 				AlertWindowOpen.openWindow("User successfully updated!");
 	    		GlobalCollection.setEditable(false);
 				BorderPane updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));

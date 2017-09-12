@@ -230,7 +230,7 @@ public class UpdateLibraryView {
 			informationField.setText("");
 		}
 		
-		if(library.getCountry().equals("-")) {
+		if(library.getCountry() == null || library.getCountry().equals("-")) {
 			onlineLibraryCheck.setSelected(true);
 			countryField.setVisible(false);
 			streetField.setVisible(false);
@@ -308,7 +308,6 @@ public class UpdateLibraryView {
 		}
 		
 		if(GlobalCollection.getBusinessHours().getCheck7().equals("Opened")) {
-			System.out.println(GlobalCollection.getBusinessHours().getCheck7());
 			check7.setSelected(true);
 			begin7.setText(GlobalCollection.getBusinessHours().getBeginTime7());
 			end7.setText(GlobalCollection.getBusinessHours().getEndTime7());
@@ -317,7 +316,8 @@ public class UpdateLibraryView {
 			begin7.setText("");
 			end7.setText("");
 		}
-		
+		begin7.setDisable(false);
+		end7.setDisable(false);
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
@@ -563,11 +563,29 @@ public class UpdateLibraryView {
 			errorLabel.setVisible(false); 
 			errorLabelTime.setVisible(false);
 			
-			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
+			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected(), library.getID(), library.getAddressID());
 			
 	    	if (!isInterrupted && isReached) {
+	    		
+	    		GlobalCollection.getLibrary().setFirstName(firstName);
+				GlobalCollection.getLibrary().setPhoneNumber(phoneNumber);
+				GlobalCollection.getLibrary().setEmail(email);
+				GlobalCollection.getLibrary().setInformation(information);
+				GlobalCollection.getLibrary().setCountry(country);
+				GlobalCollection.getLibrary().setStreet(street);
+				GlobalCollection.getLibrary().setHouseNumber(houseNumber);
+				GlobalCollection.getLibrary().setPostalCode(Integer.toString(postalCodeInt));
+				
+				if (onlineLibraryCheck.isSelected()) {
+					GlobalCollection.getLibrary().setCountry(null);
+					GlobalCollection.getLibrary().setStreet(null);
+					GlobalCollection.getLibrary().setHouseNumber(null);
+					GlobalCollection.getLibrary().setPostalCode(null);
+					GlobalCollection.getLibrary().setAddressID(-1);
+				}
+
 	    		GlobalCollection.setEditable(false);
-	    		AlertWindowOpen.openWindow("Library successfully added!");
+	    		AlertWindowOpen.openWindow("Library successfully updated!");
 	    		
 	    		BorderPane updateLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateLibrary-view.fxml"));
 	    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateLibrary);

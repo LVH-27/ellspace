@@ -42,54 +42,83 @@ public class UpdateLibraryInfo implements Runnable {
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
-		
-			String queryAddress = "UPDATE public.\"Address\" "
-					+ "SET \"Country\"=?, \"PostalCode\"=?, \"Street\"=?, \"HouseNumber\"=? " 
-					+ "WHERE \"AddressID\"=?;";
 			
-			pstmtAddress = con.prepareStatement(queryAddress);
-		
-			pstmtAddress.setString(1, country);
-			pstmtAddress.setInt(2, postalCode);
-			pstmtAddress.setString(3, street);
-			pstmtAddress.setString(4, houseNumber);
-			pstmtAddress.setInt(5, addressID);
+			if(!onlineLibraryCheck) {
+				String queryAddress = "UPDATE public.\"Address\" "
+						+ "SET \"Country\"=?, \"PostalCode\"=?, \"Street\"=?, \"HouseNumber\"=? " 
+						+ "WHERE \"AddressID\"=?;";
+				
+				pstmtAddress = con.prepareStatement(queryAddress);
 			
-			pstmtAddress.executeUpdate();
+				pstmtAddress.setString(1, country);
+				pstmtAddress.setInt(2, postalCode);
+				pstmtAddress.setString(3, street);
+				pstmtAddress.setString(4, houseNumber);
+				pstmtAddress.setInt(5, addressID);
+				
+				pstmtAddress.executeUpdate();
+				
+				String queryLibrary = "UPDATE public.\"Library\" " 
+						+ "SET \"LibraryName\"=?, \"AddressID\"=?, \"PhoneNumber\"=?, \"Email\"=?, \"Information\"=?" 
+						+ "WHERE \"LibraryID\"=?";
+				
+				pstmtUser = con.prepareStatement(queryLibrary);
+				pstmtUser.setString(1, firstName);
+				pstmtUser.setInt(2, addressID);
+				pstmtUser.setString(3, phoneNumber);
+				pstmtUser.setString(4, email); 
+				pstmtUser.setString(5, information);
+				pstmtUser.setInt(6, libraryID);
+				
+				pstmtUser.executeUpdate();
+				
+			} else {
+				String queryLibrary = "UPDATE public.\"Library\" " 
+						+ "SET \"LibraryName\"=?, \"AddressID\"=?, \"PhoneNumber\"=?, \"Email\"=?, \"Information\"=?" 
+						+ "WHERE \"LibraryID\"=?";
+				
+				pstmtUser = con.prepareStatement(queryLibrary);
+				pstmtUser.setString(1, firstName);
+				pstmtUser.setNull(2, java.sql.Types.INTEGER);
+				pstmtUser.setString(3, phoneNumber);
+				pstmtUser.setString(4, email); 
+				pstmtUser.setString(5, information);
+				pstmtUser.setInt(6, libraryID);
+				
+				pstmtUser.executeUpdate();
+				
+				String queryAddress = "DELETE FROM public.\"Address\""
+						+ "WHERE \"Address\".\"AddressID\"=?";
+				
+				pstmtAddress = con.prepareStatement(queryAddress);
+				pstmtAddress.setInt(1, addressID);
+				
+				pstmtAddress.executeUpdate();		
+				
+			}
+					
 			
-			String queryUser = "UPDATE public.\"Library\" " 
-					+ "SET \"LibraryName\"=?, \"AddressID\"=?, \"PhoneNumber\"=?, \"Email\"=?, \"Information\"=?" 
-					+ "WHERE \"LibraryID\"=?";
-			
-			pstmtUser = con.prepareStatement(queryUser);
-			
-			pstmtUser.setString(1, firstName);
-			pstmtUser.setInt(2, addressID);
-			pstmtUser.setString(3, phoneNumber);
-			pstmtUser.setString(4, email); 
-			pstmtUser.setString(5, information);
-			pstmtUser.setInt(6, libraryID);
-			
-			pstmtUser.executeUpdate();
-			
-		} catch (PSQLException e) {
-			UpdateUserView.isReached = false;
-			
-		} catch (SQLException e) {
-			UpdateUserView.isReached = false;
-		} finally {
 			try {
-				pstmtAddress.close();
+				if(pstmtAddress != null) {
+					pstmtAddress.close();
+				}
 				pstmtUser.close();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
-		}
+		} catch (PSQLException e) {
+			System.out.println(addressID);
+			UpdateLibraryView.isReached = false;
+			
+		} catch (SQLException e) {
+			System.out.println(addressID + 1);
+			UpdateLibraryView.isReached = false;
+		} 
 	}
 	
-	public static void updateLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn, boolean onlineLibraryCheckIn) {
+	public static void updateLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn, boolean onlineLibraryCheckIn, int libraryIDIn, int addressIDIn) {
 		firstName = firstNameIn;
 		phoneNumber = phoneNumberIn;
 		email = emailIn;
@@ -102,6 +131,8 @@ public class UpdateLibraryInfo implements Runnable {
 		endTime = endTimeIn;
 		checkBoxList = checkBoxListIn;
 		onlineLibraryCheck = onlineLibraryCheckIn;
+		libraryID = libraryIDIn;
+		addressID = addressIDIn;
 		
 		Thread t = new Thread(new UpdateLibraryInfo());
 		t.start();

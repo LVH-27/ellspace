@@ -52,7 +52,7 @@ public class BusinessHours {
 		this.endTime6 = endTime6;
 		
 		this.check7 = check7;
-		this.beginTime1 = beginTime7;
+		this.beginTime7 = beginTime7;
 		this.endTime7 = endTime7;
 		
 	}
