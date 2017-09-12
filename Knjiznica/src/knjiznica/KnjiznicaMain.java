@@ -17,13 +17,16 @@ public class KnjiznicaMain extends Application {
 	public void start(Stage primaryStage) {
 		
 		try {
+			primaryStage.hide();
+
+			primaryStage.setMaximized(true);
+
 			Group root = (Group) FXMLLoader.load(
 					getClass().getResource("view/Main-view.fxml"));
 			
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			
-			Scene scene = new Scene(root,
-					screenSize.getWidth() / 1.5, screenSize.getHeight() / 1.5);
+			Scene scene = new Scene(root);
+					//screenSize.getWidth(), screenSize.getHeight());
 			
 			MainView main = (MainView) ViewProvider.getView("main");
 			
@@ -33,7 +36,7 @@ public class KnjiznicaMain extends Application {
 					"resources/BackgroundStyle.css").toExternalForm());
 			
 			ViewProvider.setView("primaryStage", primaryStage);
-			
+
 			primaryStage.setTitle("ICM SoC 17 - Library");
 			primaryStage.setScene(scene);
 			primaryStage.show();
