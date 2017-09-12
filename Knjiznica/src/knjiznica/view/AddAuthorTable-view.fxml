@@ -61,7 +61,7 @@
             </TextField>
          </top>
          <center>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane vgap="10.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" />
               </columnConstraints>
@@ -78,7 +78,7 @@
                <children>
                   <TextField fx:id="firstNameField" promptText="First Name" GridPane.rowIndex="1">
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </GridPane.margin>
                   </TextField>
                   <HBox alignment="CENTER">
@@ -93,48 +93,48 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets top="5.0" />
+                        <Insets />
                      </GridPane.margin>
                   </HBox>
                   <TextField fx:id="middleNameField" promptText="Middle Name" GridPane.rowIndex="2">
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </GridPane.margin>
                   </TextField>
                   <TextField fx:id="lastNameField" promptText="Last Name" GridPane.rowIndex="3">
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </GridPane.margin>
                   </TextField>
                   <HBox alignment="CENTER_LEFT" GridPane.rowIndex="4">
                      <children>
                         <CheckBox fx:id="isAliveCheck" mnemonicParsing="false" text="Author is Alive">
                            <HBox.margin>
-                              <Insets top="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </CheckBox>
                      </children>
                   </HBox>
                   <TextField fx:id="yearOfBirthField" promptText="Year of Birth" GridPane.rowIndex="5">
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </GridPane.margin>
                   </TextField>
                   <TextField fx:id="yearOfDeathField" promptText="Year of Death" GridPane.rowIndex="6">
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </GridPane.margin>
                   </TextField>
                   <HBox alignment="CENTER" GridPane.rowIndex="7">
                      <children>
                         <Button fx:id="backButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0">
                            <HBox.margin>
-                              <Insets right="10.0" top="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0">
                            <HBox.margin>
-                              <Insets top="10.0" />
+                              <Insets left="10.0" />
                            </HBox.margin>
                         </Button>
                      </children>
@@ -143,6 +143,9 @@
                <BorderPane.margin>
                   <Insets left="30.0" right="10.0" />
                </BorderPane.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </GridPane>
          </center>
       </BorderPane>
