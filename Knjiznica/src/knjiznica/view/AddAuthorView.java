@@ -92,7 +92,8 @@ public class AddAuthorView {
 	
 	public void initialize() {
 		
-		//TODO implement error when year has more than 4 digits and it should work when year is < 0
+		//FIXME implement error when year has more than 4 digits and it should work when year is < 0
+		//XXX Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C."
 		
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));

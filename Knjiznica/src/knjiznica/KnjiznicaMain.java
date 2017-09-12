@@ -23,7 +23,7 @@ public class KnjiznicaMain extends Application {
 
 			Group root = (Group) FXMLLoader.load(
 					getClass().getResource("view/Main-view.fxml"));
-			
+			//FIXME Screen flashes during loading and switching to maximized window.
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			Scene scene = new Scene(root);
 					//screenSize.getWidth(), screenSize.getHeight());
@@ -45,7 +45,7 @@ public class KnjiznicaMain extends Application {
 			e.printStackTrace();
 		}		
 	}
-	//TODO Close all statements
+	//FIXME Close all statements
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -390,8 +390,6 @@ public class UpdateLibraryView {
 		
 		boolean errorInfo = false;
 		
-		 //TODO Check if email is already in use (UNIQUE constraint)
-		
 		for (int i = 0; i < beginTimeList.size(); ++i) {
 			beginTimeList.get(i).setStyle("");
 			endTimeList.get(i).setStyle("");

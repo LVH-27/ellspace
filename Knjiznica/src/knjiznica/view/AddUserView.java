@@ -131,9 +131,7 @@ public class AddUserView {
 		
 		final String redBorder = "-fx-border-color: #ff0000;\n";
 		
-		/*
-		 * DOUBLED EMAIL NOT UNIQUE
-		 */
+//		FIXME Check if email is already in use (UNIQUE constraint)
 		
 		check = true;
 			

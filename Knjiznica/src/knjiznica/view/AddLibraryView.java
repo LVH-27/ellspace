@@ -283,9 +283,7 @@ public class AddLibraryView {
 		endTime   = new ArrayList<String>();
 		
 		boolean errorInfo = false;
-		
-		 //TODO Check if email is already in use (UNIQUE constraint)
-		 
+				 
 		checkBoxList.add(check1); checkBoxList.add(check2); checkBoxList.add(check3); checkBoxList.add(check4); checkBoxList.add(check5); checkBoxList.add(check6); checkBoxList.add(check7);
 		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
 		endTimeList.add(end1); endTimeList.add(end2); endTimeList.add(end3); endTimeList.add(end4); endTimeList.add(end5); endTimeList.add(end6); endTimeList.add(end7);
