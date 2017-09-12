@@ -26,6 +26,7 @@ import knjiznica.model.PostalCodeComboThread;
 import knjiznica.model.UpdateLibraryInfo;
 import knjiznica.model.ViewProvider;
 
+
 public class UpdateLibraryView {
 	
 	@FXML
@@ -156,11 +157,13 @@ public class UpdateLibraryView {
 	private String houseNumber;
 	private String postalCode;
 	private SingleSelectionModel<String> postalCodeSingle;
+	private ArrayList<String> checkList;
 	private ArrayList<String> beginTime;
 	private ArrayList<String> endTime;
 	private ArrayList<TextField> beginTimeList;
 	private ArrayList<TextField> endTimeList;
 	private ArrayList<CheckBox> checkBoxList;
+
 	
 	public void initialize() {
 		
@@ -170,6 +173,12 @@ public class UpdateLibraryView {
 		checkBoxList  = new ArrayList<CheckBox>();
 		beginTimeList = new ArrayList<TextField>();
 		endTimeList   = new ArrayList<TextField>();
+		checkList = new ArrayList<String>();
+		beginTime = new ArrayList<String>();
+		endTime = new ArrayList<String>();
+		checkList = GlobalCollection.getBusinessHours().getCheck();
+		beginTime = GlobalCollection.getBusinessHours().getBeginTime();
+		endTime = GlobalCollection.getBusinessHours().getEndTime();
 		
 		checkBoxList.add(check1); checkBoxList.add(check2); checkBoxList.add(check3); checkBoxList.add(check4); checkBoxList.add(check5); checkBoxList.add(check6); checkBoxList.add(check7);
 		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
@@ -203,7 +212,7 @@ public class UpdateLibraryView {
 						((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateLibrary);
 						
 					} catch (IOException e1) {
-//						e1.printStackTrace();
+						e1.printStackTrace();
 						
 					}
 					
@@ -247,75 +256,18 @@ public class UpdateLibraryView {
 			postalCodeCombo.getSelectionModel().select(library.getPostalCode() + " - " + library.getCity());
 		}
 		
-		if(GlobalCollection.getBusinessHours().getCheck1().equals("Opened")) {
-			check1.setSelected(true);
-			begin1.setText(GlobalCollection.getBusinessHours().getBeginTime1());
-			end1.setText(GlobalCollection.getBusinessHours().getEndTime1());
-		} else {
-			check1.setSelected(false);
-			begin1.setText("");
-			end1.setText("");
+		for(int i = 0; i < checkList.size(); ++i) {
+			if(checkList.get(i).equals("Opened")) {
+				checkBoxList.get(i).setSelected(true);
+				beginTimeList.get(i).setText(beginTime.get(i));
+				endTimeList.get(i).setText(endTime.get(i));
+			} else {
+				checkBoxList.get(i).setSelected(false);
+				beginTimeList.get(i).setText("");
+				endTimeList.get(i).setText("");
+			}
 		}
-		
-		if(GlobalCollection.getBusinessHours().getCheck2().equals("Opened")) {
-			check2.setSelected(true);
-			begin2.setText(GlobalCollection.getBusinessHours().getBeginTime2());
-			end2.setText(GlobalCollection.getBusinessHours().getEndTime2());
-		} else {
-			check2.setSelected(false);
-			begin2.setText("");
-			end2.setText("");
-		}
-		
-		if(GlobalCollection.getBusinessHours().getCheck3().equals("Opened")) {
-			check3.setSelected(true);
-			begin3.setText(GlobalCollection.getBusinessHours().getBeginTime3());
-			end3.setText(GlobalCollection.getBusinessHours().getEndTime3());
-		} else {
-			check3.setSelected(false);
-			begin3.setText("");
-			end3.setText("");
-		}
-		
-		if(GlobalCollection.getBusinessHours().getCheck4().equals("Opened")) {
-			check4.setSelected(true);
-			begin4.setText(GlobalCollection.getBusinessHours().getBeginTime4());
-			end4.setText(GlobalCollection.getBusinessHours().getEndTime4());
-		} else {
-			check4.setSelected(false);
-			begin4.setText("");
-			end4.setText("");
-		}
-		
-		if(GlobalCollection.getBusinessHours().getCheck5().equals("Opened")) {
-			check5.setSelected(true);
-			begin5.setText(GlobalCollection.getBusinessHours().getBeginTime5());
-			end5.setText(GlobalCollection.getBusinessHours().getEndTime5());
-		} else {
-			check5.setSelected(false);
-			begin5.setText("");
-			end5.setText("");
-		}
-		
-		if(GlobalCollection.getBusinessHours().getCheck6().equals("Opened")) {
-			check6.setSelected(true);
-			begin6.setText(GlobalCollection.getBusinessHours().getBeginTime6());
-			end6.setText(GlobalCollection.getBusinessHours().getEndTime6());
-		} else {
-			check6.setSelected(false);
-			begin6.setText("");
-			end6.setText("");
-		}
-		
-		if(GlobalCollection.getBusinessHours().getCheck7().equals("Opened")) {
-			check7.setSelected(true);
-			begin7.setText(GlobalCollection.getBusinessHours().getBeginTime7());
-			end7.setText(GlobalCollection.getBusinessHours().getEndTime7());
-		} else {
-			check7.setSelected(false);
-			begin7.setText("");
-			end7.setText("");
-		}
+
 		begin7.setDisable(false);
 		end7.setDisable(false);
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
@@ -534,8 +486,6 @@ public class UpdateLibraryView {
 		
 		boolean check = true;
 		
-		beginTime = new ArrayList<String>();
-		
 		for (int i = 0; i < checkBoxList.size(); ++i) {
 			if (checkBoxList.get(i).isSelected()) {
 				if (!isValid(beginTimeList.get(i).getText()) || !isValid(endTimeList.get(i).getText())) {
@@ -563,7 +513,22 @@ public class UpdateLibraryView {
 			errorLabel.setVisible(false); 
 			errorLabelTime.setVisible(false);
 			
-			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected(), library.getID(), library.getAddressID());
+			checkList = new ArrayList<String>();
+			beginTime = new ArrayList<String>();
+			endTime = new ArrayList<String>();
+			
+			for(int i = 0; i < GlobalCollection.getBusinessHours().getBeginTime().size(); ++i) {
+				if(checkBoxList.get(i).isSelected()) {
+					checkList.add("Opened");
+				} else {
+					checkList.add("Closed");
+				}
+				
+				beginTime.add(beginTimeList.get(i).getText());
+				endTime.add(endTimeList.get(i).getText());
+			}
+			
+			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkList, onlineLibraryCheck.isSelected(), library.getID(), library.getAddressID());
 			
 	    	if (!isInterrupted && isReached) {
 	    		
@@ -575,6 +540,9 @@ public class UpdateLibraryView {
 				GlobalCollection.getLibrary().setStreet(street);
 				GlobalCollection.getLibrary().setHouseNumber(houseNumber);
 				GlobalCollection.getLibrary().setPostalCode(Integer.toString(postalCodeInt));
+				GlobalCollection.getBusinessHours().setCheck(checkList);
+				GlobalCollection.getBusinessHours().setBeginTime(beginTime);
+				GlobalCollection.getBusinessHours().setEndTime(endTime);
 				
 				if (onlineLibraryCheck.isSelected()) {
 					GlobalCollection.getLibrary().setCountry(null);
@@ -583,7 +551,7 @@ public class UpdateLibraryView {
 					GlobalCollection.getLibrary().setPostalCode(null);
 					GlobalCollection.getLibrary().setAddressID(-1);
 				}
-
+				
 	    		GlobalCollection.setEditable(false);
 	    		AlertWindowOpen.openWindow("Library successfully updated!");
 	    		

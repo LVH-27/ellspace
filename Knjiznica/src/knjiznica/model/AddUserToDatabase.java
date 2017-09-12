@@ -2,14 +2,11 @@ package knjiznica.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.postgresql.util.PSQLException;
-
 import knjiznica.resources.ConnectionData;
 import knjiznica.view.AddUserView;
+
 
 public class AddUserToDatabase implements Runnable{
 	
@@ -26,79 +23,28 @@ public class AddUserToDatabase implements Runnable{
 	@Override
 	public void run() {
 		
-		PreparedStatement pstmtAddress = null;
-		PreparedStatement pstmtUser = null;
-		PreparedStatement pstmtLocation = null;
-		
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 			
-			String queryAddress = "INSERT INTO public.\"Address\" VALUES(DEFAULT, ?, ?, ?, ?) RETURNING \"Address\".\"AddressID\"";
+			int addressID = -1;
 			
-			pstmtAddress = con.prepareStatement(queryAddress, new String[]{"Address.AddressID"});
+			addressID = InsertNewAddress.insert(con, country, postalCode, street, houseNumber);
 			
-			pstmtAddress.setString(1, country);
-			pstmtAddress.setInt(2, postalCode);
-			pstmtAddress.setString(3, street);
-			pstmtAddress.setString(4, houseNumber);
+			int userID = -1;
 			
-			String addressID = null;
+			userID = InsertNewUser.insert(con, firstName, middleName, lastName, addressID, phoneNumber, email);
 			
-			int i = pstmtAddress.executeUpdate();
-			if (i > 0) {
-				ResultSet rs = pstmtAddress.getGeneratedKeys();
-				while (rs.next()) {
-					addressID = rs.getString(1);
-				}
-			}
-			
-			String queryUser = "INSERT INTO public.\"User\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?) RETURNING \"User\".\"UserID\"";
-			
-			pstmtUser = con.prepareStatement(queryUser, new String[]{"User.UserID"});
-			
-			pstmtUser.setString(1, firstName);
-			pstmtUser.setString(2, middleName);
-			pstmtUser.setString(3, lastName);
-			pstmtUser.setInt(4, Integer.parseInt(addressID));
-			pstmtUser.setString(5, phoneNumber);
-			pstmtUser.setString(6, email);
-			
-			String userID = null;
-			
-			int j = pstmtUser.executeUpdate();
-			if (j > 0) {
-				ResultSet rs = pstmtUser.getGeneratedKeys();
-				while (rs.next()) {
-					userID = rs.getString(1);
-				}
-			}
-			
-			String queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, null, ?)";
-			
-			pstmtLocation = con.prepareStatement(queryLocation);
-			
-			pstmtLocation.setInt(1, 2);
-			pstmtLocation.setInt(2, Integer.parseInt(userID));
-			
-			pstmtLocation.executeUpdate();
+			InsertNewLocation.insert(con, userID, 2);
 			
 		} catch (PSQLException e) {
+			e.printStackTrace();
 			AddUserView.isReached = false;
 			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			AddUserView.isReached = false;
-		} finally {
-			try {
-				pstmtAddress.close();
-				pstmtUser.close();
-				pstmtLocation.close();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-		}
+		} 
 	}
 	
 	public static void addUser(String firstNameIn, String middleNameIn, String lastNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn) {

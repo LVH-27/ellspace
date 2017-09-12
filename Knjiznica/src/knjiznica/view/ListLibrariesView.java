@@ -1,8 +1,9 @@
 package knjiznica.view;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
-
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,13 +52,39 @@ public class ListLibrariesView {
 	@FXML
 	private TableColumn<Library, String> informationCol;
 	
+	@FXML
+	private TableColumn<Library, String> opensCol;
+	
+	@FXML
+	private TableColumn<Library, String> closesCol;
+	
 	public void initialize() {
 		
 		GlobalCollection.emptyList();
 		
+		LocalDate localDate = LocalDate.now();
+		DayOfWeek weekDay = localDate.getDayOfWeek();
+		int weekDayInt = weekDay.getValue();
+		
 		ArrayList<Library> libraries = SelectLibraries.select(); 
 		
+		ArrayList<String> weekCheck = new ArrayList<String>(); 
+		ArrayList<String> weekOpens = new ArrayList<String>(); 
+		ArrayList<String> weekCloses = new ArrayList<String>(); 
+		
 		for (int i = 0; i < libraries.size(); ++i) {
+			weekCheck = GlobalCollection.getBusinessHoursList().get(i).getCheck();
+			weekOpens = GlobalCollection.getBusinessHoursList().get(i).getBeginTime();
+			weekCloses = GlobalCollection.getBusinessHoursList().get(i).getEndTime();
+			if(weekCheck.get(weekDayInt - 1).equals("Opened")) {
+				libraries.get(i).setOpens(weekOpens.get(weekDayInt - 1));
+				libraries.get(i).setCloses(weekCloses.get(weekDayInt - 1));
+				
+			} else {
+				libraries.get(i).setOpens("-");
+				libraries.get(i).setCloses("-");
+			}
+			
 			GlobalCollection.getLibraryList().add(libraries.get(i));
 		} 
 		
@@ -80,6 +107,10 @@ public class ListLibrariesView {
 		emailCol.         setStyle("-fx-alignment: CENTER;");
 		informationCol.   setCellValueFactory(new PropertyValueFactory<Library, String>("information"));
 		informationCol.   setStyle("-fx-alignment: CENTER;");
+		opensCol.         setCellValueFactory(new PropertyValueFactory<Library, String>("opens"));
+		opensCol.         setStyle("-fx-alignment: CENTER;");
+		closesCol.        setCellValueFactory(new PropertyValueFactory<Library, String>("closes"));
+		closesCol.        setStyle("-fx-alignment: CENTER;");
 		
 		tableLibraryList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

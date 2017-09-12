@@ -2,7 +2,6 @@ package knjiznica.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
 import knjiznica.resources.ConnectionData;
@@ -20,53 +19,18 @@ public class AddAuthorToDatabase implements Runnable{
 	@Override
 	public void run() {
 		
-		PreparedStatement pstmtAuthor = null; 
-		
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 			
-			String queryAuthor = "INSERT INTO public.\"Author\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)";
-			
-			pstmtAuthor = con.prepareStatement(queryAuthor);
-			
-			if (middleName.isEmpty()) {
-				middleName = null;
-			}
-			else {
-				middleName = FormattingName.format(middleName);
-			}
-			
-			firstName = FormattingName.format(firstName);
-			lastName = FormattingName.format(lastName);
-			
-			pstmtAuthor.setString(1, firstName);
-			pstmtAuthor.setString(2, middleName);
-			pstmtAuthor.setString(3, lastName);
-			
-			if (!AddAuthorView.checkIndeterminate) {
-				pstmtAuthor.setBoolean(4, isAlive);
-			} else {
-				pstmtAuthor.setNull(4, java.sql.Types.BOOLEAN);
-			}
-			
-			pstmtAuthor.setString(5, yearOfBirth);
-			pstmtAuthor.setString(6, yearOfDeath);
-			
-			pstmtAuthor.executeUpdate();
+			InsertNewAuthor.insert(con, firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);
 			
 		} catch (PSQLException e) {
 			AddAuthorView.isReached = false;
 			
 		} catch (SQLException e) {
 			AddAuthorView.isReached = false;
-		} finally {
-			try {
-				pstmtAuthor.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 	}
 	
 	public static void addAuthor(String firstNameIn, String middleNameIn, String lastNameIn, boolean isAliveIn, String yearOfBirthIn, String yearOfDeathIn) {

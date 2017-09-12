@@ -16,7 +16,7 @@ public class GlobalCollection {
 	static {
 		lUser = FXCollections.observableArrayList();
 		lLibrary = FXCollections.observableArrayList();
-		lBusinessHours = FXCollections.observableArrayList();;
+		lBusinessHours = FXCollections.observableArrayList();
 	}
 	
 	private GlobalCollection() {
@@ -26,6 +26,7 @@ public class GlobalCollection {
 	public static void emptyList() {
 		lUser = FXCollections.observableArrayList();	
 		lLibrary = FXCollections.observableArrayList();	
+		lBusinessHours = FXCollections.observableArrayList();
 	}
 	
 	public static ObservableList<User> getUserList() {

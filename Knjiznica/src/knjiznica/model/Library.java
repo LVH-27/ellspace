@@ -12,6 +12,8 @@ public class Library {
 	private String email;
 	private String information;
 	private String city;
+	private String opens;
+	private String closes;
 	private int addressID;
 	
 	public Library(int ID, String firstName, String country, String postalCode, String street, String houseNumber, String phoneNumber, String email, String information, String city, Integer addressID) {
@@ -114,5 +116,22 @@ public class Library {
 
 	public void setAddressID(int addressID) {
 		this.addressID = addressID;
+	}
+
+	public String getOpens() {
+		return opens;
+	}
+
+	public void setOpens(String opens) {
+		this.opens = opens;
+	}
+
+	public String getCloses() {
+		return closes;
+	}
+
+	public void setCloses(String closes) {
+		this.closes = closes;
 	}	
+	
 }
