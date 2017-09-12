@@ -9,7 +9,14 @@ public class InsertNewLocation {
 	private static PreparedStatement pstmtLocation; 
 	
 	public static void insert(Connection con, int ID, int type) throws SQLException {
-		String queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, ?, null)";
+		
+		String queryLocation = null;
+		
+		if (type == 1) {
+			queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, ?, null)";
+		} else {
+			queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, null, ?)";
+		}
 		
 		pstmtLocation = con.prepareStatement(queryLocation);
 		
