@@ -110,8 +110,10 @@ public class UpdateLibraryInfo implements Runnable {
 				pstmtBusiness = con.prepareStatement(queryBusinessHours);
 				if(checkList.get(i) == "Opened") {
 					pstmtBusiness.setBoolean(1, false);
+					
 				} else {
 					pstmtBusiness.setBoolean(1, true);
+
 				}
 				pstmtBusiness.setTime(2, java.sql.Time.valueOf(beginTime.get(i) + ":00"));
 				pstmtBusiness.setTime(3, java.sql.Time.valueOf(endTime.get(i) + ":00"));

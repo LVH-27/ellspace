@@ -520,12 +520,15 @@ public class UpdateLibraryView {
 			for(int i = 0; i < GlobalCollection.getBusinessHours().getBeginTime().size(); ++i) {
 				if(checkBoxList.get(i).isSelected()) {
 					checkList.add("Opened");
+					beginTime.add(beginTimeList.get(i).getText());
+					endTime.add(endTimeList.get(i).getText());
 				} else {
 					checkList.add("Closed");
+					beginTime.add("00:00");
+					endTime.add("00:00");
 				}
 				
-				beginTime.add(beginTimeList.get(i).getText());
-				endTime.add(endTimeList.get(i).getText());
+				
 			}
 			
 			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkList, onlineLibraryCheck.isSelected(), library.getID(), library.getAddressID());
