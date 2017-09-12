@@ -2,7 +2,7 @@ package knjiznica.model;
 
 public class CheckInputLetters { 
 	
-	private static char[] letters = {'A', 'a', 'B', 'b', 'C', 'c', 'È', 'è', 'Æ', 'æ', 'D', 'd', 'Ğ', 'ğ', 'E', 'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'R', 'r', 'S', 's', 'Š', 'š', 'T', 't', 'U', 'u', 'V', 'v', 'Z', 'z', '', '', 'Q', 'q', 'W', 'w', 'X', 'x', 'Y', 'y', ' ', '-'};
+	private static char[] letters = {'A', 'a', 'B', 'b', 'C', 'c', 'ÄŒ', 'Ä', 'Ä†', 'Ä‡', 'D', 'd', 'Ä', 'Ä‘', 'E', 'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'R', 'r', 'S', 's', 'Å ', 'Å¡', 'T', 't', 'U', 'u', 'V', 'v', 'Z', 'z', 'Å½', 'Å¾', 'Q', 'q', 'W', 'w', 'X', 'x', 'Y', 'y', ' ', '-'};
 	
 	public static boolean check(String wordIn) {
 		boolean isPossible = true;

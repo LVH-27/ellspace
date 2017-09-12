@@ -38,7 +38,6 @@
             <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
-            <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <padding>
             <Insets left="20.0" right="30.0" />
@@ -80,7 +79,7 @@
             <TextField promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <TextField promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <TextField promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <HBox GridPane.columnIndex="6" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" GridPane.rowSpan="2147483647">
+            <HBox GridPane.columnIndex="6" GridPane.columnSpan="2147483647" GridPane.rowIndex="9" GridPane.rowSpan="2147483647">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" />
                </GridPane.margin>
