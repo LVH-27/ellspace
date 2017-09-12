@@ -45,7 +45,7 @@ public class KnjiznicaMain extends Application {
 			e.printStackTrace();
 		}		
 	}
-	
+	//TODO Close all statements
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -7,6 +7,7 @@ public class GlobalCollection {
 	
 	private static ObservableList<User> lUser;
 	private static ObservableList<Library> lLibrary;
+	private static ObservableList<Author> lAuthor;
 	private static ObservableList<BusinessHours> lBusinessHours;
 	private static User user;
 	private static Library library;
@@ -17,16 +18,14 @@ public class GlobalCollection {
 		lUser = FXCollections.observableArrayList();
 		lLibrary = FXCollections.observableArrayList();
 		lBusinessHours = FXCollections.observableArrayList();
-	}
-	
-	private GlobalCollection() {
-		 
+		lAuthor = FXCollections.observableArrayList();
 	}
 	
 	public static void emptyList() {
 		lUser = FXCollections.observableArrayList();	
 		lLibrary = FXCollections.observableArrayList();	
 		lBusinessHours = FXCollections.observableArrayList();
+		lAuthor = FXCollections.observableArrayList();
 	}
 	
 	public static ObservableList<User> getUserList() {
@@ -75,7 +74,16 @@ public class GlobalCollection {
 	
 	public static BusinessHours getBusinessHours() {
 		return businessHours;
+	}
+
+	public static ObservableList<Author> getAuthorList() {
+		return lAuthor;
+	}
+
+	public static void setAuthorList(ObservableList<Author> lAuthor) {
+		GlobalCollection.lAuthor = lAuthor;
 	}	
+	
 }
 
 //TODO Add new column with time/date when user was added

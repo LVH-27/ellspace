@@ -1,20 +1,29 @@
 package knjiznica.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import knjiznica.model.AddAuthorToDatabase;
 import knjiznica.model.AlertWindowOpen;
+import knjiznica.model.Author;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.ErrorLabelMessage;
+import knjiznica.model.GlobalCollection;
+import knjiznica.model.SelectAuthors;
 import knjiznica.model.ViewProvider;
+
 
 public class AddAuthorView {
 	
@@ -51,6 +60,24 @@ public class AddAuthorView {
 	@FXML
 	private Label errorLabelTooMuch;
 	
+	@FXML
+	private TableView<Author> tableAuthorList;
+	
+	@FXML
+	private TableColumn<Author, String> firstNameCol;
+	
+	@FXML
+	private TableColumn<Author, String> middleNameCol;
+	
+	@FXML
+	private TableColumn<Author, String> lastNameCol;
+	
+	@FXML
+	private TableColumn<Author, String> yearOfBirthCol;
+	
+	@FXML
+	private TableColumn<Author, String> yearOfDeathCol;
+	
 	public static boolean checkIndeterminate;
 	
 	public static boolean isInterrupted = false;
@@ -75,7 +102,25 @@ public class AddAuthorView {
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
 		
-//		searchField.setOnKeyReleased(value);
+		ArrayList<Author> authors = SelectAuthors.select(); 
+		
+		GlobalCollection.emptyList();
+		
+		for (int i = 0; i < authors.size(); ++i) {
+			GlobalCollection.getAuthorList().add(authors.get(i));
+		} 
+		
+		tableAuthorList. setItems(GlobalCollection.getAuthorList());
+		firstNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
+		firstNameCol.  setStyle("-fx-alignment: CENTER;");
+		middleNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("middleName"));
+		middleNameCol.  setStyle("-fx-alignment: CENTER;");
+		lastNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
+		lastNameCol.  setStyle("-fx-alignment: CENTER;");
+		yearOfBirthCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfBirth"));
+		yearOfBirthCol.  setStyle("-fx-alignment: CENTER;");
+		yearOfDeathCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfDeath"));
+		yearOfDeathCol.  setStyle("-fx-alignment: CENTER;");
 	}
 	
 	@FXML 
