@@ -69,7 +69,7 @@ public class StartScreenView {
 	@FXML
 	private void activateAddBook() throws IOException {
 		//TODO Change loaded FXML back to AddBook-view.fxml
-		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
+		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisher-view.fxml"));
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
 	
