@@ -93,7 +93,8 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateSearch() throws IOException {
-		BorderPane search = (BorderPane) ViewProvider.getView("search");
+		//TODO search replaced with AddAuthorTable 
+		BorderPane search = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(search);
 	}
 	
