@@ -44,9 +44,6 @@ public class LoginView {
 		password = passwordText.getText();
 		
 		LoginThread.login();
-		
-		//TODO Remove comment "isCorrect = true" (bypass login);
-		//isCorrect = true;
 
 		if (isCorrect) {
 			errorLabel.setVisible(false);

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
 
 import knjiznica.resources.ConnectionData;
+import knjiznica.view.AddPublisherView;
 import knjiznica.view.AddUserView;
 
 public class AddPublisherToDatabase implements Runnable{
@@ -18,88 +19,41 @@ public class AddPublisherToDatabase implements Runnable{
 	private static int postalCode;
 	private static String street;
 	private static String houseNumber;
+	private static boolean isKnown;
+	private static int publisherID;
 	
 	@Override
 	public void run() {
-		
-		PreparedStatement pstmtAddress = null;
-		PreparedStatement pstmtPublisher = null;
-		PreparedStatement pstmtLocation = null;
 		
 		try {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 			
-			String queryAddress = "INSERT INTO public.\"Address\" VALUES(DEFAULT, ?, ?, ?, ?) RETURNING \"Address\".\"AddressID\"";
+			int addressID = -1;
 			
-			pstmtAddress = con.prepareStatement(queryAddress, new String[]{"Address.AddressID"});
-			
-			pstmtAddress.setString(1, country);
-			pstmtAddress.setInt(2, postalCode);
-			pstmtAddress.setString(3, street);
-			pstmtAddress.setString(4, houseNumber);
-			
-			String addressID = null;
-			
-			int i = pstmtAddress.executeUpdate();
-			if (i > 0) {
-				ResultSet rs = pstmtAddress.getGeneratedKeys();
-				while (rs.next()) {
-					addressID = rs.getString(1);
-				}
+			if(isKnown) {
+				addressID = InsertNewAddress.insert(con, country, postalCode, street, houseNumber);
 			}
 			
-			String queryPublisher = "INSERT INTO public.\"Publisher\" VALUES(DEFAULT, ?, ?) RETURNING \"Publisher\".\"PublisherID\"";
-			
-			pstmtPublisher = con.prepareStatement(queryPublisher);
-			
-			pstmtPublisher.setString(1, name);
-			pstmtPublisher.setInt(2, Integer.parseInt(addressID));
-			
-			String publisherID = null;
-			
-			int j = pstmtPublisher.executeUpdate();
-			if (j > 0) {
-				ResultSet rs = pstmtPublisher.getGeneratedKeys();
-				while (rs.next()) {
-					publisherID = rs.getString(1);
-				}
-			}
-			
-			//TODO See if we should return the key here for PublisherLinks table, or get it again from AddBook
-			String queryLocation = "INSERT INTO public.\"Location\" VALUES(DEFAULT, ?, null, ?)";
-			
-			pstmtLocation = con.prepareStatement(queryLocation);
-			
-			pstmtLocation.setInt(1, 2);
-			pstmtLocation.setInt(2, Integer.parseInt(publisherID));
-			
-//			pstmtLocation.executeUpdate();
+			publisherID = InsertNewPublisher.insert(con, name, addressID);
 			
 		} catch (PSQLException e) {
-			AddUserView.isReached = false;
+			e.printStackTrace();
+			AddPublisherView.isReached = false;
 			
 		} catch (SQLException e) {
-			AddUserView.isReached = false;
-		} finally {
-			try {
-				pstmtAddress.close();
-				pstmtPublisher.close();
-				pstmtLocation.close();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+			AddPublisherView.isReached = false;
+		} 
 	}
 	
-	public static void addPublisher(String firstNameIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn) {
+	public static void addPublisher(String firstNameIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn, boolean isKnownIn) {
 		
 		name = firstNameIn;
 		country = countryIn;
 		postalCode = postalCodeIn;
 		street = streetIn;
 		houseNumber = houseNumberIn;
+		isKnown = isKnownIn;
 		
 		Thread t = new Thread(new AddPublisherToDatabase());
 		t.start();

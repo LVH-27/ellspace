@@ -11,11 +11,9 @@ import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import knjiznica.model.AddPublisherToDatabase;
 import knjiznica.model.AlertWindowOpen;
-import knjiznica.model.CheckInputLetters;
 import knjiznica.model.ErrorLabelMessage;
 import knjiznica.model.FormattingName;
 import knjiznica.model.PostalCodeComboThread;
@@ -98,7 +96,7 @@ public class AddPublisherView {
 	
 	@FXML
 	private void activateAdd() throws IOException {
-		//TODO Fix the error showing that information is missing when CheckBox is OFF (Country and postal code are "missing")
+		
 		isInterrupted = false;
 		isReached = true;
 		
@@ -132,28 +130,19 @@ public class AddPublisherView {
 			errorLabel.setVisible(true);	
 		}
 		
-		if (postalCodeSingle.isEmpty()) {
+		if (postalCodeSingle.isEmpty() && addressCheck.isSelected()) {
 			check = false;
 			postalCodeCombo.setStyle(redBorder);
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
 		} 
 		
-		if (country.isEmpty()) {
+		if (country.isEmpty() && addressCheck.isSelected()) {
 			check = false;
 			countryField.setStyle(redBorder);
 			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabel.setVisible(true);
 		} 
-		
-		if (!publisherName.isEmpty() && !CheckInputLetters.check(publisherName)) {
-			check = false;
-			nameField.setStyle(redBorder);
-			if (!errorLabel.isVisible()) {
-				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
-				errorLabel.setVisible(true);
-			}
-		}
 		
 		if (houseNumber.length() > 6) {
 			check = false;
@@ -179,12 +168,17 @@ public class AddPublisherView {
 			
 			errorLabel.setVisible(false);
 			
-			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			int postalCodeInt = -1;
+			
+			if(addressCheck.isSelected()) {
+				postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			}
+			
 			
 			isInterrupted = false;
 			isReached = true;
 			
-			AddPublisherToDatabase.addPublisher(publisherName, country, postalCodeInt, street, houseNumber);
+			AddPublisherToDatabase.addPublisher(publisherName, country, postalCodeInt, street, houseNumber, addressCheck.isSelected());
 			
 			if (!isInterrupted && isReached) {
 				AlertWindowOpen.openWindow("Publisher successfully added!");
