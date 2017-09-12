@@ -95,6 +95,8 @@ public class AddAuthorView {
 		//FIXME implement error when year has more than 4 digits and it should work when year is < 0
 		//XXX Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C."
 		
+		//TODO Emphasize what values are mandatory and what are optional.
+		
 		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -111,17 +113,17 @@ public class AddAuthorView {
 			GlobalCollection.getAuthorList().add(authors.get(i));
 		} 
 		
-		tableAuthorList. setItems(GlobalCollection.getAuthorList());
-		firstNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
-		firstNameCol.  setStyle("-fx-alignment: CENTER;");
+		tableAuthorList.setItems(GlobalCollection.getAuthorList());
+		firstNameCol.   setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
+		firstNameCol.   setStyle("-fx-alignment: CENTER;");
 		middleNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("middleName"));
 		middleNameCol.  setStyle("-fx-alignment: CENTER;");
-		lastNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
-		lastNameCol.  setStyle("-fx-alignment: CENTER;");
-		yearOfBirthCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfBirth"));
-		yearOfBirthCol.  setStyle("-fx-alignment: CENTER;");
-		yearOfDeathCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfDeath"));
-		yearOfDeathCol.  setStyle("-fx-alignment: CENTER;");
+		lastNameCol.    setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
+		lastNameCol.    setStyle("-fx-alignment: CENTER;");
+		yearOfBirthCol. setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfBirth"));
+		yearOfBirthCol. setStyle("-fx-alignment: CENTER;");
+		yearOfDeathCol. setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfDeath"));
+		yearOfDeathCol. setStyle("-fx-alignment: CENTER;");
 	}
 	
 	@FXML 
