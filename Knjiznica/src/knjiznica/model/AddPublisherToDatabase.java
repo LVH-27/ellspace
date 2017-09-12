@@ -2,12 +2,8 @@ package knjiznica.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.postgresql.util.PSQLException;
-
 import knjiznica.resources.ConnectionData;
 import knjiznica.view.AddPublisherView;
 import knjiznica.view.AddUserView;

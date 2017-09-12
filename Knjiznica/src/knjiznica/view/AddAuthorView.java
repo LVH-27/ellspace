@@ -19,6 +19,9 @@ import knjiznica.model.ViewProvider;
 public class AddAuthorView {
 	
 	@FXML
+	private TextField searchField;
+	
+	@FXML
 	private TextField firstNameField;
 	
 	@FXML
@@ -71,6 +74,8 @@ public class AddAuthorView {
 		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
+		
+//		searchField.setOnKeyReleased(value);
 	}
 	
 	@FXML 
