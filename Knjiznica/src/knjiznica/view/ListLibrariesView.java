@@ -117,19 +117,18 @@ public class ListLibrariesView {
 			@Override
 			public void handle(MouseEvent event) {
 				if (event.getClickCount() > 1) {
-					@SuppressWarnings("rawtypes")
-					ObservableList<TablePosition> cells = tableLibraryList.getSelectionModel().getSelectedCells();
-					GlobalCollection.setBusinessHours(GlobalCollection.getBusinessHoursList().get(cells.get(0).getRow()));
-					GlobalCollection.setLibrary(GlobalCollection.getLibraryList().get(cells.get(0).getRow()));
-					GlobalCollection.setEditable(false);
-					BorderPane updateLibrary;
-					
 					try {
+						@SuppressWarnings("rawtypes")
+						ObservableList<TablePosition> cells = tableLibraryList.getSelectionModel().getSelectedCells();
+						GlobalCollection.setBusinessHours(GlobalCollection.getBusinessHoursList().get(cells.get(0).getRow()));
+						GlobalCollection.setLibrary(GlobalCollection.getLibraryList().get(cells.get(0).getRow()));
+						GlobalCollection.setEditable(false);
+						BorderPane updateLibrary;
 						updateLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateLibrary-view.fxml"));
 						((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateLibrary);
 						
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (Exception e) {
+						
 					}
 				}
 			}
