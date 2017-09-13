@@ -108,6 +108,11 @@ public class AddAuthorView {
 		//XXX Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C."
 		
 		//FIXME Emphasize what values are mandatory and what are optional.
+		addedAuthorsGrid.setManaged(true);
+		
+		if(GlobalCollection.getAddedAuthors().size() == 0) {
+			addedAuthorsGrid.setManaged(false);
+		}
 		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
 			Label l = new Label();
 			Button b = new Button();
@@ -133,7 +138,9 @@ public class AddAuthorView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
 					addedAuthorsGrid.getChildren().removeAll(l, b);
-			   
+					if(GlobalCollection.getAddedAuthors().size() == 0) {
+						addedAuthorsGrid.setManaged(false);
+					}
 			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 			        int i = 0;
 			        for (Node node : childrens) {
@@ -181,7 +188,7 @@ public class AddAuthorView {
 			if (middleNameFormat.equals(" - ")) {
 				middleNameFormat = " ";
 			}
-			
+			addedAuthorsGrid.setManaged(true);
 			l.setText(firstName + middleNameFormat + lastName);
 			
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
@@ -196,7 +203,9 @@ public class AddAuthorView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
 					addedAuthorsGrid.getChildren().removeAll(l, b);
-			   
+					if(GlobalCollection.getAddedAuthors().size() == 0) {
+						addedAuthorsGrid.setManaged(false);
+					}
 			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 			        int i = 0;
 			        for (Node node : childrens) {
@@ -284,6 +293,7 @@ public class AddAuthorView {
 							Label l = new Label();
 							Button b = new Button();
 							
+							addedAuthorsGrid.setManaged(true);
 							String firstName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getFirstName();
 							String middleNameFormat = " " + GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getMiddleName() + " ";
 							String lastName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getLastName();
@@ -306,7 +316,9 @@ public class AddAuthorView {
 							    public void handle(ActionEvent e) {
 							    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
 									addedAuthorsGrid.getChildren().removeAll(l, b);
-									
+									if(GlobalCollection.getAddedAuthors().size() == 0) {
+										addedAuthorsGrid.setManaged(false);
+									}
 							        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 							        int i = 0;
 							        for (Node node : childrens) {

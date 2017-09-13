@@ -106,13 +106,18 @@ public class AddPublisherView {
 	private final static int buttonSize = 20;
 	
 	public void initialize() {
-	
+		
+		addedPublishersGrid.setManaged(true);
+		if(GlobalCollection.getAddedPublishers().size() == 0) {
+			addedPublishersGrid.setManaged(false);
+		}
+		
 		for (int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
 			Label l = new Label();
 			Button b = new Button();
 
 			l.setText(GlobalCollection.getAddedPublishers().get(i).getName());
-			
+			addedPublishersGrid.setManaged(true);
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 			b.setId("removeButton");
@@ -124,7 +129,9 @@ public class AddPublisherView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 					addedPublishersGrid.getChildren().removeAll(l, b);
-			   
+					if(GlobalCollection.getAddedPublishers().size() == 0) {
+						addedPublishersGrid.setManaged(false);
+					}
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 			        int i = 0;
 			        for (Node node : childrens) {
@@ -175,7 +182,7 @@ public class AddPublisherView {
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 			b.setId("removeButton");
-			
+			addedPublishersGrid.setManaged(true);
 			addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size() + 1, l, b);
 			GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(GlobalCollection.getPublisherList().size() - 1));
 
@@ -184,7 +191,9 @@ public class AddPublisherView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 					addedPublishersGrid.getChildren().removeAll(l, b);
-			   
+					if(GlobalCollection.getAddedPublishers().size() == 0) {
+						addedPublishersGrid.setManaged(false);
+					}
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 			        int i = 0;
 			        for (Node node : childrens) {
@@ -280,7 +289,7 @@ public class AddPublisherView {
 							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 							b.setId("removeButton");
-							
+							addedPublishersGrid.setManaged(true);
 							GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(cells.get(0).getRow()));
 							addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size(), l, b);
 							
@@ -289,7 +298,9 @@ public class AddPublisherView {
 							    public void handle(ActionEvent e) {
 							    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 									addedPublishersGrid.getChildren().removeAll(l, b);
-							   
+									if(GlobalCollection.getAddedPublishers().size() == 0) {
+										addedPublishersGrid.setManaged(false);
+									}
 							        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 							        int i = 0;
 							        for (Node node : childrens) {
