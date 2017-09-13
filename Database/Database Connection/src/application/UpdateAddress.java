@@ -34,7 +34,7 @@ public class UpdateAddress {
 	        File file = new File(importPath + "\\PopulateTableEventTypeList.sql");
 	        @SuppressWarnings("resource")
 			Scanner sc = new Scanner(file);
-	        while(sc.hasNextLine()){
+	        while(sc.hasNextLine()) {
 	        	try {
 		        	pstmt = con.prepareStatement(sc.nextLine());
 		        	pstmt.executeQuery();

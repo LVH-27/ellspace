@@ -184,7 +184,7 @@ public class UpdateLibraryView {
 		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
 		endTimeList.add(end1); endTimeList.add(end2); endTimeList.add(end3); endTimeList.add(end4); endTimeList.add(end5); endTimeList.add(end6); endTimeList.add(end7);
 		
-		if(!isEditable) {
+		if (!isEditable) {
 			firstNameField.setEditable(false);
 			phoneNumberField.setEditable(false);
 			emailField.setEditable(false);
@@ -239,7 +239,7 @@ public class UpdateLibraryView {
 			informationField.setText("");
 		}
 		
-		if(library.getCountry() == null || library.getCountry().equals("-")) {
+		if (library.getCountry() == null || library.getCountry().equals("-")) {
 			onlineLibraryCheck.setSelected(true);
 			countryField.setVisible(false);
 			streetField.setVisible(false);
@@ -256,8 +256,8 @@ public class UpdateLibraryView {
 			postalCodeCombo.getSelectionModel().select(library.getPostalCode() + " - " + library.getCity());
 		}
 		
-		for(int i = 0; i < checkList.size(); ++i) {
-			if(checkList.get(i).equals("Opened")) {
+		for (int i = 0; i < checkList.size(); ++i) {
+			if (checkList.get(i).equals("Opened")) {
 				checkBoxList.get(i).setSelected(true);
 				beginTimeList.get(i).setText(beginTime.get(i));
 				endTimeList.get(i).setText(endTime.get(i));
@@ -515,8 +515,8 @@ public class UpdateLibraryView {
 			beginTime = new ArrayList<String>();
 			endTime = new ArrayList<String>();
 			
-			for(int i = 0; i < GlobalCollection.getBusinessHours().getBeginTime().size(); ++i) {
-				if(checkBoxList.get(i).isSelected()) {
+			for (int i = 0; i < GlobalCollection.getBusinessHours().getBeginTime().size(); ++i) {
+				if (checkBoxList.get(i).isSelected()) {
 					checkList.add("Opened");
 					beginTime.add(beginTimeList.get(i).getText());
 					endTime.add(endTimeList.get(i).getText());

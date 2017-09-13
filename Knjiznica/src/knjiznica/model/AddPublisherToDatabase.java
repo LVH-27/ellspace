@@ -27,7 +27,7 @@ public class AddPublisherToDatabase implements Runnable{
 			
 			int addressID = -1;
 			
-			if(isKnown) {
+			if (isKnown) {
 				addressID = InsertNewAddress.insert(con, country, postalCode, street, houseNumber);
 			}
 			

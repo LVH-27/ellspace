@@ -39,8 +39,8 @@ public class UpdateLibraryInfo implements Runnable {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 			
-			if(!onlineLibraryCheck) {
-				if(addressID == -1) {
+			if (!onlineLibraryCheck) {
+				if (addressID == -1) {
 					
 					addressID = InsertNewAddress.insert(con, country, postalCode, street, houseNumber);
 					
@@ -101,14 +101,14 @@ public class UpdateLibraryInfo implements Runnable {
 			
 			String queryBusinessHours;
 			
-			for(int i = 0; i < beginTime.size(); ++i) {
+			for (int i = 0; i < beginTime.size(); ++i) {
 				
 				queryBusinessHours = "UPDATE public.\"BusinessHours\" " 
 						+ "SET \"Closed\"=?, \"OpenTime\"=?, \"CloseTime\"=?" 
 						+ "WHERE \"LibraryID\"=? AND \"DayOfWeek\"=?";
 				
 				pstmtBusiness = con.prepareStatement(queryBusinessHours);
-				if(checkList.get(i) == "Opened") {
+				if (checkList.get(i) == "Opened") {
 					pstmtBusiness.setBoolean(1, false);
 					
 				} else {

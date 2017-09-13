@@ -28,6 +28,15 @@
 	-fx-effect: dropshadow(three-pass-box, rgba(100, 90, 70, 0.9), 10, 0, 2, 4);
 }
 
+#removeButton{
+    -fx-background-color: transparent;
+	-fx-border-color: transparent;
+}
+
+#removeButton:hover{
+	-fx-effect: dropshadow(three-pass-box, rgba(100, 90, 70, 0.6), 2, 0, 0, 0);
+}
+
 #transparentButton{
 	-fx-background-color: transparent;
 	-fx-background-radius: 18;

@@ -33,7 +33,7 @@ public class ReadBusinessHours {
 		
 			while (businessHoursSet.next()) {
 	
-				if(!businessHoursSet.getBoolean("Closed")) {
+				if (!businessHoursSet.getBoolean("Closed")) {
 					check.add("Opened");
 				} else {
 					check.add("Closed");

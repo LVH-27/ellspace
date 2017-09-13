@@ -258,7 +258,7 @@ public class UpdateUserView {
 		if (!firstName.isEmpty() && !CheckInputLetters.check(firstName)) {
 			check = false;
 			firstNameField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
 				
@@ -269,7 +269,7 @@ public class UpdateUserView {
 		if (!middleName.isEmpty() && !CheckInputLetters.check(middleName)) {
 			check = false;
 			middleNameField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
 				
@@ -280,7 +280,7 @@ public class UpdateUserView {
 		if (!lastName.isEmpty() && !CheckInputLetters.check(lastName)) {
 			check = false;
 			lastNameField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
 				
@@ -291,7 +291,7 @@ public class UpdateUserView {
 		if (houseNumber.length() > 6) {
 			check = false;
 			houseNumberField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
 				
@@ -302,7 +302,7 @@ public class UpdateUserView {
 		if (phoneNumber.length() > 20) {
 			check = false;
 			phoneNumberField.setStyle(redBorder);
-			if(!errorLabel.isVisible()) {
+			if (!errorLabel.isVisible()) {
 				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabel.setVisible(true);
 				
@@ -341,7 +341,7 @@ public class UpdateUserView {
 			
 			UpdateUserInfo.updateUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber, user.getAddressID(), user.getID());
 			
-			if(!isInterrupted && isReached) {
+			if (!isInterrupted && isReached) {
 				GlobalCollection.getUser().setFirstName(firstName);
 				GlobalCollection.getUser().setMiddleName(middleName);
 				GlobalCollection.getUser().setLastName(lastName);

@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -27,7 +26,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import knjiznica.model.AddPublisherToDatabase;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.ErrorLabelMessage;
@@ -38,8 +36,7 @@ import knjiznica.model.Publisher;
 import knjiznica.model.SelectPublishers;
 import knjiznica.model.ViewProvider;
 
-
-public class AddPublisherView { 
+public class AddPublisherView {
 	
 	@FXML
 	private TextField nameField;
@@ -106,37 +103,41 @@ public class AddPublisherView {
 	private String postalCode;
 	private SingleSelectionModel<String> postalCodeSingle;
 	private boolean check;
+	private final static int buttonSize = 20;
 	
 	public void initialize() {
 		
-		for(int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
-			HBox container = new HBox(8);
-			Label l1 = new Label();
-			l1.setText(GlobalCollection.getAddedPublishers().get(i).getName());
-			Button b1 = new Button();
-			b1.setText("-");
-			final Pos CENTER = Pos.CENTER;
-			container.getChildren().addAll(l1, b1);
-			container.setAlignment(CENTER);
-			addedPublishersGrid.addRow(i + 1, container);
-			b1.setOnAction(new EventHandler<ActionEvent>() {
-			    @Override public void handle(ActionEvent e) {
-			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(container) - 1);
-					addedPublishersGrid.getChildren().remove(container);
+		for (int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
+			Label l = new Label();
+			Button b = new Button();
+
+			l.setText(GlobalCollection.getAddedPublishers().get(i).getName());
+			
+			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
+			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
+			b.setId("removeButton");
+
+			addedPublishersGrid.addRow(i + 1, l, b);
+			
+			b.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override
+			    public void handle(ActionEvent e) {
+			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
+					addedPublishersGrid.getChildren().removeAll(l, b);
 			   
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
-			        int i = 1;
+			        int i = 0;
 			        for (Node node : childrens) {
-			        	if(GridPane.getRowIndex(node) == null) {
+			        	if (GridPane.getRowIndex(node) == null) {
 			        		continue;
 			        	}
-			            GridPane.setRowIndex(node, i);
+			            GridPane.setRowIndex(node, i/2 + 1);
 			            i++;
 			        }
-					
 			    }
 			});
 		}
+		
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -154,41 +155,46 @@ public class AddPublisherView {
 		
 		for (int i = 0; i < publishers.size(); ++i) {
 			GlobalCollection.getPublisherList().add(publishers.get(i));
-		} 
-		if(GlobalCollection.isAdd()) {
-			HBox container = new HBox(8);
-			Label l1 = new Label();
-			l1.setText(GlobalCollection.getPublisherList().get(GlobalCollection.getPublisherList().size() - 1).getName());
-			Button b1 = new Button();
-			b1.setText("-");
-			final Pos CENTER = Pos.CENTER;
-			container.getChildren().addAll(l1, b1);
-			container.setAlignment(CENTER);
-			addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size() + 1, container);
-			b1.setOnAction(new EventHandler<ActionEvent>() {
-			    @Override public void handle(ActionEvent e) {
-			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(container) - 1);
-					addedPublishersGrid.getChildren().remove(container);
+		}
+		
+		if (GlobalCollection.isAdd()) {
+			Label l = new Label();
+			Button b = new Button();
+			
+			l.setText(GlobalCollection.getPublisherList().get(GlobalCollection.getPublisherList().size() - 1).getName());
+
+			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
+			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
+			b.setId("removeButton");
+			
+			addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size() + 1, l, b);
+			GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(GlobalCollection.getPublisherList().size() - 1));
+
+			b.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override
+			    public void handle(ActionEvent e) {
+			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
+					addedPublishersGrid.getChildren().removeAll(l, b);
 			   
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
-			        int i = 1;
+			        int i = 0;
 			        for (Node node : childrens) {
-			        	if(GridPane.getRowIndex(node) == null) {
+			        	if (GridPane.getRowIndex(node) == null) {
 			        		continue;
 			        	}
-			            GridPane.setRowIndex(node, i);
+			            GridPane.setRowIndex(node, i/2 + 1);
 			            i++;
 			        }
-					
 			    }
 			});
 		}
+		
 		tablePublisherList.setItems(GlobalCollection.getPublisherList());
 		FilteredList<Publisher> filteredData = new FilteredList<Publisher>(GlobalCollection.getPublisherList(), e -> true);
 		searchField.setOnKeyReleased(e -> {
 			searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
 				filteredData.setPredicate((Predicate<? super Publisher>) publisher ->{
-					if(newValue == null || newValue.isEmpty()) {
+					if (newValue == null || newValue.isEmpty()) {
 						return true;
 					}
 					
@@ -197,50 +203,56 @@ public class AddPublisherView {
 					ArrayList<String> splittedFilter = new ArrayList<String>();
 					ArrayList<String> splittedAuthorData = new ArrayList<String>();
 					
-					for(int i = 0; i < splitStr.length; ++i) {
+					for (int i = 0; i < splitStr.length; ++i) {
 						splittedFilter.add(splitStr[i]);
 					}
-					splittedAuthorData.add(publisher.getName().toLowerCase());
-					splittedAuthorData.add(publisher.getCountry().toLowerCase());
-					splittedAuthorData.add(publisher.getPostalCode().toLowerCase());
-					splittedAuthorData.add(publisher.getStreet().toLowerCase());
+					
+					splittedAuthorData.add(publisher.getName().       toLowerCase());
+					splittedAuthorData.add(publisher.getCountry().    toLowerCase());
+					splittedAuthorData.add(publisher.getPostalCode(). toLowerCase());
+					splittedAuthorData.add(publisher.getStreet().     toLowerCase());
 					splittedAuthorData.add(publisher.getHouseNumber().toLowerCase());
-					splittedAuthorData.add(publisher.getCityName().toLowerCase());
+					splittedAuthorData.add(publisher.getCityName().   toLowerCase());
+					
 					int i;
-					for(i = 0; i < splittedFilter.size(); ++i) {
+					for (i = 0; i < splittedFilter.size(); ++i) {
 						int j;
-						for(j = 0; j < splittedAuthorData.size(); ++j) {
-							if(splittedAuthorData.get(j).contains(splittedFilter.get(i))) {
+						for (j = 0; j < splittedAuthorData.size(); ++j) {
+							if (splittedAuthorData.get(j).contains(splittedFilter.get(i))) {
 								break;
 							}
 						}
-						if(j == splittedAuthorData.size()) {
+						
+						if (j == splittedAuthorData.size()) {
 							break;
 						}
 					}
-					if(i == splittedFilter.size()) {
+					
+					if (i == splittedFilter.size()) {
 						return true;
 					}
 					
 					return false;
 				});
 			});
+			
 			SortedList<Publisher> sortedData = new SortedList<Publisher>(filteredData);
 			sortedData.comparatorProperty().bind(tablePublisherList.comparatorProperty());
 			tablePublisherList.setItems(sortedData);
 		});
-		nameCol.   setCellValueFactory(new PropertyValueFactory<Publisher, String>("name"));
-		nameCol.   setStyle("-fx-alignment: CENTER;");
-		countryCol.   setCellValueFactory(new PropertyValueFactory<Publisher, String>("country"));
-		countryCol.   setStyle("-fx-alignment: CENTER;");
-		streetCol.   setCellValueFactory(new PropertyValueFactory<Publisher, String>("street"));
-		streetCol.   setStyle("-fx-alignment: CENTER;");
-		houseNumberCol.   setCellValueFactory(new PropertyValueFactory<Publisher, String>("houseNumber"));
-		houseNumberCol.   setStyle("-fx-alignment: CENTER;");
-		postalCodeCol.   setCellValueFactory(new PropertyValueFactory<Publisher, String>("postalCode"));
-		postalCodeCol.   setStyle("-fx-alignment: CENTER;");
-		cityCol.   setCellValueFactory(new PropertyValueFactory<Publisher, String>("cityName"));
-		cityCol.   setStyle("-fx-alignment: CENTER;");
+		
+		nameCol.   	   setCellValueFactory(new PropertyValueFactory<Publisher, String>("name"));
+		nameCol.  	   setStyle("-fx-alignment: CENTER;");
+		countryCol.    setCellValueFactory(new PropertyValueFactory<Publisher, String>("country"));
+		countryCol.    setStyle("-fx-alignment: CENTER;");
+		streetCol.     setCellValueFactory(new PropertyValueFactory<Publisher, String>("street"));
+		streetCol.     setStyle("-fx-alignment: CENTER;");
+		houseNumberCol.setCellValueFactory(new PropertyValueFactory<Publisher, String>("houseNumber"));
+		houseNumberCol.setStyle("-fx-alignment: CENTER;");
+		postalCodeCol. setCellValueFactory(new PropertyValueFactory<Publisher, String>("postalCode"));
+		postalCodeCol. setStyle("-fx-alignment: CENTER;");
+		cityCol.       setCellValueFactory(new PropertyValueFactory<Publisher, String>("cityName"));
+		cityCol.       setStyle("-fx-alignment: CENTER;");
 		
 		tablePublisherList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -250,37 +262,37 @@ public class AddPublisherView {
 					@SuppressWarnings("rawtypes")
 					ObservableList<TablePosition> cells = tablePublisherList.getSelectionModel().getSelectedCells();
 					try {
-						if(!GlobalCollection.getAddedPublishers().contains(GlobalCollection.getPublisherList().get(cells.get(0).getRow()))) {
-							HBox container = new HBox(8);
-							Label l1 = new Label();
-							l1.setText(GlobalCollection.getPublisherList().get(cells.get(0).getRow()).getName());
-							Button b1 = new Button();
-							b1.setText("-");
-							final Pos CENTER = Pos.CENTER;
-							container.getChildren().addAll(l1, b1);
-							container.setAlignment(CENTER);
+						if (!GlobalCollection.getAddedPublishers().contains(GlobalCollection.getPublisherList().get(cells.get(0).getRow()))) {
+							Label l = new Label();
+							Button b = new Button();
+							
+							l.setText(GlobalCollection.getPublisherList().get(cells.get(0).getRow()).getName());
+
+							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
+							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
+							b.setId("removeButton");
+							
 							GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(cells.get(0).getRow()));
-							addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size(), container);
-							b1.setOnAction(new EventHandler<ActionEvent>() {
-							    @Override public void handle(ActionEvent e) {
-							    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(container) - 1);
-									addedPublishersGrid.getChildren().remove(container);
+							addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size(), l, b);
+							
+							b.setOnAction(new EventHandler<ActionEvent>() {
+							    @Override
+							    public void handle(ActionEvent e) {
+							    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
+									addedPublishersGrid.getChildren().removeAll(l, b);
 							   
 							        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
-							        int i = 1;
+							        int i = 0;
 							        for (Node node : childrens) {
-							        	if(GridPane.getRowIndex(node) == null) {
+							        	if (GridPane.getRowIndex(node) == null) {
 							        		continue;
 							        	}
-							            GridPane.setRowIndex(node, i);
+							            GridPane.setRowIndex(node, i/2 + 1);
 							            i++;
 							        }
-									
 							    }
 							});
-						}	
-						
-						
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -389,7 +401,7 @@ public class AddPublisherView {
 			
 			int postalCodeInt = -1;
 			
-			if(addressCheck.isSelected()) {
+			if (addressCheck.isSelected()) {
 				postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 			}
 			

@@ -16,7 +16,7 @@ public class InsertNewPublisher {
 		pstmtPublisher = con.prepareStatement(queryPublisher, new String[]{"Publisher.PublisherID"});
 		
 		pstmtPublisher.setString(1, name);
-		if(addressID == -1) {
+		if (addressID == -1) {
 			pstmtPublisher.setNull(2, java.sql.Types.INTEGER);
 			
 		} else {

@@ -49,7 +49,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="30.0" />
+            <Insets bottom="10.0" left="30.0" right="30.0" />
          </BorderPane.margin>
       </TableView>
    </center>
@@ -94,7 +94,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" GridPane.rowIndex="4">
                <children>
-                  <CheckBox fx:id="addressCheck" mnemonicParsing="false" onAction="#toggleCheck" selected="true" text="Address is Known">
+                  <CheckBox fx:id="addressCheck" mnemonicParsing="false" onAction="#toggleCheck" selected="true" text="Address Is Known">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -131,33 +131,40 @@
                </children>
             </HBox>
             <TextField fx:id="houseNumberField" promptText="House Number (Optional)" GridPane.rowIndex="7" />
-            <ComboBox fx:id="postalCodeCombo" prefWidth="150.0" promptText="Choose Postal Code" GridPane.rowIndex="8" />
+            <ComboBox fx:id="postalCodeCombo" promptText="Choose Postal Code" GridPane.rowIndex="8" />
          </children>
          <BorderPane.margin>
-            <Insets left="30.0" right="10.0" />
+            <Insets left="30.0" />
          </BorderPane.margin>
       </GridPane>
    </left>
    <right>
-      <GridPane fx:id="addedPublishersGrid" BorderPane.alignment="CENTER">
+      <GridPane fx:id="addedPublishersGrid" hgap="10.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="NEVER" />
+          <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+            <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints vgrow="NEVER" />
         </rowConstraints>
          <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" GridPane.columnSpan="2">
                <children>
                   <Label text="Added Publishers">
                      <font>
                         <Font name="Microsoft Sans Serif" size="18.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
                   </Label>
                </children>
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
             </HBox>
          </children>
          <BorderPane.margin>

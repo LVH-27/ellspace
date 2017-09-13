@@ -35,7 +35,6 @@ public class GlobalCollection {
 		lBusinessHours = FXCollections.observableArrayList();
 		lAuthor = FXCollections.observableArrayList();
 		lPublisher = FXCollections.observableArrayList();
-
 	}
 	
 	public static void emptyAddedPublishersList() {
@@ -133,9 +132,6 @@ public class GlobalCollection {
 	public static void setAdd(boolean add) {
 		GlobalCollection.add = add;
 	}
-
-	
-	
 }
 
 //TODO Add new column with time/date when user was added

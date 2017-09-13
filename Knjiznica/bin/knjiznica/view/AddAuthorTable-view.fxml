@@ -47,7 +47,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="30.0" />
+            <Insets bottom="10.0" left="30.0" right="30.0" />
          </BorderPane.margin>
       </TableView>
    </center>
@@ -103,7 +103,7 @@
             </TextField>
             <HBox alignment="CENTER_LEFT" GridPane.rowIndex="7">
                <children>
-                  <CheckBox fx:id="isAliveCheck" allowIndeterminate="true" mnemonicParsing="false" onAction="#disableYearOfDeath" text="Author is Alive">
+                  <CheckBox fx:id="isAliveCheck" allowIndeterminate="true" mnemonicParsing="false" onAction="#disableYearOfDeath" text="Author Is Alive">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -146,30 +146,37 @@
             </HBox>
          </children>
          <BorderPane.margin>
-            <Insets left="30.0" right="10.0" />
+            <Insets left="30.0" />
          </BorderPane.margin>
       </GridPane>
    </left>
    <right>
-      <GridPane fx:id="addedAuthorsGrid" BorderPane.alignment="CENTER">
+      <GridPane fx:id="addedAuthorsGrid" hgap="10.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="NEVER" />
+          <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+            <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints vgrow="NEVER" />
         </rowConstraints>
          <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" GridPane.columnSpan="2">
                <children>
                   <Label text="Added Authors">
                      <font>
                         <Font name="Microsoft Sans Serif" size="18.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
                   </Label>
                </children>
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
             </HBox>
          </children>
          <BorderPane.margin>

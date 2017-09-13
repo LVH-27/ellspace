@@ -75,7 +75,7 @@ public class ListLibrariesView {
 			weekCheck = GlobalCollection.getBusinessHoursList().get(i).getCheck();
 			weekOpens = GlobalCollection.getBusinessHoursList().get(i).getBeginTime();
 			weekCloses = GlobalCollection.getBusinessHoursList().get(i).getEndTime();
-			if(weekCheck.get(weekDayInt - 1).equals("Opened")) {
+			if (weekCheck.get(weekDayInt - 1).equals("Opened")) {
 				libraries.get(i).setOpens(weekOpens.get(weekDayInt - 1));
 				libraries.get(i).setCloses(weekCloses.get(weekDayInt - 1));
 				
