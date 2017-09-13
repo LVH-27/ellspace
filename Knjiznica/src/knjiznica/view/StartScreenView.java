@@ -39,12 +39,12 @@ public class StartScreenView {
 		search.   setId("transparentButton");
 		eventLog. setId("transparentButton");
 		
-		Image imageAddBook   = new Image(getClass().getResourceAsStream("../resources/addBook-button.png"));
-		Image imageClients   = new Image(getClass().getResourceAsStream("../resources/clients-button.png"));
-		Image imageShare     = new Image(getClass().getResourceAsStream("../resources/sharebook-button.png"));
-		Image imageDirectory = new Image(getClass().getResourceAsStream("../resources/directory-button.png"));
-		Image imageSearch    = new Image(getClass().getResourceAsStream("../resources/search-button.png"));
-		Image imageEventLog  = new Image(getClass().getResourceAsStream("../resources/log-button.png"));
+		Image imageAddBook   = new Image(getClass().getResourceAsStream("/resources/addBook-button.png"));
+		Image imageClients   = new Image(getClass().getResourceAsStream("/resources/clients-button.png"));
+		Image imageShare     = new Image(getClass().getResourceAsStream("/resources/sharebook-button.png"));
+		Image imageDirectory = new Image(getClass().getResourceAsStream("/resources/directory-button.png"));
+		Image imageSearch    = new Image(getClass().getResourceAsStream("/resources/search-button.png"));
+		Image imageEventLog  = new Image(getClass().getResourceAsStream("/resources/log-button.png"));
 		
 		addBook.  setGraphic(new ImageView(imageAddBook));
 		clients.  setGraphic(new ImageView(imageClients));

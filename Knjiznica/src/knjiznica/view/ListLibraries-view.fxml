@@ -11,7 +11,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.ListLibrariesView">
    <center>
-      <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
+      <BorderPane id="defaultBackgroundField" stylesheets="@/resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
          <top>
             <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER">
                <children>
@@ -31,7 +31,7 @@
             </HBox>
          </top>
          <center>
-            <TableView id="tableBackgroundField" fx:id="tableLibraryList" stylesheets="@../resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
+            <TableView id="tableBackgroundField" fx:id="tableLibraryList" stylesheets="@/resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="firstNameCol" minWidth="220.0" prefWidth="220.0" text="Name" />
                 <TableColumn fx:id="countryCol" minWidth="90.0" prefWidth="90.0" text="Country" />

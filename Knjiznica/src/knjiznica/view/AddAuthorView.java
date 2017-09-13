@@ -100,11 +100,11 @@ public class AddAuthorView {
 		
 		//TODO Emphasize what values are mandatory and what are optional.
 		
-		Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/add-button.png"));
+		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
 		
-		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
+		Image imageBackButton = new Image(getClass().getResourceAsStream("/resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
 		

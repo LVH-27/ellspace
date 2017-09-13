@@ -31,10 +31,10 @@ public class ClientsMenuView {
 		addLibraryButton.   setId("transparentButton");
 		listLibrariesButton.setId("transparentButton");
 				
-		Image imageAddUser       = new Image(getClass().getResourceAsStream("../resources/addUser-button.png"));
-		Image imageListUsers     = new Image(getClass().getResourceAsStream("../resources/listUsers-button.png"));
-		Image imageAddLibrary    = new Image(getClass().getResourceAsStream("../resources/addLibrary-button.png"));
-		Image imageListLibraries = new Image(getClass().getResourceAsStream("../resources/listLibraries-button.png"));
+		Image imageAddUser       = new Image(getClass().getResourceAsStream("/resources/addUser-button.png"));
+		Image imageListUsers     = new Image(getClass().getResourceAsStream("/resources/listUsers-button.png"));
+		Image imageAddLibrary    = new Image(getClass().getResourceAsStream("/resources/addLibrary-button.png"));
+		Image imageListLibraries = new Image(getClass().getResourceAsStream("/resources/listLibraries-button.png"));
 		
 		addUserButton.      setGraphic(new ImageView(imageAddUser));
 		listUsersButton.    setGraphic(new ImageView(imageListUsers));

@@ -19,7 +19,7 @@ public class MainScreenView {
 	private Button homeButton;
 	
 	public void initialize() throws IOException {
-		Image imageHomeButton = new Image(getClass().getResourceAsStream("../resources/home-button.png"));
+		Image imageHomeButton = new Image(getClass().getResourceAsStream("/resources/home-button.png"));
 		homeButton.setGraphic(new ImageView(imageHomeButton));
 		homeButton.setId("homeButton");
 		BorderPane startScreen = (BorderPane) FXMLLoader.load(getClass().getResource("StartScreen-view.fxml"));

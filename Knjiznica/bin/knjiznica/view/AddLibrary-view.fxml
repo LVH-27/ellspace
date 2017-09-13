@@ -20,7 +20,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <BorderPane id="defaultBackgroundField" stylesheets="@../resources/BackgroundStyle.css">
+                  <BorderPane id="defaultBackgroundField" stylesheets="@/resources/BackgroundStyle.css">
                      <center>
                         <GridPane alignment="CENTER">
                           <columnConstraints>

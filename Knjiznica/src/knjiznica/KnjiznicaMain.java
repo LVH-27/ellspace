@@ -30,7 +30,7 @@ public class KnjiznicaMain extends Application {
 			main.start();
 			
 			scene.getStylesheets().add(getClass().getResource(
-					"resources/BackgroundStyle.css").toExternalForm());
+					"../resources/BackgroundStyle.css").toExternalForm());
 			
 			ViewProvider.setView("primaryStage", primaryStage);
 

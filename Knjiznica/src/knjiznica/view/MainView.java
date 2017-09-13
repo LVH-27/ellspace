@@ -35,7 +35,7 @@ public class MainView {
 	
 	public void start() throws IOException {
 		this.scene = root.getScene();
-        Image backgroundImage = new Image(getClass().getResourceAsStream("../resources/login-background.jpeg"));
+        Image backgroundImage = new Image(getClass().getResourceAsStream("/resources/login-background.jpeg"));
         setBackground(backgroundImage);	
 		addListeners();
 		BorderPane main = (BorderPane) FXMLLoader.load(getClass().getResource("Login-view.fxml"));

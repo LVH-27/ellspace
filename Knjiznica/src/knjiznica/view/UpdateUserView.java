@@ -103,7 +103,7 @@ public class UpdateUserView {
 			postalCodeCombo.setDisable(true);
 			postalCodeCombo.setStyle("-fx-opacity: 1;");
 			
-			Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/edit-button.png"));
+			Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/edit-button.png"));
 			addButton.setGraphic(new ImageView(imageAddButton));
 			addButton.setId("transparentButton");
 			addButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -123,7 +123,7 @@ public class UpdateUserView {
 			});
 			
 		} else {
-			Image imageAddButton = new Image(getClass().getResourceAsStream("../resources/editAccept-button.png"));
+			Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/editAccept-button.png"));
 			addButton.setGraphic(new ImageView(imageAddButton));
 			addButton.setId("transparentButton");
 		}
@@ -162,7 +162,7 @@ public class UpdateUserView {
 	
 		postalCodeCombo.getSelectionModel().select(Integer.toString(user.getPostalCode()) + " - " + user.getCity());
 		
-		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
+		Image imageBackButton = new Image(getClass().getResourceAsStream("/resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
 		

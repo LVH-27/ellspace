@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import knjiznica.resources.ConnectionData;
-
 public class PostalCodeCombo {
 	
 	private static List<String> comboData = new ArrayList<String>();

@@ -1,4 +1,4 @@
-package knjiznica.resources;
+package knjiznica.model;
 
 public class ConnectionData {
 	

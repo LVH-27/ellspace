@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import org.postgresql.util.PSQLException;
 import javafx.scene.control.CheckBox;
-import knjiznica.resources.ConnectionData;
 import knjiznica.view.AddLibraryView;
 
 

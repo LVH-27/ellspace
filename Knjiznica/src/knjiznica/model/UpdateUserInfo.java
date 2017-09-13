@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
-import knjiznica.resources.ConnectionData;
+
 import knjiznica.view.AddUserView;
 import knjiznica.view.UpdateUserView;
 

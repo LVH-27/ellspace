@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.postgresql.util.PSQLException;
-import knjiznica.resources.ConnectionData;
+
 import knjiznica.view.UpdateLibraryView;
 
 

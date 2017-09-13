@@ -50,7 +50,7 @@ public class LoginView {
 			
 			MainView root = (MainView) ViewProvider.getView("main");	
 			
-			Image backgroundImage = new Image(getClass().getResourceAsStream("../resources/booklist-background.jpg"));
+			Image backgroundImage = new Image(getClass().getResourceAsStream("/resources/booklist-background.jpg"));
 			root.setBackground(backgroundImage);	
 			
 			BorderPane mainScreen = (BorderPane) FXMLLoader.load(getClass().getResource("MainScreen-view.fxml"));

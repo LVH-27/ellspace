@@ -200,7 +200,7 @@ public class UpdateLibraryView {
 				beginTimeList.get(i).setEditable(false);
 				endTimeList.get(i).setEditable(false);
 			}
-			Image imageEditButton = new Image(getClass().getResourceAsStream("../resources/edit-button.png"));
+			Image imageEditButton = new Image(getClass().getResourceAsStream("/resources/edit-button.png"));
 			addButton.setGraphic(new ImageView(imageEditButton));
 			addButton.setId("transparentButton");
 			addButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -220,7 +220,7 @@ public class UpdateLibraryView {
 			});
 			
 		} else {
-			Image imageEditButton = new Image(getClass().getResourceAsStream("../resources/editAccept-button.png"));
+			Image imageEditButton = new Image(getClass().getResourceAsStream("/resources/editAccept-button.png"));
 			addButton.setGraphic(new ImageView(imageEditButton));
 			addButton.setId("transparentButton");
 		}
@@ -270,7 +270,7 @@ public class UpdateLibraryView {
 
 		begin7.setDisable(false);
 		end7.setDisable(false);
-		Image imageBackButton = new Image(getClass().getResourceAsStream("../resources/back-button.png"));
+		Image imageBackButton = new Image(getClass().getResourceAsStream("/resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
 		

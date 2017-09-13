@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import knjiznica.resources.ConnectionData;
-
 public class SelectAuthors implements Runnable {
 	private static ArrayList<Author> authors;
 
