@@ -59,22 +59,24 @@
         <rowConstraints>
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="NEVER" />
           <RowConstraints vgrow="NEVER" />
           <RowConstraints vgrow="NEVER" />
           <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
             <RowConstraints vgrow="NEVER" />
         </rowConstraints>
          <children>
-            <TextField promptText="Search" />
-            <TextField fx:id="firstNameField" promptText="First Name" GridPane.rowIndex="2">
+            <TextField fx:id="searchField" promptText="Search" />
+            <TextField fx:id="firstNameField" promptText="First Name" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <HBox alignment="CENTER" GridPane.rowIndex="1">
+            <HBox alignment="CENTER" GridPane.rowIndex="2">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Create New Author">
                      <HBox.margin>
@@ -86,20 +88,20 @@
                   </Label>
                </children>
                <GridPane.margin>
-                  <Insets top="15.0" />
+                  <Insets />
                </GridPane.margin>
             </HBox>
-            <TextField fx:id="middleNameField" promptText="Middle Name" GridPane.rowIndex="3">
+            <TextField fx:id="middleNameField" promptText="Middle Name" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="lastNameField" promptText="Last Name" GridPane.rowIndex="4">
+            <TextField fx:id="lastNameField" promptText="Last Name" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <HBox alignment="CENTER_LEFT" GridPane.rowIndex="5">
+            <HBox alignment="CENTER_LEFT" GridPane.rowIndex="6">
                <children>
                   <CheckBox fx:id="isAliveCheck" allowIndeterminate="true" mnemonicParsing="false" onAction="#disableYearOfDeath" text="Author is Alive">
                      <HBox.margin>
@@ -108,28 +110,38 @@
                   </CheckBox>
                </children>
             </HBox>
-            <TextField fx:id="yearOfBirthField" promptText="Year of Birth" GridPane.rowIndex="6">
+            <TextField fx:id="yearOfBirthField" promptText="Year of Birth" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="yearOfDeathField" promptText="Year of Death" GridPane.rowIndex="7">
+            <TextField fx:id="yearOfDeathField" promptText="Year of Death" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <HBox alignment="CENTER" GridPane.rowIndex="8">
+            <HBox alignment="CENTER" GridPane.rowIndex="10">
                <children>
                   <Button fx:id="backButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0">
+                  <Button fx:id="addButton" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="errorLabelMiss" text="Missing some information" textFill="RED" visible="false" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" GridPane.rowIndex="7">
+               <children>
+                  <Label fx:id="errorLabelTooMuch" text="Label" textFill="RED" visible="false" />
                </children>
             </HBox>
          </children>

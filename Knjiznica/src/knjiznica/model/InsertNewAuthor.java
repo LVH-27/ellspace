@@ -2,6 +2,7 @@ package knjiznica.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import knjiznica.view.AddAuthorView;
@@ -11,9 +12,9 @@ public class InsertNewAuthor {
 	private static PreparedStatement pstmtAuthor = null;
 	
 	public static void insert(Connection con, String firstName, String middleName, String lastName, boolean isAlive, String yearOfBirth, String yearOfDeath) throws SQLException {
-		String queryAuthor = "INSERT INTO public.\"Author\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)";
+		String queryAuthor = "INSERT INTO public.\"Author\" VALUES(DEFAULT, ?, ?, ?, ?, ?, ?) RETURNING \"Author\".\"AuthorID\"";
 		
-		pstmtAuthor = con.prepareStatement(queryAuthor);
+		pstmtAuthor = con.prepareStatement(queryAuthor, new String[]{"Author.AuthorID"});
 		
 		if (middleName.isEmpty()) {
 			middleName = null;
@@ -34,10 +35,10 @@ public class InsertNewAuthor {
 		} else {
 			pstmtAuthor.setNull(4, java.sql.Types.BOOLEAN);
 		}
-		
 		pstmtAuthor.setString(5, yearOfBirth);
 		pstmtAuthor.setString(6, yearOfDeath);
 		
 		pstmtAuthor.executeUpdate();
+	//	GlobalCollection.getAuthorList().add(new Author());
 	}
 }

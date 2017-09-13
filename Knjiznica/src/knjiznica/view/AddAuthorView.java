@@ -2,7 +2,10 @@ package knjiznica.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -112,8 +115,37 @@ public class AddAuthorView {
 		for (int i = 0; i < authors.size(); ++i) {
 			GlobalCollection.getAuthorList().add(authors.get(i));
 		} 
-		
 		tableAuthorList.setItems(GlobalCollection.getAuthorList());
+		FilteredList<Author> filteredData = new FilteredList<Author>(GlobalCollection.getAuthorList(), e -> true);
+		searchField.setOnKeyReleased(e -> {
+			searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
+				filteredData.setPredicate((Predicate<? super Author>) author ->{
+					if(newValue == null || newValue.isEmpty()) {
+						return true;
+					}
+					String lowerCaseFilter = newValue.toLowerCase();
+					if(author.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+						return true;
+						
+					} else if(author.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+						return true;
+						
+					} else if(author.getYearOfBirth().toLowerCase().contains(lowerCaseFilter)) {
+						return true;
+						
+					} else if(author.getYearOfDeath().toLowerCase().contains(lowerCaseFilter)) {
+						return true;
+					}
+					
+					return false;
+				});
+			});
+			SortedList<Author> sortedData = new SortedList<Author>(filteredData);
+			sortedData.comparatorProperty().bind(tableAuthorList.comparatorProperty());
+			tableAuthorList.setItems(sortedData);
+		});
+		
+		
 		firstNameCol.   setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
 		firstNameCol.   setStyle("-fx-alignment: CENTER;");
 		middleNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("middleName"));
@@ -291,9 +323,10 @@ public class AddAuthorView {
 			errorLabelTooMuch.setVisible(false);
 			
 	    	if (!isInterrupted && isReached) { 
+
 	    		AlertWindowOpen.openWindow("Author successfully added!");
 	    		
-	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthor-view.fxml"));
+	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
 	    		
 	    	} else if (isInterrupted) {

@@ -26,6 +26,7 @@ public class AddAuthorToDatabase implements Runnable{
 			InsertNewAuthor.insert(con, firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);
 			
 		} catch (PSQLException e) {
+			e.printStackTrace();
 			AddAuthorView.isReached = false;
 			
 		} catch (SQLException e) {
