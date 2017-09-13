@@ -12,7 +12,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.DirectoryView">
    <center>
-      <BorderPane id="defaultBackgroundField" stylesheets="@/resources/BackgroundStyle.css">
+      <BorderPane id="defaultBackgroundField" stylesheets="@../..../../resources/BackgroundStyle.css">
          <center>
             <GridPane BorderPane.alignment="CENTER">
               <columnConstraints>

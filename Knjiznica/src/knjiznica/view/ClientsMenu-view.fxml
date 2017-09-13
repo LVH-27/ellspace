@@ -17,7 +17,7 @@
                <children>
                   <BorderPane>
                      <center>
-                        <GridPane id="defaultBackgroundField" alignment="CENTER" hgap="10.0" stylesheets="@/resources/BackgroundStyle.css" vgap="10.0">
+                        <GridPane id="defaultBackgroundField" alignment="CENTER" hgap="10.0" stylesheets="@../../resources/BackgroundStyle.css" vgap="10.0">
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
