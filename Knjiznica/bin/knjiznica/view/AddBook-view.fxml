@@ -28,12 +28,13 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
@@ -43,43 +44,89 @@
             <Insets left="20.0" right="30.0" />
          </padding>
          <children>
+            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="3">
+               <children>
+                  <Label fx:id="errorLabel" text="Missing some information!" textFill="RED" visible="false" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Label text="General Information">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                <children>
                   <Label text="ISBN:" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="6">
-               <children>
-                  <Label text="Edition number:" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="7">
-               <children>
-                  <Label text="Publication year:" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="8">
-               <children>
-                  <Label text="Number of pages:" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" GridPane.rowIndex="4">
-               <children>
-                  <Label text="Summary:" />
-               </children>
-               <GridPane.margin>
-                  <Insets top="4.0" />
-               </GridPane.margin>
-            </HBox>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <TextField fx:id="isbnField" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <TextField promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <TextField promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <TextField promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <HBox GridPane.columnIndex="6" GridPane.columnSpan="2147483647" GridPane.rowIndex="9" GridPane.rowSpan="2147483647">
+            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
+               <children>
+                  <Label text="Title:" />
+               </children>
+            </HBox>
+            <TextField fx:id="titleField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <HBox alignment="TOP_RIGHT" GridPane.rowIndex="4">
+               <children>
+                  <Label text="Summary:">
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin></Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </HBox>
+            <TextArea fx:id="summaryArea" prefHeight="100.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <HBox alignment="TOP_RIGHT" GridPane.rowIndex="5">
+               <children>
+                  <Label text="Book information:">
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <TextArea prefHeight="75.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <children>
+                  <Label text="Edition Information">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="7">
+               <children>
+                  <Label text="Edition number:" />
+               </children>
+            </HBox>
+            <TextField fx:id="editionNumberField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="8">
+               <children>
+                  <Label text="Publication year:" />
+               </children>
+            </HBox>
+            <TextField fx:id="publicationYearField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="9">
+               <children>
+                  <Label text="Number of pages:" />
+               </children>
+            </HBox>
+            <TextField fx:id="numberOfPagesField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+            <HBox GridPane.columnIndex="6" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" GridPane.rowSpan="2147483647">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" />
                </GridPane.margin>
@@ -90,31 +137,6 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
-               <children>
-                  <Label text="Title:" />
-               </children>
-            </HBox>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextArea prefHeight="110.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <children>
-                  <Label text="General Information">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="5">
-               <children>
-                  <Label text="Edition Information">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
                </children>
             </HBox>
          </children>

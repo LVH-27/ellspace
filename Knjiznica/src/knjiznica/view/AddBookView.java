@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -13,10 +16,31 @@ import knjiznica.model.ViewProvider;
 public class AddBookView {
 	
 	@FXML
+	private TextField isbnField;
+	
+	@FXML
+	private TextField titleField;
+	
+	@FXML
+	private TextArea summaryArea;
+	
+	@FXML
+	private TextField editionNumberField;
+	
+	@FXML
+	private TextField publicationYearField;
+	
+	@FXML
+	private TextField numberOfPagesField;
+	
+	@FXML
 	private Button addButton;
 	
 	@FXML
 	private Button backButton;
+	
+	@FXML
+	private Label errorLabel;
 	
 	public void initialize() throws SQLException {
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
@@ -36,6 +60,6 @@ public class AddBookView {
 	
 	@FXML
 	private void activateAdd() {
-		
+		//TODO Replace "\n" with spaces, but not if there is also a space next to "\n".
 	}
 }
