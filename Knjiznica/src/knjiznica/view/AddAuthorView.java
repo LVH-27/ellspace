@@ -109,9 +109,11 @@ public class AddAuthorView {
 		
 		//FIXME Emphasize what values are mandatory and what are optional.
 		addedAuthorsGrid.setManaged(true);
+		addedAuthorsGrid.setVisible(true);
 		
 		if(GlobalCollection.getAddedAuthors().size() == 0) {
 			addedAuthorsGrid.setManaged(false);
+			addedAuthorsGrid.setVisible(false);
 		}
 		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
 			Label l = new Label();
@@ -140,6 +142,7 @@ public class AddAuthorView {
 					addedAuthorsGrid.getChildren().removeAll(l, b);
 					if(GlobalCollection.getAddedAuthors().size() == 0) {
 						addedAuthorsGrid.setManaged(false);
+						addedAuthorsGrid.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 			        int i = 0;
@@ -189,6 +192,7 @@ public class AddAuthorView {
 				middleNameFormat = " ";
 			}
 			addedAuthorsGrid.setManaged(true);
+			addedAuthorsGrid.setVisible(true);
 			l.setText(firstName + middleNameFormat + lastName);
 			
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
@@ -205,6 +209,7 @@ public class AddAuthorView {
 					addedAuthorsGrid.getChildren().removeAll(l, b);
 					if(GlobalCollection.getAddedAuthors().size() == 0) {
 						addedAuthorsGrid.setManaged(false);
+						addedAuthorsGrid.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 			        int i = 0;
@@ -294,6 +299,7 @@ public class AddAuthorView {
 							Button b = new Button();
 							
 							addedAuthorsGrid.setManaged(true);
+							addedAuthorsGrid.setVisible(true);
 							String firstName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getFirstName();
 							String middleNameFormat = " " + GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getMiddleName() + " ";
 							String lastName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getLastName();
@@ -318,6 +324,7 @@ public class AddAuthorView {
 									addedAuthorsGrid.getChildren().removeAll(l, b);
 									if(GlobalCollection.getAddedAuthors().size() == 0) {
 										addedAuthorsGrid.setManaged(false);
+										addedAuthorsGrid.setVisible(false);
 									}
 							        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 							        int i = 0;

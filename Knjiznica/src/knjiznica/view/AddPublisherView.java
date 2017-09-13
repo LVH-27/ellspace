@@ -108,8 +108,10 @@ public class AddPublisherView {
 	public void initialize() {
 		
 		addedPublishersGrid.setManaged(true);
+		addedPublishersGrid.setVisible(true);
 		if(GlobalCollection.getAddedPublishers().size() == 0) {
 			addedPublishersGrid.setManaged(false);
+			addedPublishersGrid.setVisible(false);
 		}
 		
 		for (int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
@@ -118,6 +120,7 @@ public class AddPublisherView {
 
 			l.setText(GlobalCollection.getAddedPublishers().get(i).getName());
 			addedPublishersGrid.setManaged(true);
+			addedPublishersGrid.setVisible(true);
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 			b.setId("removeButton");
@@ -131,6 +134,7 @@ public class AddPublisherView {
 					addedPublishersGrid.getChildren().removeAll(l, b);
 					if(GlobalCollection.getAddedPublishers().size() == 0) {
 						addedPublishersGrid.setManaged(false);
+						addedPublishersGrid.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 			        int i = 0;
@@ -193,6 +197,7 @@ public class AddPublisherView {
 					addedPublishersGrid.getChildren().removeAll(l, b);
 					if(GlobalCollection.getAddedPublishers().size() == 0) {
 						addedPublishersGrid.setManaged(false);
+						addedPublishersGrid.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 			        int i = 0;
@@ -290,6 +295,7 @@ public class AddPublisherView {
 							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 							b.setId("removeButton");
 							addedPublishersGrid.setManaged(true);
+							addedPublishersGrid.setVisible(true);
 							GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(cells.get(0).getRow()));
 							addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size(), l, b);
 							
@@ -300,6 +306,7 @@ public class AddPublisherView {
 									addedPublishersGrid.getChildren().removeAll(l, b);
 									if(GlobalCollection.getAddedPublishers().size() == 0) {
 										addedPublishersGrid.setManaged(false);
+										addedPublishersGrid.setVisible(false);
 									}
 							        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 							        int i = 0;
