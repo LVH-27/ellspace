@@ -17,6 +17,7 @@ public class GlobalCollection {
 	private static Library library;
 	private static BusinessHours businessHours;
 	private static boolean isEditable;
+	private static boolean add;
 	
 	static {
 		lUser = FXCollections.observableArrayList();
@@ -34,8 +35,15 @@ public class GlobalCollection {
 		lBusinessHours = FXCollections.observableArrayList();
 		lAuthor = FXCollections.observableArrayList();
 		lPublisher = FXCollections.observableArrayList();
-		addedAuthors = FXCollections.observableArrayList(); 
+
+	}
+	
+	public static void emptyAddedPublishersList() {
 		addedPublishers = FXCollections.observableArrayList(); 
+	}
+	
+	public static void emptyAddedAuthorsList() {
+		addedAuthors = FXCollections.observableArrayList(); 
 	}
 	
 	public static ObservableList<User> getUserList() {
@@ -116,7 +124,17 @@ public class GlobalCollection {
 
 	public static void setAddedPublishers(ObservableList<Publisher> addedPublishers) {
 		GlobalCollection.addedPublishers = addedPublishers;
-	}	
+	}
+
+	public static boolean isAdd() {
+		return add;
+	}
+
+	public static void setAdd(boolean add) {
+		GlobalCollection.add = add;
+	}
+
+	
 	
 }
 

@@ -33,6 +33,7 @@ public class AddPublisherToDatabase implements Runnable{
 			
 			publisherID = InsertNewPublisher.insert(con, name, addressID);
 			
+			
 		} catch (PSQLException e) {
 			e.printStackTrace();
 			AddPublisherView.isReached = false;

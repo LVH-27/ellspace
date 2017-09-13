@@ -110,7 +110,34 @@ public class AddAuthorView {
 		//XXX Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C."
 		
 		//TODO Emphasize what values are mandatory and what are optional.
-		
+		for(int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
+			HBox container = new HBox(8);
+			Label l1 = new Label();
+			l1.setText(GlobalCollection.getAddedAuthors().get(i).getFirstName() + " " + GlobalCollection.getAddedAuthors().get(i).getMiddleName() + " " + GlobalCollection.getAddedAuthors().get(i).getLastName());
+			Button b1 = new Button();
+			b1.setText("-");
+			final Pos CENTER = Pos.CENTER;
+			container.getChildren().addAll(l1, b1);
+			container.setAlignment(CENTER);
+			addedAuthorsGrid.addRow(i + 1, container);
+			b1.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(container) - 1);
+					addedAuthorsGrid.getChildren().remove(container);
+			   
+			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
+			        int i = 1;
+			        for (Node node : childrens) {
+			        	if(GridPane.getRowIndex(node) == null) {
+			        		continue;
+			        	}
+			            GridPane.setRowIndex(node, i);
+			            i++;
+			        }
+					
+			    }
+			});
+		}
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -126,6 +153,34 @@ public class AddAuthorView {
 		for (int i = 0; i < authors.size(); ++i) {
 			GlobalCollection.getAuthorList().add(authors.get(i));
 		} 
+		if(GlobalCollection.isAdd()) {
+			HBox container = new HBox(8);
+			Label l1 = new Label();
+			l1.setText(GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getFirstName() + " " + GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getMiddleName() + " " + GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getLastName());
+			Button b1 = new Button();
+			b1.setText("-");
+			final Pos CENTER = Pos.CENTER;
+			container.getChildren().addAll(l1, b1);
+			container.setAlignment(CENTER);
+			addedAuthorsGrid.addRow(GlobalCollection.getAddedAuthors().size() + 1, container);
+			b1.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(container) - 1);
+					addedAuthorsGrid.getChildren().remove(container);
+			   
+			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
+			        int i = 1;
+			        for (Node node : childrens) {
+			        	if(GridPane.getRowIndex(node) == null) {
+			        		continue;
+			        	}
+			            GridPane.setRowIndex(node, i);
+			            i++;
+			        }
+					
+			    }
+			});
+		}
 		tableAuthorList.setItems(GlobalCollection.getAuthorList());
 		FilteredList<Author> filteredData = new FilteredList<Author>(GlobalCollection.getAuthorList(), e -> true);
 		searchField.setOnKeyReleased(e -> {
@@ -398,7 +453,7 @@ public class AddAuthorView {
 	    	if (!isInterrupted && isReached) { 
 
 	    		AlertWindowOpen.openWindow("Author successfully added!");
-	    		
+	    		GlobalCollection.setAdd(true);
 	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
 	    		
