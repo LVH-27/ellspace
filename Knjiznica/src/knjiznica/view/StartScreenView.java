@@ -99,6 +99,7 @@ public class StartScreenView {
 		//TODO search replaced with AddAuthorTable 
 		GlobalCollection.setAdd(false);
 		GlobalCollection.emptyAddedAuthorsList();
+		
 		BorderPane search = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(search);
 	}

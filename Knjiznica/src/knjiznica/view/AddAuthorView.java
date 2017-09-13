@@ -162,7 +162,14 @@ public class AddAuthorView {
 		for (int i = 0; i < authors.size(); ++i) {
 			GlobalCollection.getAuthorList().add(authors.get(i));
 		} 
-		
+		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
+			for (int j = 0; j < GlobalCollection.getAuthorList().size(); ++j) {
+				if (GlobalCollection.getAddedAuthors().get(i).getID() == GlobalCollection.getAuthorList().get(j).getID()) {
+					GlobalCollection.getAddedAuthors().set(i, GlobalCollection.getAuthorList().get(j));
+					break;
+				}
+			}
+		}
 		if (GlobalCollection.isAdd()) {
 			Label l = new Label();
 			Button b = new Button();

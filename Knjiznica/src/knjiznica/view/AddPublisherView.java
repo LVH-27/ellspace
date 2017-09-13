@@ -106,7 +106,7 @@ public class AddPublisherView {
 	private final static int buttonSize = 20;
 	
 	public void initialize() {
-		
+	
 		for (int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
 			Label l = new Label();
 			Button b = new Button();
@@ -157,6 +157,15 @@ public class AddPublisherView {
 			GlobalCollection.getPublisherList().add(publishers.get(i));
 		}
 		
+		for (int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
+			for (int j = 0; j < GlobalCollection.getPublisherList().size(); ++j) {
+				if (GlobalCollection.getAddedPublishers().get(i).getID() == GlobalCollection.getPublisherList().get(j).getID()) {
+					GlobalCollection.getAddedPublishers().set(i, GlobalCollection.getPublisherList().get(j));
+					break;
+				}
+			}
+		}
+		
 		if (GlobalCollection.isAdd()) {
 			Label l = new Label();
 			Button b = new Button();
@@ -188,7 +197,7 @@ public class AddPublisherView {
 			    }
 			});
 		}
-		
+		System.out.println(GlobalCollection.getAddedPublishers().size());
 		tablePublisherList.setItems(GlobalCollection.getPublisherList());
 		FilteredList<Publisher> filteredData = new FilteredList<Publisher>(GlobalCollection.getPublisherList(), e -> true);
 		searchField.setOnKeyReleased(e -> {
