@@ -101,7 +101,7 @@
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <HBox alignment="CENTER_LEFT" GridPane.rowIndex="6">
+            <HBox alignment="CENTER_LEFT" GridPane.rowIndex="7">
                <children>
                   <CheckBox fx:id="isAliveCheck" allowIndeterminate="true" mnemonicParsing="false" onAction="#disableYearOfDeath" text="Author is Alive">
                      <HBox.margin>
@@ -139,7 +139,7 @@
                   <Label fx:id="errorLabelMiss" text="Missing some information" textFill="RED" visible="false" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" GridPane.rowIndex="7">
+            <HBox alignment="CENTER" GridPane.rowIndex="6">
                <children>
                   <Label fx:id="errorLabelTooMuch" text="Label" textFill="RED" visible="false" />
                </children>
@@ -150,4 +150,31 @@
          </BorderPane.margin>
       </GridPane>
    </left>
+   <right>
+      <GridPane fx:id="addedAuthorsGrid" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="NEVER" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="Added Authors">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets right="30.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </right>
 </BorderPane>

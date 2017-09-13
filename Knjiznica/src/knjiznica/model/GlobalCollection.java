@@ -8,7 +8,11 @@ public class GlobalCollection {
 	private static ObservableList<User> lUser;
 	private static ObservableList<Library> lLibrary;
 	private static ObservableList<Author> lAuthor;
+	private static ObservableList<Publisher> lPublisher;
 	private static ObservableList<BusinessHours> lBusinessHours;
+	private static ObservableList<Author> addedAuthors;
+	private static ObservableList<Publisher> addedPublishers;
+	
 	private static User user;
 	private static Library library;
 	private static BusinessHours businessHours;
@@ -19,6 +23,9 @@ public class GlobalCollection {
 		lLibrary = FXCollections.observableArrayList();
 		lBusinessHours = FXCollections.observableArrayList();
 		lAuthor = FXCollections.observableArrayList();
+		lPublisher = FXCollections.observableArrayList();
+		addedAuthors = FXCollections.observableArrayList(); 
+		addedPublishers = FXCollections.observableArrayList(); 
 	}
 	
 	public static void emptyList() {
@@ -26,6 +33,9 @@ public class GlobalCollection {
 		lLibrary = FXCollections.observableArrayList();	
 		lBusinessHours = FXCollections.observableArrayList();
 		lAuthor = FXCollections.observableArrayList();
+		lPublisher = FXCollections.observableArrayList();
+		addedAuthors = FXCollections.observableArrayList(); 
+		addedPublishers = FXCollections.observableArrayList(); 
 	}
 	
 	public static ObservableList<User> getUserList() {
@@ -82,6 +92,30 @@ public class GlobalCollection {
 
 	public static void setAuthorList(ObservableList<Author> lAuthor) {
 		GlobalCollection.lAuthor = lAuthor;
+	}
+
+	public static ObservableList<Author> getAddedAuthors() {
+		return addedAuthors;
+	}
+
+	public static void setAddedAuthors(ObservableList<Author> addedAuthors) {
+		GlobalCollection.addedAuthors = addedAuthors;
+	}
+
+	public static ObservableList<Publisher> getPublisherList() {
+		return lPublisher;
+	}
+
+	public static void setPublisherList(ObservableList<Publisher> lPublisher) {
+		GlobalCollection.lPublisher = lPublisher;
+	}
+
+	public static ObservableList<Publisher> getAddedPublishers() {
+		return addedPublishers;
+	}
+
+	public static void setAddedPublishers(ObservableList<Publisher> addedPublishers) {
+		GlobalCollection.addedPublishers = addedPublishers;
 	}	
 	
 }
