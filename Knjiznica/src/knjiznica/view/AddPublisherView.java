@@ -197,7 +197,7 @@ public class AddPublisherView {
 			    }
 			});
 		}
-		System.out.println(GlobalCollection.getAddedPublishers().size());
+		
 		tablePublisherList.setItems(GlobalCollection.getPublisherList());
 		FilteredList<Publisher> filteredData = new FilteredList<Publisher>(GlobalCollection.getPublisherList(), e -> true);
 		searchField.setOnKeyReleased(e -> {
