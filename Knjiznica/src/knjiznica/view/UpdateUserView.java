@@ -52,7 +52,7 @@ public class UpdateUserView {
 	private TextField houseNumberField;
 	
 	@FXML
-	private Button addButton;
+	private Button updateButton;
 	
 	@FXML
 	private Button backButton;
@@ -104,9 +104,9 @@ public class UpdateUserView {
 			postalCodeCombo.setStyle("-fx-opacity: 1;");
 			
 			Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/edit-button.png"));
-			addButton.setGraphic(new ImageView(imageAddButton));
-			addButton.setId("transparentButton");
-			addButton.setOnAction(new EventHandler<ActionEvent>() {
+			updateButton.setGraphic(new ImageView(imageAddButton));
+			updateButton.setId("transparentButton");
+			updateButton.setOnAction(new EventHandler<ActionEvent>() {
 			    @Override public void handle(ActionEvent e) {
 			    	GlobalCollection.setEditable(true);
 			    	BorderPane updateUser;
@@ -124,8 +124,8 @@ public class UpdateUserView {
 			
 		} else {
 			Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/editAccept-button.png"));
-			addButton.setGraphic(new ImageView(imageAddButton));
-			addButton.setId("transparentButton");
+			updateButton.setGraphic(new ImageView(imageAddButton));
+			updateButton.setId("transparentButton");
 		}
 		
 		
@@ -216,9 +216,7 @@ public class UpdateUserView {
 		streetField.setStyle("");
 		houseNumberField.setStyle("");
 
-		/*
-		 * DOUBLED EMAIL NOT UNIQUE
-		 */
+//		FIXME Check if email is already in use (UNIQUE constraint)
 		
 		check = true;
 			

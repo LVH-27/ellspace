@@ -120,7 +120,7 @@ public class UpdateLibraryView {
 	private TextField  end7;
 	
 	@FXML
-	private Button addButton;
+	private Button updateButton;
 	
 	@FXML
 	private Button backButton;
@@ -175,35 +175,36 @@ public class UpdateLibraryView {
 		endTimeList   = new ArrayList<TextField>();
 		checkList = new ArrayList<String>();
 		beginTime = new ArrayList<String>();
-		endTime = new ArrayList<String>();
+		endTime   = new ArrayList<String>();
 		checkList = GlobalCollection.getBusinessHours().getCheck();
 		beginTime = GlobalCollection.getBusinessHours().getBeginTime();
-		endTime = GlobalCollection.getBusinessHours().getEndTime();
+		endTime   = GlobalCollection.getBusinessHours().getEndTime();
 		
 		checkBoxList.add(check1); checkBoxList.add(check2); checkBoxList.add(check3); checkBoxList.add(check4); checkBoxList.add(check5); checkBoxList.add(check6); checkBoxList.add(check7);
 		beginTimeList.add(begin1); beginTimeList.add(begin2); beginTimeList.add(begin3); beginTimeList.add(begin4); beginTimeList.add(begin5); beginTimeList.add(begin6); beginTimeList.add(begin7);
 		endTimeList.add(end1); endTimeList.add(end2); endTimeList.add(end3); endTimeList.add(end4); endTimeList.add(end5); endTimeList.add(end6); endTimeList.add(end7);
 		
 		if (!isEditable) {
-			firstNameField.setEditable(false);
+			firstNameField.  setEditable(false);
 			phoneNumberField.setEditable(false);
-			emailField.setEditable(false);
+			emailField.      setEditable(false);
 			informationField.setEditable(false);
-			countryField.setEditable(false);
-			streetField.setEditable(false);
+			countryField.    setEditable(false);
+			streetField.     setEditable(false);
 			houseNumberField.setEditable(false);
 			postalCodeCombo.setDisable(true);
 			postalCodeCombo.setStyle("-fx-opacity: 1;");
 			onlineLibraryCheck.setDisable(true);
+			
 			for (int i = 0; i < checkBoxList.size(); ++i) {
-				checkBoxList.get(i).setDisable(true);
+				checkBoxList. get(i).setDisable(true);
 				beginTimeList.get(i).setEditable(false);
-				endTimeList.get(i).setEditable(false);
+				endTimeList.  get(i).setEditable(false);
 			}
 			Image imageEditButton = new Image(getClass().getResourceAsStream("/resources/edit-button.png"));
-			addButton.setGraphic(new ImageView(imageEditButton));
-			addButton.setId("transparentButton");
-			addButton.setOnAction(new EventHandler<ActionEvent>() {
+			updateButton.setGraphic(new ImageView(imageEditButton));
+			updateButton.setId("transparentButton");
+			updateButton.setOnAction(new EventHandler<ActionEvent>() {
 			    @Override public void handle(ActionEvent e) {
 			    	GlobalCollection.setEditable(true);
 			    	BorderPane updateLibrary;
@@ -213,16 +214,14 @@ public class UpdateLibraryView {
 						
 					} catch (IOException e1) {
 						e1.printStackTrace();
-						
 					}
-					
 			    }
 			});
 			
 		} else {
 			Image imageEditButton = new Image(getClass().getResourceAsStream("/resources/editAccept-button.png"));
-			addButton.setGraphic(new ImageView(imageEditButton));
-			addButton.setId("transparentButton");
+			updateButton.setGraphic(new ImageView(imageEditButton));
+			updateButton.setId("transparentButton");
 		}
 		GlobalCollection.setEditable(false);
 		firstNameField.setText(library.getFirstName());
@@ -525,8 +524,6 @@ public class UpdateLibraryView {
 					beginTime.add("00:00");
 					endTime.add("00:00");
 				}
-				
-				
 			}
 			
 			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkList, onlineLibraryCheck.isSelected(), library.getID(), library.getAddressID());
