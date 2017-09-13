@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import knjiznica.model.GlobalCollection;
 import knjiznica.model.ViewProvider;
 
 public class StartScreenView {
@@ -58,7 +59,7 @@ public class StartScreenView {
 		BorderPane directory   = (BorderPane) FXMLLoader.load(getClass().getResource("Directory-view.fxml"));
 		BorderPane search      = (BorderPane) FXMLLoader.load(getClass().getResource("Search-view.fxml"));
 		BorderPane eventLog    = (BorderPane) FXMLLoader.load(getClass().getResource("EventLog-view.fxml"));
-		
+				
 		ViewProvider.setView("clientsMenu", clientsMenu);
 		ViewProvider.setView("share", share);
 		ViewProvider.setView("directory", directory);
@@ -69,6 +70,8 @@ public class StartScreenView {
 	@FXML
 	private void activateAddBook() throws IOException {
 		//TODO Change loaded FXML back to AddBook-view.fxml
+		GlobalCollection.setAdd(false);
+		GlobalCollection.emptyAddedPublishersList();
 		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
@@ -94,6 +97,8 @@ public class StartScreenView {
 	@FXML
 	private void activateSearch() throws IOException {
 		//TODO search replaced with AddAuthorTable 
+		GlobalCollection.setAdd(false);
+		GlobalCollection.emptyAddedAuthorsList();
 		BorderPane search = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(search);
 	}

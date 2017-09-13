@@ -3,7 +3,6 @@ package knjiznica.view;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -31,7 +30,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import knjiznica.model.AddPublisherToDatabase;
 import knjiznica.model.AlertWindowOpen;
-import knjiznica.model.Author;
 import knjiznica.model.ErrorLabelMessage;
 import knjiznica.model.FormattingName;
 import knjiznica.model.GlobalCollection;
@@ -110,6 +108,35 @@ public class AddPublisherView {
 	private boolean check;
 	
 	public void initialize() {
+		
+		for(int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
+			HBox container = new HBox(8);
+			Label l1 = new Label();
+			l1.setText(GlobalCollection.getAddedPublishers().get(i).getName());
+			Button b1 = new Button();
+			b1.setText("-");
+			final Pos CENTER = Pos.CENTER;
+			container.getChildren().addAll(l1, b1);
+			container.setAlignment(CENTER);
+			addedPublishersGrid.addRow(i + 1, container);
+			b1.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(container) - 1);
+					addedPublishersGrid.getChildren().remove(container);
+			   
+			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
+			        int i = 1;
+			        for (Node node : childrens) {
+			        	if(GridPane.getRowIndex(node) == null) {
+			        		continue;
+			        	}
+			            GridPane.setRowIndex(node, i);
+			            i++;
+			        }
+					
+			    }
+			});
+		}
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -128,6 +155,34 @@ public class AddPublisherView {
 		for (int i = 0; i < publishers.size(); ++i) {
 			GlobalCollection.getPublisherList().add(publishers.get(i));
 		} 
+		if(GlobalCollection.isAdd()) {
+			HBox container = new HBox(8);
+			Label l1 = new Label();
+			l1.setText(GlobalCollection.getPublisherList().get(GlobalCollection.getPublisherList().size() - 1).getName());
+			Button b1 = new Button();
+			b1.setText("-");
+			final Pos CENTER = Pos.CENTER;
+			container.getChildren().addAll(l1, b1);
+			container.setAlignment(CENTER);
+			addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size() + 1, container);
+			b1.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(container) - 1);
+					addedPublishersGrid.getChildren().remove(container);
+			   
+			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
+			        int i = 1;
+			        for (Node node : childrens) {
+			        	if(GridPane.getRowIndex(node) == null) {
+			        		continue;
+			        	}
+			            GridPane.setRowIndex(node, i);
+			            i++;
+			        }
+					
+			    }
+			});
+		}
 		tablePublisherList.setItems(GlobalCollection.getPublisherList());
 		FilteredList<Publisher> filteredData = new FilteredList<Publisher>(GlobalCollection.getPublisherList(), e -> true);
 		searchField.setOnKeyReleased(e -> {
@@ -346,7 +401,7 @@ public class AddPublisherView {
 			
 			if (!isInterrupted && isReached) {
 				AlertWindowOpen.openWindow("Publisher successfully added!");
-				
+				GlobalCollection.setAdd(true);
 	    		//TODO We need to return to AddBook but without resetting TextFields, inserting this publisher
 				BorderPane addPublisherTable = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
 		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addPublisherTable);
