@@ -57,6 +57,9 @@ public class AddPublisherTableView {
 	private Button backButton;
 	
 	@FXML
+	private Button acceptButton;
+	
+	@FXML
 	private TableView<Publisher> tablePublisherList;
 	
 	@FXML
@@ -84,6 +87,9 @@ public class AddPublisherTableView {
 	private GridPane addedPublishersGrid;
 	
 	@FXML
+	private BorderPane addedPublishersBorder;
+	
+	@FXML
 	private ComboBox<String> postalCodeCombo;
 	
 	@FXML
@@ -107,11 +113,11 @@ public class AddPublisherTableView {
 	
 	public void initialize() {
 		
-		addedPublishersGrid.setManaged(true);
-		addedPublishersGrid.setVisible(true);
+		addedPublishersBorder.setManaged(true);
+		addedPublishersBorder.setVisible(true);
 		if (GlobalCollection.getAddedPublishers().size() == 0) {
-			addedPublishersGrid.setManaged(false);
-			addedPublishersGrid.setVisible(false);
+			addedPublishersBorder.setManaged(false);
+			addedPublishersBorder.setVisible(false);
 		}
 		
 		for (int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
@@ -119,8 +125,8 @@ public class AddPublisherTableView {
 			Button b = new Button();
 
 			l.setText(GlobalCollection.getAddedPublishers().get(i).getName());
-			addedPublishersGrid.setManaged(true);
-			addedPublishersGrid.setVisible(true);
+			addedPublishersBorder.setManaged(true);
+			addedPublishersBorder.setVisible(true);
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 			b.setId("removeButton");
@@ -133,8 +139,8 @@ public class AddPublisherTableView {
 			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 					addedPublishersGrid.getChildren().removeAll(l, b);
 					if (GlobalCollection.getAddedPublishers().size() == 0) {
-						addedPublishersGrid.setManaged(false);
-						addedPublishersGrid.setVisible(false);
+						addedPublishersBorder.setManaged(false);
+						addedPublishersBorder.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 			        int i = 0;
@@ -156,6 +162,10 @@ public class AddPublisherTableView {
 		Image imageBackButton = new Image(getClass().getResourceAsStream("/resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
+		
+		Image imageAcceptButton = new Image(getClass().getResourceAsStream("/resources/accept-button.png"));
+		acceptButton.setGraphic(new ImageView(imageAcceptButton));
+		acceptButton.setId("transparentButton");
 		
 		ViewProvider.setView(nameCombo, postalCodeCombo);
 		PostalCodeComboThread.setComboData(nameCombo);
@@ -186,7 +196,9 @@ public class AddPublisherTableView {
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 			b.setId("removeButton");
-			addedPublishersGrid.setManaged(true);
+			
+			addedPublishersBorder.setManaged(true);
+			addedPublishersBorder.setVisible(true);
 			addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size() + 1, l, b);
 			GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(GlobalCollection.getPublisherList().size() - 1));
 
@@ -196,8 +208,8 @@ public class AddPublisherTableView {
 			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 					addedPublishersGrid.getChildren().removeAll(l, b);
 					if (GlobalCollection.getAddedPublishers().size() == 0) {
-						addedPublishersGrid.setManaged(false);
-						addedPublishersGrid.setVisible(false);
+						addedPublishersBorder.setManaged(false);
+						addedPublishersBorder.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 			        int i = 0;
@@ -294,8 +306,8 @@ public class AddPublisherTableView {
 							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 							b.setId("removeButton");
-							addedPublishersGrid.setManaged(true);
-							addedPublishersGrid.setVisible(true);
+							addedPublishersBorder.setManaged(true);
+							addedPublishersBorder.setVisible(true);
 							GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(cells.get(0).getRow()));
 							addedPublishersGrid.addRow(GlobalCollection.getAddedPublishers().size(), l, b);
 							
@@ -305,8 +317,8 @@ public class AddPublisherTableView {
 							    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 									addedPublishersGrid.getChildren().removeAll(l, b);
 									if (GlobalCollection.getAddedPublishers().size() == 0) {
-										addedPublishersGrid.setManaged(false);
-										addedPublishersGrid.setVisible(false);
+										addedPublishersBorder.setManaged(false);
+										addedPublishersBorder.setVisible(false);
 									}
 							        ObservableList<Node> childrens = addedPublishersGrid.getChildren();
 							        int i = 0;
@@ -454,5 +466,11 @@ public class AddPublisherTableView {
 				errorLabel.setVisible(true); 	
 			}	
 		}
+	}
+	
+	@FXML
+	public void activateAccept() {
+		//FIXME Close view and add authors to AddBook view.
+		System.out.println(GlobalCollection.getAddedPublishers());
 	}
 }
