@@ -10,10 +10,12 @@ public class GlobalCollection {
 	private static ObservableList<Author> lAuthor;
 	private static ObservableList<Publisher> lPublisher;
 	private static ObservableList<BusinessHours> lBusinessHours;
+	private static ObservableList<Language> lLanguages;
 	private static ObservableList<Author> addedAuthors;
 	private static ObservableList<Publisher> addedPublishers;
 	private static ObservableList<User> addedUsers;
 	private static ObservableList<Library> addedLibraries;
+	private static ObservableList<Language> addedLanguages;
 	
 	private static User user;
 	private static Library library;
@@ -35,10 +37,12 @@ public class GlobalCollection {
 		lBusinessHours = FXCollections.observableArrayList();
 		lAuthor = FXCollections.observableArrayList();
 		lPublisher = FXCollections.observableArrayList();
+		lLanguages = FXCollections.observableArrayList();
 		addedAuthors = FXCollections.observableArrayList(); 
 		addedPublishers = FXCollections.observableArrayList(); 
 		addedUsers = FXCollections.observableArrayList(); 
 		addedLibraries = FXCollections.observableArrayList(); 
+		addedLanguages = FXCollections.observableArrayList();
 	}
 	
 	public static void emptyList() {
@@ -47,8 +51,19 @@ public class GlobalCollection {
 		lBusinessHours = FXCollections.observableArrayList();
 		lAuthor = FXCollections.observableArrayList();
 		lPublisher = FXCollections.observableArrayList();
+		lLanguages = FXCollections.observableArrayList();
 	}
-	
+
+	public static void resetFields() {
+		ISBN = "";
+		title = "";
+		summary = "";
+		bookInfo = "";
+		edition = "";
+		publictionYear = "";
+		numberOfPages = "";
+	}
+
 	public static void emptyAddedPublishersList() {
 		addedPublishers = FXCollections.observableArrayList(); 
 	}
@@ -63,6 +78,10 @@ public class GlobalCollection {
 	
 	public static void emptyAddedLibrariesList() {
 		addedLibraries = FXCollections.observableArrayList(); 
+	}
+	
+	public static void emptyAddedLanguagesList() {
+		addedLanguages = FXCollections.observableArrayList(); 
 	}
 	
 	public static ObservableList<User> getUserList() {
@@ -231,6 +250,22 @@ public class GlobalCollection {
 
 	public static void setTitle(String title) {
 		GlobalCollection.title = title;
+	}
+
+	public static ObservableList<Language> getLanguageList() {
+		return lLanguages;
+	}
+
+	public static void setLanguageList(ObservableList<Language> lLanguages) {
+		GlobalCollection.lLanguages = lLanguages;
+	}
+
+	public static ObservableList<Language> getAddedLanguages() {
+		return addedLanguages;
+	}
+
+	public static void setAddedLanguages(ObservableList<Language> addedLanguages) {
+		GlobalCollection.addedLanguages = addedLanguages;
 	}
 	
 }

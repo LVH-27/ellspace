@@ -222,18 +222,21 @@ public class AddBookView {
 	
 	@FXML
 	private void activateAuthorsEditButton() throws IOException {
+		getText();
 		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
 	}
 	
 	@FXML
 	private void activatePublishersEditButton() throws IOException {
+		getText();
 		BorderPane addPublisher = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addPublisher);
 	}
 	
 	@FXML
 	private void activateLanguagesEditButton() throws IOException {
+		getText();
 		//FIXME fxml link
 		BorderPane addLanguage = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLanguage);
@@ -241,6 +244,7 @@ public class AddBookView {
 	
 	@FXML
 	private void activateGenreEditButton() throws IOException {
+		getText();
 		//FIXME fxml link
 		BorderPane addGenre = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addGenre);
@@ -248,6 +252,7 @@ public class AddBookView {
 	
 	@FXML
 	private void activateBack() throws IOException {
+		GlobalCollection.resetFields();
 		BorderPane startScreen = (BorderPane) ViewProvider.getView("startScreen");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(startScreen);
 	}
