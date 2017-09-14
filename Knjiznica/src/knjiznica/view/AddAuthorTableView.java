@@ -33,7 +33,7 @@ import knjiznica.model.GlobalCollection;
 import knjiznica.model.SelectAuthors;
 import knjiznica.model.ViewProvider;
 
-public class AddAuthorView {
+public class AddAuthorTableView {
 	
 	@FXML
 	private TextField searchField;
@@ -63,6 +63,9 @@ public class AddAuthorView {
 	private Button backButton;
 	
 	@FXML
+	private Button acceptButton;
+	
+	@FXML
 	private Label errorLabelMiss;
 	
 	@FXML
@@ -70,6 +73,9 @@ public class AddAuthorView {
 	
 	@FXML
 	private GridPane addedAuthorsGrid;
+	
+	@FXML
+	private BorderPane addedAuthorsBorder;
 	
 	@FXML
 	private TableView<Author> tableAuthorList;
@@ -108,13 +114,14 @@ public class AddAuthorView {
 		//XXX Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C."
 		
 		//FIXME Emphasize what values are mandatory and what are optional.
-		addedAuthorsGrid.setManaged(true);
-		addedAuthorsGrid.setVisible(true);
+		addedAuthorsBorder.setManaged(true);
+		addedAuthorsBorder.setVisible(true);
 		
-		if(GlobalCollection.getAddedAuthors().size() == 0) {
-			addedAuthorsGrid.setManaged(false);
-			addedAuthorsGrid.setVisible(false);
+		if (GlobalCollection.getAddedAuthors().size() == 0) {
+			addedAuthorsBorder.setManaged(false);
+			addedAuthorsBorder.setVisible(false);
 		}
+		
 		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
 			Label l = new Label();
 			Button b = new Button();
@@ -140,9 +147,9 @@ public class AddAuthorView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
 					addedAuthorsGrid.getChildren().removeAll(l, b);
-					if(GlobalCollection.getAddedAuthors().size() == 0) {
-						addedAuthorsGrid.setManaged(false);
-						addedAuthorsGrid.setVisible(false);
+					if (GlobalCollection.getAddedAuthors().size() == 0) {
+						addedAuthorsBorder.setManaged(false);
+						addedAuthorsBorder.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 			        int i = 0;
@@ -164,6 +171,10 @@ public class AddAuthorView {
 		Image imageBackButton = new Image(getClass().getResourceAsStream("/resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
+		
+		Image imageAcceptButton = new Image(getClass().getResourceAsStream("/resources/accept-button.png"));
+		acceptButton.setGraphic(new ImageView(imageAcceptButton));
+		acceptButton.setId("transparentButton");
 		
 		ArrayList<Author> authors = SelectAuthors.select(); 
 		
@@ -191,8 +202,10 @@ public class AddAuthorView {
 			if (middleNameFormat.equals(" - ")) {
 				middleNameFormat = " ";
 			}
-			addedAuthorsGrid.setManaged(true);
-			addedAuthorsGrid.setVisible(true);
+			
+			addedAuthorsBorder.setManaged(true);
+			addedAuthorsBorder.setVisible(true);
+			
 			l.setText(firstName + middleNameFormat + lastName);
 			
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
@@ -207,9 +220,9 @@ public class AddAuthorView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
 					addedAuthorsGrid.getChildren().removeAll(l, b);
-					if(GlobalCollection.getAddedAuthors().size() == 0) {
-						addedAuthorsGrid.setManaged(false);
-						addedAuthorsGrid.setVisible(false);
+					if (GlobalCollection.getAddedAuthors().size() == 0) {
+						addedAuthorsBorder.setManaged(false);
+						addedAuthorsBorder.setVisible(false);
 					}
 			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 			        int i = 0;
@@ -241,6 +254,7 @@ public class AddAuthorView {
 					for (int i = 0; i < splitStr.length; ++i) {
 						splittedFilter.add(splitStr[i]);
 					}
+					
 					splittedAuthorData.add(author.getFirstName().  toLowerCase());
 					splittedAuthorData.add(author.getMiddleName(). toLowerCase());
 					splittedAuthorData.add(author.getLastName().   toLowerCase());
@@ -298,8 +312,8 @@ public class AddAuthorView {
 							Label l = new Label();
 							Button b = new Button();
 							
-							addedAuthorsGrid.setManaged(true);
-							addedAuthorsGrid.setVisible(true);
+							addedAuthorsBorder.setManaged(true);
+							addedAuthorsBorder.setVisible(true);
 							String firstName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getFirstName();
 							String middleNameFormat = " " + GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getMiddleName() + " ";
 							String lastName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getLastName();
@@ -322,9 +336,9 @@ public class AddAuthorView {
 							    public void handle(ActionEvent e) {
 							    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
 									addedAuthorsGrid.getChildren().removeAll(l, b);
-									if(GlobalCollection.getAddedAuthors().size() == 0) {
-										addedAuthorsGrid.setManaged(false);
-										addedAuthorsGrid.setVisible(false);
+									if (GlobalCollection.getAddedAuthors().size() == 0) {
+										addedAuthorsBorder.setManaged(false);
+										addedAuthorsBorder.setVisible(false);
 									}
 							        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
 							        int i = 0;
@@ -535,5 +549,11 @@ public class AddAuthorView {
 		} else {
 			yearOfDeathField.setDisable(false);
 		}
+	}
+	
+	@FXML
+	public void activateAccept() {
+		//FIXME Close view and add authors to AddBook view.
+		System.out.println(GlobalCollection.getAddedAuthors());
 	}
 }
