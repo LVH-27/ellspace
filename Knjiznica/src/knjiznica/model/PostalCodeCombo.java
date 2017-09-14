@@ -17,6 +17,8 @@ public class PostalCodeCombo {
 	
 	public static List<ArrayList<?>> getData() throws SQLException {
 		
+		returnData = new ArrayList<ArrayList<?>>();
+		
 		Statement stmt = null;
 		
 		try {
