@@ -2,7 +2,6 @@ package knjiznica.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -98,6 +97,22 @@ public class AddBookView {
 			ownerLabelHBox.setVisible(false);
 			ownerNameLabel.setText("");
 		}
+		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
+			Label l = new Label();
+			
+			String firstName = GlobalCollection.getAddedAuthors().get(i).getFirstName();
+			String middleNameFormat = " " + GlobalCollection.getAddedAuthors().get(i).getMiddleName() + " ";
+			String lastName = GlobalCollection.getAddedAuthors().get(i).getLastName();
+			
+			if (middleNameFormat.equals(" - ")) {
+				middleNameFormat = " ";
+			}
+			
+			l.setText(firstName + middleNameFormat + lastName);
+			
+			authorsListGrid.addRow(i, l);
+			
+		}
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -168,8 +183,9 @@ public class AddBookView {
 	}
 	
 	@FXML
-	private void activateAuthorsEditButton() {
-		// TODO Auto-generated method stub
+	private void activateAuthorsEditButton() throws IOException {
+		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
 
 	}
 	

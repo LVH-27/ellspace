@@ -205,7 +205,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <Button fx:id="authorsEditButton" mnemonicParsing="false" text="Edit Authors" />
+                        <Button fx:id="authorsEditButton" mnemonicParsing="false" onAction="#activateAuthorsEditButton" text="Edit Authors" />
                      </children>
                   </VBox>
                   <GridPane fx:id="authorsListGrid" vgap="5.0" GridPane.rowIndex="4">

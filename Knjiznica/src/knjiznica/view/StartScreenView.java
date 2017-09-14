@@ -70,8 +70,9 @@ public class StartScreenView {
 	@FXML
 	private void activateAddBook() throws IOException {
 		//TODO Change loaded FXML back to AddBook-view.fxml
-		/*GlobalCollection.setAdd(false);
-		GlobalCollection.emptyAddedPublishersList();*/
+		GlobalCollection.setAdd(false);
+		GlobalCollection.emptyAddedPublishersList();
+		GlobalCollection.emptyAddedAuthorsList();
 		GlobalCollection.emptyAddedUsersList();
 		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
@@ -98,11 +99,7 @@ public class StartScreenView {
 	@FXML
 	private void activateSearch() throws IOException {
 		//TODO search replaced with AddAuthorTable 
-		GlobalCollection.setAdd(false);
-		GlobalCollection.emptyAddedAuthorsList();
 		
-		BorderPane search = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
-		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(search);
 	}
 	
 	@FXML
