@@ -155,8 +155,8 @@ public class AddBookView {
 	
 	@FXML
 	private void activateBack() throws IOException {
-		BorderPane clientsMenu = (BorderPane) ViewProvider.getView("clientsMenu");
-		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(clientsMenu);
+		BorderPane startScreen = (BorderPane) ViewProvider.getView("startScreen");
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(startScreen);
 	}
 	
 	@FXML
