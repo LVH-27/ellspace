@@ -146,6 +146,7 @@ public class AddBookView {
 	
 	@FXML
 	private void activateOwnerClear() throws IOException {
+		getText();
 		GlobalCollection.emptyAddedUsersList();
 		GlobalCollection.emptyAddedLibrariesList();
 		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
