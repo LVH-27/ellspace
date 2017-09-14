@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import knjiznica.view.AddAuthorView;
+import knjiznica.view.AddAuthorTableView;
 
 public class InsertNewAuthor {
 	
@@ -29,7 +29,7 @@ public class InsertNewAuthor {
 		pstmtAuthor.setString(2, middleName);
 		pstmtAuthor.setString(3, lastName);
 		
-		if (!AddAuthorView.checkIndeterminate) {
+		if (!AddAuthorTableView.checkIndeterminate) {
 			pstmtAuthor.setBoolean(4, isAlive);
 		} else {
 			pstmtAuthor.setNull(4, java.sql.Types.BOOLEAN);

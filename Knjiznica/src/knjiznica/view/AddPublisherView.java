@@ -109,7 +109,7 @@ public class AddPublisherView {
 		
 		addedPublishersGrid.setManaged(true);
 		addedPublishersGrid.setVisible(true);
-		if(GlobalCollection.getAddedPublishers().size() == 0) {
+		if (GlobalCollection.getAddedPublishers().size() == 0) {
 			addedPublishersGrid.setManaged(false);
 			addedPublishersGrid.setVisible(false);
 		}
@@ -132,7 +132,7 @@ public class AddPublisherView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 					addedPublishersGrid.getChildren().removeAll(l, b);
-					if(GlobalCollection.getAddedPublishers().size() == 0) {
+					if (GlobalCollection.getAddedPublishers().size() == 0) {
 						addedPublishersGrid.setManaged(false);
 						addedPublishersGrid.setVisible(false);
 					}
@@ -195,7 +195,7 @@ public class AddPublisherView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 					addedPublishersGrid.getChildren().removeAll(l, b);
-					if(GlobalCollection.getAddedPublishers().size() == 0) {
+					if (GlobalCollection.getAddedPublishers().size() == 0) {
 						addedPublishersGrid.setManaged(false);
 						addedPublishersGrid.setVisible(false);
 					}
@@ -304,7 +304,7 @@ public class AddPublisherView {
 							    public void handle(ActionEvent e) {
 							    	GlobalCollection.getAddedPublishers().remove(GridPane.getRowIndex(l) - 1);
 									addedPublishersGrid.getChildren().removeAll(l, b);
-									if(GlobalCollection.getAddedPublishers().size() == 0) {
+									if (GlobalCollection.getAddedPublishers().size() == 0) {
 										addedPublishersGrid.setManaged(false);
 										addedPublishersGrid.setVisible(false);
 									}

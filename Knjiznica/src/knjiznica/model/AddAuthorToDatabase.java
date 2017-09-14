@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
 
-import knjiznica.view.AddAuthorView;
+import knjiznica.view.AddAuthorTableView;
 
 public class AddAuthorToDatabase implements Runnable{
 	
@@ -27,10 +27,10 @@ public class AddAuthorToDatabase implements Runnable{
 			
 		} catch (PSQLException e) {
 			e.printStackTrace();
-			AddAuthorView.isReached = false;
+			AddAuthorTableView.isReached = false;
 			
 		} catch (SQLException e) {
-			AddAuthorView.isReached = false;
+			AddAuthorTableView.isReached = false;
 		} 
 	}
 	
@@ -48,7 +48,7 @@ public class AddAuthorToDatabase implements Runnable{
 		try {
 			t.join();
 		} catch (InterruptedException e) {
-			AddAuthorView.isInterrupted = true;
+			AddAuthorTableView.isInterrupted = true;
 		}
 	}
 }
