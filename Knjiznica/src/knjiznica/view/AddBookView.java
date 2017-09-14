@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.ViewProvider;
 
 public class AddBookView {
@@ -25,6 +27,9 @@ public class AddBookView {
 	private TextArea summaryArea;
 	
 	@FXML
+	private TextArea informationArea;
+	
+	@FXML
 	private TextField editionNumberField;
 	
 	@FXML
@@ -32,6 +37,30 @@ public class AddBookView {
 	
 	@FXML
 	private TextField numberOfPagesField;
+	
+	@FXML
+	private StackPane ownerStackPane;
+	
+	@FXML
+	private HBox ownerButtonsHBox;
+	
+	@FXML
+	private HBox ownerLabelHBox;
+	
+	@FXML
+	private Button ownerUserButton;
+	
+	@FXML
+	private Button ownerLibraryButton;
+	
+	@FXML
+	private Label ownerNameLabel;
+	
+	@FXML
+	private HBox ownerClearHBox;
+	
+	@FXML
+	private Button ownerClearButton;
 	
 	@FXML
 	private Button addButton;
@@ -50,6 +79,24 @@ public class AddBookView {
 		Image imageBackButton = new Image(getClass().getResourceAsStream("/resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
+	}
+	
+	@FXML
+	private void activateOwnerAddUser() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@FXML
+	private void activateOwnerAddLibrary() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@FXML
+	private void activateOwnerClear() {
+		// TODO Auto-generated method stub
+
 	}
 	
 	@FXML

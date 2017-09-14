@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -20,11 +21,8 @@
             <ColumnConstraints hgrow="SOMETIMES" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -95,7 +93,7 @@
                   </Label>
                </children>
             </HBox>
-            <TextArea prefHeight="75.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextArea fx:id="informationArea" prefHeight="75.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="6">
                <children>
                   <Label text="Edition Information">
@@ -126,7 +124,7 @@
                </children>
             </HBox>
             <TextField fx:id="numberOfPagesField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-            <HBox GridPane.columnIndex="6" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" GridPane.rowSpan="2147483647">
+            <HBox GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" GridPane.rowSpan="2147483647">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" />
                </GridPane.margin>
@@ -137,6 +135,44 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Owner">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <children>
+                  <Label text="Author">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <StackPane fx:id="ownerStackPane" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <children>
+                  <HBox fx:id="ownerButtonsHBox">
+                     <children>
+                        <Button fx:id="ownerLibraryButton" mnemonicParsing="false" text="Library" />
+                        <Button fx:id="ownerUserButton" mnemonicParsing="false" text="User" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="ownerLabelHBox" alignment="CENTER_LEFT" visible="false">
+                     <children>
+                        <Label fx:id="ownerNameLabel" />
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+            <HBox fx:id="ownerClearHBox" alignment="CENTER_LEFT" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="ownerClearButton" mnemonicParsing="false" text="Clear" />
                </children>
             </HBox>
          </children>
