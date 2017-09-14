@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import knjiznica.model.GlobalCollection;
 import knjiznica.model.ViewProvider;
 
 public class ClientsMenuView {
@@ -50,6 +51,7 @@ public class ClientsMenuView {
 	
 	@FXML
 	private void activateListUsers() throws IOException {
+		GlobalCollection.setPotentialOwner(false);
 		BorderPane listUsers = (BorderPane) FXMLLoader.load(getClass().getResource("ListUsers-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listUsers);
 	}
@@ -62,6 +64,7 @@ public class ClientsMenuView {
 	
 	@FXML
 	private void activateListLibraries() throws IOException {
+		GlobalCollection.setPotentialOwner(false);
 		BorderPane listLibraries = (BorderPane) FXMLLoader.load(getClass().getResource("ListLibraries-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listLibraries);
 	}

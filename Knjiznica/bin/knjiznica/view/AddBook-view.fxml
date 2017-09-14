@@ -159,8 +159,8 @@
                <children>
                   <HBox fx:id="ownerButtonsHBox">
                      <children>
-                        <Button fx:id="ownerLibraryButton" mnemonicParsing="false" text="Library" />
-                        <Button fx:id="ownerUserButton" mnemonicParsing="false" text="User" />
+                        <Button fx:id="ownerLibraryButton" mnemonicParsing="false" onAction="#activateOwnerAddLibrary" text="Library" />
+                        <Button fx:id="ownerUserButton" mnemonicParsing="false" onAction="#activateOwnerAddUser" text="User" />
                      </children>
                   </HBox>
                   <HBox fx:id="ownerLabelHBox" alignment="CENTER_LEFT" visible="false">
@@ -172,7 +172,7 @@
             </StackPane>
             <HBox fx:id="ownerClearHBox" alignment="CENTER_LEFT" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="ownerClearButton" mnemonicParsing="false" text="Clear" />
+                  <Button fx:id="ownerClearButton" mnemonicParsing="false" onAction="#activateOwnerClear" text="Clear" />
                </children>
             </HBox>
          </children>

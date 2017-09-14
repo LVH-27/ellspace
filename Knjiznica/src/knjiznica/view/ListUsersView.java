@@ -1,5 +1,6 @@
 package knjiznica.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -132,18 +133,33 @@ public class ListUsersView {
 			@Override
 			public void handle(MouseEvent event) {
 				if (event.getClickCount() > 1) {
-					try {
-						@SuppressWarnings("rawtypes")
-						ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
-						GlobalCollection.setUser(GlobalCollection.getUserList().get(cells.get(0).getRow()));
-						GlobalCollection.setEditable(false);
-						BorderPane updateUser;
-						updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
-						((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
-						
-					} catch (Exception e) {
+					@SuppressWarnings("rawtypes")
+					ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
+					if(!GlobalCollection.isPotentialOwner()) {
+						try {
+							GlobalCollection.setUser(GlobalCollection.getUserList().get(cells.get(0).getRow()));
+							GlobalCollection.setEditable(false);
+							BorderPane updateUser;
+							updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
+							((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
+							
+						} catch (Exception e) {
 
+						}
+					} else {
+						GlobalCollection.emptyAddedUsersList();
+						GlobalCollection.getAddedUsers().add(GlobalCollection.getUserList().get(cells.get(0).getRow()));
+						BorderPane addBook;
+						try {
+							addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
+							((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
+							
+						} catch (IOException e) {
+							
+						}
+				    	
 					}
+					
 				}
 			}
 		});

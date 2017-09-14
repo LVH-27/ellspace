@@ -70,9 +70,10 @@ public class StartScreenView {
 	@FXML
 	private void activateAddBook() throws IOException {
 		//TODO Change loaded FXML back to AddBook-view.fxml
-		GlobalCollection.setAdd(false);
-		GlobalCollection.emptyAddedPublishersList();
-		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
+		/*GlobalCollection.setAdd(false);
+		GlobalCollection.emptyAddedPublishersList();*/
+		GlobalCollection.emptyAddedUsersList();
+		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
 	

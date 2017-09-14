@@ -1,5 +1,6 @@
 package knjiznica.view;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -159,19 +160,34 @@ public class ListLibrariesView {
 			@Override
 			public void handle(MouseEvent event) {
 				if (event.getClickCount() > 1) {
-					try {
-						@SuppressWarnings("rawtypes")
-						ObservableList<TablePosition> cells = tableLibraryList.getSelectionModel().getSelectedCells();
-						GlobalCollection.setBusinessHours(GlobalCollection.getBusinessHoursList().get(cells.get(0).getRow()));
-						GlobalCollection.setLibrary(GlobalCollection.getLibraryList().get(cells.get(0).getRow()));
-						GlobalCollection.setEditable(false);
-						BorderPane updateLibrary;
-						updateLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateLibrary-view.fxml"));
-						((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateLibrary);
-						
-					} catch (Exception e) {
-						
+					@SuppressWarnings("rawtypes")
+					ObservableList<TablePosition> cells = tableLibraryList.getSelectionModel().getSelectedCells();
+					
+					if(!GlobalCollection.isPotentialOwner()) {
+						try {
+							GlobalCollection.setBusinessHours(GlobalCollection.getBusinessHoursList().get(cells.get(0).getRow()));
+							GlobalCollection.setLibrary(GlobalCollection.getLibraryList().get(cells.get(0).getRow()));
+							GlobalCollection.setEditable(false);
+							BorderPane updateLibrary;
+							updateLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateLibrary-view.fxml"));
+							((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateLibrary);
+							
+						} catch (Exception e) {
+							
+						}
+					} else {
+						GlobalCollection.emptyAddedLibrariesList();
+						GlobalCollection.getAddedLibraries().add(GlobalCollection.getLibraryList().get(cells.get(0).getRow()));
+						BorderPane addBook;
+						try {
+							addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
+							((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
+							
+						} catch (IOException e) {
+							
+						}
 					}
+					
 				}
 			}
 		});

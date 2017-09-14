@@ -12,12 +12,22 @@ public class GlobalCollection {
 	private static ObservableList<BusinessHours> lBusinessHours;
 	private static ObservableList<Author> addedAuthors;
 	private static ObservableList<Publisher> addedPublishers;
+	private static ObservableList<User> addedUsers;
+	private static ObservableList<Library> addedLibraries;
 	
 	private static User user;
 	private static Library library;
 	private static BusinessHours businessHours;
 	private static boolean isEditable;
 	private static boolean add;
+	private static boolean isPotentialOwner;
+	private static String ISBN;
+	private static String title;
+	private static String summary;
+	private static String bookInfo;
+	private static String edition;
+	private static String publictionYear;
+	private static String numberOfPages;
 	
 	static {
 		lUser = FXCollections.observableArrayList();
@@ -27,6 +37,8 @@ public class GlobalCollection {
 		lPublisher = FXCollections.observableArrayList();
 		addedAuthors = FXCollections.observableArrayList(); 
 		addedPublishers = FXCollections.observableArrayList(); 
+		addedUsers = FXCollections.observableArrayList(); 
+		addedLibraries = FXCollections.observableArrayList(); 
 	}
 	
 	public static void emptyList() {
@@ -43,6 +55,14 @@ public class GlobalCollection {
 	
 	public static void emptyAddedAuthorsList() {
 		addedAuthors = FXCollections.observableArrayList(); 
+	}
+	
+	public static void emptyAddedUsersList() {
+		addedUsers = FXCollections.observableArrayList(); 
+	}
+	
+	public static void emptyAddedLibrariesList() {
+		addedLibraries = FXCollections.observableArrayList(); 
 	}
 	
 	public static ObservableList<User> getUserList() {
@@ -132,6 +152,87 @@ public class GlobalCollection {
 	public static void setAdd(boolean add) {
 		GlobalCollection.add = add;
 	}
+
+	public static ObservableList<User> getAddedUsers() {
+		return addedUsers;
+	}
+
+	public static void setAddedUsers(ObservableList<User> addedUsers) {
+		GlobalCollection.addedUsers = addedUsers;
+	}
+
+	public static ObservableList<Library> getAddedLibraries() {
+		return addedLibraries;
+	}
+
+	public static void setAddedLibraries(ObservableList<Library> addedLibraries) {
+		GlobalCollection.addedLibraries = addedLibraries;
+	}
+
+	public static boolean isPotentialOwner() {
+		return isPotentialOwner;
+	}
+
+	public static void setPotentialOwner(boolean isPotentialOwner) {
+		GlobalCollection.isPotentialOwner = isPotentialOwner;
+	}
+
+	public static String getISBN() {
+		return ISBN;
+	}
+
+	public static void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
+
+	public static String getSummary() {
+		return summary;
+	}
+
+	public static void setSummary(String summary) {
+		GlobalCollection.summary = summary;
+	}
+
+	public static String getBookInfo() {
+		return bookInfo;
+	}
+
+	public static void setBookInfo(String bookInfo) {
+		GlobalCollection.bookInfo = bookInfo;
+	}
+
+	public static String getEdition() {
+		return edition;
+	}
+
+	public static void setEdition(String edition) {
+		GlobalCollection.edition = edition;
+	}
+
+	public static String getPublictionYear() {
+		return publictionYear;
+	}
+
+	public static void setPublictionYear(String publictionYear) {
+		GlobalCollection.publictionYear = publictionYear;
+	}
+
+	public static String getNumberOfPages() {
+		return numberOfPages;
+	}
+
+	public static void setNumberOfPages(String numberOfPages) {
+		GlobalCollection.numberOfPages = numberOfPages;
+	}
+
+	public static String getTitle() {
+		return title;
+	}
+
+	public static void setTitle(String title) {
+		GlobalCollection.title = title;
+	}
+	
 }
 
 //TODO Add new column with time/date when user was added
