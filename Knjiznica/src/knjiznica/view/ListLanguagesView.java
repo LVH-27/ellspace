@@ -21,8 +21,6 @@ import javafx.scene.layout.StackPane;
 import knjiznica.model.GlobalCollection;
 import knjiznica.model.Language;
 import knjiznica.model.SelectLanguages;
-import knjiznica.model.SelectUsers;
-import knjiznica.model.User;
 import knjiznica.model.ViewProvider;
 
 public class ListLanguagesView {

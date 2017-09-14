@@ -229,9 +229,8 @@ public class AddPublisherTableView {
 	
 	@FXML
 	private void activateBack() throws IOException {
-		//TODO We need to return to AddBook but without resetting TextFields
-//		BorderPane clientsMenu = (BorderPane) ViewProvider.getView("clientsMenu");
-//		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(clientsMenu);
+		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
 	
 	@FXML
