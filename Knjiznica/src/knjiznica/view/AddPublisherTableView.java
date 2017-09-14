@@ -539,8 +539,8 @@ public class AddPublisherTableView {
 	}
 	
 	@FXML
-	public void activateAccept() {
-		//FIXME Close view and add authors to AddBook view.
-		System.out.println(GlobalCollection.getAddedPublishers());
+	public void activateAccept() throws IOException {
+		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
 }

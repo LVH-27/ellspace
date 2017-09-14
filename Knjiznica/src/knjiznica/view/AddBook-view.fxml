@@ -70,6 +70,9 @@
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
@@ -101,7 +104,7 @@
                         <Insets />
                      </GridPane.margin>
                   </HBox>
-                  <TextArea fx:id="summaryArea" prefHeight="100.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <TextArea fx:id="summaryArea" prefHeight="120.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                   <HBox alignment="TOP_RIGHT" GridPane.rowIndex="5">
                      <children>
                         <Label text="Book information:">
@@ -111,17 +114,20 @@
                         </Label>
                      </children>
                   </HBox>
-                  <TextArea fx:id="informationArea" prefHeight="75.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <TextArea fx:id="informationArea" prefHeight="85.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="6">
                      <children>
                         <Label text="Edition Information">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </GridPane.margin>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="7">
@@ -162,6 +168,11 @@
                 <RowConstraints vgrow="NEVER" />
                   <RowConstraints vgrow="NEVER" />
                   <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
               </rowConstraints>
                <children>
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnSpan="2">
@@ -175,6 +186,9 @@
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
@@ -205,7 +219,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <Button fx:id="authorsEditButton" mnemonicParsing="false" onAction="#activateAuthorsEditButton" text="Edit Authors" />
+                        <Button fx:id="authorsEditButton" mnemonicParsing="false" onAction="#activateAuthorsEditButton" text=" Edit Authors" />
                      </children>
                   </VBox>
                   <GridPane fx:id="authorsListGrid" vgap="5.0" GridPane.rowIndex="4">
@@ -215,6 +229,72 @@
                     <rowConstraints>
                       <RowConstraints valignment="CENTER" vgrow="NEVER" />
                     </rowConstraints>
+                  </GridPane>
+                  <VBox spacing="5.0" GridPane.rowIndex="5">
+                     <children>
+                        <HBox alignment="BOTTOM_LEFT">
+                           <children>
+                              <Label text="Publishers">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button fx:id="publishersEditButton" mnemonicParsing="false" onAction="#activatePublishersEditButton" text=" Edit Publishers" />
+                     </children>
+                  </VBox>
+                  <GridPane fx:id="publishersListGrid" vgap="5.0" GridPane.rowIndex="6">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                     </rowConstraints>
+                  </GridPane>
+                  <VBox spacing="5.0" GridPane.rowIndex="7">
+                     <children>
+                        <HBox alignment="BOTTOM_LEFT">
+                           <children>
+                              <Label text="Languages">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button fx:id="languagesEditButton" mnemonicParsing="false" onAction="#activateLanguagesEditButton" text=" Edit Languages" />
+                     </children>
+                  </VBox>
+                  <GridPane fx:id="languagesListGrid" vgap="5.0" GridPane.rowIndex="8">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                     </rowConstraints>
+                  </GridPane>
+                  <VBox spacing="5.0" GridPane.rowIndex="9">
+                     <children>
+                        <HBox alignment="BOTTOM_LEFT">
+                           <children>
+                              <Label text="Genre">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button fx:id="genreEditButton" mnemonicParsing="false" onAction="#activateGenreEditButton" text=" Edit Genre" />
+                     </children>
+                  </VBox>
+                  <GridPane fx:id="genreListGrid" vgap="5.0" GridPane.rowIndex="10">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                     </rowConstraints>
                   </GridPane>
                </children>
                <padding>

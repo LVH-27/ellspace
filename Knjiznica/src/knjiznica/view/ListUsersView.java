@@ -135,7 +135,7 @@ public class ListUsersView {
 				if (event.getClickCount() > 1) {
 					@SuppressWarnings("rawtypes")
 					ObservableList<TablePosition> cells = tableUserList.getSelectionModel().getSelectedCells();
-					if(!GlobalCollection.isPotentialOwner()) {
+					if (!GlobalCollection.isPotentialOwner()) {
 						try {
 							GlobalCollection.setUser(GlobalCollection.getUserList().get(cells.get(0).getRow()));
 							GlobalCollection.setEditable(false);

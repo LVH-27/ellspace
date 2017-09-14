@@ -163,7 +163,7 @@ public class ListLibrariesView {
 					@SuppressWarnings("rawtypes")
 					ObservableList<TablePosition> cells = tableLibraryList.getSelectionModel().getSelectedCells();
 					
-					if(!GlobalCollection.isPotentialOwner()) {
+					if (!GlobalCollection.isPotentialOwner()) {
 						try {
 							GlobalCollection.setBusinessHours(GlobalCollection.getBusinessHoursList().get(cells.get(0).getRow()));
 							GlobalCollection.setLibrary(GlobalCollection.getLibraryList().get(cells.get(0).getRow()));

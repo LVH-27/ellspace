@@ -68,6 +68,24 @@ public class AddBookView {
 	private GridPane authorsListGrid;
 	
 	@FXML
+	private Button publishersEditButton;
+	
+	@FXML
+	private GridPane publishersListGrid;
+	
+	@FXML
+	private Button languagesEditButton;
+	
+	@FXML
+	private GridPane languagesListGrid;
+	
+	@FXML
+	private Button genreEditButton;
+	
+	@FXML
+	private GridPane genreListGrid;
+	
+	@FXML
 	private Button addButton;
 	
 	@FXML
@@ -77,17 +95,27 @@ public class AddBookView {
 	private Label errorLabel;
 	
 	public void initialize() throws SQLException {
-		setText();
-		if(GlobalCollection.getAddedUsers().size() > 0) {
+		setTextToTextField();
+		
+		authorsEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
+		authorsEditButton.setId("smallButton");
+		publishersEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
+		publishersEditButton.setId("smallButton");
+		languagesEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
+		languagesEditButton.setId("smallButton");
+		genreEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
+		genreEditButton.setId("smallButton");
+		
+		if (GlobalCollection.getAddedUsers().size() > 0) {
 			ownerButtonsHBox.setVisible(false);
 			ownerLabelHBox.setVisible(true);
 			String middleName = "";
-			if(!GlobalCollection.getAddedUsers().get(0).getMiddleName().equals("-")) {
+			if (!GlobalCollection.getAddedUsers().get(0).getMiddleName().equals("-")) {
 				middleName = GlobalCollection.getAddedUsers().get(0).getMiddleName() + " ";
 			}
 			ownerNameLabel.setText(GlobalCollection.getAddedUsers().get(0).getFirstName() + " " + middleName + GlobalCollection.getAddedUsers().get(0).getLastName());
 			
-		} else if(GlobalCollection.getAddedLibraries().size() > 0) {
+		} else if (GlobalCollection.getAddedLibraries().size() > 0) {
 			ownerButtonsHBox.setVisible(false);
 			ownerLabelHBox.setVisible(true);
 			ownerNameLabel.setText(GlobalCollection.getAddedLibraries().get(0).getFirstName());
@@ -97,6 +125,7 @@ public class AddBookView {
 			ownerLabelHBox.setVisible(false);
 			ownerNameLabel.setText("");
 		}
+		
 		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
 			Label l = new Label();
 			
@@ -109,10 +138,22 @@ public class AddBookView {
 			}
 			
 			l.setText(firstName + middleNameFormat + lastName);
+			l.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/addedAuthor-icon-small.png"))));
 			
 			authorsListGrid.addRow(i, l);
 			
 		}
+		
+		for (int i = 0; i < GlobalCollection.getAddedPublishers().size(); ++i) {
+			Label l = new Label();
+			
+			l.setText(GlobalCollection.getAddedPublishers().get(i).getName());
+			l.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/addedPublisher-icon-small.png"))));
+			
+			publishersListGrid.addRow(i, l);
+			
+		}
+		
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -140,10 +181,9 @@ public class AddBookView {
 		GlobalCollection.setPotentialOwner(true);
 		BorderPane listUsers = (BorderPane) FXMLLoader.load(getClass().getResource("ListUsers-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listUsers);
-
 	}
 	
-	private void setText() {
+	private void setTextToTextField() {
 		isbnField.setText(GlobalCollection.getISBN());
 		titleField.setText(GlobalCollection.getTitle());
 		summaryArea.setText(GlobalCollection.getSummary());
@@ -169,7 +209,6 @@ public class AddBookView {
 		GlobalCollection.setPotentialOwner(true);
 		BorderPane listLibraries = (BorderPane) FXMLLoader.load(getClass().getResource("ListLibraries-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listLibraries);
-
 	}
 	
 	@FXML
@@ -179,14 +218,32 @@ public class AddBookView {
 		GlobalCollection.emptyAddedLibrariesList();
 		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
-
 	}
 	
 	@FXML
 	private void activateAuthorsEditButton() throws IOException {
 		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
-
+	}
+	
+	@FXML
+	private void activatePublishersEditButton() throws IOException {
+		BorderPane addPublisher = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addPublisher);
+	}
+	
+	@FXML
+	private void activateLanguagesEditButton() throws IOException {
+		//FIXME fxml link
+		BorderPane addLanguage = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLanguage);
+	}
+	
+	@FXML
+	private void activateGenreEditButton() throws IOException {
+		//FIXME fxml link
+		BorderPane addGenre = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
+		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addGenre);
 	}
 	
 	@FXML

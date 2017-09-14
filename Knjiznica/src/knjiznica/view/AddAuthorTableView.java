@@ -598,7 +598,7 @@ public class AddAuthorTableView {
     		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
         	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
     		
-    	} else if(isInterrupted){
+    	} else if (isInterrupted) {
     		errorLabelMiss.setText(ErrorLabelMessage.getFailReach());
     		errorLabelMiss.setVisible(true);
     		
