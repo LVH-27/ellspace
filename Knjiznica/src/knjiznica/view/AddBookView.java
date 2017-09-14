@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import knjiznica.model.GlobalCollection;
@@ -60,6 +61,12 @@ public class AddBookView {
 	
 	@FXML
 	private Button ownerClearButton;
+	
+	@FXML
+	private Button authorsEditButton;
+	
+	@FXML
+	private GridPane authorsListGrid;
 	
 	@FXML
 	private Button addButton;
@@ -157,6 +164,12 @@ public class AddBookView {
 		GlobalCollection.emptyAddedLibrariesList();
 		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
+
+	}
+	
+	@FXML
+	private void activateAuthorsEditButton() {
+		// TODO Auto-generated method stub
 
 	}
 	

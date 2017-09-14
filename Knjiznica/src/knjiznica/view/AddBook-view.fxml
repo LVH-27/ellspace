@@ -160,7 +160,8 @@
                 <RowConstraints vgrow="NEVER" />
                 <RowConstraints vgrow="NEVER" />
                 <RowConstraints vgrow="NEVER" />
-                  <RowConstraints />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
               </rowConstraints>
                <children>
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnSpan="2">
@@ -193,34 +194,49 @@
                         </HBox>
                      </children>
                   </StackPane>
-                  <HBox alignment="BOTTOM_LEFT" GridPane.rowIndex="3">
+                  <VBox spacing="5.0" GridPane.rowIndex="3">
                      <children>
-                        <Label text="Author">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
+                        <HBox alignment="BOTTOM_LEFT">
+                           <children>
+                              <Label text="Authors">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button fx:id="authorsEditButton" mnemonicParsing="false" onAction="#activateAuthorsEditButton" text="Edit Authors" />
                      </children>
-                  </HBox>
-                  <HBox spacing="10.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.rowSpan="2147483647">
-                     <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" />
-                     </GridPane.margin>
-                     <children>
-                        <Button fx:id="backButton" cancelButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0" />
-                        <Button fx:id="addButton" defaultButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
+                  </VBox>
+                  <GridPane fx:id="authorsListGrid" vgap="5.0" GridPane.rowIndex="4">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                    </rowConstraints>
+                  </GridPane>
                </children>
                <padding>
                   <Insets right="30.0" />
                </padding>
             </GridPane>
          </center>
+         <bottom>
+            <HBox spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="backButton" cancelButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0" />
+                  <Button fx:id="addButton" defaultButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="30.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
       </BorderPane>
    </right>
 </BorderPane>
