@@ -154,7 +154,7 @@ public class AddAuthorTableView {
 			
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-			b.setId("removeButton");
+			b.setId("smallButton");
 			
 			addedAuthorsGrid.addRow(i + 1, l, b);
 			
@@ -439,7 +439,7 @@ public class AddAuthorTableView {
 			
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-			b.setId("removeButton");
+			b.setId("smallButton");
 			
 			addedAuthorsGrid.addRow(GlobalCollection.getAddedAuthors().size() + 1, l, b);
 			GlobalCollection.getAddedAuthors().add(GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1));
@@ -557,7 +557,7 @@ public class AddAuthorTableView {
 							
 							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-							b.setId("removeButton");
+							b.setId("smallButton");
 							
 							GlobalCollection.getAddedAuthors().add(GlobalCollection.getAuthorList().get(cells.get(0).getRow()));
 							addedAuthorsGrid.addRow(GlobalCollection.getAddedAuthors().size(), l, b);

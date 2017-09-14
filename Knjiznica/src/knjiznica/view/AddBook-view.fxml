@@ -160,6 +160,7 @@
                 <RowConstraints vgrow="NEVER" />
                 <RowConstraints vgrow="NEVER" />
                 <RowConstraints vgrow="NEVER" />
+                  <RowConstraints />
               </rowConstraints>
                <children>
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnSpan="2">
@@ -176,7 +177,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <StackPane fx:id="ownerStackPane" GridPane.rowIndex="2">
+                  <StackPane fx:id="ownerStackPane" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <children>
                         <HBox fx:id="ownerButtonsHBox">
                            <children>
@@ -184,9 +185,10 @@
                               <Button fx:id="ownerUserButton" mnemonicParsing="false" onAction="#activateOwnerAddUser" text="User" />
                            </children>
                         </HBox>
-                        <HBox fx:id="ownerLabelHBox" alignment="CENTER_LEFT" visible="false">
+                        <HBox fx:id="ownerLabelHBox" alignment="CENTER_LEFT" spacing="15.0" visible="false">
                            <children>
                               <Label fx:id="ownerNameLabel" />
+                              <Button fx:id="ownerClearButton" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#activateOwnerClear" prefHeight="20.0" prefWidth="20.0" />
                            </children>
                         </HBox>
                      </children>
@@ -200,7 +202,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.rowSpan="2147483647">
+                  <HBox spacing="10.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.rowSpan="2147483647">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" />
                      </GridPane.margin>
@@ -208,21 +210,10 @@
                         <Button fx:id="backButton" cancelButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateBack" prefHeight="80.0" prefWidth="80.0" />
                         <Button fx:id="addButton" defaultButton="true" maxHeight="80.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#activateAdd" prefHeight="80.0" prefWidth="80.0">
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
                      </children>
-                  </HBox>
-                  <HBox fx:id="ownerClearHBox" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <Button fx:id="ownerClearButton" mnemonicParsing="false" onAction="#activateOwnerClear" text="Clear" />
-                     </children>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
                   </HBox>
                </children>
                <padding>

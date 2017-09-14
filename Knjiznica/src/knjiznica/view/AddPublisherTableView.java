@@ -143,7 +143,7 @@ public class AddPublisherTableView {
 			addedPublishersBorder.setVisible(true);
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-			b.setId("removeButton");
+			b.setId("smallButton");
 
 			addedPublishersGrid.addRow(i + 1, l, b);
 			
@@ -369,7 +369,7 @@ public class AddPublisherTableView {
 
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-			b.setId("removeButton");
+			b.setId("smallButton");
 			
 			addedPublishersBorder.setManaged(true);
 			addedPublishersBorder.setVisible(true);
@@ -479,7 +479,7 @@ public class AddPublisherTableView {
 
 							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-							b.setId("removeButton");
+							b.setId("smallButton");
 							addedPublishersBorder.setManaged(true);
 							addedPublishersBorder.setVisible(true);
 							GlobalCollection.getAddedPublishers().add(GlobalCollection.getPublisherList().get(cells.get(0).getRow()));

@@ -59,9 +59,6 @@ public class AddBookView {
 	private Label ownerNameLabel;
 	
 	@FXML
-	private HBox ownerClearHBox;
-	
-	@FXML
 	private Button ownerClearButton;
 	
 	@FXML
@@ -76,7 +73,6 @@ public class AddBookView {
 	public void initialize() throws SQLException {
 		setText();
 		if(GlobalCollection.getAddedUsers().size() > 0) {
-			ownerClearHBox.setVisible(true);
 			ownerButtonsHBox.setVisible(false);
 			ownerLabelHBox.setVisible(true);
 			String middleName = "";
@@ -86,13 +82,11 @@ public class AddBookView {
 			ownerNameLabel.setText(GlobalCollection.getAddedUsers().get(0).getFirstName() + " " + middleName + GlobalCollection.getAddedUsers().get(0).getLastName());
 			
 		} else if(GlobalCollection.getAddedLibraries().size() > 0) {
-			ownerClearHBox.setVisible(true);
 			ownerButtonsHBox.setVisible(false);
 			ownerLabelHBox.setVisible(true);
 			ownerNameLabel.setText(GlobalCollection.getAddedLibraries().get(0).getFirstName());
 			
 		} else {
-			ownerClearHBox.setVisible(false);
 			ownerButtonsHBox.setVisible(true);
 			ownerLabelHBox.setVisible(false);
 			ownerNameLabel.setText("");
@@ -104,6 +98,18 @@ public class AddBookView {
 		Image imageBackButton = new Image(getClass().getResourceAsStream("/resources/back-button.png"));
 		backButton.setGraphic(new ImageView(imageBackButton));
 		backButton.setId("transparentButton");
+		
+		Image imageOwnerUserButton = new Image(getClass().getResourceAsStream("/resources/addUser-button-small.png"));
+		ownerUserButton.setGraphic(new ImageView(imageOwnerUserButton));
+		ownerUserButton.setId("smallButton");
+		
+		Image imageOwnerLibraryButton = new Image(getClass().getResourceAsStream("/resources/addLibrary-button-small.png"));
+		ownerLibraryButton.setGraphic(new ImageView(imageOwnerLibraryButton));
+		ownerLibraryButton.setId("smallButton");
+		
+		Image imageOwnerClearButton = new Image(getClass().getResourceAsStream("/resources/remove-button.png"));
+		ownerClearButton.setGraphic(new ImageView(imageOwnerClearButton));
+		ownerClearButton.setId("smallButton");
 	}
 	
 	@FXML
