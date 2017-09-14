@@ -3,7 +3,11 @@ package knjiznica.view;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import org.controlsfx.control.MaskerPane;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.GlobalCollection;
 import knjiznica.model.Library;
 import knjiznica.model.SelectLibraries;
@@ -57,15 +62,53 @@ public class ListLibrariesView {
 	@FXML
 	private TableColumn<Library, String> closesCol;
 	
-	public void initialize() {
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
+	
+	public void initialize() {	
+		
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
 		
 		GlobalCollection.emptyList();
+		
+		sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+		
+		ArrayList<Library> libraries = new ArrayList<Library>();
+		
+		Task<ArrayList<Library>> getLibrariesTableTask = new Task<ArrayList<Library>>() {
+            @Override
+            public ArrayList<Library> call() throws Exception {
+            	
+    			Thread.sleep(600);
+    			
+    			return SelectLibraries.select();  
+            }
+		};
+		
+		getLibrariesTableTask.setOnSucceeded(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			libraries.addAll(getLibrariesTableTask.getValue());
+			populateTable(libraries);
+		});
+		
+		//TODO after thread fails populate libraries table
+		
+		/*getAuthorsTableTask.setOnFailed(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			afterThreadFails();
+	    });*/
+		exec.execute(getLibrariesTableTask);		
+		
+	}
+	public void populateTable(ArrayList<Library> libraries) {
 		
 		LocalDate localDate = LocalDate.now();
 		DayOfWeek weekDay = localDate.getDayOfWeek();
 		int weekDayInt = weekDay.getValue();
-		
-		ArrayList<Library> libraries = SelectLibraries.select(); 
 		
 		ArrayList<String> weekCheck = new ArrayList<String>(); 
 		ArrayList<String> weekOpens = new ArrayList<String>(); 

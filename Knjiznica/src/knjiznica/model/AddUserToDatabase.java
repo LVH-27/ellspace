@@ -8,7 +8,7 @@ import org.postgresql.util.PSQLException;
 import knjiznica.view.AddUserView;
 
 
-public class AddUserToDatabase implements Runnable{
+public class AddUserToDatabase {
 	
 	private static String firstName;
 	private static String middleName;
@@ -20,8 +20,17 @@ public class AddUserToDatabase implements Runnable{
 	private static String street;
 	private static String houseNumber;
 	
-	@Override
-	public void run() {
+	public static void addUser(String firstNameIn, String middleNameIn, String lastNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn) {
+		
+		firstName = firstNameIn;
+		middleName = middleNameIn;
+		lastName = lastNameIn;
+		email = emailIn;
+		phoneNumber = phoneNumberIn;
+		country = countryIn;
+		postalCode = postalCodeIn;
+		street = streetIn;
+		houseNumber = houseNumberIn;
 		
 		try {
 			Connection con = DriverManager.getConnection(
@@ -37,34 +46,12 @@ public class AddUserToDatabase implements Runnable{
 			
 			InsertNewLocation.insert(con, userID, 2);
 			
+			
 		} catch (PSQLException e) {
-			e.printStackTrace();
 			AddUserView.isReached = false;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
 			AddUserView.isReached = false;
 		} 
-	}
-	
-	public static void addUser(String firstNameIn, String middleNameIn, String lastNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn) {
-		
-		firstName = firstNameIn;
-		middleName = middleNameIn;
-		lastName = lastNameIn;
-		email = emailIn;
-		phoneNumber = phoneNumberIn;
-		country = countryIn;
-		postalCode = postalCodeIn;
-		street = streetIn;
-		houseNumber = houseNumberIn;
-		
-		Thread t = new Thread(new AddUserToDatabase());
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			AddUserView.isInterrupted = true;
-		}
 	}
 }

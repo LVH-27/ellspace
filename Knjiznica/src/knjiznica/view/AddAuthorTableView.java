@@ -2,10 +2,16 @@ package knjiznica.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.function.Predicate;
+
+import org.controlsfx.control.MaskerPane;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.AddAuthorToDatabase;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.Author;
@@ -107,6 +114,8 @@ public class AddAuthorTableView {
 	private String yearOfDeath;
 	private boolean isAlive;
 	private final static int buttonSize = 20;
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
 	
 	public void initialize() {
 		
@@ -114,6 +123,13 @@ public class AddAuthorTableView {
 		//XXX Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C."
 		
 		//FIXME Emphasize what values are mandatory and what are optional.
+		
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
+		
 		addedAuthorsBorder.setManaged(true);
 		addedAuthorsBorder.setVisible(true);
 		
@@ -176,188 +192,31 @@ public class AddAuthorTableView {
 		acceptButton.setGraphic(new ImageView(imageAcceptButton));
 		acceptButton.setId("transparentButton");
 		
-		ArrayList<Author> authors = SelectAuthors.select(); 
+		sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+				
+		ArrayList<Author> authors = new ArrayList<Author>();
 		
-		GlobalCollection.emptyList();
+		Task<ArrayList<Author>> getAuthorsTableTask = new Task<ArrayList<Author>>() {
+            @Override
+            public ArrayList<Author> call() throws Exception {
+            	
+    			Thread.sleep(600);
+    			
+    			return SelectAuthors.select();  
+            }
+		};
 		
-		for (int i = 0; i < authors.size(); ++i) {
-			GlobalCollection.getAuthorList().add(authors.get(i));
-		} 
-		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
-			for (int j = 0; j < GlobalCollection.getAuthorList().size(); ++j) {
-				if (GlobalCollection.getAddedAuthors().get(i).getID() == GlobalCollection.getAuthorList().get(j).getID()) {
-					GlobalCollection.getAddedAuthors().set(i, GlobalCollection.getAuthorList().get(j));
-					break;
-				}
-			}
-		}
-		if (GlobalCollection.isAdd()) {
-			Label l = new Label();
-			Button b = new Button();
-			
-			String firstName = GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getFirstName();
-			String middleNameFormat = " " + GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getMiddleName() + " ";
-			String lastName = GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getLastName();
-			
-			if (middleNameFormat.equals(" - ")) {
-				middleNameFormat = " ";
-			}
-			
-			addedAuthorsBorder.setManaged(true);
-			addedAuthorsBorder.setVisible(true);
-			
-			l.setText(firstName + middleNameFormat + lastName);
-			
-			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
-			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-			b.setId("removeButton");
-			
-			addedAuthorsGrid.addRow(GlobalCollection.getAddedAuthors().size() + 1, l, b);
-			GlobalCollection.getAddedAuthors().add(GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1));
-
-			b.setOnAction(new EventHandler<ActionEvent>() {
-			    @Override
-			    public void handle(ActionEvent e) {
-			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
-					addedAuthorsGrid.getChildren().removeAll(l, b);
-					if (GlobalCollection.getAddedAuthors().size() == 0) {
-						addedAuthorsBorder.setManaged(false);
-						addedAuthorsBorder.setVisible(false);
-					}
-			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
-			        int i = 0;
-			        for (Node node : childrens) {
-			        	if (GridPane.getRowIndex(node) == null) {
-			        		continue;
-			        	}
-			            GridPane.setRowIndex(node, i/2 + 1);
-			            i++;
-			        }
-			    }
-			});
-		}
-		
-		tableAuthorList.setItems(GlobalCollection.getAuthorList());
-		FilteredList<Author> filteredData = new FilteredList<Author>(GlobalCollection.getAuthorList(), e -> true);
-		searchField.setOnKeyReleased(e -> {
-			searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
-				filteredData.setPredicate((Predicate<? super Author>) author ->{
-					if (newValue == null || newValue.isEmpty()) {
-						return true;
-					}
-					
-					String lowerCaseFilter = newValue.toLowerCase();
-					String[] splitStr = lowerCaseFilter.split(" ");
-					ArrayList<String> splittedFilter = new ArrayList<String>();
-					ArrayList<String> splittedAuthorData = new ArrayList<String>();
-					
-					for (int i = 0; i < splitStr.length; ++i) {
-						splittedFilter.add(splitStr[i]);
-					}
-					
-					splittedAuthorData.add(author.getFirstName().  toLowerCase());
-					splittedAuthorData.add(author.getMiddleName(). toLowerCase());
-					splittedAuthorData.add(author.getLastName().   toLowerCase());
-					splittedAuthorData.add(author.getYearOfBirth().toLowerCase());
-					splittedAuthorData.add(author.getYearOfDeath().toLowerCase());
-					
-					int i;
-					for (i = 0; i < splittedFilter.size(); ++i) {
-						int j;
-						for (j = 0; j < splittedAuthorData.size(); ++j) {
-							if (splittedAuthorData.get(j).contains(splittedFilter.get(i))) {
-								break;
-							}
-						}
-						
-						if (j == splittedAuthorData.size()) {
-							break;
-						}
-					}
-					
-					if (i == splittedFilter.size()) {
-						return true;
-					}
-					
-					return false;
-				});
-			});
-			
-			SortedList<Author> sortedData = new SortedList<Author>(filteredData);
-			sortedData.comparatorProperty().bind(tableAuthorList.comparatorProperty());
-			tableAuthorList.setItems(sortedData);
+		getAuthorsTableTask.setOnSucceeded(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			authors.addAll(getAuthorsTableTask.getValue());
+			populateTable(authors);
 		});
+		getAuthorsTableTask.setOnFailed(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			afterThreadFails();
+	    });
+		exec.execute(getAuthorsTableTask);
 		
-		firstNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
-		firstNameCol.  setStyle("-fx-alignment: CENTER;");
-		middleNameCol. setCellValueFactory(new PropertyValueFactory<Author, String>("middleName"));
-		middleNameCol. setStyle("-fx-alignment: CENTER;");
-		lastNameCol.   setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
-		lastNameCol.   setStyle("-fx-alignment: CENTER;");
-		yearOfBirthCol.setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfBirth"));
-		yearOfBirthCol.setStyle("-fx-alignment: CENTER;");
-		yearOfDeathCol.setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfDeath"));
-		yearOfDeathCol.setStyle("-fx-alignment: CENTER;");
-		
-		tableAuthorList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (event.getClickCount() > 1) {
-					@SuppressWarnings("rawtypes")
-					ObservableList<TablePosition> cells = tableAuthorList.getSelectionModel().getSelectedCells();
-					
-					try {
-						if (!GlobalCollection.getAddedAuthors().contains(GlobalCollection.getAuthorList().get(cells.get(0).getRow()))) {
-							Label l = new Label();
-							Button b = new Button();
-							
-							addedAuthorsBorder.setManaged(true);
-							addedAuthorsBorder.setVisible(true);
-							String firstName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getFirstName();
-							String middleNameFormat = " " + GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getMiddleName() + " ";
-							String lastName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getLastName();
-							
-							if (middleNameFormat.equals(" - ")) {
-								middleNameFormat = " ";
-							}
-							
-							l.setText(firstName + middleNameFormat + lastName);
-							
-							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
-							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
-							b.setId("removeButton");
-							
-							GlobalCollection.getAddedAuthors().add(GlobalCollection.getAuthorList().get(cells.get(0).getRow()));
-							addedAuthorsGrid.addRow(GlobalCollection.getAddedAuthors().size(), l, b);
-							
-							b.setOnAction(new EventHandler<ActionEvent>() {
-							    @Override
-							    public void handle(ActionEvent e) {
-							    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
-									addedAuthorsGrid.getChildren().removeAll(l, b);
-									if (GlobalCollection.getAddedAuthors().size() == 0) {
-										addedAuthorsBorder.setManaged(false);
-										addedAuthorsBorder.setVisible(false);
-									}
-							        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
-							        int i = 0;
-							        for (Node node : childrens) {
-							        	if (GridPane.getRowIndex(node) == null) {
-							        		continue;
-							        	}
-							            GridPane.setRowIndex(node, i/2 + 1);
-							            i++;
-							        }
-							    }
-							});
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
 	}
 	
 	@FXML
@@ -519,26 +378,241 @@ public class AddAuthorTableView {
 			if (yearOfBirth.isEmpty()) {
 				yearOfBirth = null;
 			}
-			
-			AddAuthorToDatabase.addAuthor(firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);
+			sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+			Task<Void> addAuthorToDatabaseTask = new Task<Void>() {
+	            @Override
+	            public Void call() throws Exception {
+	            	
+	    			Thread.sleep(600);
+	    			
+	    			AddAuthorToDatabase.addAuthor(firstName, middleName, lastName, isAlive, yearOfBirth, yearOfDeath);					
+	    			return null;  
+	            }
+			};
+			addAuthorToDatabaseTask.setOnSucceeded(e -> {
+				try {
+					afterThreadFinishes();
+					
+				} catch (IOException e1) {
+						e1.printStackTrace();
+				}
+			});
+			addAuthorToDatabaseTask.setOnFailed(e -> {
+				afterThreadFails();
+		    });
 			errorLabelMiss.setVisible(false);
 			errorLabelTooMuch.setVisible(false);
-			
-	    	if (!isInterrupted && isReached) { 
-
-	    		AlertWindowOpen.openWindow("Author successfully added!");
-	    		GlobalCollection.setAdd(true);
-	    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
-		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
-	    		
-	    	} else if (isInterrupted) {
-	    		errorLabelMiss.setText(ErrorLabelMessage.getSomething());
-	    		errorLabelMiss.setVisible(true);
-	    	} else {
-	    		errorLabelMiss.setText(ErrorLabelMessage.getFailReach());
-	    		errorLabelMiss.setVisible(true);
-	    	}
+			exec.execute(addAuthorToDatabaseTask);	
 		}
+	}
+	
+	private void populateTable(ArrayList<Author>authors) {
+		GlobalCollection.emptyList();
+			
+		for (int i = 0; i < authors.size(); ++i) {
+			GlobalCollection.getAuthorList().add(authors.get(i));
+		} 
+		for (int i = 0; i < GlobalCollection.getAddedAuthors().size(); ++i) {
+			for (int j = 0; j < GlobalCollection.getAuthorList().size(); ++j) {
+				if (GlobalCollection.getAddedAuthors().get(i).getID() == GlobalCollection.getAuthorList().get(j).getID()) {
+					GlobalCollection.getAddedAuthors().set(i, GlobalCollection.getAuthorList().get(j));
+					break;
+				}
+			}
+		}
+		if (GlobalCollection.isAdd()) {
+			Label l = new Label();
+			Button b = new Button();
+			
+			String firstName = GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getFirstName();
+			String middleNameFormat = " " + GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getMiddleName() + " ";
+			String lastName = GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1).getLastName();
+			
+			if (middleNameFormat.equals(" - ")) {
+				middleNameFormat = " ";
+			}
+			
+			addedAuthorsBorder.setManaged(true);
+			addedAuthorsBorder.setVisible(true);
+			
+			l.setText(firstName + middleNameFormat + lastName);
+			
+			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
+			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
+			b.setId("removeButton");
+			
+			addedAuthorsGrid.addRow(GlobalCollection.getAddedAuthors().size() + 1, l, b);
+			GlobalCollection.getAddedAuthors().add(GlobalCollection.getAuthorList().get(GlobalCollection.getAuthorList().size() - 1));
+	
+			b.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override
+			    public void handle(ActionEvent e) {
+			    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
+					addedAuthorsGrid.getChildren().removeAll(l, b);
+					if (GlobalCollection.getAddedAuthors().size() == 0) {
+						addedAuthorsBorder.setManaged(false);
+						addedAuthorsBorder.setVisible(false);
+					}
+			        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
+			        int i = 0;
+			        for (Node node : childrens) {
+			        	if (GridPane.getRowIndex(node) == null) {
+			        		continue;
+			        	}
+			            GridPane.setRowIndex(node, i/2 + 1);
+			            i++;
+			        }
+			    }
+			});
+		}
+		
+		GlobalCollection.setAdd(false);
+		
+		tableAuthorList.setItems(GlobalCollection.getAuthorList());
+		FilteredList<Author> filteredData = new FilteredList<Author>(GlobalCollection.getAuthorList(), e -> true);
+		searchField.setOnKeyReleased(e -> {
+			searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
+				filteredData.setPredicate((Predicate<? super Author>) author ->{
+					if (newValue == null || newValue.isEmpty()) {
+						return true;
+					}
+					
+					String lowerCaseFilter = newValue.toLowerCase();
+					String[] splitStr = lowerCaseFilter.split(" ");
+					ArrayList<String> splittedFilter = new ArrayList<String>();
+					ArrayList<String> splittedAuthorData = new ArrayList<String>();
+					
+					for (int i = 0; i < splitStr.length; ++i) {
+						splittedFilter.add(splitStr[i]);
+					}
+					
+					splittedAuthorData.add(author.getFirstName().  toLowerCase());
+					splittedAuthorData.add(author.getMiddleName(). toLowerCase());
+					splittedAuthorData.add(author.getLastName().   toLowerCase());
+					splittedAuthorData.add(author.getYearOfBirth().toLowerCase());
+					splittedAuthorData.add(author.getYearOfDeath().toLowerCase());
+					
+					int i;
+					for (i = 0; i < splittedFilter.size(); ++i) {
+						int j;
+						for (j = 0; j < splittedAuthorData.size(); ++j) {
+							if (splittedAuthorData.get(j).contains(splittedFilter.get(i))) {
+								break;
+							}
+						}
+						
+						if (j == splittedAuthorData.size()) {
+							break;
+						}
+					}
+					
+					if (i == splittedFilter.size()) {
+						return true;
+					}
+					
+					return false;
+				});
+			});
+			
+			SortedList<Author> sortedData = new SortedList<Author>(filteredData);
+			sortedData.comparatorProperty().bind(tableAuthorList.comparatorProperty());
+			tableAuthorList.setItems(sortedData);
+		});
+		
+		firstNameCol.  setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
+		firstNameCol.  setStyle("-fx-alignment: CENTER;");
+		middleNameCol. setCellValueFactory(new PropertyValueFactory<Author, String>("middleName"));
+		middleNameCol. setStyle("-fx-alignment: CENTER;");
+		lastNameCol.   setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
+		lastNameCol.   setStyle("-fx-alignment: CENTER;");
+		yearOfBirthCol.setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfBirth"));
+		yearOfBirthCol.setStyle("-fx-alignment: CENTER;");
+		yearOfDeathCol.setCellValueFactory(new PropertyValueFactory<Author, String>("yearOfDeath"));
+		yearOfDeathCol.setStyle("-fx-alignment: CENTER;");
+		
+		tableAuthorList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() > 1) {
+					@SuppressWarnings("rawtypes")
+					ObservableList<TablePosition> cells = tableAuthorList.getSelectionModel().getSelectedCells();
+					
+					try {
+						if (!GlobalCollection.getAddedAuthors().contains(GlobalCollection.getAuthorList().get(cells.get(0).getRow()))) {
+							Label l = new Label();
+							Button b = new Button();
+							
+							addedAuthorsBorder.setManaged(true);
+							addedAuthorsBorder.setVisible(true);
+							String firstName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getFirstName();
+							String middleNameFormat = " " + GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getMiddleName() + " ";
+							String lastName = GlobalCollection.getAuthorList().get(cells.get(0).getRow()).getLastName();
+							
+							if (middleNameFormat.equals(" - ")) {
+								middleNameFormat = " ";
+							}
+							
+							l.setText(firstName + middleNameFormat + lastName);
+							
+							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
+							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
+							b.setId("removeButton");
+							
+							GlobalCollection.getAddedAuthors().add(GlobalCollection.getAuthorList().get(cells.get(0).getRow()));
+							addedAuthorsGrid.addRow(GlobalCollection.getAddedAuthors().size(), l, b);
+							
+							b.setOnAction(new EventHandler<ActionEvent>() {
+							    @Override
+							    public void handle(ActionEvent e) {
+							    	GlobalCollection.getAddedAuthors().remove(GridPane.getRowIndex(l) - 1);
+									addedAuthorsGrid.getChildren().removeAll(l, b);
+									if (GlobalCollection.getAddedAuthors().size() == 0) {
+										addedAuthorsBorder.setManaged(false);
+										addedAuthorsBorder.setVisible(false);
+									}
+							        ObservableList<Node> childrens = addedAuthorsGrid.getChildren();
+							        int i = 0;
+							        for (Node node : childrens) {
+							        	if (GridPane.getRowIndex(node) == null) {
+							        		continue;
+							        	}
+							            GridPane.setRowIndex(node, i/2 + 1);
+							            i++;
+							        }
+							    }
+							});
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+	}
+	private void afterThreadFinishes() throws IOException {
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		if (!isInterrupted && isReached) {
+			AlertWindowOpen.openWindow("Author successfully added!");
+    		GlobalCollection.setAdd(true);
+    		BorderPane addAuthor = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
+        	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addAuthor);
+    		
+    	} else if(isInterrupted){
+    		errorLabelMiss.setText(ErrorLabelMessage.getFailReach());
+    		errorLabelMiss.setVisible(true);
+    		
+    	} else {
+        	errorLabelMiss.setText(ErrorLabelMessage.getSomething());
+    		errorLabelMiss.setVisible(true);
+    	}
+		
+	}
+	
+	private void afterThreadFails() {
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		errorLabelMiss.setText(ErrorLabelMessage.getSomething());
+		errorLabelMiss.setVisible(true);
 	}
 	
 	@FXML

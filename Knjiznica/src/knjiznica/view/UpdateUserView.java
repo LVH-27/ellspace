@@ -1,6 +1,10 @@
 package knjiznica.view;
 
 import java.io.IOException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import org.controlsfx.control.MaskerPane;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.ErrorLabelMessage;
@@ -82,8 +87,17 @@ public class UpdateUserView {
 	private String postalCode = "";
 	private SingleSelectionModel<String> postalCodeSingle;
 	private boolean check;
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
+	private static int postalCodeInt;
 	
 	public void initialize() {
+		
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
 		
 		isEditable = GlobalCollection.isEditable();
 		user = GlobalCollection.getUser();
@@ -335,36 +349,66 @@ public class UpdateUserView {
 			
 			errorLabel.setVisible(false);
 			
-			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-			
-			UpdateUserInfo.updateUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber, user.getAddressID(), user.getID());
-			
-			if (!isInterrupted && isReached) {
-				GlobalCollection.getUser().setFirstName(firstName);
-				GlobalCollection.getUser().setMiddleName(middleName);
-				GlobalCollection.getUser().setLastName(lastName);
-				GlobalCollection.getUser().setEmail(email);
-				GlobalCollection.getUser().setPhoneNumber(phoneNumber);
-				GlobalCollection.getUser().setCountry(country);
-				GlobalCollection.getUser().setPostalCode(postalCodeInt);
-				GlobalCollection.getUser().setStreet(street);
-				GlobalCollection.getUser().setHouseNumber(houseNumber);
-				AlertWindowOpen.openWindow("User successfully updated!");
-	    		GlobalCollection.setEditable(false);
-				BorderPane updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
-		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
-		    	
-			} else if (isInterrupted) {
-				errorLabel.setText(ErrorLabelMessage.getSomething());
-				errorLabel.setVisible(true);
-				
-			} else {
-				errorLabel.setText(ErrorLabelMessage.getFailReach());
-				errorLabel.setVisible(true); 
-				
-			}
+			postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+			Task<Void> updateUserTask = new Task<Void>() {
+	            @Override
+	            public Void call() throws Exception {
+	            	
+	    			Thread.sleep(600);
+	    			
+	    			UpdateUserInfo.updateUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber, user.getAddressID(), user.getID());
+	    			return null;  
+	            }
+			};
+			updateUserTask.setOnSucceeded(e -> {
+				try {
+					afterThreadFinishes();
+					
+				} catch (IOException e1) {
+						e1.printStackTrace();
+				}
+			});
+			updateUserTask.setOnFailed(e -> {
+				afterThreadFails();
+		    });
+
+			exec.execute(updateUserTask);			
 			
 		}	
 		
+	}
+	private void afterThreadFinishes() throws IOException{
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		if (!isInterrupted && isReached) {
+			GlobalCollection.getUser().setFirstName(firstName);
+			GlobalCollection.getUser().setMiddleName(middleName);
+			GlobalCollection.getUser().setLastName(lastName);
+			GlobalCollection.getUser().setEmail(email);
+			GlobalCollection.getUser().setPhoneNumber(phoneNumber);
+			GlobalCollection.getUser().setCountry(country);
+			GlobalCollection.getUser().setPostalCode(postalCodeInt);
+			GlobalCollection.getUser().setStreet(street);
+			GlobalCollection.getUser().setHouseNumber(houseNumber);
+			AlertWindowOpen.openWindow("User successfully updated!");
+    		GlobalCollection.setEditable(false);
+			BorderPane updateUser = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateUser-view.fxml"));
+	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateUser);
+	    	
+		} else if (isInterrupted) {
+			errorLabel.setText(ErrorLabelMessage.getSomething());
+			errorLabel.setVisible(true);
+			
+		} else {
+			errorLabel.setText(ErrorLabelMessage.getFailReach());
+			errorLabel.setVisible(true); 
+			
+		}
+	}
+	
+	private void afterThreadFails() {
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		errorLabel.setText(ErrorLabelMessage.getSomething());
+		errorLabel.setVisible(true);
 	}
 }

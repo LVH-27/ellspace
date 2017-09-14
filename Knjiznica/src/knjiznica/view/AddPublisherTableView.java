@@ -2,10 +2,14 @@ package knjiznica.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.function.Predicate;
+import org.controlsfx.control.MaskerPane;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.AddPublisherToDatabase;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.ErrorLabelMessage;
@@ -110,8 +115,17 @@ public class AddPublisherTableView {
 	private SingleSelectionModel<String> postalCodeSingle;
 	private boolean check;
 	private final static int buttonSize = 20;
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
+	private static int postalCodeInt = -1;;
 	
 	public void initialize() {
+		
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
 		
 		addedPublishersBorder.setManaged(true);
 		addedPublishersBorder.setVisible(true);
@@ -169,8 +183,168 @@ public class AddPublisherTableView {
 		
 		ViewProvider.setView(nameCombo, postalCodeCombo);
 		PostalCodeComboThread.setComboData(nameCombo);
+		
+		sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
 
-		ArrayList<Publisher> publishers = SelectPublishers.select(); 
+		ArrayList<Publisher> publishers = new ArrayList<Publisher>(); 
+		
+		Task<ArrayList<Publisher>> getPublishersTableTask = new Task<ArrayList<Publisher>>() {
+            @Override
+            public ArrayList<Publisher> call() throws Exception {
+            	
+    			Thread.sleep(600);
+    			
+    			return SelectPublishers.select();  
+            }
+		};
+		
+		getPublishersTableTask.setOnSucceeded(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			publishers.addAll(getPublishersTableTask.getValue());
+			populateTable(publishers);
+		});
+		getPublishersTableTask.setOnFailed(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			afterThreadFails();
+	    });
+		exec.execute(getPublishersTableTask);
+		
+	}
+	
+	@FXML
+	private void toggleCheck() {
+		if (addressCheck.isSelected()) {
+			countryField.setVisible(true);
+			streetField.setVisible(true);
+			houseNumberField.setVisible(true);
+			postalCodeCombo.setVisible(true);
+
+		} else {
+			countryField.setVisible(false);
+			streetField.setVisible(false);
+			houseNumberField.setVisible(false);
+			postalCodeCombo.setVisible(false);
+		}
+	}
+	
+	@FXML
+	private void activateBack() throws IOException {
+		//TODO We need to return to AddBook but without resetting TextFields
+//		BorderPane clientsMenu = (BorderPane) ViewProvider.getView("clientsMenu");
+//		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(clientsMenu);
+	}
+	
+	@FXML
+	private void activateAdd() throws IOException {
+		
+		isInterrupted = false;
+		isReached = true;
+		
+		errorLabel.setVisible(false);
+		postalCodeSingle = postalCodeCombo.getSelectionModel();
+		publisherName = nameField.getText();
+		country = countryField.getText();
+		street = streetField.getText();
+		houseNumber = houseNumberField.getText();
+		
+		publisherName = publisherName.trim();
+		country = country.trim();
+		street = street.trim();
+		houseNumber = houseNumber.trim();
+		
+		nameField.setStyle("");
+		postalCodeCombo.setStyle("");
+		countryField.setStyle("");
+		streetField.setStyle("");
+		houseNumberField.setStyle("");
+		
+		final String redBorder = "-fx-border-color: #ff0000;\n";
+		
+		check = true;
+		
+		
+		if (publisherName.isEmpty()) {
+			check = false;
+			nameField.setStyle(redBorder);
+			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
+			errorLabel.setVisible(true);	
+		}
+		
+		if (postalCodeSingle.isEmpty() && addressCheck.isSelected()) {
+			check = false;
+			postalCodeCombo.setStyle(redBorder);
+			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
+			errorLabel.setVisible(true);
+		} 
+		
+		if (country.isEmpty() && addressCheck.isSelected()) {
+			check = false;
+			countryField.setStyle(redBorder);
+			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
+			errorLabel.setVisible(true);
+		} 
+		
+		if (houseNumber.length() > 6) {
+			check = false;
+			houseNumberField.setStyle(redBorder);
+			if (!errorLabel.isVisible()) {
+				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
+				errorLabel.setVisible(true);
+			}
+		}
+		
+		if (check) {
+			
+			if (street.isEmpty()) {
+				street = null;
+			} 
+			
+			if (houseNumber.isEmpty()) {
+				houseNumber = null;
+			}
+			
+			postalCode = postalCodeSingle.getSelectedItem();
+			publisherName = FormattingName.format(publisherName);
+			
+			errorLabel.setVisible(false);
+			
+			if (addressCheck.isSelected()) {
+				postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			}
+			
+			
+			isInterrupted = false;
+			isReached = true;
+			
+			sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+			Task<Void> addAuthorToDatabaseTask = new Task<Void>() {
+	            @Override
+	            public Void call() throws Exception {
+	            	
+	    			Thread.sleep(600);
+	    			
+	    			AddPublisherToDatabase.addPublisher(publisherName, country, postalCodeInt, street, houseNumber, addressCheck.isSelected());	    			return null;  
+	            }
+			};
+			addAuthorToDatabaseTask.setOnSucceeded(e -> {
+				try {
+					afterThreadFinishes();
+					
+				} catch (IOException e1) {
+						e1.printStackTrace();
+				}
+			});
+			addAuthorToDatabaseTask.setOnFailed(e -> {
+				afterThreadFails();
+		    });
+			
+			errorLabel.setVisible(false);
+			exec.execute(addAuthorToDatabaseTask);	
+			
+		}
+	}
+	
+	public void populateTable(ArrayList<Publisher> publishers) {
 		
 		GlobalCollection.emptyList();
 		
@@ -338,134 +512,30 @@ public class AddPublisherTableView {
 				}
 			}
 		});
-		
 	}
 	
-	@FXML
-	private void toggleCheck() {
-		if (addressCheck.isSelected()) {
-			countryField.setVisible(true);
-			streetField.setVisible(true);
-			houseNumberField.setVisible(true);
-			postalCodeCombo.setVisible(true);
-
+	public void afterThreadFinishes() throws IOException {
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		if (!isInterrupted && isReached) {
+			AlertWindowOpen.openWindow("Publisher successfully added!");
+			GlobalCollection.setAdd(true);
+    		//TODO We need to return to AddBook but without resetting TextFields, inserting this publisher
+			BorderPane addPublisherTable = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
+	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addPublisherTable);
+	    	
+		} else if (isInterrupted) {
+			errorLabel.setText(ErrorLabelMessage.getSomething());
+			errorLabel.setVisible(true);
+			
 		} else {
-			countryField.setVisible(false);
-			streetField.setVisible(false);
-			houseNumberField.setVisible(false);
-			postalCodeCombo.setVisible(false);
-		}
+			errorLabel.setText(ErrorLabelMessage.getFailReach());
+			errorLabel.setVisible(true); 	
+		}	
 	}
 	
-	@FXML
-	private void activateBack() throws IOException {
-		//TODO We need to return to AddBook but without resetting TextFields
-//		BorderPane clientsMenu = (BorderPane) ViewProvider.getView("clientsMenu");
-//		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(clientsMenu);
-	}
-	
-	@FXML
-	private void activateAdd() throws IOException {
-		
-		isInterrupted = false;
-		isReached = true;
-		
-		errorLabel.setVisible(false);
-		postalCodeSingle = postalCodeCombo.getSelectionModel();
-		publisherName = nameField.getText();
-		country = countryField.getText();
-		street = streetField.getText();
-		houseNumber = houseNumberField.getText();
-		
-		publisherName = publisherName.trim();
-		country = country.trim();
-		street = street.trim();
-		houseNumber = houseNumber.trim();
-		
-		nameField.setStyle("");
-		postalCodeCombo.setStyle("");
-		countryField.setStyle("");
-		streetField.setStyle("");
-		houseNumberField.setStyle("");
-		
-		final String redBorder = "-fx-border-color: #ff0000;\n";
-		
-		check = true;
-		
-		
-		if (publisherName.isEmpty()) {
-			check = false;
-			nameField.setStyle(redBorder);
-			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
-			errorLabel.setVisible(true);	
-		}
-		
-		if (postalCodeSingle.isEmpty() && addressCheck.isSelected()) {
-			check = false;
-			postalCodeCombo.setStyle(redBorder);
-			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
-			errorLabel.setVisible(true);
-		} 
-		
-		if (country.isEmpty() && addressCheck.isSelected()) {
-			check = false;
-			countryField.setStyle(redBorder);
-			errorLabel.setText(ErrorLabelMessage.getInfoMiss());
-			errorLabel.setVisible(true);
-		} 
-		
-		if (houseNumber.length() > 6) {
-			check = false;
-			houseNumberField.setStyle(redBorder);
-			if (!errorLabel.isVisible()) {
-				errorLabel.setText(ErrorLabelMessage.getWrongFormat());
-				errorLabel.setVisible(true);
-			}
-		}
-		
-		if (check) {
-			
-			if (street.isEmpty()) {
-				street = null;
-			} 
-			
-			if (houseNumber.isEmpty()) {
-				houseNumber = null;
-			}
-			
-			postalCode = postalCodeSingle.getSelectedItem();
-			publisherName = FormattingName.format(publisherName);
-			
-			errorLabel.setVisible(false);
-			
-			int postalCodeInt = -1;
-			
-			if (addressCheck.isSelected()) {
-				postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
-			}
-			
-			
-			isInterrupted = false;
-			isReached = true;
-			
-			AddPublisherToDatabase.addPublisher(publisherName, country, postalCodeInt, street, houseNumber, addressCheck.isSelected());
-			
-			if (!isInterrupted && isReached) {
-				AlertWindowOpen.openWindow("Publisher successfully added!");
-				GlobalCollection.setAdd(true);
-	    		//TODO We need to return to AddBook but without resetting TextFields, inserting this publisher
-				BorderPane addPublisherTable = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
-		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addPublisherTable);
-		    	
-			} else if (isInterrupted) {
-				errorLabel.setText(ErrorLabelMessage.getSomething());
-				errorLabel.setVisible(true);
-				
-			} else {
-				errorLabel.setText(ErrorLabelMessage.getFailReach());
-				errorLabel.setVisible(true); 	
-			}	
-		}
+	public void afterThreadFails() {
+		errorLabel.setText(ErrorLabelMessage.getSomething());
+		errorLabel.setVisible(true);
 	}
 	
 	@FXML

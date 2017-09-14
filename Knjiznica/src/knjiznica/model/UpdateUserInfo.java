@@ -5,11 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
-
-import knjiznica.view.AddUserView;
 import knjiznica.view.UpdateUserView;
 
-public class UpdateUserInfo implements Runnable {
+public class UpdateUserInfo {
 	
 	private static String firstName;
 	private static String middleName;
@@ -23,8 +21,20 @@ public class UpdateUserInfo implements Runnable {
 	private static int addressID;
 	private static int userID;
 	
-	@Override
-	public void run() {
+	
+	public static void updateUser(String firstNameIn, String middleNameIn, String lastNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn, int addressIDIn, int userIDIn) {
+		
+		firstName = firstNameIn;
+		middleName = middleNameIn;
+		lastName = lastNameIn;
+		email = emailIn;
+		phoneNumber = phoneNumberIn;
+		country = countryIn;
+		postalCode = postalCodeIn;
+		street = streetIn;
+		houseNumber = houseNumberIn;
+		addressID = addressIDIn;
+		userID = userIDIn;
 		
 		PreparedStatement pstmtAddress = null;
 		PreparedStatement pstmtUser = null;
@@ -76,29 +86,6 @@ public class UpdateUserInfo implements Runnable {
 				e.printStackTrace();
 			}
 			
-		}
-	}
-	
-	public static void updateUser(String firstNameIn, String middleNameIn, String lastNameIn, String emailIn, String phoneNumberIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn, int addressIDIn, int userIDIn) {
-		
-		firstName = firstNameIn;
-		middleName = middleNameIn;
-		lastName = lastNameIn;
-		email = emailIn;
-		phoneNumber = phoneNumberIn;
-		country = countryIn;
-		postalCode = postalCodeIn;
-		street = streetIn;
-		houseNumber = houseNumberIn;
-		addressID = addressIDIn;
-		userID = userIDIn;
-		
-		Thread t = new Thread(new UpdateUserInfo());
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			AddUserView.isInterrupted = true;
 		}
 	}
 }

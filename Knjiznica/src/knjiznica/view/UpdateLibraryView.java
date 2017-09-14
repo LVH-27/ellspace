@@ -2,6 +2,10 @@ package knjiznica.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import org.controlsfx.control.MaskerPane;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.CheckInputLetters;
 import knjiznica.model.ErrorLabelMessage;
@@ -163,9 +168,18 @@ public class UpdateLibraryView {
 	private ArrayList<TextField> beginTimeList;
 	private ArrayList<TextField> endTimeList;
 	private ArrayList<CheckBox> checkBoxList;
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
+	private static int postalCodeInt;
 
 	
 	public void initialize() {
+		
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
 		
 		isEditable = GlobalCollection.isEditable();
 		library = GlobalCollection.getLibrary();
@@ -440,7 +454,6 @@ public class UpdateLibraryView {
 			firstName = FormattingName.format(firstName);
 		}
 		
-		int postalCodeInt;
 		try {
 			postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 		} catch (Exception e) {
@@ -526,44 +539,32 @@ public class UpdateLibraryView {
 				}
 			}
 			
-			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkList, onlineLibraryCheck.isSelected(), library.getID(), library.getAddressID());
-			
-	    	if (!isInterrupted && isReached) {
-	    		
-	    		GlobalCollection.getLibrary().setFirstName(firstName);
-				GlobalCollection.getLibrary().setPhoneNumber(phoneNumber);
-				GlobalCollection.getLibrary().setEmail(email);
-				GlobalCollection.getLibrary().setInformation(information);
-				GlobalCollection.getLibrary().setCountry(country);
-				GlobalCollection.getLibrary().setStreet(street);
-				GlobalCollection.getLibrary().setHouseNumber(houseNumber);
-				GlobalCollection.getLibrary().setPostalCode(Integer.toString(postalCodeInt));
-				GlobalCollection.getBusinessHours().setCheck(checkList);
-				GlobalCollection.getBusinessHours().setBeginTime(beginTime);
-				GlobalCollection.getBusinessHours().setEndTime(endTime);
-				
-				if (onlineLibraryCheck.isSelected()) {
-					GlobalCollection.getLibrary().setCountry(null);
-					GlobalCollection.getLibrary().setStreet(null);
-					GlobalCollection.getLibrary().setHouseNumber(null);
-					GlobalCollection.getLibrary().setPostalCode(null);
-					GlobalCollection.getLibrary().setAddressID(-1);
+			sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+			Task<Void> updateLibraryTask = new Task<Void>() {
+	            @Override
+	            public Void call() throws Exception {
+	            	
+	    			Thread.sleep(600);
+	    			
+	    			UpdateLibraryInfo.updateLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkList, onlineLibraryCheck.isSelected(), library.getID(), library.getAddressID());
+	    			return null;  
+	            }
+			};
+			updateLibraryTask.setOnSucceeded(e -> {
+				try {
+					afterThreadFinishes();
+					
+				} catch (IOException e1) {
+						e1.printStackTrace();
 				}
-				
-	    		GlobalCollection.setEditable(false);
-	    		AlertWindowOpen.openWindow("Library successfully updated!");
-	    		
-	    		BorderPane updateLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateLibrary-view.fxml"));
-	    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateLibrary);
-	    		
-	    	} else if (isInterrupted) {
-	    		errorLabel.setText(ErrorLabelMessage.getSomething());
-	    		errorLabel.setVisible(true);
-	    		
-	    	} else {
-	    		errorLabel.setText(ErrorLabelMessage.getFailReach());
-	    		errorLabel.setVisible(true);
-	    	}
+			});
+			updateLibraryTask.setOnFailed(e -> {
+				afterThreadFails();
+		    });
+
+			exec.execute(updateLibraryTask);	
+			
+	    	
 		}
 		
 		if (!check) {
@@ -571,6 +572,52 @@ public class UpdateLibraryView {
 					+ "00:00 and 23:59.");
 			errorLabelTime.setVisible(true);
 		}
+	}
+	
+	private void afterThreadFinishes() throws IOException{
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		
+		if (!isInterrupted && isReached) {
+    		GlobalCollection.getLibrary().setFirstName(firstName);
+			GlobalCollection.getLibrary().setPhoneNumber(phoneNumber);
+			GlobalCollection.getLibrary().setEmail(email);
+			GlobalCollection.getLibrary().setInformation(information);
+			GlobalCollection.getLibrary().setCountry(country);
+			GlobalCollection.getLibrary().setStreet(street);
+			GlobalCollection.getLibrary().setHouseNumber(houseNumber);
+			GlobalCollection.getLibrary().setPostalCode(Integer.toString(postalCodeInt));
+			GlobalCollection.getBusinessHours().setCheck(checkList);
+			GlobalCollection.getBusinessHours().setBeginTime(beginTime);
+			GlobalCollection.getBusinessHours().setEndTime(endTime);
+			
+			if (onlineLibraryCheck.isSelected()) {
+				GlobalCollection.getLibrary().setCountry(null);
+				GlobalCollection.getLibrary().setStreet(null);
+				GlobalCollection.getLibrary().setHouseNumber(null);
+				GlobalCollection.getLibrary().setPostalCode(null);
+				GlobalCollection.getLibrary().setAddressID(-1);
+			}
+			
+    		GlobalCollection.setEditable(false);
+    		AlertWindowOpen.openWindow("Library successfully updated!");
+    		
+    		BorderPane updateLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("UpdateLibrary-view.fxml"));
+    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(updateLibrary);
+    		
+    	} else if (isInterrupted) {
+    		errorLabel.setText(ErrorLabelMessage.getSomething());
+    		errorLabel.setVisible(true);
+    		
+    	} else {
+    		errorLabel.setText(ErrorLabelMessage.getFailReach());
+    		errorLabel.setVisible(true);
+    	}
+	}
+	
+	private void afterThreadFails() {
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		errorLabel.setText(ErrorLabelMessage.getSomething());
+		errorLabel.setVisible(true);
 	}
 	
 	private static boolean isValid(String time) {

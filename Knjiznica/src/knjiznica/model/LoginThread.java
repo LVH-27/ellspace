@@ -7,11 +7,10 @@ import org.postgresql.util.PSQLException;
 
 import knjiznica.view.LoginView;
 
-public class LoginThread implements Runnable {
-	
-	@Override
-	public void run() {
-    	try {
+public class LoginThread {
+
+	public static void login() {
+		try {
 			@SuppressWarnings("unused")
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), LoginView.username, LoginView.password);
@@ -26,16 +25,5 @@ public class LoginThread implements Runnable {
 		} catch (SQLException e) {
 			LoginView.isCorrect = false;
 		} 
-	}
-	
-	public static void login() {
-		Thread t = new Thread(new LoginThread());
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			LoginView.isCorrect = false;
-			System.out.println(ErrorLabelMessage.getFailReach());
-		}
 	}	
 }

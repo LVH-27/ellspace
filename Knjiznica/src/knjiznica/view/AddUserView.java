@@ -1,7 +1,12 @@
 package knjiznica.view;
 
 import java.io.IOException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
+import org.controlsfx.control.MaskerPane;
+
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -12,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.AddUserToDatabase;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.CheckInputLetters;
@@ -73,8 +79,18 @@ public class AddUserView {
 	private String postalCode;
 	private SingleSelectionModel<String> postalCodeSingle;
 	private boolean check;
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
+	private static int postalCodeInt;
 	
 	public void initialize() {
+		
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
+		
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -242,27 +258,56 @@ public class AddUserView {
 			
 			errorLabel.setVisible(false);
 			
-			int postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
+			postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 			
 			isInterrupted = false;
 			isReached = true;
 			
-			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
-			
-			if (!isInterrupted && isReached) {
-				AlertWindowOpen.openWindow("User successfully added!");
-	    		
-				BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
-		    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
-		    	
-			} else if (isInterrupted) {
-				errorLabel.setText(ErrorLabelMessage.getSomething());
-				errorLabel.setVisible(true);
-				
-			} else {
-				errorLabel.setText(ErrorLabelMessage.getFailReach());
-				errorLabel.setVisible(true); 	
-			}	
+			sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+			Task<Void> addUserToDatabaseTask = new Task<Void>() {
+	            @Override
+	            public Void call() throws Exception {
+	            	
+	    			Thread.sleep(600);
+	    			
+	    			AddUserToDatabase.addUser(firstName, middleName, lastName, email, phoneNumber, country, postalCodeInt, street, houseNumber);
+	    			return null;  
+	            }
+			};
+			addUserToDatabaseTask.setOnSucceeded(e -> {
+				try {
+					afterThreadFinishes();
+					
+				} catch (IOException e1) {
+						e1.printStackTrace();
+				}
+			});
+			addUserToDatabaseTask.setOnFailed(e -> {
+				afterThreadFails();
+		    });
+			exec.execute(addUserToDatabaseTask);
 		}
+	}
+	public void afterThreadFinishes() throws IOException {
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		if (!isInterrupted && isReached) {
+			AlertWindowOpen.openWindow("User successfully added!");
+			BorderPane addUser = (BorderPane) FXMLLoader.load(getClass().getResource("AddUser-view.fxml"));
+	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addUser);
+	    	
+		} else if (isInterrupted) {
+			errorLabel.setText(ErrorLabelMessage.getSomething());
+			errorLabel.setVisible(true);
+			
+		} else {
+			errorLabel.setText(ErrorLabelMessage.getFailReach());
+			errorLabel.setVisible(true); 	
+		}	
+		
+	}
+	
+	public void afterThreadFails() {
+		errorLabel.setText(ErrorLabelMessage.getSomething());
+		errorLabel.setVisible(true);
 	}
 }

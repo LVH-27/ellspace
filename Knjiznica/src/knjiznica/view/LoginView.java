@@ -1,6 +1,10 @@
 package knjiznica.view;
  
 import java.io.IOException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import org.controlsfx.control.MaskerPane;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,6 +13,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import knjiznica.model.ErrorLabelMessage;
 import knjiznica.model.LoginThread;
 import knjiznica.model.ViewProvider;
 
@@ -32,19 +38,58 @@ public class LoginView {
 	public static boolean isCorrect = true;
 	public static String username;
 	public static String password;
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static MaskerPane mask = (MaskerPane) ViewProvider.getView("mask");
+	private static Executor exec;
 	
 	public void initialize() {
 		loginButton.setId("loginButton");
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
 	}
 	
 	@FXML
 	private void activateLogin() throws IOException {
-		errorLabel.setVisible(false);
-		username = usernameText.getText();
-		password = passwordText.getText();
 		
-		LoginThread.login();
+		errorLabel.setVisible(false);
+		sp.getChildren().add(mask);
+		Task<Void> loginTask = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+            	
+    			Thread.sleep(600);
+    			
+    			username = usernameText.getText();
+    			password = passwordText.getText();
+    			
+    			LoginThread.login();
+    			
+    			return null;  
+            }
+		};
+		
+		loginTask.setOnSucceeded(e -> {
+			try {
+				afterThreadFinishes();
+				
+			} catch (IOException e1) {
+					e1.printStackTrace();
+			}
+		});
+		loginTask.setOnFailed(e -> {
+			afterThreadFails();
+	    });
 
+		exec.execute(loginTask);
+
+		
+	}
+	
+	private void afterThreadFinishes() throws IOException {
+		sp.getChildren().remove(mask);
 		if (isCorrect) {
 			errorLabel.setVisible(false);
 			
@@ -66,4 +111,11 @@ public class LoginView {
 		}
 		//TODO SQLTimeoutException ?
 	}
+	
+	private void afterThreadFails() {
+		sp.getChildren().remove(mask);
+		errorLabel.setText(ErrorLabelMessage.getSomething());
+		errorLabel.setVisible(true);
+	}
+	
 }

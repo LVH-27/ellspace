@@ -38,6 +38,5 @@ public class InsertNewAuthor {
 		pstmtAuthor.setString(6, yearOfDeath);
 		
 		pstmtAuthor.executeUpdate();
-	//	GlobalCollection.getAuthorList().add(new Author());
 	}
 }

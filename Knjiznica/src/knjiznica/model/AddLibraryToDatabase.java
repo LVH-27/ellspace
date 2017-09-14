@@ -9,7 +9,7 @@ import javafx.scene.control.CheckBox;
 import knjiznica.view.AddLibraryView;
 
 
-public class AddLibraryToDatabase implements Runnable{
+public class AddLibraryToDatabase {
 	
 	private static String firstName;
 	private static String phoneNumber;
@@ -24,8 +24,20 @@ public class AddLibraryToDatabase implements Runnable{
 	private static ArrayList<CheckBox> checkBoxList;
 	private static boolean onlineLibraryCheck;
 	
-	@Override
-	public void run() {
+	public static void addLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn, boolean onlineLibraryCheckIn) {
+		
+		firstName = firstNameIn;
+		phoneNumber = phoneNumberIn;
+		email = emailIn;
+		information = informationIn;
+		country = countryIn;
+		street = streetIn;
+		houseNumber = houseNumberIn;
+		postalCode = postalCodeIn;
+		beginTime = beginTimeIn;
+		endTime = endTimeIn;
+		checkBoxList = checkBoxListIn;
+		onlineLibraryCheck = onlineLibraryCheckIn;
 		
 		int libraryID = -1; 
 		
@@ -52,29 +64,5 @@ public class AddLibraryToDatabase implements Runnable{
 		} catch (SQLException e) {
 			AddLibraryView.isReached = false;	
 		} 
-	}
-	
-	public static void addLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<CheckBox> checkBoxListIn, boolean onlineLibraryCheckIn) {
-		
-		firstName = firstNameIn;
-		phoneNumber = phoneNumberIn;
-		email = emailIn;
-		information = informationIn;
-		country = countryIn;
-		street = streetIn;
-		houseNumber = houseNumberIn;
-		postalCode = postalCodeIn;
-		beginTime = beginTimeIn;
-		endTime = endTimeIn;
-		checkBoxList = checkBoxListIn;
-		onlineLibraryCheck = onlineLibraryCheckIn;
-		
-		Thread t = new Thread(new AddLibraryToDatabase());
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			AddLibraryView.isInterrupted = true;
-		}
 	}
 }

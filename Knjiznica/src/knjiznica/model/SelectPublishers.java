@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class SelectPublishers implements Runnable {
+public class SelectPublishers {
 	
 	private static ArrayList<Publisher> publishers;
-
-	@Override
-	public void run() {
+	
+	public static ArrayList<Publisher> select() {
 		
 		publishers = new ArrayList<Publisher>();
 		
@@ -68,17 +67,6 @@ public class SelectPublishers implements Runnable {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public static ArrayList<Publisher> select() {
-		Thread t = new Thread(new SelectPublishers());
-		t.start();
-		try {
-			t.join();
-			return publishers;
-		} catch (InterruptedException e) {
-			System.out.println("Something went wrong!");
-			return null;
-		}
+		return publishers;
 	}
 }

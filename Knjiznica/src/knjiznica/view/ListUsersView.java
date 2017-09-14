@@ -1,8 +1,11 @@
 package knjiznica.view;
 
 import java.util.ArrayList;
-
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import org.controlsfx.control.MaskerPane;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.GlobalCollection;
 import knjiznica.model.SelectUsers;
 import knjiznica.model.User;
@@ -52,9 +56,48 @@ public class ListUsersView {
 	@FXML
 	private TableColumn<User, String> emailCol;
 	
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
+	
 	public void initialize() {
 		
-		ArrayList<User> users = SelectUsers.select(); 
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
+		
+		sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+		
+		ArrayList<User> users = new ArrayList<User>();
+		
+		Task<ArrayList<User>> getUsersTableTask = new Task<ArrayList<User>>() {
+            @Override
+            public ArrayList<User> call() throws Exception {
+            	
+    			Thread.sleep(600);
+    			
+    			return SelectUsers.select();  
+            }
+		};
+		
+		getUsersTableTask.setOnSucceeded(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			users.addAll(getUsersTableTask.getValue());
+			populateTable(users);
+		});
+		
+		//TODO after thread fails populate users table
+		
+		/*getAuthorsTableTask.setOnFailed(e -> {
+			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+			afterThreadFails();
+	    });*/
+		
+		exec.execute(getUsersTableTask);
+	}
+	
+	public void populateTable(ArrayList<User> users) {
 		
 		GlobalCollection.emptyList();
 		

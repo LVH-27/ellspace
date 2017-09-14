@@ -10,7 +10,7 @@ import org.postgresql.util.PSQLException;
 import knjiznica.view.UpdateLibraryView;
 
 
-public class UpdateLibraryInfo implements Runnable {
+public class UpdateLibraryInfo {
 	
 	private static String firstName;
 	private static String phoneNumber;
@@ -27,9 +27,23 @@ public class UpdateLibraryInfo implements Runnable {
 	private static int addressID;
 	private static int libraryID;
 	
+		
 	
-	@Override
-	public void run() {
+	public static void updateLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<String> checkListIn, boolean onlineLibraryCheckIn, int libraryIDIn, int addressIDIn) {
+		firstName = firstNameIn;
+		phoneNumber = phoneNumberIn;
+		email = emailIn;
+		information = informationIn;
+		country = countryIn;
+		street = streetIn;
+		houseNumber = houseNumberIn;
+		postalCode = postalCodeIn;
+		beginTime = beginTimeIn;
+		endTime = endTimeIn;
+		checkList = checkListIn;
+		onlineLibraryCheck = onlineLibraryCheckIn;
+		libraryID = libraryIDIn;
+		addressID = addressIDIn;
 		
 		PreparedStatement pstmtAddress = null;
 		PreparedStatement pstmtUser = null;
@@ -131,30 +145,5 @@ public class UpdateLibraryInfo implements Runnable {
 			System.out.println(addressID + 1);
 			UpdateLibraryView.isReached = false;
 		} 
-	}
-	
-	public static void updateLibrary(String firstNameIn, String phoneNumberIn, String emailIn, String informationIn, String countryIn, String streetIn, String houseNumberIn, int postalCodeIn, ArrayList<String> beginTimeIn, ArrayList<String>endTimeIn, ArrayList<String> checkListIn, boolean onlineLibraryCheckIn, int libraryIDIn, int addressIDIn) {
-		firstName = firstNameIn;
-		phoneNumber = phoneNumberIn;
-		email = emailIn;
-		information = informationIn;
-		country = countryIn;
-		street = streetIn;
-		houseNumber = houseNumberIn;
-		postalCode = postalCodeIn;
-		beginTime = beginTimeIn;
-		endTime = endTimeIn;
-		checkList = checkListIn;
-		onlineLibraryCheck = onlineLibraryCheckIn;
-		libraryID = libraryIDIn;
-		addressID = addressIDIn;
-		
-		Thread t = new Thread(new UpdateLibraryInfo());
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			UpdateLibraryView.isInterrupted = true;
-		}
 	}
 }

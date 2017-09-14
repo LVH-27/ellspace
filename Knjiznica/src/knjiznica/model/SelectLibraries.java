@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class SelectLibraries implements Runnable {
+public class SelectLibraries {
 	
 	private static ArrayList<Library> libraries;
-
-	@Override
-	public void run() {
+	
+	public static ArrayList<Library> select() {
 		libraries = new ArrayList<Library>();
 		
 		Statement stmt1 = null;
@@ -83,17 +82,6 @@ public class SelectLibraries implements Runnable {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public static ArrayList<Library> select() {
-		Thread t = new Thread(new SelectLibraries());
-		t.start();
-		try {
-			t.join();
-			return libraries;
-		} catch (InterruptedException e) {
-			System.out.println("Something went wrong!");
-			return null;
-		}
+		return libraries;
 	}
 }

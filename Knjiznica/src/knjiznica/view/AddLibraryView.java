@@ -2,6 +2,12 @@ package knjiznica.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+import org.controlsfx.control.MaskerPane;
+
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import knjiznica.model.AddLibraryToDatabase;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.CheckInputLetters;
@@ -155,8 +162,18 @@ public class AddLibraryView {
 	private ArrayList<TextField> beginTimeList;
 	private ArrayList<TextField> endTimeList;
 	private ArrayList<CheckBox> checkBoxList;
+	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
+	private static Executor exec;
+	private static int postalCodeInt;
 	
 	public void initialize() {
+		
+		exec = Executors.newCachedThreadPool(runnable -> {
+            Thread t = new Thread(runnable);
+            t.setDaemon(true);
+            return t ;
+        });
+		
 		Image imageAddButton = new Image(getClass().getResourceAsStream("/resources/add-button.png"));
 		addButton.setGraphic(new ImageView(imageAddButton));
 		addButton.setId("transparentButton");
@@ -339,7 +356,6 @@ public class AddLibraryView {
 			firstName = FormattingName.format(firstName);
 		}
 		
-		int postalCodeInt;
 		try {
 			postalCodeInt = Integer.parseInt((postalCode.split(" - "))[0]);
 		} catch (Exception e) {
@@ -408,25 +424,31 @@ public class AddLibraryView {
 		
 		if (check && !errorInfo) {
 			
+			sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+			Task<Void> addLibraryToDatabaseTask = new Task<Void>() {
+	            @Override
+	            public Void call() throws Exception {
+	            	
+	    			Thread.sleep(600);
+	    			
+	    			AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
+	    			return null;  
+	            }
+			};
+			addLibraryToDatabaseTask.setOnSucceeded(e -> {
+				try {
+					afterThreadFinishes();
+					
+				} catch (IOException e1) {
+						e1.printStackTrace();
+				}
+			});
+			addLibraryToDatabaseTask.setOnFailed(e -> {
+				afterThreadFails();
+		    });
 			errorLabel.setVisible(false); 
-			errorLabelTime.setVisible(false);
-			
-			AddLibraryToDatabase.addLibrary(firstName, phoneNumber, email, information, country, street, houseNumber, postalCodeInt, beginTime, endTime, checkBoxList, onlineLibraryCheck.isSelected());
-			
-	    	if (!isInterrupted && isReached) {
-	    		AlertWindowOpen.openWindow("Library successfully added!");
-	    		
-	    		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
-	    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
-	    		
-	    	} else if (isInterrupted) {
-	    		errorLabel.setText(ErrorLabelMessage.getSomething());
-	    		errorLabel.setVisible(true);
-	    		
-	    	} else {
-	    		errorLabel.setText(ErrorLabelMessage.getFailReach());
-	    		errorLabel.setVisible(true);
-	    	}
+			errorLabelTime.setVisible(false);			
+			exec.execute(addLibraryToDatabaseTask);	
 		}
 		
 		if (!check) {
@@ -434,6 +456,28 @@ public class AddLibraryView {
 					+ "00:00 and 23:59.");
 			errorLabelTime.setVisible(true);
 		}
+	}
+	
+	public void afterThreadFinishes() throws IOException {
+		sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
+		if (!isInterrupted && isReached) {
+    		AlertWindowOpen.openWindow("Library successfully added!");
+    		BorderPane addLibrary = (BorderPane) FXMLLoader.load(getClass().getResource("AddLibrary-view.fxml"));
+    		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLibrary);
+    		
+    	} else if (isInterrupted) {
+    		errorLabel.setText(ErrorLabelMessage.getSomething());
+    		errorLabel.setVisible(true);
+    		
+    	} else {
+    		errorLabel.setText(ErrorLabelMessage.getFailReach());
+    		errorLabel.setVisible(true);
+    	}
+	}
+	
+	public void afterThreadFails() {
+		errorLabel.setText(ErrorLabelMessage.getSomething());
+		errorLabel.setVisible(true);
 	}
 	
 	private static boolean isValid(String time) {
