@@ -36,7 +36,7 @@ import knjiznica.model.Publisher;
 import knjiznica.model.SelectPublishers;
 import knjiznica.model.ViewProvider;
 
-public class AddPublisherView {
+public class AddPublisherTableView {
 	
 	@FXML
 	private TextField nameField;

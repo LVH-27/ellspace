@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
 
-import knjiznica.view.AddPublisherView;
+import knjiznica.view.AddPublisherTableView;
 import knjiznica.view.AddUserView;
 
 public class AddPublisherToDatabase implements Runnable{
@@ -36,10 +36,10 @@ public class AddPublisherToDatabase implements Runnable{
 			
 		} catch (PSQLException e) {
 			e.printStackTrace();
-			AddPublisherView.isReached = false;
+			AddPublisherTableView.isReached = false;
 			
 		} catch (SQLException e) {
-			AddPublisherView.isReached = false;
+			AddPublisherTableView.isReached = false;
 		} 
 	}
 	
