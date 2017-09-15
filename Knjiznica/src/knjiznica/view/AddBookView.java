@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import org.controlsfx.control.MaskerPane;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -24,6 +23,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import knjiznica.model.AddBookToDatabase;
 import knjiznica.model.AlertWindowOpen;
+import knjiznica.model.CheckIsbn;
+import knjiznica.model.ConfirmationDialogueOpen;
 import knjiznica.model.ErrorLabelMessage;
 import knjiznica.model.FindIsbn;
 import knjiznica.model.GlobalCollection;
@@ -139,35 +140,76 @@ public class AddBookView {
 	
 	public void initialize() throws SQLException {
 		
-		setTextToTextField();
-		
 		exec = Executors.newCachedThreadPool(runnable -> {
             Thread t = new Thread(runnable);
             t.setDaemon(true);
             return t ;
         });
 		
+		if(GlobalCollection.isFound()) {
+			disableButtons();
+		}
+		
+		success();
+		
 		isbnField.focusedProperty().addListener(new ChangeListener<Boolean>() {
 		    @Override
 		    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
-		        if (newPropertyValue) {
-		        }
-		        else {
-		        	Task<Void> loadIsbn = new Task<Void>() {
+		        if (!newPropertyValue) {
+		        	Task<Void> checkIsbn = new Task<Void>() {
 			            @Override
 			            public Void call() throws Exception {
-			            	System.out.println(isbnField.getText());
-			    			FindIsbn.find(isbnField.getText());
+			            	
+			            	GlobalCollection.setFound(false);
+			            	
+			    			CheckIsbn.check(isbnField.getText());
 			    			
 			    			return null;  
 			            }
 					};
-					exec.execute(loadIsbn);
+					exec.execute(checkIsbn);
+					checkIsbn.setOnSucceeded(e -> {
+						if (GlobalCollection.isFound()) {
+							ConfirmationDialogueOpen.open();
+							if (GlobalCollection.isOk()) {
+								disableButtons();
+								getText();
+								GlobalCollection.resetIsbnFields();
+								activateFound();
+							} else {
+								enableButtons();
+								isbnField.setText("");
+						    	
+							}
+						} else {
+							enableButtons();
+						}
+					});
 		        }
 		    }
 		});
 		
+	}
+	
+	public void activateFound(){
+		Task<Void> loadIsbn = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+            	
+    			FindIsbn.find(isbnField.getText());
+    			
+    			return null;  
+            }
+		};
+		exec.execute(loadIsbn);
+		loadIsbn.setOnSucceeded(e -> {
+				success();
+		});
+	}
+	
+	public void success() {
 		
+		setTextToTextField();
 		authorsEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
 		authorsEditButton.setId("smallButton");
 		publishersEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
@@ -176,6 +218,11 @@ public class AddBookView {
 		languagesEditButton.setId("smallButton");
 		genreEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
 		genreEditButton.setId("smallButton");
+		
+		authorsListGrid.getChildren().clear();
+		publishersListGrid.getChildren().clear();
+		languagesListGrid.getChildren().clear();
+		genreListGrid.getChildren().clear();
 		
 		if (GlobalCollection.getAddedUsers().size() > 0) {
 			ownerButtonsHBox.setVisible(false);
@@ -343,7 +390,8 @@ public class AddBookView {
 	
 	@FXML
 	private void activateBack() throws IOException {
-		GlobalCollection.resetFields();
+		GlobalCollection.resetIsbnFields();
+		GlobalCollection.resetOtherFields();
 		BorderPane startScreen = (BorderPane) ViewProvider.getView("startScreen");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(startScreen);
 	}
@@ -549,8 +597,27 @@ public class AddBookView {
 		}
 	}
 	
+	private void enableButtons() {
+		titleField.setDisable(false);
+		summaryArea.setDisable(false);
+		authorsEditButton.setDisable(false);
+		publishersEditButton.setDisable(false);
+		languagesEditButton.setDisable(false);
+		genreEditButton.setDisable(false);
+	}
+	
+	private void disableButtons() {
+		titleField.setDisable(true);
+		summaryArea.setDisable(true);
+		authorsEditButton.setDisable(true);
+		publishersEditButton.setDisable(true);
+		languagesEditButton.setDisable(true);
+		genreEditButton.setDisable(true);
+	}
+	
 	public void afterThreadFinishes() throws IOException {
-		GlobalCollection.resetFields();
+		GlobalCollection.resetIsbnFields();
+		GlobalCollection.resetOtherFields();
 		GlobalCollection.emptyAddedLibrariesList();
 		GlobalCollection.emptyAddedPublishersList();
 		GlobalCollection.emptyAddedAuthorsList();

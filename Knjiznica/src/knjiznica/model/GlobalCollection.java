@@ -25,6 +25,8 @@ public class GlobalCollection {
 	private static boolean isEditable;
 	private static boolean add;
 	private static boolean isPotentialOwner;
+	private static boolean isFound = true;
+	private static boolean ok;
 	private static String ISBN;
 	private static String title;
 	private static String summary;
@@ -58,10 +60,13 @@ public class GlobalCollection {
 		lLanguages = FXCollections.observableArrayList();
 	}
 
-	public static void resetFields() {
+	public static void resetIsbnFields() {
 		ISBN = "";
 		title = "";
 		summary = "";
+	}
+	
+	public static void resetOtherFields() {
 		bookInfo = "";
 		edition = "";
 		publictionYear = "";
@@ -290,6 +295,22 @@ public class GlobalCollection {
 
 	public static void setAddedGenres(ObservableList<Genre> addedGenres) {
 		GlobalCollection.addedGenres = addedGenres;
+	}
+
+	public static boolean isFound() {
+		return isFound;
+	}
+
+	public static void setFound(boolean isFound) {
+		GlobalCollection.isFound = isFound;
+	}
+
+	public static boolean isOk() {
+		return ok;
+	}
+
+	public static void setOk(boolean ok) {
+		GlobalCollection.ok = ok;
 	}
 	
 }
