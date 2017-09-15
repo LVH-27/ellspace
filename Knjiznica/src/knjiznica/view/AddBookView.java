@@ -177,6 +177,7 @@ public class AddBookView {
 								GlobalCollection.resetIsbnFields();
 								activateFound();
 							} else {
+								GlobalCollection.setFound(false);
 								enableButtons();
 								isbnField.setText("");
 						    	
