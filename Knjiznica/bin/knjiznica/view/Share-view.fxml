@@ -14,7 +14,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <BorderPane id="defaultBackgroundField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1500.0" stylesheets="@../../resources/BackgroundStyle.css">
+                  <BorderPane id="defaultBackgroundField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../resources/BackgroundStyle.css">
                      <top>
                         <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER">
                            <children>
@@ -34,7 +34,10 @@
                         </HBox>
                      </top>
                      <center>
-                        <WorldMapView zoomFactor="7.0" BorderPane.alignment="CENTER" />
+                        <WorldMapView BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </BorderPane.margin></WorldMapView>
                      </center>
                   </BorderPane>
                </children>

@@ -127,7 +127,7 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateShareOnMouseEntered() {
-		nameOnHoverLabel.setText("Share Book");
+		nameOnHoverLabel.setText("Book Management");
 	}
 	
 	@FXML
