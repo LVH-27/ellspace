@@ -114,11 +114,13 @@ public class AddBookView {
 				middleName = GlobalCollection.getAddedUsers().get(0).getMiddleName() + " ";
 			}
 			ownerNameLabel.setText(GlobalCollection.getAddedUsers().get(0).getFirstName() + " " + middleName + GlobalCollection.getAddedUsers().get(0).getLastName());
+			ownerNameLabel.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/user-icon-small.png"))));
 			
 		} else if (GlobalCollection.getAddedLibraries().size() > 0) {
 			ownerButtonsHBox.setVisible(false);
 			ownerLabelHBox.setVisible(true);
 			ownerNameLabel.setText(GlobalCollection.getAddedLibraries().get(0).getFirstName());
+			ownerNameLabel.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/library-icon-small.png"))));
 			
 		} else {
 			ownerButtonsHBox.setVisible(true);
@@ -151,6 +153,26 @@ public class AddBookView {
 			l.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/addedPublisher-icon-small.png"))));
 			
 			publishersListGrid.addRow(i, l);
+			
+		}
+		
+		for (int i = 0; i < GlobalCollection.getAddedLanguages().size(); ++i) {
+			Label l = new Label();
+			
+			l.setText(GlobalCollection.getAddedLanguages().get(i).getName());
+			l.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/addedLanguage-icon-small.png"))));
+			
+			languagesListGrid.addRow(i, l);
+			
+		}
+		
+		for (int i = 0; i < GlobalCollection.getAddedGenres().size(); ++i) {
+			Label l = new Label();
+			
+			l.setText(GlobalCollection.getAddedGenres().get(i).getName());
+			l.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/addedGenre-icon-small.png"))));
+			
+			genreListGrid.addRow(i, l);
 			
 		}
 		
@@ -237,16 +259,14 @@ public class AddBookView {
 	@FXML
 	private void activateLanguagesEditButton() throws IOException {
 		getText();
-		//FIXME fxml link
-		BorderPane addLanguage = (BorderPane) FXMLLoader.load(getClass().getResource("AddAuthorTable-view.fxml"));
+		BorderPane addLanguage = (BorderPane) FXMLLoader.load(getClass().getResource("ListLanguages-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addLanguage);
 	}
 	
 	@FXML
 	private void activateGenreEditButton() throws IOException {
 		getText();
-		//FIXME fxml link
-		BorderPane addGenre = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
+		BorderPane addGenre = (BorderPane) FXMLLoader.load(getClass().getResource("ListGenres-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addGenre);
 	}
 	
