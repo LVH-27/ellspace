@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +31,9 @@ public class StartScreenView {
 	
 	@FXML
 	private Button eventLog;
+	
+	@FXML
+	private Label nameOnHoverLabel;
 	
 	public void initialize() throws IOException {
 		
@@ -109,5 +113,40 @@ public class StartScreenView {
 	private void activateEventLog() throws IOException {
 		BorderPane eventLog = (BorderPane) ViewProvider.getView("eventLog");
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(eventLog);
+	}
+	
+	@FXML
+	private void activateAddBookOnMouseEntered() {
+		nameOnHoverLabel.setText("Add Book");
+	}
+	
+	@FXML
+	private void activateClientsMenuOnMouseEntered() {
+		nameOnHoverLabel.setText("Clients Menu");
+	}
+	
+	@FXML
+	private void activateShareOnMouseEntered() {
+		nameOnHoverLabel.setText("Share Book");
+	}
+	
+	@FXML
+	private void activateDirectoryOnMouseEntered() {
+		nameOnHoverLabel.setText("Directory");
+	}
+	
+	@FXML
+	private void activateSearchOnMouseEntered() {
+		nameOnHoverLabel.setText("Search");
+	}
+	
+	@FXML
+	private void activateEventLogOnMouseEntered() {
+		nameOnHoverLabel.setText("Event Viewer");
+	}
+	
+	@FXML
+	private void activateOnMouseExited() {
+		nameOnHoverLabel.setText("");
 	}
 }
