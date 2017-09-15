@@ -73,7 +73,9 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateAddBook() throws IOException {
-		GlobalCollection.resetFields();
+		GlobalCollection.setFound(false);
+		GlobalCollection.resetIsbnFields();
+		GlobalCollection.resetOtherFields();
 		GlobalCollection.setAdd(false);
 		GlobalCollection.emptyAddedLibrariesList();
 		GlobalCollection.emptyAddedPublishersList();
