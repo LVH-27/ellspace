@@ -35,9 +35,9 @@
    <center>
       <TableView id="tableBackgroundField" fx:id="tableGenreList" stylesheets="@../../resources/BackgroundStyle.css">
         <columns>
-          <TableColumn fx:id="nameCol" minWidth="85.0" prefWidth="85.0" text="English" />
-            <TableColumn fx:id="nameHrCol" minWidth="85.0" prefWidth="85.0" text="Hrvatski" />
-            <TableColumn fx:id="nameDeCol" minWidth="85.0" prefWidth="85.0" text="Deutsch" />
+          <TableColumn fx:id="nameCol" minWidth="130.0" prefWidth="130.0" text="English" />
+            <TableColumn fx:id="nameHrCol" minWidth="130.0" prefWidth="130.0" text="Hrvatski" />
+            <TableColumn fx:id="nameDeCol" minWidth="130.0" prefWidth="130.0" text="Deutsch" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

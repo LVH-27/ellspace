@@ -351,7 +351,7 @@
                   </Button>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="10.0" right="30.0" top="20.0" />
+                  <Insets bottom="15.0" right="30.0" top="20.0" />
                </BorderPane.margin>
             </HBox>
          </bottom>
