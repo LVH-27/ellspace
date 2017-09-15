@@ -92,7 +92,13 @@ public class AddBookView {
 	private Button backButton;
 	
 	@FXML
-	private Label errorLabel;
+	private Label errorLabelGeneral;
+	
+	@FXML
+	private Label errorLabelEdition;
+	
+	@FXML
+	private Label errorLabelLinks;
 	
 	public void initialize() throws SQLException {
 		setTextToTextField();

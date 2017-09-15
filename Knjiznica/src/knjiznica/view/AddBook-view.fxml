@@ -43,9 +43,9 @@
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
@@ -60,40 +60,47 @@
                   <Insets left="25.0" right="30.0" />
                </padding>
                <children>
-                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2">
+                  <VBox GridPane.columnIndex="2">
                      <children>
-                        <Label fx:id="errorLabel" text="Missing some information!" textFill="RED" visible="false" />
+                        <HBox alignment="BOTTOM_LEFT">
+                           <children>
+                              <Label fx:id="errorLabelGeneral" text="Missing some information!" textFill="RED" visible="false" />
+                           </children>
+                           <padding>
+                              <Insets top="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="BOTTOM_LEFT">
+                           <children>
+                              <Label text="General Information">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="15.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="General Information">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
                      <children>
                         <Label text="ISBN:" />
                      </children>
                   </HBox>
-                  <TextField fx:id="isbnField" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <TextField fx:id="isbnField" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </TextField>
-                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                      <children>
                         <Label text="Title:" />
                      </children>
                   </HBox>
-                  <TextField fx:id="titleField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <HBox alignment="TOP_RIGHT" GridPane.rowIndex="4">
+                  <TextField fx:id="titleField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <HBox alignment="TOP_RIGHT" GridPane.rowIndex="3">
                      <children>
                         <Label text="Summary:">
                            <HBox.margin>
@@ -105,8 +112,8 @@
                         <Insets />
                      </GridPane.margin>
                   </HBox>
-                  <TextArea fx:id="summaryArea" prefHeight="120.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <HBox alignment="TOP_RIGHT" GridPane.rowIndex="5">
+                  <TextArea fx:id="summaryArea" prefHeight="120.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <HBox alignment="TOP_RIGHT" GridPane.rowIndex="4">
                      <children>
                         <Label text="Book information:">
                            <HBox.margin>
@@ -115,7 +122,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <TextArea fx:id="informationArea" prefHeight="85.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <TextArea fx:id="informationArea" prefHeight="85.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="6">
                      <children>
                         <Label text="Edition Information">
@@ -123,7 +130,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets top="20.0" />
+                              <Insets />
                            </HBox.margin>
                         </Label>
                      </children>
@@ -149,6 +156,11 @@
                      </children>
                   </HBox>
                   <TextField fx:id="numberOfPagesField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <children>
+                        <Label fx:id="errorLabelEdition" text="Missing some information!" textFill="RED" visible="false" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </center>
@@ -179,10 +191,10 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="2">
                      <children>
-                        <Label text="Missing some information!" textFill="RED" visible="false" />
+                        <Label fx:id="errorLabelLinks" text="Missing some information!" textFill="RED" visible="false" />
                      </children>
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets top="15.0" />
                      </GridPane.margin>
                   </HBox>
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -192,7 +204,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets top="10.0" />
+                              <Insets top="5.0" />
                            </HBox.margin>
                         </Label>
                      </children>
@@ -219,7 +231,7 @@
                         <Insets top="4.0" />
                      </padding>
                      <GridPane.margin>
-                        <Insets left="9.0" />
+                        <Insets left="15.0" />
                      </GridPane.margin>
                   </StackPane>
                   <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">

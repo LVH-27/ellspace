@@ -50,6 +50,7 @@
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
@@ -116,14 +117,14 @@
                      </children>
                   </HBox>
                   <TextArea fx:id="informationArea" prefHeight="85.0" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="7">
                      <children>
                         <Label text="Edition Information">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets top="20.0" />
+                              <Insets />
                            </HBox.margin>
                         </Label>
                      </children>
@@ -131,24 +132,29 @@
                         <Insets />
                      </GridPane.margin>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="7">
+                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="8">
                      <children>
                         <Label text="Edition number:" />
                      </children>
                   </HBox>
-                  <TextField fx:id="editionNumberField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="8">
+                  <TextField fx:id="editionNumberField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="9">
                      <children>
                         <Label text="Publication year:" />
                      </children>
                   </HBox>
-                  <TextField fx:id="publicationYearField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="9">
+                  <TextField fx:id="publicationYearField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="10">
                      <children>
                         <Label text="Number of pages:" />
                      </children>
                   </HBox>
-                  <TextField fx:id="numberOfPagesField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <TextField fx:id="numberOfPagesField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <children>
+                        <Label fx:id="errorLabel1" text="Missing some information!" textFill="RED" visible="false" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </center>
@@ -219,7 +225,7 @@
                         <Insets top="4.0" />
                      </padding>
                      <GridPane.margin>
-                        <Insets left="9.0" />
+                        <Insets left="15.0" />
                      </GridPane.margin>
                   </StackPane>
                   <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
