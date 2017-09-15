@@ -506,7 +506,7 @@ public class AddPublisherTableView {
 							});
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						
 					}
 				}
 			}

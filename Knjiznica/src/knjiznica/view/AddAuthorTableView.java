@@ -584,7 +584,7 @@ public class AddAuthorTableView {
 							});
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						
 					}
 				}
 			}
