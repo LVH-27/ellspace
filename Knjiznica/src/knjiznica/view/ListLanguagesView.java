@@ -88,10 +88,6 @@ public class ListLanguagesView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedLanguages().remove(GridPane.getRowIndex(l) - 1);
 					addedLanguagesGrid.getChildren().removeAll(l, b);
-					if (GlobalCollection.getAddedLanguages().size() == 0) {
-						addedLanguagesBorder.setManaged(false);
-						addedLanguagesBorder.setVisible(false);
-					}
 			        ObservableList<Node> childrens = addedLanguagesGrid.getChildren();
 			        int i = 0;
 			        for (Node node : childrens) {

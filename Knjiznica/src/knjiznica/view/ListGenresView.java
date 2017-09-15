@@ -87,10 +87,6 @@ public class ListGenresView {
 			    public void handle(ActionEvent e) {
 			    	GlobalCollection.getAddedGenres().remove(GridPane.getRowIndex(l) - 1);
 					addedGenresGrid.getChildren().removeAll(l, b);
-					if (GlobalCollection.getAddedGenres().size() == 0) {
-						addedGenresBorder.setManaged(false);
-						addedGenresBorder.setVisible(false);
-					}
 			        ObservableList<Node> childrens = addedGenresGrid.getChildren();
 			        int i = 0;
 			        for (Node node : childrens) {
