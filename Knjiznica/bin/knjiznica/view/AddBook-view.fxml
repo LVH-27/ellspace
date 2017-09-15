@@ -199,7 +199,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Owner">
+                        <Label fx:id="owners" text="Owner">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -238,7 +238,7 @@
                      <children>
                         <HBox alignment="BOTTOM_LEFT">
                            <children>
-                              <Label text="Authors">
+                              <Label fx:id="authors" text="Authors">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -263,7 +263,7 @@
                      <children>
                         <HBox alignment="BOTTOM_LEFT">
                            <children>
-                              <Label text="Publishers">
+                              <Label fx:id="publishers" text="Publishers">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -288,7 +288,7 @@
                      <children>
                         <HBox alignment="BOTTOM_LEFT">
                            <children>
-                              <Label text="Languages">
+                              <Label fx:id="languages" text="Languages">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -313,7 +313,7 @@
                      <children>
                         <HBox alignment="BOTTOM_LEFT">
                            <children>
-                              <Label text="Genre">
+                              <Label fx:id="genres" text="Genre">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>

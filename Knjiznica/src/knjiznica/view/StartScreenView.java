@@ -73,9 +73,9 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateAddBook() throws IOException {
-		//TODO Change loaded FXML back to AddBook-view.fxml
 		GlobalCollection.resetFields();
 		GlobalCollection.setAdd(false);
+		GlobalCollection.emptyAddedLibrariesList();
 		GlobalCollection.emptyAddedPublishersList();
 		GlobalCollection.emptyAddedAuthorsList();
 		GlobalCollection.emptyAddedUsersList();
