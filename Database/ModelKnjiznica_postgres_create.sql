@@ -131,7 +131,9 @@ CREATE TABLE "EventLog" (
 
 CREATE TABLE "LanguageList" (
 	"LanguageID" serial NOT NULL,
-	"LanguageName" TEXT NOT NULL UNIQUE,
+	"LanguageNameEN" TEXT NOT NULL UNIQUE,
+	"LanguageNameHR" TEXT NOT NULL UNIQUE,
+	"LanguageNameDE" TEXT NOT NULL UNIQUE,
 	CONSTRAINT LanguageList_pk PRIMARY KEY ("LanguageID")
 ) WITH (
   OIDS=FALSE
@@ -141,7 +143,9 @@ CREATE TABLE "LanguageList" (
 
 CREATE TABLE "GenreList" (
 	"GenreID" serial NOT NULL,
-	"GenreName" TEXT NOT NULL UNIQUE,
+	"GenreNameEN" TEXT NOT NULL UNIQUE,
+	"GenreNameHR" TEXT NOT NULL UNIQUE,
+	"GenreNameDE" TEXT NOT NULL UNIQUE,
 	CONSTRAINT GenreList_pk PRIMARY KEY ("GenreID")
 ) WITH (
   OIDS=FALSE

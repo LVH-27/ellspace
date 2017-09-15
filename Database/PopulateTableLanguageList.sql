@@ -1,39 +1,31 @@
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Unknown');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Other');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hrvatski');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Engleski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Njemački');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Srpski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Češki');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Slovački');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Poljski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Ruski');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Francuski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Talijanski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Španjolski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Portugalski');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Danski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Nizozemski');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Finski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Norveški');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Švedski');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Mađarski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Rumunjski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Bugarski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Makedonski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Albanski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Grčki');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Turski');
-
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Kineski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Japanski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Arapski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hindski');
-INSERT INTO "LanguageList" VALUES(DEFAULT, 'Pandžapski');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Unknown', 'Nepoznato', 'Unbekannt');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Other', 'Drugo', 'Andere');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Croatian', 'Hrvatski', 'Kroatisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'English', 'Engleski', 'Englisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'German', 'Njemački', 'Deutsch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Serbian', 'Srpski', 'Serbisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Czech', 'Češki', 'Tschechisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Slovak', 'Slovački', 'Slowakisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Polish', 'Poljski', 'Polnisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Russian', 'Ruski', 'Russisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'French', 'Francuski', 'Französisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Italian', 'Talijanski', 'Italienisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Spanish', 'Španjolski', 'Spanisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Portuguese', 'Portugalski', 'Portugiesisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Danish', 'Danski', 'Dänisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Dutch', 'Nizozemski', 'Niederländisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Finnish', 'Finski', 'Finnisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Norwegian', 'Norveški', 'Norwegisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Swedish', 'Švedski', 'Schwedisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hungarian', 'Mađarski', 'Ungarisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Romanian', 'Rumunjski', 'Rumänisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Bulgarian', 'Bugarski', 'Bulgarisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Makedonski', 'Makedonski', 'Mazedonisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Albanian', 'Albanski', 'Albanisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Greek', 'Grčki', 'Griechisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Turkish', 'Turski', 'Türkisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Chinese', 'Kineski', 'Chinesisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Japanese', 'Japanski', 'Japanisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Arabic', 'Arapski', 'Arabisch');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Hindi', 'Hindski', 'Hindi');
+INSERT INTO "LanguageList" VALUES(DEFAULT, 'Punjabi', 'Pandžapski', 'Panjabi');
