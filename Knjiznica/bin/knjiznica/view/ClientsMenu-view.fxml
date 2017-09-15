@@ -19,7 +19,7 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label fx:id="nameOnHoverLabel" textAlignment="CENTER" textFill="#00000080">
+                        <Label fx:id="nameOnHoverLabel" textAlignment="CENTER" textFill="#635a48cc">
                            <font>
                               <Font name="Microsoft Sans Serif" size="46.0" />
                            </font>
