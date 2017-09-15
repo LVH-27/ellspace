@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +25,9 @@ public class ClientsMenuView {
 	
 	@FXML
 	private Button listLibrariesButton;
+	
+	@FXML
+	private Label nameOnHoverLabel;
 	
 	public void initialize() {
 		
@@ -67,5 +71,30 @@ public class ClientsMenuView {
 		GlobalCollection.setPotentialOwner(false);
 		BorderPane listLibraries = (BorderPane) FXMLLoader.load(getClass().getResource("ListLibraries-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(listLibraries);
+	}
+	
+	@FXML
+	private void activateAddUserOnMouseEntered() {
+		nameOnHoverLabel.setText("Add New User");
+	}
+	
+	@FXML
+	private void activateListUsersOnMouseEntered() {
+		nameOnHoverLabel.setText("View All Users");
+	}
+	
+	@FXML
+	private void activateAddLibraryOnMouseEntered() {
+		nameOnHoverLabel.setText("Add New Library");
+	}
+	
+	@FXML
+	private void activateListLibrariesOnMouseEntered() {
+		nameOnHoverLabel.setText("View All Libraries");
+	}
+	
+	@FXML
+	private void activateOnMouseExited() {
+		nameOnHoverLabel.setText("");
 	}
 }

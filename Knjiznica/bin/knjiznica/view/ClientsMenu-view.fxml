@@ -2,19 +2,33 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.ClientsMenuView">
    <center>
       <HBox alignment="CENTER">
          <children>
-            <VBox alignment="CENTER">
+            <VBox alignment="CENTER" fillWidth="false">
                <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="nameOnHoverLabel" textAlignment="CENTER" textFill="#00000080">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="46.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </HBox>
                   <BorderPane>
                      <center>
                         <GridPane id="defaultBackgroundField" alignment="CENTER" hgap="10.0" stylesheets="@../../resources/BackgroundStyle.css" vgap="10.0">
@@ -27,21 +41,21 @@
                               <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="addUserButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateAddUser" prefHeight="110.0" prefWidth="110.0">
+                              <Button fx:id="addUserButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateAddUser" onMouseEntered="#activateAddUserOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="listUsersButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateListUsers" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1">
+                              <Button fx:id="listUsersButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateListUsers" onMouseEntered="#activateListUsersOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="addLibraryButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateAddLibrary" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="1">
+                              <Button fx:id="addLibraryButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateAddLibrary" onMouseEntered="#activateAddLibraryOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin></Button>
-                              <Button fx:id="listLibrariesButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateListLibraries" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button fx:id="listLibrariesButton" alignment="CENTER" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateListLibraries" onMouseEntered="#activateListLibrariesOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -55,6 +69,9 @@
                            </padding>
                         </GridPane>
                      </center>
+                     <padding>
+                        <Insets bottom="140.0" left="50.0" right="50.0" />
+                     </padding>
                   </BorderPane>
                </children>
             </VBox>

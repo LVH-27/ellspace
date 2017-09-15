@@ -2,22 +2,36 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.StartScreenView">
    <center>
       <HBox alignment="CENTER">
          <children>
-            <VBox alignment="CENTER">
+            <VBox alignment="CENTER" fillWidth="false">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="nameOnHoverLabel" alignment="CENTER" textAlignment="CENTER" textFill="#00000080">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="46.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </HBox>
                   <BorderPane BorderPane.alignment="CENTER">
                      <center>
                         <GridPane id="defaultBackgroundField" alignment="CENTER" hgap="10.0" stylesheets="@../../resources/BackgroundStyle.css" vgap="10.0">
@@ -31,32 +45,32 @@
                             <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="addBook" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateAddBook" prefHeight="110.0" prefWidth="110.0">
+                              <Button fx:id="addBook" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateAddBook" onMouseEntered="#activateAddBookOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="clients" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateClientsMenu" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1">
+                              <Button fx:id="clients" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateClientsMenu" onMouseEntered="#activateClientsMenuOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="share" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateShare" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="1">
+                              <Button fx:id="share" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateShare" onMouseEntered="#activateShareOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="directory" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateDirectory" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button fx:id="directory" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateDirectory" onMouseEntered="#activateDirectoryOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="search" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateSearch" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="2">
+                              <Button fx:id="search" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateSearch" onMouseEntered="#activateSearchOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="eventLog" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateEventLog" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Button fx:id="eventLog" maxHeight="110.0" maxWidth="110.0" minHeight="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#activateEventLog" onMouseEntered="#activateEventLogOnMouseEntered" onMouseExited="#activateOnMouseExited" prefHeight="110.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -67,6 +81,9 @@
                            </padding>
                         </GridPane>
                      </center>
+                     <padding>
+                        <Insets bottom="140.0" left="50.0" right="50.0" />
+                     </padding>
                   </BorderPane>
                </children>
             </VBox>

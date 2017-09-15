@@ -21,7 +21,7 @@
                <children>
                   <BorderPane id="defaultBackgroundField" stylesheets="@../../resources/BackgroundStyle.css">
                      <center>
-                        <GridPane alignment="CENTER">
+                        <GridPane alignment="CENTER" vgap="20.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
@@ -32,7 +32,8 @@
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="180.0" />
                           </columnConstraints>
                           <rowConstraints>
-                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
@@ -43,29 +44,16 @@
                            <children>
                               <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="4">
                                  <children>
-                                    <Label fx:id="errorLabel" text="Missing Information" textFill="RED" visible="false">
+                                    <Label fx:id="errorLabel" text="Missing Some Information!" textFill="RED" visible="false">
                                        <HBox.margin>
-                                          <Insets left="10.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </Label>
                                  </children>
                               </HBox>
-                              <TextField fx:id="firstNameField" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
+                              <TextField fx:id="firstNameField" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
-                                 </GridPane.margin>
-                                 <children>
-                                    <Label alignment="CENTER" text="First Name:" />
-                                 </children>
-                              </HBox>
-                              <TextField fx:id="middleNameField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" top="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
@@ -73,15 +61,28 @@
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <Label text="Middle Name:" />
+                                    <Label alignment="CENTER" text="First Name:" />
                                  </children>
                               </HBox>
-                              <TextField fx:id="lastNameField" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                              <TextField fx:id="middleNameField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </TextField>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <children>
+                                    <Label text="Middle Name:" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="lastNameField" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="4">
                                  <children>
                                     <Label text="Last Name:">
                                        <HBox.margin>
@@ -92,12 +93,12 @@
                                     <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="emailField" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                              <TextField fx:id="emailField" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                  <GridPane.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="4">
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="5">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="RIGHT" text="Email:">
                                        <HBox.margin>
@@ -109,12 +110,12 @@
                                     <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="phoneNumberField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                              <TextField fx:id="phoneNumberField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                  <GridPane.margin>
-                                    <Insets bottom="10.0" top="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="5">
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="6">
                                  <children>
                                     <Label text="Phone Number:" />
                                  </children>
@@ -122,12 +123,12 @@
                                     <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="countryField" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                              <TextField fx:id="countryField" GridPane.columnIndex="6" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -139,12 +140,12 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <TextField fx:id="streetField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                              <TextField fx:id="streetField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                  <children>
                                     <Label text="Street:" />
                                  </children>
@@ -152,12 +153,12 @@
                                     <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <TextField fx:id="houseNumberField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                              <TextField fx:id="houseNumberField" promptText="Optional" GridPane.columnIndex="6" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </TextField>
-                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                  <children>
                                     <Label text="House Number:" />
                                  </children>
@@ -165,12 +166,12 @@
                                     <Insets />
                                  </GridPane.margin>
                               </HBox>
-                              <HBox alignment="CENTER" GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                              <HBox alignment="CENTER" GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
                                  <children>
-                                    <ComboBox fx:id="postalCodeCombo" prefWidth="150.0" promptText="Choose Postal Code" />
+                                    <ComboBox fx:id="postalCodeCombo" prefWidth="170.0" promptText="Choose Postal Code" />
                                  </children>
                               </HBox>
-                              <HBox GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
+                              <HBox GridPane.columnIndex="4" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" GridPane.rowSpan="2147483647">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
@@ -184,6 +185,27 @@
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin></Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="General Information">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                              <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="Address">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </HBox>
                            </children>
@@ -216,4 +238,10 @@
          </children>
       </VBox>
    </center>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="40.0" />
+   </padding>
 </BorderPane>

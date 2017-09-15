@@ -135,6 +135,9 @@ public class AddLibraryView {
 	private Label errorLabelTime;
 
 	@FXML
+	private HBox addressHBox;
+	
+	@FXML
 	private HBox countryHBox;
 		
 	@FXML
@@ -518,6 +521,7 @@ public class AddLibraryView {
 	@FXML
 	private void onlineLibrary() {
 		if (onlineLibraryCheck.isSelected()) {
+			addressHBox.	 setVisible(false);
 			countryHBox.	 setVisible(false);
 			countryField.	 setVisible(false);
 			streetHBox.      setVisible(false);
@@ -526,7 +530,17 @@ public class AddLibraryView {
 			houseNumberField.setVisible(false);
 			postalCodeCombo. setVisible(false);
 			
+			addressHBox.	 setManaged(false);
+			countryHBox.	 setManaged(false);
+			countryField.	 setManaged(false);
+			streetHBox.      setManaged(false);
+			streetField.     setManaged(false);
+			houseNumberHBox. setManaged(false);
+			houseNumberField.setManaged(false);
+			postalCodeCombo. setManaged(false);
+			
 		} else if (!onlineLibraryCheck.isSelected()) {
+			addressHBox.     setVisible(true);
 			countryHBox.	 setVisible(true);
 			countryField.	 setVisible(true);
 			streetHBox.		 setVisible(true);
@@ -534,6 +548,15 @@ public class AddLibraryView {
 			houseNumberHBox. setVisible(true);
 			houseNumberField.setVisible(true);
 			postalCodeCombo. setVisible(true);
+			
+			addressHBox.	 setManaged(true);
+			countryHBox.	 setManaged(true);
+			countryField.	 setManaged(true);
+			streetHBox.      setManaged(true);
+			streetField.     setManaged(true);
+			houseNumberHBox. setManaged(true);
+			houseNumberField.setManaged(true);
+			postalCodeCombo. setManaged(true);
 		}
 	}
 }
