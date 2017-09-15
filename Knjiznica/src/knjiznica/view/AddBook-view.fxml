@@ -64,7 +64,7 @@
                      <children>
                         <HBox alignment="BOTTOM_LEFT">
                            <children>
-                              <Label fx:id="errorLabelGeneral" text="Missing some information!" textFill="RED" visible="false" />
+                              <Label fx:id="errorLabelGeneral" text="Missing some information!" textFill="RED" visible="false" wrapText="true" />
                            </children>
                            <padding>
                               <Insets top="15.0" />
@@ -158,7 +158,7 @@
                   <TextField fx:id="numberOfPagesField" promptText="Optional" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <children>
-                        <Label fx:id="errorLabelEdition" text="Missing some information!" textFill="RED" visible="false" />
+                        <Label fx:id="errorLabelEdition" text="Missing some information!" textFill="RED" visible="false" wrapText="true" />
                      </children>
                   </HBox>
                </children>
@@ -191,7 +191,7 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="2">
                      <children>
-                        <Label fx:id="errorLabelLinks" text="Missing some information!" textFill="RED" visible="false" />
+                        <Label fx:id="errorLabelLinks" text="Missing some information!" textFill="RED" visible="false" wrapText="true" />
                      </children>
                      <GridPane.margin>
                         <Insets top="15.0" />

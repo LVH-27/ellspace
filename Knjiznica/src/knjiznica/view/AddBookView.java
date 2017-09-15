@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import org.controlsfx.control.MaskerPane;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +25,7 @@ import javafx.scene.paint.Color;
 import knjiznica.model.AddBookToDatabase;
 import knjiznica.model.AlertWindowOpen;
 import knjiznica.model.ErrorLabelMessage;
+import knjiznica.model.FindIsbn;
 import knjiznica.model.GlobalCollection;
 import knjiznica.model.ViewProvider;
 
@@ -142,6 +146,27 @@ public class AddBookView {
             t.setDaemon(true);
             return t ;
         });
+		
+		isbnField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		    @Override
+		    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+		        if (newPropertyValue) {
+		        }
+		        else {
+		        	Task<Void> loadIsbn = new Task<Void>() {
+			            @Override
+			            public Void call() throws Exception {
+			            	System.out.println(isbnField.getText());
+			    			FindIsbn.find(isbnField.getText());
+			    			
+			    			return null;  
+			            }
+					};
+					exec.execute(loadIsbn);
+		        }
+		    }
+		});
+		
 		
 		authorsEditButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/add-button-small.png"))));
 		authorsEditButton.setId("smallButton");
@@ -333,6 +358,7 @@ public class AddBookView {
 		editionNumber = editionNumberField.getText().trim();
 		publicationYear = publicationYearField.getText().trim();
 		numberOfPages = numberOfPagesField.getText().trim();
+	
 		
 		owners.setTextFill(Color.BLACK);
 		authors.setTextFill(Color.BLACK);
@@ -363,8 +389,8 @@ public class AddBookView {
 			errorLabelGeneral.setVisible(true);
 			isbnField.setStyle(redBorder);
 		}
-		if(title.isEmpty()) {
-			if(checkGeneral) {
+		if (title.isEmpty()) {
+			if (checkGeneral) {
 				errorLabelGeneral.setText(ErrorLabelMessage.getInfoMiss());
 				errorLabelGeneral.setVisible(true);
 			}
@@ -383,7 +409,7 @@ public class AddBookView {
 			Long.parseLong(isbn);
 			
 		} catch (Exception e) {
-			if(checkGeneral) {
+			if (checkGeneral) {
 				
 				errorLabelGeneral.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabelGeneral.setVisible(true);
@@ -391,8 +417,9 @@ public class AddBookView {
 			checkGeneral = false;
 			isbnField.setStyle(redBorder);
 		}
+		
 		if (isbn.length() != 13 && isbn.length() != 10) {
-			if(checkGeneral) {
+			if (checkGeneral) {
 				errorLabelGeneral.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabelGeneral.setVisible(true);
 			}
@@ -400,7 +427,7 @@ public class AddBookView {
 			isbnField.setStyle(redBorder);
 		}
 		
-		if(!editionNumber.isEmpty()) {
+		if (!editionNumber.isEmpty()) {
 			try {
 				Integer.parseInt(editionNumber);
 				
@@ -409,13 +436,13 @@ public class AddBookView {
 				errorLabelEdition.setVisible(true);
 				checkEdition = false;
 				editionNumberField.setStyle(redBorder);
-				
 			}
+			
 		} else {
 			editionNumber = "-";
 		}
 		
-		if(!publicationYear.isEmpty()) {
+		if (!publicationYear.isEmpty()) {
 			try {
 				Integer.parseInt(publicationYear);
 				
@@ -426,13 +453,13 @@ public class AddBookView {
 				}
 				checkEdition = false;
 				publicationYearField.setStyle(redBorder);
-				
 			}
+			
 		} else {
 			publicationYear = "-";
 		}
 		
-		if(!numberOfPages.isEmpty()) {
+		if (!numberOfPages.isEmpty()) {
 			try {
 				Integer.parseInt(numberOfPages);
 				
@@ -443,12 +470,12 @@ public class AddBookView {
 				}
 				checkEdition = false;
 				numberOfPagesField.setStyle(redBorder);
-				
 			}
+			
 		} else {
 			numberOfPages = "-";
 		}
-		if(publicationYear.length() > 4) {
+		if (publicationYear.length() > 4) {
 			if (checkEdition) {
 				errorLabelEdition.setText(ErrorLabelMessage.getWrongFormat());
 				errorLabelEdition.setVisible(true);
@@ -456,43 +483,44 @@ public class AddBookView {
 			checkEdition = false;
 			publicationYearField.setStyle(redBorder);
 		}
-		if(GlobalCollection.getAddedUsers().isEmpty() && GlobalCollection.getAddedLibraries().isEmpty()) {
+		if (GlobalCollection.getAddedUsers().isEmpty() && GlobalCollection.getAddedLibraries().isEmpty()) {
 			errorLabelLinks.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabelLinks.setVisible(true);
 			owners.setTextFill(Color.RED);
 			checkLinks = false;
 		}
-		if(GlobalCollection.getAddedAuthors().isEmpty()) {
+		if (GlobalCollection.getAddedAuthors().isEmpty()) {
 			errorLabelLinks.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabelLinks.setVisible(true);
 			authors.setTextFill(Color.RED);
 			checkLinks = false;
 		}
-		if(GlobalCollection.getAddedPublishers().isEmpty()) {
+		if (GlobalCollection.getAddedPublishers().isEmpty()) {
 			errorLabelLinks.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabelLinks.setVisible(true);
 			publishers.setTextFill(Color.RED);
 			checkLinks = false;
 		}
-		if(GlobalCollection.getAddedLanguages().isEmpty()) {
+		if (GlobalCollection.getAddedLanguages().isEmpty()) {
 			errorLabelLinks.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabelLinks.setVisible(true);
 			languages.setTextFill(Color.RED);
 			checkLinks = false;
 		}
-		if(GlobalCollection.getAddedGenres().isEmpty()) {
+		if (GlobalCollection.getAddedGenres().isEmpty()) {
 			errorLabelLinks.setText(ErrorLabelMessage.getInfoMiss());
 			errorLabelLinks.setVisible(true);
 			genres.setTextFill(Color.RED);
 			checkLinks = false;
 		}
 		if (checkGeneral && checkEdition && checkLinks) {
-			if(summary.isEmpty()) {
+			if (summary.isEmpty()) {
 				summary = "-";
 			}
-			if(info.isEmpty()) {
+			if (info.isEmpty()) {
 				info = "-";
 			}
+			
 			sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
 			Task<Void> addBookToDatabaseTask = new Task<Void>() {
 	            @Override
@@ -504,6 +532,7 @@ public class AddBookView {
 	    			return null;  
 	            }
 			};
+			
 			addBookToDatabaseTask.setOnSucceeded(e -> {
 				try {
 					afterThreadFinishes();
@@ -512,6 +541,7 @@ public class AddBookView {
 					
 				}
 			});
+			
 			addBookToDatabaseTask.setOnFailed(e -> {
 				afterThreadFails();
 		    });
