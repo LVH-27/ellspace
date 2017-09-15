@@ -24,40 +24,39 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import knjiznica.model.Genre;
 import knjiznica.model.GlobalCollection;
-import knjiznica.model.Language;
-import knjiznica.model.SelectLanguages;
+import knjiznica.model.SelectGenres;
 import knjiznica.model.ViewProvider;
 
-public class ListLanguagesView {
+public class ListGenresView {
 	
 	@FXML
 	private Button acceptButton;
 	
 	@FXML
-	private GridPane addedLanguagesGrid;
+	private GridPane addedGenresGrid;
 	
 	@FXML
-	private BorderPane addedLanguagesBorder;
+	private BorderPane addedGenresBorder;
 	
 	@FXML
-	private TableView<Language> tableLanguageList;
+	private TableView<Genre> tableGenreList;
 	
 	@FXML
-	private TableColumn<Language, String> nameCol;
+	private TableColumn<Genre, String> nameCol;
 	
 	@FXML
-	private TableColumn<Language, String> nameHrCol;
+	private TableColumn<Genre, String> nameHrCol;
 	
 	@FXML
-	private TableColumn<Language, String> nameDeCol;
+	private TableColumn<Genre, String> nameDeCol;
 	
 	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
 	private static Executor exec;
 	private final static int buttonSize = 20;
 	
 	public void initialize() {
-		
 		
 		exec = Executors.newCachedThreadPool(runnable -> {
             Thread t = new Thread(runnable);
@@ -71,28 +70,28 @@ public class ListLanguagesView {
 		
 		sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
 		
-		for (int i = 0; i < GlobalCollection.getAddedLanguages().size(); ++i) {
+		for (int i = 0; i < GlobalCollection.getAddedGenres().size(); ++i) {
 			Label l = new Label();
 			Button b = new Button();
 			
-			l.setText(GlobalCollection.getAddedLanguages().get(i).getName());
+			l.setText(GlobalCollection.getAddedGenres().get(i).getName());
 			
 			b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 			b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 			b.setId("smallButton");
 			
-			addedLanguagesGrid.addRow(i + 1, l, b);
+			addedGenresGrid.addRow(i + 1, l, b);
 			
 			b.setOnAction(new EventHandler<ActionEvent>() {
 			    @Override
 			    public void handle(ActionEvent e) {
-			    	GlobalCollection.getAddedLanguages().remove(GridPane.getRowIndex(l) - 1);
-					addedLanguagesGrid.getChildren().removeAll(l, b);
-					if (GlobalCollection.getAddedLanguages().size() == 0) {
-						addedLanguagesBorder.setManaged(false);
-						addedLanguagesBorder.setVisible(false);
+			    	GlobalCollection.getAddedGenres().remove(GridPane.getRowIndex(l) - 1);
+					addedGenresGrid.getChildren().removeAll(l, b);
+					if (GlobalCollection.getAddedGenres().size() == 0) {
+						addedGenresBorder.setManaged(false);
+						addedGenresBorder.setVisible(false);
 					}
-			        ObservableList<Node> childrens = addedLanguagesGrid.getChildren();
+			        ObservableList<Node> childrens = addedGenresGrid.getChildren();
 			        int i = 0;
 			        for (Node node : childrens) {
 			        	if (GridPane.getRowIndex(node) == null) {
@@ -105,70 +104,70 @@ public class ListLanguagesView {
 			});
 		}
 		
-		ArrayList<Language> languages = new ArrayList<Language>();
+		ArrayList<Genre> genres = new ArrayList<Genre>();
 		
-		Task<ArrayList<Language>> getLanguagesTable = new Task<ArrayList<Language>>() {
+		Task<ArrayList<Genre>> getGenresTable = new Task<ArrayList<Genre>>() {
             @Override
-            public ArrayList<Language> call() throws Exception {
+            public ArrayList<Genre> call() throws Exception {
             	
     			Thread.sleep(600);
     			
-    			return SelectLanguages.select();  
+    			return SelectGenres.select();  
             }
 		};
-		//TODO after thread fails populate languages table
-		getLanguagesTable.setOnSucceeded(e -> {
+		//TODO after thread fails populate genress table
+		getGenresTable.setOnSucceeded(e -> {
 			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
-			languages.addAll(getLanguagesTable.getValue());
-			populateTable(languages);
+			genres.addAll(getGenresTable.getValue());
+			populateTable(genres);
 		});
-		exec.execute(getLanguagesTable);
+		exec.execute(getGenresTable);
 		
 	}
 	
-	private void populateTable(ArrayList<Language> languages) {
+	private void populateTable(ArrayList<Genre> genres) {
 		GlobalCollection.emptyList();
 		
-		for (int i = 0; i < languages.size(); ++i) {
-			GlobalCollection.getLanguageList().add(languages.get(i));
+		for (int i = 0; i < genres.size(); ++i) {
+			GlobalCollection.getGenresList().add(genres.get(i));
 		} 
 		
-		tableLanguageList. setItems(GlobalCollection.getLanguageList());
-		nameCol.  setCellValueFactory(new PropertyValueFactory<Language, String>("name"));
+		tableGenreList. setItems(GlobalCollection.getGenresList());
+		nameCol.  setCellValueFactory(new PropertyValueFactory<Genre, String>("name"));
 		nameCol.  setStyle("-fx-alignment: CENTER;");
-		nameHrCol.  setCellValueFactory(new PropertyValueFactory<Language, String>("nameHr"));
+		nameHrCol.  setCellValueFactory(new PropertyValueFactory<Genre, String>("nameHr"));
 		nameHrCol.  setStyle("-fx-alignment: CENTER;");
-		nameDeCol.  setCellValueFactory(new PropertyValueFactory<Language, String>("nameDe"));
+		nameDeCol.  setCellValueFactory(new PropertyValueFactory<Genre, String>("nameDe"));
 		nameDeCol.  setStyle("-fx-alignment: CENTER;");
-		tableLanguageList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		tableGenreList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				if (event.getClickCount() > 1) {
 					@SuppressWarnings("rawtypes")
-					ObservableList<TablePosition> cells = tableLanguageList.getSelectionModel().getSelectedCells();
+					ObservableList<TablePosition> cells = tableGenreList.getSelectionModel().getSelectedCells();
 					try {
-						if (!GlobalCollection.getAddedLanguages().contains(GlobalCollection.getLanguageList().get(cells.get(0).getRow()))) {
+						if (!GlobalCollection.getAddedGenres().contains(GlobalCollection.getGenresList().get(cells.get(0).getRow()))) {
 							
 							Label l = new Label();
 							Button b = new Button();						
-							addedLanguagesBorder.setManaged(true);
-							addedLanguagesBorder.setVisible(true);
+							addedGenresBorder.setManaged(true);
+							addedGenresBorder.setVisible(true);
 
-							l.setText(GlobalCollection.getLanguageList().get(cells.get(0).getRow()).getName());
+							l.setText(GlobalCollection.getGenresList().get(cells.get(0).getRow()).getName());
 							
 							b.setMaxWidth(buttonSize); b.setPrefWidth(buttonSize); b.setMinWidth(buttonSize); b.setMaxHeight(buttonSize); b.setPrefHeight(buttonSize); b.setMinHeight(buttonSize);
 							b.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/resources/remove-button.png"))));
 							b.setId("smallButton");
 							
-							GlobalCollection.getAddedLanguages().add(GlobalCollection.getLanguageList().get(cells.get(0).getRow()));
-							addedLanguagesGrid.addRow(GlobalCollection.getAddedLanguages().size(), l, b);
+							GlobalCollection.getAddedGenres().add(GlobalCollection.getGenresList().get(cells.get(0).getRow()));
+							addedGenresGrid.addRow(GlobalCollection.getAddedGenres().size(), l, b);
 							
 							b.setOnAction(new EventHandler<ActionEvent>() {
 							    @Override
 							    public void handle(ActionEvent e) {
-							    	GlobalCollection.getAddedLanguages().remove(GridPane.getRowIndex(l) - 1);
-									addedLanguagesGrid.getChildren().removeAll(l, b);
-							        ObservableList<Node> childrens = addedLanguagesGrid.getChildren();
+							    	GlobalCollection.getAddedGenres().remove(GridPane.getRowIndex(l) - 1);
+									addedGenresGrid.getChildren().removeAll(l, b);
+							        ObservableList<Node> childrens = addedGenresGrid.getChildren();
 							        int i = 0;
 							        for (Node node : childrens) {
 							        	if (GridPane.getRowIndex(node) == null) {

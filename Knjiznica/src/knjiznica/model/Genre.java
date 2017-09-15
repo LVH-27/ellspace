@@ -1,13 +1,13 @@
 package knjiznica.model;
 
-public class Language {
+public class Genre {
 	
 	private int ID;
 	private String name;
 	private String nameHr;
 	private String nameDe;
 	
-	public Language(int ID, String name, String nameHr, String nameDe) {
+	public Genre(int ID, String name, String nameHr, String nameDe) {
 		this.ID = ID;
 		this.name = name;
 		this.nameHr = nameHr;

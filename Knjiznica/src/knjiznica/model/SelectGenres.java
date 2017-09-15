@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class SelectLanguages {
+public class SelectGenres {
 	
-	private static ArrayList<Language> languages;
+	private static ArrayList<Genre> genres;
 	
-	public static ArrayList<Language> select() {
+	public static ArrayList<Genre> select() {
 		
-		languages = new ArrayList<Language>();
+		genres = new ArrayList<Genre>();
 		
 		Statement stmt = null;
 		
@@ -21,14 +21,14 @@ public class SelectLanguages {
 			Connection con = DriverManager.getConnection(
 					ConnectionData.getLink(), ConnectionData.getUsername(), ConnectionData.getPassword());
 			
-			String query = "SELECT * FROM public.\"LanguageList\"";
+			String query = "SELECT * FROM public.\"GenreList\"";
 			
 			stmt = con.createStatement();
 			
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while (rs.next()) {
-				languages.add(new Language(rs.getInt("LanguageID"), rs.getString("LanguageNameEN"), rs.getString("LanguageNameHR"), rs.getString("LanguageNameDE")));
+				genres.add(new Genre(rs.getInt("GenreID"), rs.getString("GenreNameEN"), rs.getString("GenreNameHR"), rs.getString("GenreNameDE")));
 			}
 			
 		} catch (SQLException e) {
@@ -41,6 +41,6 @@ public class SelectLanguages {
 				e.printStackTrace();
 			}
 		}
-		return languages;
+		return genres;
 	}
 }

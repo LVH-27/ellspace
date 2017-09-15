@@ -11,11 +11,13 @@ public class GlobalCollection {
 	private static ObservableList<Publisher> lPublisher;
 	private static ObservableList<BusinessHours> lBusinessHours;
 	private static ObservableList<Language> lLanguages;
+	private static ObservableList<Genre> lGenres;
 	private static ObservableList<Author> addedAuthors;
 	private static ObservableList<Publisher> addedPublishers;
 	private static ObservableList<User> addedUsers;
 	private static ObservableList<Library> addedLibraries;
 	private static ObservableList<Language> addedLanguages;
+	private static ObservableList<Genre> addedGenres;
 	
 	private static User user;
 	private static Library library;
@@ -38,11 +40,13 @@ public class GlobalCollection {
 		lAuthor = FXCollections.observableArrayList();
 		lPublisher = FXCollections.observableArrayList();
 		lLanguages = FXCollections.observableArrayList();
+		lGenres = FXCollections.observableArrayList();
 		addedAuthors = FXCollections.observableArrayList(); 
 		addedPublishers = FXCollections.observableArrayList(); 
 		addedUsers = FXCollections.observableArrayList(); 
 		addedLibraries = FXCollections.observableArrayList(); 
 		addedLanguages = FXCollections.observableArrayList();
+		addedGenres = FXCollections.observableArrayList(); 
 	}
 	
 	public static void emptyList() {
@@ -82,6 +86,10 @@ public class GlobalCollection {
 	
 	public static void emptyAddedLanguagesList() {
 		addedLanguages = FXCollections.observableArrayList(); 
+	}
+	
+	public static void emptyAddedGenresList() {
+		addedGenres = FXCollections.observableArrayList(); 
 	}
 	
 	public static ObservableList<User> getUserList() {
@@ -266,6 +274,22 @@ public class GlobalCollection {
 
 	public static void setAddedLanguages(ObservableList<Language> addedLanguages) {
 		GlobalCollection.addedLanguages = addedLanguages;
+	}
+
+	public static ObservableList<Genre> getGenresList() {
+		return lGenres;
+	}
+
+	public static void setGenresList(ObservableList<Genre> lGenres) {
+		GlobalCollection.lGenres = lGenres;
+	}
+
+	public static ObservableList<Genre> getAddedGenres() {
+		return addedGenres;
+	}
+
+	public static void setAddedGenres(ObservableList<Genre> addedGenres) {
+		GlobalCollection.addedGenres = addedGenres;
 	}
 	
 }

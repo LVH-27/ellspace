@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="defaultBackgroundField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../resources/BackgroundStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.ListLanguagesView">
+<BorderPane id="defaultBackgroundField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../resources/BackgroundStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knjiznica.view.ListGenresView">
    <top>
       <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" text="Languages">
+                  <Label alignment="CENTER" text="Genres">
                      <font>
                         <Font name="Microsoft Sans Serif" size="50.0" />
                      </font>
@@ -33,7 +33,7 @@
       </HBox>
    </top>
    <center>
-      <TableView id="tableBackgroundField" fx:id="tableLanguageList" stylesheets="@../../resources/BackgroundStyle.css">
+      <TableView id="tableBackgroundField" fx:id="tableGenreList" stylesheets="@../../resources/BackgroundStyle.css">
         <columns>
           <TableColumn fx:id="nameCol" minWidth="85.0" prefWidth="85.0" text="English" />
             <TableColumn fx:id="nameHrCol" minWidth="85.0" prefWidth="85.0" text="Hrvatski" />
@@ -48,12 +48,12 @@
       </TableView>
    </center>
    <right>
-      <BorderPane fx:id="addedLanguagesBorder" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="addedGenresBorder" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets right="30.0" />
          </BorderPane.margin>
          <center>
-            <GridPane fx:id="addedLanguagesGrid" alignment="TOP_CENTER" hgap="10.0" BorderPane.alignment="CENTER">
+            <GridPane fx:id="addedGenresGrid" alignment="TOP_CENTER" hgap="10.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
                   <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
@@ -64,7 +64,7 @@
                <children>
                   <HBox alignment="CENTER" GridPane.columnSpan="2">
                      <children>
-                        <Label text="Added Languages">
+                        <Label text="Added Genres">
                            <font>
                               <Font name="Microsoft Sans Serif" size="18.0" />
                            </font>
