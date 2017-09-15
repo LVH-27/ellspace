@@ -3,7 +3,6 @@ package knjiznica.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import knjiznica.view.AddAuthorTableView;
 
 public class InsertNewAuthor {

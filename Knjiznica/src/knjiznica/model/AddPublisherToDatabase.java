@@ -14,7 +14,6 @@ public class AddPublisherToDatabase {
 	private static String street;
 	private static String houseNumber;
 	private static boolean isKnown;
-	private static int publisherID;
 	
 	public static void addPublisher(String firstNameIn, String countryIn, int postalCodeIn, String streetIn, String houseNumberIn, boolean isKnownIn) {
 		
@@ -35,7 +34,7 @@ public class AddPublisherToDatabase {
 				addressID = InsertNewAddress.insert(con, country, postalCode, street, houseNumber);
 			}
 			
-			publisherID = InsertNewPublisher.insert(con, name, addressID);
+			InsertNewPublisher.insert(con, name, addressID);
 			
 			
 		} catch (PSQLException e) {
