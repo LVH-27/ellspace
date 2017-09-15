@@ -74,6 +74,8 @@ public class StartScreenView {
 		GlobalCollection.emptyAddedPublishersList();
 		GlobalCollection.emptyAddedAuthorsList();
 		GlobalCollection.emptyAddedUsersList();
+		GlobalCollection.emptyAddedGenresList();
+		GlobalCollection.emptyAddedLanguagesList();
 		BorderPane addBook = (BorderPane) FXMLLoader.load(getClass().getResource("AddBook-view.fxml"));
     	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addBook);
 	}
