@@ -36,7 +36,7 @@
          <center>
             <TableView id="tableBackgroundField" fx:id="tableBookList" stylesheets="@../../resources/BackgroundStyle.css">
               <columns>
-                  <TableColumn fx:id="wideGeneralCol" minWidth="710.0" prefWidth="710.0" style="-fx-background-color: linear-gradient(to bottom right, #424141, #131313, #424141);" text="General Information">
+                  <TableColumn minWidth="710.0" prefWidth="710.0" style="-fx-background-color: linear-gradient(to bottom right, #424141, #131313, #424141);" text="General Information">
                      <columns>
                       <TableColumn fx:id="ISBNCol" minWidth="110.0" prefWidth="110.0" text="ISBN" />
                       <TableColumn fx:id="titleCol" minWidth="110.0" prefWidth="110.0" text="Title" />
@@ -47,14 +47,14 @@
                         <TableColumn fx:id="informationCol" minWidth="90.0" prefWidth="90.0" text="Information" />
                      </columns>
                   </TableColumn>
-                  <TableColumn fx:id="wideEditionCol" minWidth="180.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to bottom right, #424141, #131313, #424141);" text="Edition">
+                  <TableColumn minWidth="180.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(to bottom right, #424141, #131313, #424141);" text="Edition">
                      <columns>
                         <TableColumn fx:id="numberCol" minWidth="60.0" prefWidth="60.0" text="Number" />
                         <TableColumn fx:id="yearCol" minWidth="60.0" prefWidth="60.0" text="Year" />
                         <TableColumn fx:id="pagesCol" minWidth="60.0" prefWidth="60.0" text="Pages" />
                      </columns>
                   </TableColumn>
-                  <TableColumn fx:id="wideAvailabilityCol" minWidth="110.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to bottom right, #424141, #131313, #424141);" text="Availability">
+                  <TableColumn minWidth="110.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to bottom right, #424141, #131313, #424141);" text="Availability">
                      <columns>
                         <TableColumn fx:id="ownerCol" minWidth="110.0" prefWidth="110.0" text="Owner" />
                         <TableColumn fx:id="locationCol" minWidth="110.0" prefWidth="110.0" text="Location" />
