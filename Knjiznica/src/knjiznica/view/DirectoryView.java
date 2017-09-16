@@ -98,7 +98,7 @@ public class DirectoryView {
             return t ;
         });
 		
-		sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
+		//sp.getChildren().add((MaskerPane) ViewProvider.getView("mask"));
 		
 		ArrayList<Book> books = new ArrayList<Book>();
 		

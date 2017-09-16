@@ -27,7 +27,7 @@ public class Book {
 			int editionNumber, String editionYear, int editionNumberOfPages, 
 			Object currentLocation, Object owner, boolean available, Date returnDate, 
 			String information, ArrayList<Author> authors, ArrayList<Publisher> publishers, 
-			ArrayList<Language> languages, ArrayList<Genre> genres) {
+			ArrayList<Language> languages, ArrayList<Genre> genres, String currentLocationname, String ownerName) {
 		this.ID = ID;
 		this.ISBN = ISBN;
 		this.title = title;
