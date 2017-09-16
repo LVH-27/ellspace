@@ -62,6 +62,8 @@ public class GlobalCollection {
 		lAuthor = FXCollections.observableArrayList();
 		lPublisher = FXCollections.observableArrayList();
 		lLanguages = FXCollections.observableArrayList();
+		lBooks = FXCollections.observableArrayList();
+
 	}
 
 	public static void resetIsbnFields() {

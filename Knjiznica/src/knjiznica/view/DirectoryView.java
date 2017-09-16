@@ -116,6 +116,7 @@ public class DirectoryView {
 		GlobalCollection.emptyList();
 		
 		for (int i = 0; i < books.size(); ++i) {
+			System.out.println(books.get(i).toString());
 			GlobalCollection.getBooksList().add(books.get(i));
 		}
 		

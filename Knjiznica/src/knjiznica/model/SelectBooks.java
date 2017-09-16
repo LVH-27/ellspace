@@ -85,6 +85,7 @@ public class SelectBooks {
 						+ "JOIN public.\"Address\" ON \"Address\".\"AddressID\"=\"Publisher\".\"AddressID\""
 						+ "JOIN public.\"City\" ON \"Address\".\"PostalCode\"=\"City\".\"PostalCode\""
 						+ "WHERE \"Book\".\"ISBN\"=?";
+				
 				pstmtBookPublisher = con.prepareStatement(query);
 				pstmtBookPublisher.setString(1, rsBook.getString("ISBN"));
 				pstmtBookPublisher.setString(2, rsBook.getString("ISBN"));
@@ -103,10 +104,12 @@ public class SelectBooks {
 					
 					publishers.add(new Publisher(rs.getInt("PublisherID"), rs.getString("PublisherName"), rs.getString("Country"), Integer.toString(rs.getInt("PostalCode")), street, houseNumber, rs.getString("CityName"), rs.getInt("AddressID")));
 				}
+				
 				query = "SELECT * FROM \"public\".\"Book\""
 						+ "JOIN public.\"PublisherLinks\" ON \"PublisherLinks\".\"ISBN\"=?"
 						+ "JOIN public.\"Publisher\" ON \"Publisher\".\"PublisherID\"=\"PublisherLinks\".\"PublisherID\" AND \"Publisher\".\"AddressID\" IS NULL "
 						+ "WHERE \"Book\".\"ISBN\"=?";
+				
 				PreparedStatement pstmtBookPublisherNull = con.prepareStatement(query);
 				pstmtBookPublisherNull.setString(1, rsBook.getString("ISBN"));
 				pstmtBookPublisherNull.setString(2, rsBook.getString("ISBN"));
@@ -114,10 +117,12 @@ public class SelectBooks {
 				while (rs.next()) {			
 					publishers.add(new Publisher(rs.getInt("PublisherID"), rs.getString("PublisherName"), "-", "-", "-", "-", "-", -1));
 				}
+				
 				query = "SELECT * FROM \"public\".\"Book\""
 						+ "JOIN public.\"LanguageLinks\" ON \"LanguageLinks\".\"ISBN\"=?"
 						+ "JOIN public.\"LanguageList\" ON \"LanguageList\".\"LanguageID\"=\"LanguageLinks\".\"LanguageID\""
 						+ "WHERE \"Book\".\"ISBN\"=?";
+				
 				pstmtBookLanguage = con.prepareStatement(query);
 				pstmtBookLanguage.setString(1, rsBook.getString("ISBN"));
 				pstmtBookLanguage.setString(2, rsBook.getString("ISBN"));
@@ -130,6 +135,7 @@ public class SelectBooks {
 						+ "JOIN public.\"GenreLinks\" ON \"GenreLinks\".\"ISBN\"=?"
 						+ "JOIN public.\"GenreList\" ON \"GenreList\".\"GenreID\"=\"GenreLinks\".\"GenreID\""
 						+ "WHERE \"Book\".\"ISBN\"=?";
+				
 				pstmtBookGenre = con.prepareStatement(query);
 				pstmtBookGenre.setString(1, rsBook.getString("ISBN"));
 				pstmtBookGenre.setString(2, rsBook.getString("ISBN"));
@@ -145,6 +151,7 @@ public class SelectBooks {
 				query = "SELECT * FROM \"public\".\"Book\""
 						+ "JOIN \"public\".\"Location\" ON \"Book\".\"CurrentLocationID\"=\"Location\".\"LocationID\""
 						+ "WHERE \"Book\".\"BookID\"=?";
+				
 				pstmtLocation = con.prepareStatement(query);
 				pstmtLocation.setInt(1, rsBook.getInt("BookID"));
 				ResultSet rsLocation = pstmtLocation.executeQuery();
@@ -154,6 +161,7 @@ public class SelectBooks {
 				query = "SELECT * FROM \"public\".\"Book\""
 						+ "JOIN \"public\".\"Location\" ON \"Book\".\"OwnerID\"=\"Location\".\"LocationID\""
 						+ "WHERE \"Book\".\"BookID\"=?";
+				
 				pstmtOwner = con.prepareStatement(query);
 				pstmtOwner.setInt(1, rsBook.getInt("BookID"));
 				ResultSet rsOwner = pstmtLocation.executeQuery();
@@ -194,7 +202,7 @@ public class SelectBooks {
 					}
 				}
 				
-				GlobalCollection.getBooksList().add(new Book(rsBook.getInt("BookID"), rsBook.getString("ISBN"), rsBook.getString("Title"), rsBook.getString("Summary"), rsBook.getInt("EditionID"), rsBook.getInt("Number"), rsBook.getString("Year"), rsBook.getInt("NumberOfPages"), currLocation, owner, rsBook.getBoolean("Available"), rsBook.getDate("ReturnDate"), rsBook.getString("Information"), authors, publishers, languages, genres, locationName, ownerName, authorsName, publishersName, languagesName, genresName));
+				books.add(new Book(rsBook.getInt("BookID"), rsBook.getString("ISBN"), rsBook.getString("Title"), rsBook.getString("Summary"), rsBook.getInt("EditionID"), rsBook.getInt("Number"), rsBook.getString("Year"), rsBook.getInt("NumberOfPages"), currLocation, owner, rsBook.getBoolean("Available"), rsBook.getDate("ReturnDate"), rsBook.getString("Information"), authors, publishers, languages, genres, locationName, ownerName, authorsName, publishersName, languagesName, genresName));
 				
 			}
 			
