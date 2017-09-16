@@ -123,7 +123,7 @@ public class DirectoryView {
 		
 		for (int i = 0; i < books.size(); ++i) {
 			GlobalCollection.getBooksList().add(books.get(i));
-		} 
+		}
 		
 		tableBookList. setItems(GlobalCollection.getBooksList());
 		ISBNCol.  	   setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
