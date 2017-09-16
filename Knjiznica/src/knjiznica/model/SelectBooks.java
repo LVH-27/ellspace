@@ -260,17 +260,13 @@ public class SelectBooks {
 				pstmtUser.setInt(1, rsLocation.getInt("UserID"));
 				ResultSet rsUser = pstmtUser.executeQuery();
 				while (rsUser.next()) {
-					String middleName = "-";
+					String middleName = "";
 					String street = "-";
 					String houseNumber = "-"; 
 					String phoneNumber = "-";
-					if(currLoc) {
-						locationName = rsUser.getString("FirstName") + " " + rsUser.getString("MiddleName") + " " + rsUser.getString("LastName");
-					} else {
-						ownerName = rsUser.getString("FirstName") + " " + rsUser.getString("MiddleName") + " " + rsUser.getString("LastName");
-					}
+					
 					if (rsUser.getString("MiddleName") != null) {
-						middleName = rsUser.getString("MiddleName");
+						middleName = rsUser.getString("MiddleName") + " ";
 					}
 					if (rsUser.getString("Street") != null) {
 						street = rsUser.getString("Street");
@@ -280,6 +276,11 @@ public class SelectBooks {
 					}
 					if (rsUser.getString("PhoneNumber") != null) {
 						phoneNumber = rsUser.getString("PhoneNumber");
+					}
+					if(currLoc) {
+						locationName = rsUser.getString("FirstName") + " " + middleName + " " + rsUser.getString("LastName");
+					} else {
+						ownerName = rsUser.getString("FirstName") + " " + middleName + rsUser.getString("LastName");
 					}
 					currLocation = new User(rsUser.getInt("UserID"), rsUser.getString("FirstName"), middleName, rsUser.getString("LastName"), rsUser.getString("Country"), rsUser.getInt("PostalCode"), street, houseNumber, phoneNumber, rsUser.getString("Email"), rsUser.getString("CityName"), rsUser.getInt("AddressID"));
 				}
