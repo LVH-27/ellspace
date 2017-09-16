@@ -123,12 +123,14 @@ public class SelectBooks {
 				ResultSet rsLocation = pstmtLocation.executeQuery();
 				if(rsBook.getInt("TypeID") == 1) {
 					while (rsLocation.next()) {
-						query = "SELECT * FROM \"public\".\"Library\" WHERE \"Library\".\'LIbraryID\"=?";
+						query = "SELECT * FROM \"public\".\"Library\" "
+								+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"Library\".\"AddressID\""
+								+ "WHERE \"Library\".\'LIbraryID\"=?";
 						PreparedStatement pstmtLibrary = con.prepareStatement(query);
 						pstmtLibrary.setInt(1, rsLocation.getInt("LibraryID"));
 						ResultSet rsLibrary = pstmtLibrary.executeQuery();
 						while (rsLibrary.next()) {
-							
+							currLocation = new Library();
 						}
 					}
 				}

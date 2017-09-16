@@ -73,7 +73,7 @@ public class DirectoryView {
 		
 		ArrayList<Book> books = new ArrayList<Book>();
 		
-		Task<ArrayList<Book>> getBooksTableTask = new Task<ArrayList<Book>>() {
+		/**Task<ArrayList<Book>> getBooksTableTask = new Task<ArrayList<Book>>() {
             @Override
             public ArrayList<Book> call() throws Exception {
             	
@@ -81,9 +81,9 @@ public class DirectoryView {
     			
     			return SelectBooks.select();  
             }
-		};
+		};*/
 		
-		getBooksTableTask.setOnSucceeded(e -> {
+		/**getBooksTableTask.setOnSucceeded(e -> {
 			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
 			books.addAll(getBooksTableTask.getValue());
 			populateTable(books);
@@ -94,9 +94,9 @@ public class DirectoryView {
 	/*	getAuthorsTableTask.setOnFailed(e -> {
 			sp.getChildren().remove((MaskerPane) ViewProvider.getView("mask"));
 			afterThreadFails();
-	    });*/
+	    });
 		
-		exec.execute(getBooksTableTask);
+		exec.execute(getBooksTableTask);*/
 	}
 	
 	public void populateTable(ArrayList<Book> books) {
