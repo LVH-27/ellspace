@@ -14,28 +14,40 @@ def main():
     export = open("AllLines.txt", "w", encoding="utf-8")
     FINAL = ""
     cwd = getcwd()
-    mypaths = ["Database",
-               "Knjiznica\src\knjiznica",
-               "Knjiznica\src\knjiznica\model",
-               "Knjiznica\src\knjiznica\\view"]
+    
+    mypathsDatabase = ["Database"]
+    mypathsJava = ["Knjiznica\src\knjiznica",
+                   "Knjiznica\src\knjiznica\model",
+                   "Knjiznica\src\knjiznica\\view"]
+    linesNumber = ['0', '0']
 
-    for mypath in mypaths:
-        mypath = cwd+'\\'+mypath
-        import_list = [mypath+'\\'+f for f in listdir(mypath) if isfile(join(mypath, f))]
-                
-        for file in import_list:
-            imp = open(file, "r", encoding="utf-8")
-            text = imp.read()
-            imp.close()
-            FINAL += text + '\n'
+    mypathsAll = [mypathsDatabase, mypathsJava]
+    i = 0
+
+    for mypaths in mypathsAll:
+        finalTemp = ""
+        for mypath in mypaths:
+            mypath = cwd+'\\'+mypath
+            import_list = [mypath+'\\'+f for f in listdir(mypath) if isfile(join(mypath, f))]
+                    
+            for file in import_list:
+                imp = open(file, "r", encoding="utf-8")
+                text = imp.read()
+                imp.close()
+                finalTemp += text + '\n'
+        FINAL += finalTemp
+        linesNumber[i] = str(len(finalTemp.split('\n')))
+        i += 1
 
     numberOfLines = str(len(FINAL.split('\n')))
     export.write(numberOfLines + '\n\n' + FINAL)
 
     export.close()
     
-    print('\nTXT file successfully generated.\n' +
-          'There are {} lines!\n'. format(numberOfLines))
+    print('''\nTXT file successfully generated.
+There are {} lines!
+{} in Database
+{} in Java'''. format(numberOfLines, linesNumber[0], linesNumber[1]))
 
     return
 
