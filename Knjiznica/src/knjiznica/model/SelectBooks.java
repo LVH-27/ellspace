@@ -12,6 +12,11 @@ public class SelectBooks {
 	
 	private static ArrayList<Book> books;
 	
+	private static boolean currLoc = true;
+	
+	private static String locationName;
+	private static String ownerName;
+	
 	public static ArrayList<Book> select() {
 		books = new ArrayList<Book>();
 		
@@ -24,16 +29,6 @@ public class SelectBooks {
 			String queryBook = "SELECT * FROM public.\"Book\"" + 
 					"JOIN public.\"Edition\" ON \"Edition\".\"EditionID\"=\"Book\".\"EditionID\"" + 
 					"JOIN public.\"IsbnLinks\" ON \"Book\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"";
-				//	"JOIN public.\"Location\" ON \"Location\".\"LocationID\"=\"Book\".\"CurrentLocationID\"";
-					/**"JOIN public.\"AuthorLinks\" ON \"AuthorLinks\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"" + 
-					"JOIN public.\"PublisherLinks\" ON \"PublisherLinks\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"" + 
-					"JOIN public.\"GenreLinks\" ON \"GenreLinks\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"\r\n" + 
-					"JOIN public.\"LanguageLinks\" ON \"LanguageLinks\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"" + 
-					"JOIN public.\"Author\" ON \"AuthorLinks\".\"AuthorID\"=\"Author\".\"AuthorID\"" + 
-					"JOIN public.\"Publisher\" ON \"PublisherLinks\".\"PublisherID\"=\"Publisher\".\"PublisherID\"" + 
-					"JOIN public.\"GenreList\" ON \"GenreLinks\".\"GenreID\"=\"GenreList\".\"GenreID\"" + 
-					"JOIN public.\"LanguageList\" ON \"LanguageLinks\".\"LanguageID\"=\"LanguageList\".\"LanguageID\"" + 
-					"JOIN public.\"Address\" ON \"Address\".\"AddressID\"=\"Publisher\".\"AddressID\"";**/
 			
 			stmt = con.createStatement();
 			
@@ -45,6 +40,7 @@ public class SelectBooks {
 			ArrayList<Genre> genres;
 		
 			while (rsBook.next()) {
+				currLoc = true;
 				authors = new ArrayList<Author>();
 				publishers = new ArrayList<Publisher>();
 				languages = new ArrayList<Language>();
@@ -54,7 +50,9 @@ public class SelectBooks {
 				PreparedStatement pstmtBookLanguage;
 				PreparedStatement pstmtBookGenre;
 				
-				String query = "JOIN public.\"AuthorLinks\" ON \"AuthorLinks\".\"ISBN\"=?"
+				String query = "SELECT * FROM \"public\".\"Book\""
+						+ "JOIN public.\"AuthorLinks\" ON \"AuthorLinks\".\"ISBN\"=?"
+						+ "JOIN public.\"Author\" ON \"Author\".\"AuthorID\"=\"AuthorLinks\".\"AuthorID\""
 						+ "WHERE \"Book\".\"ISBN\"=?";
 				
 				PreparedStatement pstmtBook = con.prepareStatement(query);
@@ -81,7 +79,11 @@ public class SelectBooks {
 					authors.add(new Author(rs.getInt("AuthorID"), rs.getString("FirstName"), middleName, rs.getString("LastName"), rs.getBoolean("Alive"), yearOfBirth, yearOfDeath));
 				}
 				
-				query = "JOIN public.\"PublisherLinks\" ON \"PublisherLinks\".\"ISBN\"=?"
+				query = "SELECT * FROM \"public\".\"Book\""
+						+ "JOIN public.\"PublisherLinks\" ON \"PublisherLinks\".\"ISBN\"=?"
+						+ "JOIN public.\"Publisher\" ON \"Publisher\".\"PublisherID\"=\"PublisherLinks\".\"PublisherID\""
+						+ "JOIN public.\"Address\" ON \"Address\".\"AddressID\"=\"Publisher\".\"AddressID\""
+						+ "JOIN public.\"City\" ON \"Address\".\"PostalCode\"=\"City\".\"PostalCode\""
 						+ "WHERE \"Book\".\"ISBN\"=?";
 				pstmtBookPublisher = con.prepareStatement(query);
 				pstmtBookPublisher.setString(1, rsBook.getString("ISBN"));
@@ -101,8 +103,20 @@ public class SelectBooks {
 					
 					publishers.add(new Publisher(rs.getInt("PublisherID"), rs.getString("PublisherName"), rs.getString("Country"), Integer.toString(rs.getInt("PostalCode")), street, houseNumber, rs.getString("CityName"), rs.getInt("AddressID")));
 				}
-				
-				query = "JOIN public.\"LanguageLinks\" ON \"LanguageLinks\".\"ISBN\"=?"
+				query = "SELECT * FROM \"public\".\"Book\""
+						+ "JOIN public.\"PublisherLinks\" ON \"PublisherLinks\".\"ISBN\"=?"
+						+ "JOIN public.\"Publisher\" ON \"Publisher\".\"PublisherID\"=\"PublisherLinks\".\"PublisherID\" AND \"Publisher\".\"AddressID\" IS NULL "
+						+ "WHERE \"Book\".\"ISBN\"=?";
+				PreparedStatement pstmtBookPublisherNull = con.prepareStatement(query);
+				pstmtBookPublisherNull.setString(1, rsBook.getString("ISBN"));
+				pstmtBookPublisherNull.setString(2, rsBook.getString("ISBN"));
+				rs = pstmtBookPublisherNull.executeQuery();
+				while (rs.next()) {			
+					publishers.add(new Publisher(rs.getInt("PublisherID"), rs.getString("PublisherName"), "-", "-", "-", "-", "-", -1));
+				}
+				query = "SELECT * FROM \"public\".\"Book\""
+						+ "JOIN public.\"LanguageLinks\" ON \"LanguageLinks\".\"ISBN\"=?"
+						+ "JOIN public.\"LanguageList\" ON \"LanguageList\".\"LanguageID\"=\"LanguageLinks\".\"LanguageID\""
 						+ "WHERE \"Book\".\"ISBN\"=?";
 				pstmtBookLanguage = con.prepareStatement(query);
 				pstmtBookLanguage.setString(1, rsBook.getString("ISBN"));
@@ -112,7 +126,9 @@ public class SelectBooks {
 					languages.add(new Language(rs.getInt("LanguageID"), rs.getString("LanguageNameEN"), rs.getString("LanguageNameHR"), rs.getString("LanguageNameDE")));
 				}
 				
-				query = "JOIN public.\"GenreLinks\" ON \"GenreLinks\".\"ISBN\"=?"
+				query = "SELECT * FROM \"public\".\"Book\""
+						+ "JOIN public.\"GenreLinks\" ON \"GenreLinks\".\"ISBN\"=?"
+						+ "JOIN public.\"GenreList\" ON \"GenreList\".\"GenreID\"=\"GenreLinks\".\"GenreID\""
 						+ "WHERE \"Book\".\"ISBN\"=?";
 				pstmtBookGenre = con.prepareStatement(query);
 				pstmtBookGenre.setString(1, rsBook.getString("ISBN"));
@@ -133,7 +149,7 @@ public class SelectBooks {
 				pstmtLocation.setInt(1, rsBook.getInt("BookID"));
 				ResultSet rsLocation = pstmtLocation.executeQuery();
 				currLocation = getObject(rsLocation, con);
-				
+				currLoc = false;
 				Object owner;
 				query = "SELECT * FROM \"public\".\"Book\""
 						+ "JOIN \"public\".\"Location\" ON \"Book\".\"OwnerID\"=\"Location\".\"LocationID\""
@@ -144,7 +160,41 @@ public class SelectBooks {
 				
 				owner = getObject(rsOwner, con);
 				
-				GlobalCollection.getBooksList().add(new Book(rsBook.getInt("BookID"), rsBook.getString("ISBN"), rsBook.getString("Title"), rsBook.getString("Summary"), rsBook.getInt("EditionID"), rsBook.getInt("EditionNumber"), rsBook.getString("EditionYear"), rsBook.getInt("NumberOfPages"), currLocation, owner, rsBook.getBoolean("Avaliable"), rsBook.getDate("ReturnDate"), rs.getString("Information"), authors, publishers, languages, genres));
+				String authorsName = "";
+				for(int i = 0; i < authors.size(); ++i) {
+					authorsName += authors.get(i).getFirstName() + " ";
+					authorsName += authors.get(i).getMiddleName() + " ";
+					authorsName += authors.get(i).getLastName();
+					if(i < authors.size() - 1) {
+						authorsName += ", ";
+					}
+				}
+				
+				String publishersName = "";
+				for(int i = 0; i < publishers.size(); ++i) {
+					publishersName += publishers.get(i).getName();
+					if(i < publishers.size() - 1) {
+						publishersName += ", ";
+					}
+				}
+				
+				String languagesName = "";
+				for(int i = 0; i < languages.size(); ++i) {
+					languagesName += languages.get(i).getName();
+					if(i < languages.size() - 1) {
+						languagesName += ", ";
+					}
+				}
+				
+				String genresName = "";
+				for(int i = 0; i < genres.size(); ++i) {
+					genresName += genres.get(i).getName();
+					if(i < genres.size() - 1) {
+						genresName += ", ";
+					}
+				}
+				
+				GlobalCollection.getBooksList().add(new Book(rsBook.getInt("BookID"), rsBook.getString("ISBN"), rsBook.getString("Title"), rsBook.getString("Summary"), rsBook.getInt("EditionID"), rsBook.getInt("Number"), rsBook.getString("Year"), rsBook.getInt("NumberOfPages"), currLocation, owner, rsBook.getBoolean("Available"), rsBook.getDate("ReturnDate"), rsBook.getString("Information"), authors, publishers, languages, genres, locationName, ownerName, authorsName, publishersName, languagesName, genresName));
 				
 			}
 			
@@ -166,25 +216,46 @@ public class SelectBooks {
 		
 		Object currLocation = null;
 		
-		if(rsLocation.getInt("TypeID") == 1) {
-			while (rsLocation.next()) {
-				String query = "SELECT * FROM \"public\".\"Library\" "
+		while(rsLocation.next()) {
+		//	System.out.println(rsLocation.getInt("TypeID"));
+			if(rsLocation.getInt("TypeID") == 1) {
+				String query = "SELECT * FROM \"public\".\"Library\""
 						+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"Library\".\"AddressID\""
 						+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
-						+ "WHERE \"Library\".\'LIbraryID\"=?";
+						+ "WHERE \"Library\".\"LibraryID\"=?";
 				PreparedStatement pstmtLibrary = con.prepareStatement(query);
 				pstmtLibrary.setInt(1, rsLocation.getInt("LibraryID"));
 				ResultSet rsLibrary = pstmtLibrary.executeQuery();
 				while (rsLibrary.next()) {
-					currLocation = new Library(rsLibrary.getInt("LibraryID"), rsLibrary.getString("LibraryName"), rsLibrary.getString("Country"), Integer.toString(rsLibrary.getInt("PostalCode")), rsLibrary.getString("Street"), rsLibrary.getString("HouseNumber"), rsLibrary.getString("PhoneNumber"), rsLibrary.getString("email"), rsLibrary.getString("Information"), rsLibrary.getString("City"), rsLibrary.getInt("AddressID"));
+					if(currLoc) {
+						locationName = rsLibrary.getString("LibraryName");
+					} else {
+						ownerName = rsLibrary.getString("LibraryName");					
+					}
+					currLocation = new Library(rsLibrary.getInt("LibraryID"), rsLibrary.getString("LibraryName"), rsLibrary.getString("Country"), Integer.toString(rsLibrary.getInt("PostalCode")), rsLibrary.getString("Street"), rsLibrary.getString("HouseNumber"), rsLibrary.getString("PhoneNumber"), rsLibrary.getString("email"), rsLibrary.getString("Information"), rsLibrary.getString("CityName"), rsLibrary.getInt("AddressID"));
 				}
-			}
-		} else {
-			while (rsLocation.next()) {
-				String query = "SELECT * FROM \"public\".\"User\" "
+				if(currLocation == null) {
+					query = "SELECT * FROM \"public\".\"Library\" "
+							+ "WHERE \"Library\".\"LIbraryID\"=?";
+					PreparedStatement pstmtLibraryNull = con.prepareStatement(query);
+					pstmtLibrary.setInt(1, rsLocation.getInt("LibraryID"));
+					ResultSet rsLibraryNull = pstmtLibraryNull.executeQuery();			
+					while (rsLibraryNull.next()) {
+						if(currLoc) {
+							locationName = rsLibraryNull.getString("LibraryName");
+						} else {
+							ownerName = rsLibraryNull.getString("LibraryName");					
+						}
+						currLocation = new Library(rsLibraryNull.getInt("LibraryID"), rsLibraryNull.getString("LibraryName"), "-", "-", "-", "-", rsLibraryNull.getString("PhoneNumber"), rsLibraryNull.getString("email"), rsLibraryNull.getString("Information"), "-", -1);
+					}
+				}
+					
+				
+			} else {
+				String query = "SELECT * FROM \"public\".\"User\""
 						+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"User\".\"AddressID\""
 						+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
-						+ "WHERE \"User\".\'UserID\"=?";
+						+ "WHERE \"User\".\"UserID\"=?";
 				PreparedStatement pstmtUser = con.prepareStatement(query);
 				pstmtUser.setInt(1, rsLocation.getInt("UserID"));
 				ResultSet rsUser = pstmtUser.executeQuery();
@@ -193,7 +264,11 @@ public class SelectBooks {
 					String street = "-";
 					String houseNumber = "-"; 
 					String phoneNumber = "-";
-					
+					if(currLoc) {
+						locationName = rsUser.getString("FirstName") + " " + rsUser.getString("MiddleName") + " " + rsUser.getString("LastName");
+					} else {
+						ownerName = rsUser.getString("FirstName") + " " + rsUser.getString("MiddleName") + " " + rsUser.getString("LastName");
+					}
 					if (rsUser.getString("MiddleName") != null) {
 						middleName = rsUser.getString("MiddleName");
 					}
@@ -208,8 +283,10 @@ public class SelectBooks {
 					}
 					currLocation = new User(rsUser.getInt("UserID"), rsUser.getString("FirstName"), middleName, rsUser.getString("LastName"), rsUser.getString("Country"), rsUser.getInt("PostalCode"), street, houseNumber, phoneNumber, rsUser.getString("Email"), rsUser.getString("CityName"), rsUser.getInt("AddressID"));
 				}
+				
 			}
 		}
+		
 		return currLocation;
 	}
 }

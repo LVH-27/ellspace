@@ -22,12 +22,18 @@ public class Book {
 	private ArrayList<Publisher> publishers;
 	private ArrayList<Language> languages;
 	private ArrayList<Genre> genres;
+	private String currentLocationName;
+	private String ownerName;
+	private String authorsName;
+	private String publishersName;
+	private String languagesName;
+	private String genresName;
 	
 	public Book(int ID, String ISBN, String title, String summary, int editionID, 
 			int editionNumber, String editionYear, int editionNumberOfPages, 
 			Object currentLocation, Object owner, boolean available, Date returnDate, 
 			String information, ArrayList<Author> authors, ArrayList<Publisher> publishers, 
-			ArrayList<Language> languages, ArrayList<Genre> genres, String currentLocationname, String ownerName) {
+			ArrayList<Language> languages, ArrayList<Genre> genres, String currentLocationName, String ownerName, String authorsName, String publishersName, String languagesName, String genresName) {
 		this.ID = ID;
 		this.ISBN = ISBN;
 		this.title = title;
@@ -45,6 +51,12 @@ public class Book {
 		this.publishers = publishers;
 		this.languages = languages;
 		this.genres = genres;
+		this.currentLocationName = currentLocationName;
+		this.ownerName = ownerName;
+		this.authorsName = authorsName;
+		this.publishersName = publishersName;
+		this.languagesName = languagesName;
+		this.genresName = genresName;
 	}
 
 	public int getID() {
@@ -182,6 +194,53 @@ public class Book {
 	public void setGenres(ArrayList<Genre> genres) {
 		this.genres = genres;
 	}
-	
+
+	public String getCurrentLocationName() {
+		return currentLocationName;
+	}
+
+	public void setCurrentLocationName(String currentLocationName) {
+		this.currentLocationName = currentLocationName;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public String getAuthorsName() {
+		return authorsName;
+	}
+
+	public void setAuthorsName(String authorsName) {
+		this.authorsName = authorsName;
+	}
+
+	public String getPublishersName() {
+		return publishersName;
+	}
+
+	public void setPublishersName(String publishersName) {
+		this.publishersName = publishersName;
+	}
+
+	public String getLanguagesName() {
+		return languagesName;
+	}
+
+	public void setLanguagesName(String languagesName) {
+		this.languagesName = languagesName;
+	}
+
+	public String getGenresName() {
+		return genresName;
+	}
+
+	public void setGenresName(String genresName) {
+		this.genresName = genresName;
+	}
 	
 }
