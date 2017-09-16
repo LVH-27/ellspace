@@ -120,7 +120,7 @@ public class AddAuthorTableView {
 	public void initialize() {
 		
 		//FIXME implement error when year has more than 4 digits and it should work when year is < 0
-		//XXX Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C." - requires changes in database
+		//Comment: Should be 5 digits for e.g. "-1649" as in "1649 B.C." - requires changes in database
 		
 		exec = Executors.newCachedThreadPool(runnable -> {
             Thread t = new Thread(runnable);
