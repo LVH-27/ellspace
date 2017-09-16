@@ -5,12 +5,18 @@ import java.util.concurrent.Executor;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
+import java.util.function.Predicate;
+
 import org.controlsfx.control.MaskerPane;
+
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -20,6 +26,9 @@ import knjiznica.model.SelectBooks;
 import knjiznica.model.ViewProvider;
 
 public class DirectoryView {
+	
+	@FXML
+	private TextField searchField;
 	
 	@FXML
 	private TableView<Book> tableBookList;
@@ -65,9 +74,6 @@ public class DirectoryView {
 	
 	@FXML
 	private TableColumn<Book, Date> returnDateCol;
-	
-	
-	
 	
 	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
 	private static Executor exec;
@@ -151,6 +157,65 @@ public class DirectoryView {
 					//TODO click event
 				}
 			}
+		});
+		
+		FilteredList<Book> filteredData = new FilteredList<Book>(GlobalCollection.getBooksList(), e -> true);
+		searchField.setOnKeyReleased(e -> {
+			searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+				filteredData.setPredicate((Predicate<? super Book>) book -> {
+					if (newValue == null || newValue.isEmpty()) {
+						return true;
+					}
+					
+					String lowerCaseFilter = newValue.toLowerCase();
+					String[] splitStr = lowerCaseFilter.split(" ");
+					ArrayList<String> splittedFilter = new ArrayList<String>();
+					ArrayList<String> splittedBookData = new ArrayList<String>();
+					
+					for (int i = 0; i < splitStr.length; ++i) {
+						splittedFilter.add(splitStr[i]);
+					}
+					
+					splittedBookData.add(book.getAuthorsName().toLowerCase());
+					splittedBookData.add(book.getCurrentLocationName().toLowerCase());
+					splittedBookData.add(Integer.toString(book.getEditionNumber()));
+					splittedBookData.add(Integer.toString(book.getEditionNumberOfPages()));
+					splittedBookData.add(book.getEditionYear());
+					splittedBookData.add(book.getGenresName().toLowerCase());
+//					splittedBookData.add(book.getInformation().toLowerCase());
+					splittedBookData.add(book.getISBN());
+					splittedBookData.add(book.getLanguagesName().toLowerCase());
+					splittedBookData.add(book.getOwnerName().toLowerCase());
+					splittedBookData.add(book.getPublishersName().toLowerCase());
+//					splittedBookData.add(book.getReturnDate().toString(). toLowerCase());
+//					splittedBookData.add(book.getSummary(). toLowerCase());
+					splittedBookData.add(book.getTitle(). toLowerCase());
+					
+					int i;
+					for (i = 0; i < splittedFilter.size(); ++i) {
+						int j;
+						for (j = 0; j < splittedBookData.size(); ++j) {
+							if (splittedBookData.get(j).contains(splittedFilter.get(i))) {
+								break;
+							}
+						}
+						
+						if (j == splittedBookData.size()) {
+							break;
+						}
+					}
+					
+					if (i == splittedFilter.size()) {
+						return true;
+					}
+					
+					return false;
+				});
+			});
+			
+			SortedList<Book> sortedData = new SortedList<Book>(filteredData);
+			sortedData.comparatorProperty().bind(tableBookList.comparatorProperty());
+			tableBookList.setItems(sortedData);
 		});
 	}
 }

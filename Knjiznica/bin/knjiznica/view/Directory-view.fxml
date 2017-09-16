@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -13,9 +14,12 @@
    <center>
       <BorderPane id="defaultBackgroundField" stylesheets="@../../resources/BackgroundStyle.css" BorderPane.alignment="CENTER">
          <top>
-            <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER">
+            <VBox BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="15.0" />
+               </BorderPane.margin>
                <children>
-                  <VBox alignment="CENTER">
+                  <HBox alignment="CENTER" maxHeight="60.0" minHeight="60.0" prefHeight="60.0">
                      <children>
                         <Label alignment="CENTER" text="Directory">
                            <font>
@@ -23,12 +27,18 @@
                            </font>
                         </Label>
                      </children>
-                  </VBox>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT">
+                     <children>
+                        <TextField fx:id="searchField" maxWidth="1.7976931348623157E308" prefWidth="350.0" promptText="Search">
+                           <HBox.margin>
+                              <Insets bottom="15.0" left="10.0" top="15.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
                </children>
-               <BorderPane.margin>
-                  <Insets bottom="25.0" top="15.0" />
-               </BorderPane.margin>
-            </HBox>
+            </VBox>
          </top>
          <BorderPane.margin>
             <Insets bottom="60.0" left="80.0" right="80.0" top="30.0" />
