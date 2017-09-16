@@ -125,12 +125,26 @@ public class SelectBooks {
 					while (rsLocation.next()) {
 						query = "SELECT * FROM \"public\".\"Library\" "
 								+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"Library\".\"AddressID\""
+								+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
 								+ "WHERE \"Library\".\'LIbraryID\"=?";
 						PreparedStatement pstmtLibrary = con.prepareStatement(query);
 						pstmtLibrary.setInt(1, rsLocation.getInt("LibraryID"));
 						ResultSet rsLibrary = pstmtLibrary.executeQuery();
 						while (rsLibrary.next()) {
-							currLocation = new Library();
+							currLocation = new Library(rsLibrary.getInt("LibraryID"), rsLibrary.getString("LibraryName"), rsLibrary.getString("Country"), Integer.toString(rsLibrary.getInt("PostalCode")), rsLibrary.getString("Street"), rsLibrary.getString("HouseNumber"), rsLibrary.getString("PhoneNumber"), rsLibrary.getString("email"), rsLibrary.getString("Information"), rsLibrary.getString("City"), rsLibrary.getInt("AddressID"));
+						}
+					}
+				} else {
+					while (rsLocation.next()) {
+						query = "SELECT * FROM \"public\".\"User\" "
+								+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"User\".\"AddressID\""
+								+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
+								+ "WHERE \"User\".\'UserID\"=?";
+						PreparedStatement pstmtUser = con.prepareStatement(query);
+						pstmtUser.setInt(1, rsLocation.getInt("UserID"));
+						ResultSet rsUser = pstmtUser.executeQuery();
+						while (rsUser.next()) {
+							currLocation = new Library(rsUser.getInt("LibraryID"), rsUser.getString("LibraryName"), rsUser.getString("Country"), Integer.toString(rsUser.getInt("PostalCode")), rsUser.getString("Street"), rsUser.getString("HouseNumber"), rsUser.getString("PhoneNumber"), rsUser.getString("email"), rsUser.getString("Information"), rsUser.getString("City"), rsUser.getInt("AddressID"));
 						}
 					}
 				}
