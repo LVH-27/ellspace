@@ -3,6 +3,7 @@ package knjiznica.view;
 import java.util.concurrent.Executor;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import org.controlsfx.control.MaskerPane;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -28,42 +30,69 @@ public class DirectoryView {
 	@FXML
 	private TableView<Book> tableBookList;
 	
+	//TODO What does this take?
 	@FXML
-	private TableColumn<Book, String> firstNameCol;
+	private TableColumn<Book, String> wideGeneralCol;
 	
 	@FXML
-	private TableColumn<Book, String> middleNameCol;
+	private TableColumn<Book, String> ISBNCol;
 	
 	@FXML
-	private TableColumn<Book, String> lastNameCol;
+	private TableColumn<Book, String> titleCol;
 	
 	@FXML
-	private TableColumn<Book, String> countryCol;
+	private TableColumn<Book, String> authorsCol;
 	
 	@FXML
-	private TableColumn<Book, String> cityCol;
+	private TableColumn<Book, String> publishersCol;
 	
 	@FXML
-	private TableColumn<Book, Integer> postalCodeCol;
+	private TableColumn<Book, String> genresCol;
 	
 	@FXML
-	private TableColumn<Book, String> streetCol;
+	private TableColumn<Book, String> languagesCol;
 	
 	@FXML
-	private TableColumn<Book, String> houseNumberCol;
+	private TableColumn<Book, String> informationCol;
+	
+	//TODO What does this take?
+	@FXML
+	private TableColumn<Book, String> wideEditionCol;
 	
 	@FXML
-	private TableColumn<Book, String> phoneNumberCol;
+	private TableColumn<Book, Integer> numberCol;
 	
 	@FXML
-	private TableColumn<Book, String> emailCol;
+	private TableColumn<Book, String> yearCol;
+	
+	@FXML
+	private TableColumn<Book, Integer> pagesCol;
+	
+	//TODO What does this take?
+	@FXML
+	private TableColumn<Book, String> wideAvailabilityCol;
+	
+	@FXML
+	private TableColumn<Book, String> ownerCol;
+	
+	@FXML
+	private TableColumn<Book, String> locationCol;
+	
+	@FXML
+	private TableColumn<Book, Boolean> availableCol;
+	
+	@FXML
+	private TableColumn<Book, Date> returnDateCol;
+	
+	
+	
 	
 	private static StackPane sp = (StackPane) ViewProvider.getView("stackPane");
 	private static Executor exec;
 	
 	public void initialize() {
 		
-		/*exec = Executors.newCachedThreadPool(runnable -> {
+		exec = Executors.newCachedThreadPool(runnable -> {
             Thread t = new Thread(runnable);
             t.setDaemon(true);
             return t ;
@@ -99,37 +128,45 @@ public class DirectoryView {
 		exec.execute(getBooksTableTask);*/
 	}
 	
-	/**public void populateTable(ArrayList<Book> books) {
+	public void populateTable(ArrayList<Book> books) {
 		
 		GlobalCollection.emptyList();
 		
 		for (int i = 0; i < books.size(); ++i) {
 			GlobalCollection.getBooksList().add(books.get(i));
-		} **/
+		} 
 		
-	/**	tableUserList. setItems(GlobalCollection.getUserList());
-		firstNameCol.  setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
-		firstNameCol.  setStyle("-fx-alignment: CENTER;");
-		middleNameCol. setCellValueFactory(new PropertyValueFactory<User, String>("middleName"));
-		middleNameCol. setStyle("-fx-alignment: CENTER;");
-		lastNameCol.   setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
-		lastNameCol.   setStyle("-fx-alignment: CENTER;");
-		countryCol.    setCellValueFactory(new PropertyValueFactory<User, String>("country"));
-		countryCol.    setStyle("-fx-alignment: CENTER;");
-		cityCol.       setCellValueFactory(new PropertyValueFactory<User, String>("city"));
-		cityCol.       setStyle("-fx-alignment: CENTER;");
-		postalCodeCol. setCellValueFactory(new PropertyValueFactory<User, Integer>("postalCode"));
-		postalCodeCol. setStyle("-fx-alignment: CENTER;");
-		streetCol.     setCellValueFactory(new PropertyValueFactory<User, String>("street"));
-		streetCol.     setStyle("-fx-alignment: CENTER;");
-		houseNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("houseNumber"));
-		houseNumberCol.setStyle("-fx-alignment: CENTER;");
-		phoneNumberCol.setCellValueFactory(new PropertyValueFactory<User, String>("phoneNumber")); 
-		phoneNumberCol.setStyle("-fx-alignment: CENTER;");
-		emailCol.      setCellValueFactory(new PropertyValueFactory<User, String>("email"));
-		emailCol.      setStyle("-fx-alignment: CENTER;");**/
+		tableBookList. setItems(GlobalCollection.getBooksList());
+		ISBNCol.  	   setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
+		ISBNCol.  	   setStyle("-fx-alignment: CENTER;");
+		titleCol.      setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+		titleCol. 	   setStyle("-fx-alignment: CENTER;");
+		authorsCol.    setCellValueFactory(new PropertyValueFactory<Book, String>("authors"));
+		authorsCol.    setStyle("-fx-alignment: CENTER;");
+		publishersCol. setCellValueFactory(new PropertyValueFactory<Book, String>("publishers"));
+		publishersCol. setStyle("-fx-alignment: CENTER;");
+		genresCol.     setCellValueFactory(new PropertyValueFactory<Book, String>("genres"));
+		genresCol.     setStyle("-fx-alignment: CENTER;");
+		languagesCol.  setCellValueFactory(new PropertyValueFactory<Book, String>("languages"));
+		languagesCol.  setStyle("-fx-alignment: CENTER;");
+		informationCol.setCellValueFactory(new PropertyValueFactory<Book, String>("information"));
+		informationCol.setStyle("-fx-alignment: CENTER;");
+		numberCol.     setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
+		numberCol.     setStyle("-fx-alignment: CENTER;");
+		yearCol.       setCellValueFactory(new PropertyValueFactory<Book, String>("year")); 
+		yearCol.       setStyle("-fx-alignment: CENTER;");
+		pagesCol.      setCellValueFactory(new PropertyValueFactory<Book, Integer>("pages"));
+		pagesCol.      setStyle("-fx-alignment: CENTER;");
+		ownerCol.      setCellValueFactory(new PropertyValueFactory<Book, String>("owner"));
+		ownerCol.      setStyle("-fx-alignment: CENTER;");
+		locationCol.   setCellValueFactory(new PropertyValueFactory<Book, String>("location"));
+		locationCol.   setStyle("-fx-alignment: CENTER;");
+		availableCol.  setCellValueFactory(new PropertyValueFactory<Book, Boolean>("available"));
+		availableCol.  setStyle("-fx-alignment: CENTER;");
+		returnDateCol. setCellValueFactory(new PropertyValueFactory<Book, Date>("returnDate"));
+		returnDateCol. setStyle("-fx-alignment: CENTER;");
 		
-		/**tableBookList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		tableBookList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
@@ -138,5 +175,5 @@ public class DirectoryView {
 				}
 			}
 		});
-	}*/
+	}
 }
