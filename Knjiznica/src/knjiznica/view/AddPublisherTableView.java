@@ -518,7 +518,6 @@ public class AddPublisherTableView {
 		if (!isInterrupted && isReached) {
 			AlertWindowOpen.openWindow("Publisher successfully added!");
 			GlobalCollection.setAdd(true);
-    		//TODO We need to return to AddBook but without resetting TextFields, inserting this publisher
 			BorderPane addPublisherTable = (BorderPane) FXMLLoader.load(getClass().getResource("AddPublisherTable-view.fxml"));
 	    	((BorderPane) ViewProvider.getView("mainScreen")).setCenter(addPublisherTable);
 	    	
