@@ -120,6 +120,64 @@ public class DirectoryView {
 		}
 		
 		tableBookList. setItems(GlobalCollection.getBooksList());
+		FilteredList<Book> filteredData = new FilteredList<Book>(GlobalCollection.getBooksList(), e -> true);
+		searchField.setOnKeyReleased(e -> {
+			searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+				filteredData.setPredicate((Predicate<? super Book>) book -> {
+					if (newValue == null || newValue.isEmpty()) {
+						return true;
+					}
+					
+					String lowerCaseFilter = newValue.toLowerCase();
+					String[] splitStr = lowerCaseFilter.split(" ");
+					ArrayList<String> splittedFilter = new ArrayList<String>();
+					ArrayList<String> splittedBookData = new ArrayList<String>();
+					
+					for (int i = 0; i < splitStr.length; ++i) {
+						splittedFilter.add(splitStr[i]);
+					}
+					
+					splittedBookData.add(book.getAuthorsName().toLowerCase());
+					splittedBookData.add(book.getCurrentLocationName().toLowerCase());
+					splittedBookData.add(Integer.toString(book.getEditionNumber()));
+					splittedBookData.add(Integer.toString(book.getEditionNumberOfPages()));
+//					splittedBookData.add(book.getEditionYear());
+					splittedBookData.add(book.getGenresName().toLowerCase());
+//					splittedBookData.add(book.getInformation().toLowerCase());
+					splittedBookData.add(book.getISBN());
+					splittedBookData.add(book.getLanguagesName().toLowerCase());
+					splittedBookData.add(book.getOwnerName().toLowerCase());
+					splittedBookData.add(book.getPublishersName().toLowerCase());
+//					splittedBookData.add(book.getReturnDate().toString(). toLowerCase());
+//					splittedBookData.add(book.getSummary(). toLowerCase());
+					splittedBookData.add(book.getTitle(). toLowerCase());
+					
+					int i;
+					for (i = 0; i < splittedFilter.size(); ++i) {
+						int j;
+						for (j = 0; j < splittedBookData.size(); ++j) {
+							if (splittedBookData.get(j).contains(splittedFilter.get(i))) {
+								break;
+							}
+						}
+						
+						if (j == splittedBookData.size()) {
+							break;
+						}
+					}
+					
+					if (i == splittedFilter.size()) {
+						return true;
+					}
+					
+					return false;
+				});
+			});
+			
+			SortedList<Book> sortedData = new SortedList<Book>(filteredData);
+			sortedData.comparatorProperty().bind(tableBookList.comparatorProperty());
+			tableBookList.setItems(sortedData);
+		});
 		ISBNCol.  	   setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
 		ISBNCol.  	   setStyle("-fx-alignment: CENTER;");
 		titleCol.      setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
@@ -159,63 +217,6 @@ public class DirectoryView {
 			}
 		});
 		
-		FilteredList<Book> filteredData = new FilteredList<Book>(GlobalCollection.getBooksList(), e -> true);
-		searchField.setOnKeyReleased(e -> {
-			searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-				filteredData.setPredicate((Predicate<? super Book>) book -> {
-					if (newValue == null || newValue.isEmpty()) {
-						return true;
-					}
-					
-					String lowerCaseFilter = newValue.toLowerCase();
-					String[] splitStr = lowerCaseFilter.split(" ");
-					ArrayList<String> splittedFilter = new ArrayList<String>();
-					ArrayList<String> splittedBookData = new ArrayList<String>();
-					
-					for (int i = 0; i < splitStr.length; ++i) {
-						splittedFilter.add(splitStr[i]);
-					}
-					
-					splittedBookData.add(book.getAuthorsName().toLowerCase());
-					splittedBookData.add(book.getCurrentLocationName().toLowerCase());
-					splittedBookData.add(Integer.toString(book.getEditionNumber()));
-					splittedBookData.add(Integer.toString(book.getEditionNumberOfPages()));
-					splittedBookData.add(book.getEditionYear());
-					splittedBookData.add(book.getGenresName().toLowerCase());
-//					splittedBookData.add(book.getInformation().toLowerCase());
-					splittedBookData.add(book.getISBN());
-					splittedBookData.add(book.getLanguagesName().toLowerCase());
-					splittedBookData.add(book.getOwnerName().toLowerCase());
-					splittedBookData.add(book.getPublishersName().toLowerCase());
-//					splittedBookData.add(book.getReturnDate().toString(). toLowerCase());
-//					splittedBookData.add(book.getSummary(). toLowerCase());
-					splittedBookData.add(book.getTitle(). toLowerCase());
-					
-					int i;
-					for (i = 0; i < splittedFilter.size(); ++i) {
-						int j;
-						for (j = 0; j < splittedBookData.size(); ++j) {
-							if (splittedBookData.get(j).contains(splittedFilter.get(i))) {
-								break;
-							}
-						}
-						
-						if (j == splittedBookData.size()) {
-							break;
-						}
-					}
-					
-					if (i == splittedFilter.size()) {
-						return true;
-					}
-					
-					return false;
-				});
-			});
-			
-			SortedList<Book> sortedData = new SortedList<Book>(filteredData);
-			sortedData.comparatorProperty().bind(tableBookList.comparatorProperty());
-			tableBookList.setItems(sortedData);
-		});
+		
 	}
 }
