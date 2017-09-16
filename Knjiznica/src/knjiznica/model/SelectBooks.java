@@ -23,8 +23,8 @@ public class SelectBooks {
 			
 			String queryBook = "SELECT * FROM public.\"Book\"" + 
 					"JOIN public.\"Edition\" ON \"Edition\".\"EditionID\"=\"Book\".\"EditionID\"" + 
-					"JOIN public.\"IsbnLinks\" ON \"Book\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"" +
-					"JOIN public.\"Location\" ON \"Location\".\"LocationID\"=\"Book\".\"CurrentLocationID\"";
+					"JOIN public.\"IsbnLinks\" ON \"Book\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"";
+				//	"JOIN public.\"Location\" ON \"Location\".\"LocationID\"=\"Book\".\"CurrentLocationID\"";
 					/**"JOIN public.\"AuthorLinks\" ON \"AuthorLinks\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"" + 
 					"JOIN public.\"PublisherLinks\" ON \"PublisherLinks\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"" + 
 					"JOIN public.\"GenreLinks\" ON \"GenreLinks\".\"ISBN\"=\"IsbnLinks\".\"ISBN\"\r\n" + 
@@ -50,9 +50,16 @@ public class SelectBooks {
 				languages = new ArrayList<Language>();
 				genres = new ArrayList<Genre>();
 				
+				PreparedStatement pstmtBookPublisher;
+				PreparedStatement pstmtBookLanguage;
+				PreparedStatement pstmtBookGenre;
+				
 				String query = "JOIN public.\"AuthorLinks\" ON \"AuthorLinks\".\"ISBN\"=?"
 						+ "WHERE \"Book\".\"ISBN\"=?";
+				
 				PreparedStatement pstmtBook = con.prepareStatement(query);
+				
+				
 				pstmtBook.setString(1, rsBook.getString("ISBN"));
 				pstmtBook.setString(2, rsBook.getString("ISBN"));
 				ResultSet rs = pstmtBook.executeQuery();
@@ -76,10 +83,10 @@ public class SelectBooks {
 				
 				query = "JOIN public.\"PublisherLinks\" ON \"PublisherLinks\".\"ISBN\"=?"
 						+ "WHERE \"Book\".\"ISBN\"=?";
-				pstmtBook = con.prepareStatement(query);
-				pstmtBook.setString(1, rsBook.getString("ISBN"));
-				pstmtBook.setString(2, rsBook.getString("ISBN"));
-				rs = pstmtBook.executeQuery();
+				pstmtBookPublisher = con.prepareStatement(query);
+				pstmtBookPublisher.setString(1, rsBook.getString("ISBN"));
+				pstmtBookPublisher.setString(2, rsBook.getString("ISBN"));
+				rs = pstmtBookPublisher.executeQuery();
 				while (rs.next()) {
 					
 					String street = "-";
@@ -97,31 +104,47 @@ public class SelectBooks {
 				
 				query = "JOIN public.\"LanguageLinks\" ON \"LanguageLinks\".\"ISBN\"=?"
 						+ "WHERE \"Book\".\"ISBN\"=?";
-				pstmtBook = con.prepareStatement(query);
-				pstmtBook.setString(1, rsBook.getString("ISBN"));
-				pstmtBook.setString(2, rsBook.getString("ISBN"));
-				rs = pstmtBook.executeQuery();
+				pstmtBookLanguage = con.prepareStatement(query);
+				pstmtBookLanguage.setString(1, rsBook.getString("ISBN"));
+				pstmtBookLanguage.setString(2, rsBook.getString("ISBN"));
+				rs = pstmtBookLanguage.executeQuery();
 				while (rs.next()) {
 					languages.add(new Language(rs.getInt("LanguageID"), rs.getString("LanguageNameEN"), rs.getString("LanguageNameHR"), rs.getString("LanguageNameDE")));
 				}
 				
 				query = "JOIN public.\"GenreLinks\" ON \"GenreLinks\".\"ISBN\"=?"
 						+ "WHERE \"Book\".\"ISBN\"=?";
-				pstmtBook = con.prepareStatement(query);
-				pstmtBook.setString(1, rsBook.getString("ISBN"));
-				pstmtBook.setString(2, rsBook.getString("ISBN"));
-				rs = pstmtBook.executeQuery();
+				pstmtBookGenre = con.prepareStatement(query);
+				pstmtBookGenre.setString(1, rsBook.getString("ISBN"));
+				pstmtBookGenre.setString(2, rsBook.getString("ISBN"));
+				rs = pstmtBookGenre.executeQuery();
 				while (rs.next()) {
 					genres.add(new Genre(rs.getInt("GenreID"), rs.getString("GenreNameEN"), rs.getString("GenreNameHR"), rs.getString("GenreNameDE")));
 				}
 				
 				PreparedStatement pstmtLocation = null;
-				Object currLocation;
-				query = "SELECT * FROM \"public\".\"Location\" WHERE \"Location\".\"LocationID\"=?";
-				pstmtLocation = con.prepareStatement(query);
-				pstmtLocation.setInt(1, rsBook.getInt("LocationID"));
-				ResultSet rsLocation = pstmtLocation.executeQuery();
+				PreparedStatement pstmtOwner = null;
 				
+				Object currLocation;
+				query = "SELECT * FROM \"public\".\"Book\""
+						+ "JOIN \"public\".\"Location\" ON \"Book\".\"CurrentLocationID\"=\"Location\".\"LocationID\""
+						+ "WHERE \"Book\".\"BookID\"=?";
+				pstmtLocation = con.prepareStatement(query);
+				pstmtLocation.setInt(1, rsBook.getInt("BookID"));
+				ResultSet rsLocation = pstmtLocation.executeQuery();
+				currLocation = getObject(rsLocation, con);
+				
+				Object owner;
+				query = "SELECT * FROM \"public\".\"Book\""
+						+ "JOIN \"public\".\"Location\" ON \"Book\".\"OwnerID\"=\"Location\".\"LocationID\""
+						+ "WHERE \"Book\".\"BookID\"=?";
+				pstmtOwner = con.prepareStatement(query);
+				pstmtOwner.setInt(1, rsBook.getInt("BookID"));
+				ResultSet rsOwner = pstmtLocation.executeQuery();
+				
+				owner = getObject(rsOwner, con);
+				
+				GlobalCollection.getBooksList().add(new Book(rsBook.getInt("BookID"), rsBook.getString("ISBN"), rsBook.getString("Title"), rsBook.getString("Summary"), rsBook.getInt("EditionID"), rsBook.getInt("EditionNumber"), rsBook.getString("EditionYear"), rsBook.getInt("NumberOfPages"), currLocation, owner, rsBook.getBoolean("Avaliable"), rsBook.getDate("ReturnDate"), rs.getString("Information"), authors, publishers, languages, genres));
 				
 			}
 			
@@ -139,13 +162,13 @@ public class SelectBooks {
 		return books;
 	}
 	
-	private Object getObject(ResultSet) {
+	private static Object getObject(ResultSet rsLocation, Connection con) throws SQLException {
 		
-		Object currLocation;
+		Object currLocation = null;
 		
-		if(rsBook.getInt("TypeID") == 1) {
+		if(rsLocation.getInt("TypeID") == 1) {
 			while (rsLocation.next()) {
-				query = "SELECT * FROM \"public\".\"Library\" "
+				String query = "SELECT * FROM \"public\".\"Library\" "
 						+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"Library\".\"AddressID\""
 						+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
 						+ "WHERE \"Library\".\'LIbraryID\"=?";
@@ -158,7 +181,7 @@ public class SelectBooks {
 			}
 		} else {
 			while (rsLocation.next()) {
-				query = "SELECT * FROM \"public\".\"User\" "
+				String query = "SELECT * FROM \"public\".\"User\" "
 						+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"User\".\"AddressID\""
 						+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
 						+ "WHERE \"User\".\'UserID\"=?";
