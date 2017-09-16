@@ -13,7 +13,8 @@ public class ConfirmationDialogueOpen {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText("ISBN already in use!");
-		alert.setContentText("Using this ISBN will apply changes to title, summary, authors, publishers, genres and languages?");
+		alert.setContentText("Using this ISBN will apply changes to title, summary, authors, publishers, genres and languages.\n"
+				+ "Are you sure you want to use that ISBN?");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		
