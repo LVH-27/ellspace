@@ -63,7 +63,7 @@ public class DirectoryView {
 	
 	public void initialize() {
 		
-		exec = Executors.newCachedThreadPool(runnable -> {
+		/*exec = Executors.newCachedThreadPool(runnable -> {
             Thread t = new Thread(runnable);
             t.setDaemon(true);
             return t ;
@@ -99,13 +99,13 @@ public class DirectoryView {
 		exec.execute(getBooksTableTask);*/
 	}
 	
-	public void populateTable(ArrayList<Book> books) {
+	/**public void populateTable(ArrayList<Book> books) {
 		
 		GlobalCollection.emptyList();
 		
 		for (int i = 0; i < books.size(); ++i) {
 			GlobalCollection.getBooksList().add(books.get(i));
-		} 
+		} **/
 		
 	/**	tableUserList. setItems(GlobalCollection.getUserList());
 		firstNameCol.  setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
@@ -129,7 +129,7 @@ public class DirectoryView {
 		emailCol.      setCellValueFactory(new PropertyValueFactory<User, String>("email"));
 		emailCol.      setStyle("-fx-alignment: CENTER;");**/
 		
-		tableBookList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		/**tableBookList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
@@ -138,5 +138,5 @@ public class DirectoryView {
 				}
 			}
 		});
-	}
+	}*/
 }

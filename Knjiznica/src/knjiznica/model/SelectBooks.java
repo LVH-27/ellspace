@@ -121,33 +121,7 @@ public class SelectBooks {
 				pstmtLocation = con.prepareStatement(query);
 				pstmtLocation.setInt(1, rsBook.getInt("LocationID"));
 				ResultSet rsLocation = pstmtLocation.executeQuery();
-				if(rsBook.getInt("TypeID") == 1) {
-					while (rsLocation.next()) {
-						query = "SELECT * FROM \"public\".\"Library\" "
-								+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"Library\".\"AddressID\""
-								+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
-								+ "WHERE \"Library\".\'LIbraryID\"=?";
-						PreparedStatement pstmtLibrary = con.prepareStatement(query);
-						pstmtLibrary.setInt(1, rsLocation.getInt("LibraryID"));
-						ResultSet rsLibrary = pstmtLibrary.executeQuery();
-						while (rsLibrary.next()) {
-							currLocation = new Library(rsLibrary.getInt("LibraryID"), rsLibrary.getString("LibraryName"), rsLibrary.getString("Country"), Integer.toString(rsLibrary.getInt("PostalCode")), rsLibrary.getString("Street"), rsLibrary.getString("HouseNumber"), rsLibrary.getString("PhoneNumber"), rsLibrary.getString("email"), rsLibrary.getString("Information"), rsLibrary.getString("City"), rsLibrary.getInt("AddressID"));
-						}
-					}
-				} else {
-					while (rsLocation.next()) {
-						query = "SELECT * FROM \"public\".\"User\" "
-								+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"User\".\"AddressID\""
-								+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
-								+ "WHERE \"User\".\'UserID\"=?";
-						PreparedStatement pstmtUser = con.prepareStatement(query);
-						pstmtUser.setInt(1, rsLocation.getInt("UserID"));
-						ResultSet rsUser = pstmtUser.executeQuery();
-						while (rsUser.next()) {
-							currLocation = new Library(rsUser.getInt("LibraryID"), rsUser.getString("LibraryName"), rsUser.getString("Country"), Integer.toString(rsUser.getInt("PostalCode")), rsUser.getString("Street"), rsUser.getString("HouseNumber"), rsUser.getString("PhoneNumber"), rsUser.getString("email"), rsUser.getString("Information"), rsUser.getString("City"), rsUser.getInt("AddressID"));
-						}
-					}
-				}
+				
 				
 			}
 			
@@ -163,5 +137,56 @@ public class SelectBooks {
 			}
 		}
 		return books;
+	}
+	
+	private Object getObject(ResultSet) {
+		
+		Object currLocation;
+		
+		if(rsBook.getInt("TypeID") == 1) {
+			while (rsLocation.next()) {
+				query = "SELECT * FROM \"public\".\"Library\" "
+						+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"Library\".\"AddressID\""
+						+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
+						+ "WHERE \"Library\".\'LIbraryID\"=?";
+				PreparedStatement pstmtLibrary = con.prepareStatement(query);
+				pstmtLibrary.setInt(1, rsLocation.getInt("LibraryID"));
+				ResultSet rsLibrary = pstmtLibrary.executeQuery();
+				while (rsLibrary.next()) {
+					currLocation = new Library(rsLibrary.getInt("LibraryID"), rsLibrary.getString("LibraryName"), rsLibrary.getString("Country"), Integer.toString(rsLibrary.getInt("PostalCode")), rsLibrary.getString("Street"), rsLibrary.getString("HouseNumber"), rsLibrary.getString("PhoneNumber"), rsLibrary.getString("email"), rsLibrary.getString("Information"), rsLibrary.getString("City"), rsLibrary.getInt("AddressID"));
+				}
+			}
+		} else {
+			while (rsLocation.next()) {
+				query = "SELECT * FROM \"public\".\"User\" "
+						+ "JOIN \"Address\" ON \"Address\".\"AddressID\"=\"User\".\"AddressID\""
+						+ "JOIN \"City\" ON \"City\".\"PostalCode\"=\"Address\".\"PostalCode\""
+						+ "WHERE \"User\".\'UserID\"=?";
+				PreparedStatement pstmtUser = con.prepareStatement(query);
+				pstmtUser.setInt(1, rsLocation.getInt("UserID"));
+				ResultSet rsUser = pstmtUser.executeQuery();
+				while (rsUser.next()) {
+					String middleName = "-";
+					String street = "-";
+					String houseNumber = "-"; 
+					String phoneNumber = "-";
+					
+					if (rsUser.getString("MiddleName") != null) {
+						middleName = rsUser.getString("MiddleName");
+					}
+					if (rsUser.getString("Street") != null) {
+						street = rsUser.getString("Street");
+					}
+					if (rsUser.getString("HouseNumber") != null) {
+						houseNumber = rsUser.getString("HouseNumber");
+					}
+					if (rsUser.getString("PhoneNumber") != null) {
+						phoneNumber = rsUser.getString("PhoneNumber");
+					}
+					currLocation = new User(rsUser.getInt("UserID"), rsUser.getString("FirstName"), middleName, rsUser.getString("LastName"), rsUser.getString("Country"), rsUser.getInt("PostalCode"), street, houseNumber, phoneNumber, rsUser.getString("Email"), rsUser.getString("CityName"), rsUser.getInt("AddressID"));
+				}
+			}
+		}
+		return currLocation;
 	}
 }

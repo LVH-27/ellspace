@@ -16,7 +16,10 @@ public class Library {
 	private String closes;
 	private int addressID;
 	
-	public Library(int ID, String firstName, String country, String postalCode, String street, String houseNumber, String phoneNumber, String email, String information, String city, Integer addressID) {
+	public Library(int ID, String firstName, String country, 
+			String postalCode, String street, String houseNumber, 
+			String phoneNumber, String email, String information, 
+			String city, Integer addressID) {
 		this.ID = ID;
 		this.firstName = firstName;
 		this.country = country;
