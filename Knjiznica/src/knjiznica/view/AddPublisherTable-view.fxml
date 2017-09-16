@@ -124,6 +124,9 @@
                      </HBox.margin>
                   </Button>
                </children>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
             </HBox>
             <HBox alignment="CENTER" GridPane.rowIndex="1">
                <children>
