@@ -60,13 +60,11 @@ public class StartScreenView {
 		
 		BorderPane clientsMenu = (BorderPane) FXMLLoader.load(getClass().getResource("ClientsMenu-view.fxml"));
 		BorderPane share       = (BorderPane) FXMLLoader.load(getClass().getResource("Share-view.fxml"));
-		BorderPane directory   = (BorderPane) FXMLLoader.load(getClass().getResource("Directory-view.fxml"));
 		BorderPane search      = (BorderPane) FXMLLoader.load(getClass().getResource("Search-view.fxml"));
 		BorderPane eventLog    = (BorderPane) FXMLLoader.load(getClass().getResource("EventLog-view.fxml"));
 				
 		ViewProvider.setView("clientsMenu", clientsMenu);
 		ViewProvider.setView("share", share);
-		ViewProvider.setView("directory", directory);
 		ViewProvider.setView("search", search);
 		ViewProvider.setView("eventLog", eventLog);
 	}
@@ -101,7 +99,7 @@ public class StartScreenView {
 	
 	@FXML
 	private void activateDirectory() throws IOException {
-		BorderPane directory = (BorderPane) ViewProvider.getView("directory");
+		BorderPane directory = (BorderPane) FXMLLoader.load(getClass().getResource("Directory-view.fxml"));
 		((BorderPane) ViewProvider.getView("mainScreen")).setCenter(directory);
 	}
 	
