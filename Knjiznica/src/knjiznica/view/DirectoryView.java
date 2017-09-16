@@ -24,10 +24,6 @@ public class DirectoryView {
 	@FXML
 	private TableView<Book> tableBookList;
 	
-	//TODO What does this take?
-	@FXML
-	private TableColumn<Book, String> wideGeneralCol;
-	
 	@FXML
 	private TableColumn<Book, String> ISBNCol;
 	
@@ -49,10 +45,6 @@ public class DirectoryView {
 	@FXML
 	private TableColumn<Book, String> informationCol;
 	
-	//TODO What does this take?
-	@FXML
-	private TableColumn<Book, String> wideEditionCol;
-	
 	@FXML
 	private TableColumn<Book, Integer> numberCol;
 	
@@ -61,10 +53,6 @@ public class DirectoryView {
 	
 	@FXML
 	private TableColumn<Book, Integer> pagesCol;
-	
-	//TODO What does this take?
-	@FXML
-	private TableColumn<Book, String> wideAvailabilityCol;
 	
 	@FXML
 	private TableColumn<Book, String> ownerCol;
