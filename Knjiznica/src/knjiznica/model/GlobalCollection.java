@@ -12,6 +12,7 @@ public class GlobalCollection {
 	private static ObservableList<BusinessHours> lBusinessHours;
 	private static ObservableList<Language> lLanguages;
 	private static ObservableList<Genre> lGenres;
+	private static ObservableList<Book> lBooks;
 	private static ObservableList<Author> addedAuthors;
 	private static ObservableList<Publisher> addedPublishers;
 	private static ObservableList<User> addedUsers;
@@ -43,12 +44,15 @@ public class GlobalCollection {
 		lPublisher = FXCollections.observableArrayList();
 		lLanguages = FXCollections.observableArrayList();
 		lGenres = FXCollections.observableArrayList();
+		lBooks = FXCollections.observableArrayList();
 		addedAuthors = FXCollections.observableArrayList(); 
 		addedPublishers = FXCollections.observableArrayList(); 
 		addedUsers = FXCollections.observableArrayList(); 
 		addedLibraries = FXCollections.observableArrayList(); 
 		addedLanguages = FXCollections.observableArrayList();
 		addedGenres = FXCollections.observableArrayList(); 
+		lBooks = FXCollections.observableArrayList();
+		
 	}
 	
 	public static void emptyList() {
@@ -311,6 +315,14 @@ public class GlobalCollection {
 
 	public static void setOk(boolean ok) {
 		GlobalCollection.ok = ok;
+	}
+
+	public static ObservableList<Book> getBooksList() {
+		return lBooks;
+	}
+
+	public static void setBooksList(ObservableList<Book> lBooks) {
+		GlobalCollection.lBooks = lBooks;
 	}
 	
 }

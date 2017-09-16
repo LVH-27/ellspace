@@ -1,6 +1,7 @@
 package knjiznica.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Book {
 	
@@ -12,13 +13,21 @@ public class Book {
 	private int editionNumber;
 	private String editionYear;
 	private int editionNumberOfPages;
-	private int ownerID;
-	private int currentLocationID;
+	private Object currentLocation;
+	private Object owner;
 	private boolean available;
 	private Date returnDate;
 	private String information;
+	private ArrayList<Author> authors;
+	private ArrayList<Publisher> publishers;
+	private ArrayList<Language> languages;
+	private ArrayList<Genre> genres;
 	
-	public Book(int ID, String ISBN, String title, String summary, int editionID, int editionNumber, String editionYear, int editionNumberOfPages, int ownerID, int currentLocationID, boolean available, Date returnDate, String information) {
+	public Book(int ID, String ISBN, String title, String summary, int editionID, 
+			int editionNumber, String editionYear, int editionNumberOfPages, 
+			Object currentLocation, Object owner, boolean available, Date returnDate, 
+			String information, ArrayList<Author> authors, ArrayList<Publisher> publishers, 
+			ArrayList<Language> languages, ArrayList<Genre> genres) {
 		this.ID = ID;
 		this.ISBN = ISBN;
 		this.title = title;
@@ -27,11 +36,15 @@ public class Book {
 		this.editionNumber = editionNumber;
 		this.editionYear = editionYear;
 		this.editionNumberOfPages = editionNumberOfPages;
-		this.ownerID = ownerID;
-		this.currentLocationID = currentLocationID;
+		this.currentLocation = currentLocation;
+		this.owner = owner;
 		this.available = available;
 		this.returnDate = returnDate;
 		this.information = information;
+		this.authors = authors;
+		this.publishers = publishers;
+		this.languages = languages;
+		this.genres = genres;
 	}
 
 	public int getID() {
@@ -98,22 +111,6 @@ public class Book {
 		this.editionNumberOfPages = editionNumberOfPages;
 	}
 
-	public int getOwnerID() {
-		return ownerID;
-	}
-
-	public void setOwnerID(int ownerID) {
-		this.ownerID = ownerID;
-	}
-
-	public int getCurrentLocationID() {
-		return currentLocationID;
-	}
-
-	public void setCurrentLocationID(int currentLocationID) {
-		this.currentLocationID = currentLocationID;
-	}
-
 	public boolean isAvailable() {
 		return available;
 	}
@@ -137,5 +134,54 @@ public class Book {
 	public void setInformation(String information) {
 		this.information = information;
 	}
+
+	public Object getCurrentLocation() {
+		return currentLocation;
+	}
+
+	public void setCurrentLocation(Object currentLocation) {
+		this.currentLocation = currentLocation;
+	}
+
+	public Object getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Object owner) {
+		this.owner = owner;
+	}
+
+	public ArrayList<Author> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(ArrayList<Author> authors) {
+		this.authors = authors;
+	}
+
+	public ArrayList<Publisher> getPublishers() {
+		return publishers;
+	}
+
+	public void setPublishers(ArrayList<Publisher> publishers) {
+		this.publishers = publishers;
+	}
+
+	public ArrayList<Language> getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(ArrayList<Language> languages) {
+		this.languages = languages;
+	}
+
+	public ArrayList<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(ArrayList<Genre> genres) {
+		this.genres = genres;
+	}
+	
 	
 }
