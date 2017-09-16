@@ -91,7 +91,7 @@
                   <Insets />
                </GridPane.margin>
             </HBox>
-            <TextField fx:id="middleNameField" promptText="Middle Name" GridPane.rowIndex="4">
+            <TextField fx:id="middleNameField" promptText="Middle Name (Optional)" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -110,12 +110,12 @@
                   </CheckBox>
                </children>
             </HBox>
-            <TextField fx:id="yearOfBirthField" promptText="Year of Birth" GridPane.rowIndex="8">
+            <TextField fx:id="yearOfBirthField" promptText="Year of Birth (Optional)" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="yearOfDeathField" promptText="Year of Death" GridPane.rowIndex="9">
+            <TextField fx:id="yearOfDeathField" promptText="Year of Death (Optional)" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
