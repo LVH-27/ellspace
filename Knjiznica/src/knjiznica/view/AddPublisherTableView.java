@@ -400,8 +400,8 @@ public class AddPublisherTableView {
 		tablePublisherList.setItems(GlobalCollection.getPublisherList());
 		FilteredList<Publisher> filteredData = new FilteredList<Publisher>(GlobalCollection.getPublisherList(), e -> true);
 		searchField.setOnKeyReleased(e -> {
-			searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
-				filteredData.setPredicate((Predicate<? super Publisher>) publisher ->{
+			searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+				filteredData.setPredicate((Predicate<? super Publisher>) publisher -> {
 					if (newValue == null || newValue.isEmpty()) {
 						return true;
 					}

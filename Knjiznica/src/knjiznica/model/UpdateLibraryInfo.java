@@ -142,7 +142,6 @@ public class UpdateLibraryInfo {
 			UpdateLibraryView.isReached = false;
 			
 		} catch (SQLException e) {
-			System.out.println(addressID + 1);
 			UpdateLibraryView.isReached = false;
 		} 
 	}

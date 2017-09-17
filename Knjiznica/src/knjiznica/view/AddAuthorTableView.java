@@ -469,8 +469,8 @@ public class AddAuthorTableView {
 		tableAuthorList.setItems(GlobalCollection.getAuthorList());
 		FilteredList<Author> filteredData = new FilteredList<Author>(GlobalCollection.getAuthorList(), e -> true);
 		searchField.setOnKeyReleased(e -> {
-			searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
-				filteredData.setPredicate((Predicate<? super Author>) author ->{
+			searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+				filteredData.setPredicate((Predicate<? super Author>) author -> {
 					if (newValue == null || newValue.isEmpty()) {
 						return true;
 					}

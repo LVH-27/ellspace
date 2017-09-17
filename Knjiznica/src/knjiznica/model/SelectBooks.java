@@ -247,7 +247,7 @@ public class SelectBooks {
 							+ "WHERE \"Library\".\"LIbraryID\"=?";
 					PreparedStatement pstmtLibraryNull = con.prepareStatement(query);
 					pstmtLibrary.setInt(1, rsLocation.getInt("LibraryID"));
-					ResultSet rsLibraryNull = pstmtLibraryNull.executeQuery();			
+					ResultSet rsLibraryNull = pstmtLibraryNull.executeQuery();
 					while (rsLibraryNull.next()) {
 						if(currLoc) {
 							locationName = rsLibraryNull.getString("LibraryName");
