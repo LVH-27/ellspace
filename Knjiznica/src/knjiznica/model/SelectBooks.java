@@ -164,7 +164,7 @@ public class SelectBooks {
 				
 				pstmtOwner = con.prepareStatement(query);
 				pstmtOwner.setInt(1, rsBook.getInt("BookID"));
-				ResultSet rsOwner = pstmtLocation.executeQuery();
+				ResultSet rsOwner = pstmtOwner.executeQuery();
 				
 				owner = getObject(rsOwner, con);
 				
